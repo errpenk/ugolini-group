@@ -7,6 +7,8 @@ const header = read('assets/css/header.css');
 const responsive = read('assets/css/responsive.css');
 const footer = read('assets/css/footer.css');
 const surecart = read('assets/css/surecart.css');
+const functions = read('functions.php');
+const externalCatalog = JSON.parse(read('migration/ugolini-external-products/products.json'));
 const script = read('assets/js/theme.js');
 const collectionTemplate = read('templates/taxonomy-sc_collection.html');
 
@@ -40,6 +42,14 @@ assert.match(script, /if \(menuOpen && !active\) active = ugoliniSectionTargets\
 assert.doesNotMatch(script, /Boolean\(document\.querySelector\('main article'\)\)/);
 assert.match(surecart, /\.swiper-button-prev, \.swiper-button-next\) \{ width: 52px; height: 52px; border: 2px/);
 assert.match(surecart, /box-shadow: none !important;/);
+assert.equal(externalCatalog.products.length, 66);
+assert.deepEqual(externalCatalog.collections.map(({ slug }) => slug), ['caviareat', 'truffleat', 'tin-caviar', 'luxureat']);
+assert.equal(externalCatalog.products.filter(({ product_collection_slugs }) => product_collection_slugs.includes('luxureat')).length, 35);
+assert.equal(externalCatalog.products.filter(({ prices }) => !prices).length, 7);
+assert.equal(externalCatalog.products.find(({ slug }) => slug === 'tincaviar-lattine-per-caviale').variants.length, 8);
+assert.match(functions, /ugolini_group_products_730_seeded/);
+assert.match(functions, /foreach \( \$terms as \$term \)/);
+assert.match(functions, /ugolini_group_description_sections/);
 assert.match(collectionTemplate, /ugolini-group\/professional-assurances/);
 
 console.log('Theme regression checks passed.');

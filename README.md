@@ -43,6 +43,18 @@ payments or checkout logic.
 5. Test cart, checkout, confirmation and customer dashboard in SureCart test
    mode before any product is published.
 
+## External catalogue import
+
+Version 7.2 extends the resumable, idempotent importer to 66 external products
+listed by CaviarEat, Truffleat, Tin Caviar and LuxurEat. Install
+`ugolini-external-products.zip`, then run **Tools → Ugolini External Products**.
+The importer creates one SureCart collection per brand, skips existing slugs,
+uses native SureCart prices and variants, and queues the source images as native
+product media. LuxurEat products are deduplicated against matching CaviarEat
+slugs. Its requested catalogue sections are complete even when a product is out
+of stock; the seven entries without a published source price remain visible as
+unpriced catalogue products rather than receiving an invented price.
+
 ## CSS structure
 
 - `base.css`: reset, controls, spacing and shared utilities
@@ -256,6 +268,17 @@ guide with four accessible accordions to every product page.
 Ugolini Gourmet supplies factual content and media. Urbani is used only as a
 visual reference for premium ecommerce hierarchy and rhythm. No Urbani copy,
 products, imagery, branding or claims are included.
+
+V7.0 extends the same catalogue pipeline to CaviarEat, Truffleat and Tin Caviar:
+52 products are represented in the Shop dataset, with 32 external products and
+45 currently purchasable external variants across three SureCart collections.
+V7.2 represents all 35 unique LuxurEat products from the seven requested
+catalogue sections. One is shared with CaviarEat, so 34 new products bring the
+Shop dataset to 86 products and 10 collections. Seven products without a
+published price display “Prezzo su richiesta”.
+V7.3 shows all ten collections in the home discovery grid, adds enlarged
+burgundy hover states, equalizes the Events hero, and splits imported product
+descriptions into open semantic accordions.
 V6.63 hardens deployed WordPress parity: footer fallback branding and column
 alignment, stable three-icon header geometry, persistent transparent hero
 navigation, legacy Events shortcode expansion, hidden duplicate SureCart

@@ -449,7 +449,7 @@ function ugolini_group_seed_recipe_posts() {
 }
 add_action( 'init', 'ugolini_group_seed_recipe_posts', 100 );
 
-/** Read the 20-product dataset that powers the local preview. */
+/** Read the product dataset that powers the local preview. */
 function ugolini_group_bundled_products() {
 	$path   = get_theme_file_path( 'data/products.csv' );
 	$handle = is_readable( $path ) ? fopen( $path, 'r' ) : false;
@@ -501,8 +501,8 @@ function ugolini_group_preview_product_grid( $limit = 20 ) {
 		$slug       = sanitize_title( $product['slug'] );
 		$post       = get_page_by_path( $slug, OBJECT, 'sc_product' );
 		$link       = $post ? get_permalink( $post ) : home_url( '/products/' . $slug . '/' );
-		$image      = $images[ $slug ] ?? '';
-		$price      = number_format( (float) $product['current_price'], 2, ',', '.' ) . ' €';
+		$image      = $images[ $slug ] ?? ( $post ? (string) get_the_post_thumbnail_url( $post, 'large' ) : '' );
+		$price      = '' === trim( $product['current_price'] ) ? 'Prezzo su richiesta' : number_format( (float) $product['current_price'], 2, ',', '.' ) . ' €';
 		$name       = $product['official_product_name'];
 		$collection = $product['collections'];
 		$html      .= '<article class="ugolini-product-card preview-product-card" data-product-card data-name="' . esc_attr( strtolower( $name ) ) . '" data-collections="' . esc_attr( strtolower( $collection ) ) . '" data-price="' . esc_attr( $product['current_price'] ) . '">';
@@ -512,7 +512,7 @@ function ugolini_group_preview_product_grid( $limit = 20 ) {
 	return '<div class="preview-product-grid">' . $html . '</div>';
 }
 
-/** Render the exact preview catalogue controls and all 20 product cards. */
+/** Render the exact preview catalogue controls and every product card. */
 function ugolini_group_preview_shop() {
 	$collections = array(
 		'marmellate'      => 'Marmellate',
@@ -521,12 +521,20 @@ function ugolini_group_preview_shop() {
 		'salse-funghi'    => 'Salse ai funghi',
 		'salse-tartufo'   => 'Salse con tartufo',
 		'sughi'           => 'Sughi',
+		'caviareat'       => 'CaviarEat',
+		'truffleat'       => 'Truffleat',
+		'tin-caviar'      => 'Tin Caviar',
+		'luxureat'        => 'LuxurEat',
 	);
+	$products = ugolini_group_bundled_products();
+	$prices   = array_map( static fn( $product ) => (float) $product['current_price'], array_filter( $products, static fn( $product ) => '' !== trim( $product['current_price'] ) ) );
+	$minimum  = $prices ? floor( min( $prices ) ) : 0;
+	$maximum  = $prices ? ceil( max( $prices ) ) : 0;
 	$tabs = '<button class="is-active" type="button" data-shop-collection="" data-shop-label="">Tutti i prodotti</button>';
 	foreach ( $collections as $slug => $label ) {
 		$tabs .= '<button type="button" data-shop-collection="' . esc_attr( $slug ) . '" data-shop-label="' . esc_attr( strtolower( $label ) ) . '">' . esc_html( $label ) . '</button>';
 	}
-	return '<div class="alignwide preview-shop" data-preview-shop><div class="preview-shop-bar"><div class="preview-shop-tabs">' . $tabs . '</div><div class="preview-shop-actions"><button type="button" data-filter-open>' . ugolini_group_icon( 'sliders-horizontal' ) . 'Filtri</button><label><span>Cerca</span><input type="search" data-shop-search placeholder="Cerca prodotti"></label><label><span>Ordina</span><select data-shop-sort><option value="featured">In evidenza</option><option value="az">Nome, A–Z</option><option value="za">Nome, Z–A</option><option value="low">Prezzo crescente</option><option value="high">Prezzo decrescente</option></select></label></div></div><dialog class="preview-filter-dialog" data-filter-dialog><form method="dialog"><button class="preview-filter-close" value="close" aria-label="Chiudi filtri">' . ugolini_group_icon( 'x' ) . '</button><h2>Filtri</h2><fieldset><legend>Disponibilità</legend><label><input type="checkbox" checked disabled> Disponibile</label><label class="is-disabled"><input type="checkbox" disabled> Non disponibile</label></fieldset><fieldset class="preview-price-filter"><legend>Prezzo</legend><div class="preview-price-inputs"><label>Minimo € <input type="number" min="3" max="15" step="0.01" placeholder="3" data-price-min></label><label>Massimo € <input type="number" min="3" max="15" step="0.01" placeholder="15" data-price-max></label></div></fieldset><button type="button" data-filter-clear>Azzera filtri</button></form></dialog>' . ugolini_group_preview_product_grid( 20 ) . '</div>';
+	return '<div class="alignwide preview-shop" data-preview-shop><div class="preview-shop-bar"><div class="preview-shop-tabs">' . $tabs . '</div><div class="preview-shop-actions"><button type="button" data-filter-open>' . ugolini_group_icon( 'sliders-horizontal' ) . 'Filtri</button><label><span>Cerca</span><input type="search" data-shop-search placeholder="Cerca prodotti"></label><label><span>Ordina</span><select data-shop-sort><option value="featured">In evidenza</option><option value="az">Nome, A–Z</option><option value="za">Nome, Z–A</option><option value="low">Prezzo crescente</option><option value="high">Prezzo decrescente</option></select></label></div></div><dialog class="preview-filter-dialog" data-filter-dialog><form method="dialog"><button class="preview-filter-close" value="close" aria-label="Chiudi filtri">' . ugolini_group_icon( 'x' ) . '</button><h2>Filtri</h2><fieldset><legend>Catalogo</legend><label><input type="checkbox" checked disabled> Tutti i prodotti pubblicati</label></fieldset><fieldset class="preview-price-filter"><legend>Prezzo</legend><div class="preview-price-inputs"><label>Minimo € <input type="number" min="' . esc_attr( $minimum ) . '" max="' . esc_attr( $maximum ) . '" step="0.01" placeholder="' . esc_attr( $minimum ) . '" data-price-min></label><label>Massimo € <input type="number" min="' . esc_attr( $minimum ) . '" max="' . esc_attr( $maximum ) . '" step="0.01" placeholder="' . esc_attr( $maximum ) . '" data-price-max></label></div></fieldset><button type="button" data-filter-clear>Azzera filtri</button></form></dialog>' . ugolini_group_preview_product_grid( count( $products ) ) . '</div>';
 }
 
 /** Replace SureCart's version-dependent list wrapper with preview-identical cards. */
@@ -537,10 +545,28 @@ function ugolini_group_render_product_list_parity( $block_content, $block ) {
 }
 add_filter( 'render_block_surecart/product-list', 'ugolini_group_render_product_list_parity', 10, 2 );
 
+/** Split imported descriptions at their original section headings. */
+function ugolini_group_description_sections( $description ) {
+	$sections = array( 'Descrizione' => array() );
+	$label    = 'Descrizione';
+	foreach ( preg_split( '/\R/', trim( $description ) ) as $line ) {
+		$line = trim( $line );
+		if ( '' === $line ) {
+			continue;
+		}
+		if ( 0 === strpos( $line, '## ' ) ) {
+			$label = trim( substr( $line, 3 ) );
+			$sections[ $label ] = $sections[ $label ] ?? array();
+		} else {
+			$sections[ $label ][] = $line;
+		}
+	}
+	return array_filter( $sections );
+}
+
 /** Build the same open product-fact list used by the static preview. */
 function ugolini_group_product_facts_content( $product ) {
 	$fields = array(
-		'full_description'              => 'Descrizione',
 		'ingredients'                   => 'Ingredienti',
 		'allergens'                     => 'Allergeni',
 		'nutritional_information'       => 'Informazioni nutrizionali',
@@ -553,9 +579,20 @@ function ugolini_group_product_facts_content( $product ) {
 		'organoleptic_characteristics'  => 'Caratteristiche organolettiche',
 	);
 
-	$html = '<div class="preview-product-facts">';
+	$html     = '<div class="preview-product-facts">';
+	$rendered = array();
+	foreach ( ugolini_group_description_sections( $product['full_description'] ?? '' ) as $label => $lines ) {
+		$body = '';
+		foreach ( $lines as $line ) {
+			$body .= 0 === strpos( $line, '### ' )
+				? '<h4>' . esc_html( trim( substr( $line, 4 ) ) ) . '</h4>'
+				: '<p>' . esc_html( $line ) . '</p>';
+		}
+		$html      .= '<details class="ugolini-product-fact" open><summary>' . esc_html( $label ) . '</summary><div class="ugolini-product-fact__body">' . $body . '</div></details>';
+		$rendered[] = sanitize_title( $label );
+	}
 	foreach ( $fields as $key => $label ) {
-		if ( empty( $product[ $key ] ) ) {
+		if ( empty( $product[ $key ] ) || in_array( sanitize_title( $label ), $rendered, true ) ) {
 			continue;
 		}
 		$html .= '<details class="ugolini-product-fact" open><summary>' . esc_html( $label ) . '</summary><p>' . nl2br( esc_html( $product[ $key ] ) ) . '</p></details>';
@@ -565,12 +602,12 @@ function ugolini_group_product_facts_content( $product ) {
 
 /** Synchronize SureCart product order and factual detail content with preview. */
 function ugolini_group_seed_product_details() {
-	if ( ! current_user_can( 'manage_options' ) || get_option( 'ugolini_group_products_624_seeded' ) ) {
+	if ( ! current_user_can( 'manage_options' ) || get_option( 'ugolini_group_products_730_seeded' ) ) {
 		return;
 	}
 
 	$products = ugolini_group_bundled_products();
-	if ( 20 !== count( $products ) ) {
+	if ( ! $products ) {
 		return;
 	}
 
@@ -595,7 +632,7 @@ function ugolini_group_seed_product_details() {
 	}
 
 	if ( $complete ) {
-		update_option( 'ugolini_group_products_624_seeded', 1, false );
+		update_option( 'ugolini_group_products_730_seeded', 1, false );
 	}
 }
 add_action( 'init', 'ugolini_group_seed_product_details', 101 );
@@ -816,7 +853,7 @@ function ugolini_group_collection_grid_shortcode() {
 	}
 
 	$cards = '';
-	foreach ( array_slice( $terms, 0, 6 ) as $term ) {
+	foreach ( $terms as $term ) {
 		$link = get_term_link( $term );
 		if ( is_wp_error( $link ) ) {
 			continue;
@@ -878,6 +915,26 @@ function ugolini_group_collection_editorial_shortcode() {
 			'Sughi Ugolini Gourmet',
 			'Ricette italiane pronte per una tavola semplice, generosa e ricca di gusto.',
 			'Dal ragù alla Bolognese alla versione vegana, dall’arrabbiata alla bruschetta piccantina e al sugo al tartufo, la collezione offre condimenti pronti per pasta, crostini e piatti conviviali. Una gamma costruita intorno al pomodoro italiano e a ricette immediatamente riconoscibili.',
+		),
+		'caviareat'         => array(
+			'CaviarEat',
+			'Caviale, specialità di mare e alternative vegetali in diversi formati.',
+			'La selezione comprende caviali da storioni differenti, formati per la degustazione e per la ristorazione, acciughe sott’olio e caviale vegetale. Conservazione, disponibilità e modalità di servizio sono indicate nella singola scheda.',
+		),
+		'truffleat'         => array(
+			'Truffleat',
+			'Specialità al tartufo, condimenti e accessori per la cucina.',
+			'Creme, salse, oli, pasta, riso e accessori compongono una gamma dedicata al tartufo. Ogni referenza mantiene ingredienti, formato e indicazioni d’uso propri, riportati nella scheda prodotto.',
+		),
+		'tin-caviar'        => array(
+			'Tin Caviar',
+			'Lattine professionali per il confezionamento di caviale e uova di pesce.',
+			'Formati e quantità per cartone sono disponibili come varianti acquistabili. Consulta le combinazioni presenti nella scheda e seleziona quella adatta alle esigenze di confezionamento.',
+		),
+		'luxureat'          => array(
+			'LuxurEat',
+			'Caviale, tartare, burger gourmet, condimenti e specialità al tartufo.',
+			'Una selezione dedicata alla tavola e alla ristorazione. Consulta formati, ingredienti, allergeni e conservazione nella scheda di ogni prodotto.',
 		),
 	);
 
@@ -1042,6 +1099,10 @@ function ugolini_group_product_story_shortcode() {
 		'olio-al-tartufo' => array( 'Oli al tartufo Ugolini Gourmet', 'Il profumo del tartufo bianco e nero incontra l’olio extra vergine di oliva.', 'Pensati come condimenti di finitura, valorizzano pasta, risotti, uova, carne e verdure. Bastano poche gocce; ingredienti e modalità di conservazione restano quelli riportati in etichetta.' ),
 		'salse-funghi'    => array( 'Salse ai funghi Ugolini Gourmet', 'Porcini e champignon in creme morbide, pronte per la cucina di ogni giorno.', 'Servile su primi piatti, crostini, carne o verdure e regola la consistenza con moderazione. Ogni ricetta conserva il proprio profilo e le informazioni specifiche della confezione.' ),
 		'salse-tartufo'   => array( 'Specialità al tartufo Ugolini Gourmet', 'Salse, creme e condimenti che portano il carattere del tartufo in tavola.', 'La collezione riunisce ricette e formati diversi per completare pasta, riso, uova, carne, verdure e crostini con un prodotto pronto all’uso e facile da dosare.' ),
+		'caviareat'       => array( 'CaviarEat', 'Caviale e specialità selezionate per degustazione, ristorazione e occasioni speciali.', 'Scegli specie e formato dalla scheda prodotto. Per il caviale refrigerato, rispetta sempre temperature e tempi indicati dal produttore.' ),
+		'truffleat'       => array( 'Truffleat', 'Una gamma di specialità al tartufo, condimenti e accessori dedicati alla cucina.', 'Formati e ricette cambiano per ogni referenza: consulta ingredienti, allergeni e indicazioni d’uso prima dell’acquisto.' ),
+		'tin-caviar'      => array( 'Tin Caviar', 'Lattine professionali disponibili in quantità e formati differenti.', 'Seleziona nella scheda la combinazione tra pezzi per cartone e capacità della lattina.' ),
+		'luxureat'        => array( 'LuxurEat', 'Caviale, tartare, burger gourmet, condimenti e specialità al tartufo.', 'Consulta formati, ingredienti, allergeni e conservazione nella scheda di ogni prodotto.' ),
 	);
 	$content = $copy[ $slug ] ?? $copy['salse-tartufo'];
 	$images = $term instanceof WP_Term ? ugolini_group_collection_images( $term ) : array();
@@ -1094,6 +1155,24 @@ function ugolini_group_product_guide_shortcode() {
 			array( 'sparkles', 'Dosare il tartufo', 'Inizia con una piccola quantità e completa dopo l’assaggio: il condimento deve sostenere, non coprire, la preparazione.' ),
 			array( 'book-open', 'Salse e creme', 'La gamma comprende consistenze e ricette diverse; ingredienti, percentuali e certificazioni vanno verificati sulla singola scheda prodotto.' ),
 			array( 'tag', 'Prima dell’uso', 'Rispetta le istruzioni riportate in etichetta per apertura, conservazione e durata; sono specifiche per ciascuna referenza.' ),
+		),
+		'caviareat' => array(
+			array( 'utensils', 'Come servirlo', 'Servi il caviale alla temperatura indicata nella scheda, usando utensili che non ne alterino il profilo aromatico.' ),
+			array( 'sparkles', 'Scegliere il formato', 'I formati più piccoli sono adatti alla degustazione; quelli maggiori rispondono alle esigenze della ristorazione e degli eventi.' ),
+			array( 'book-open', 'Specie e gusto', 'Calibro, consistenza e profilo aromatico dipendono dalla specie: consulta le caratteristiche riportate per ogni caviale.' ),
+			array( 'tag', 'Conservazione', 'Per i prodotti refrigerati, rispetta senza interruzioni la temperatura e i tempi indicati dal produttore.' ),
+		),
+		'truffleat' => array(
+			array( 'utensils', 'Come utilizzarlo', 'Segui la modalità d’uso della singola referenza: salse, oli, pasta, riso e accessori richiedono impieghi differenti.' ),
+			array( 'sparkles', 'Dosaggio progressivo', 'Per i condimenti al tartufo, parti da una quantità contenuta e regola dopo l’assaggio.' ),
+			array( 'book-open', 'Una gamma completa', 'La collezione comprende alimenti e utensili: formato, materiali e caratteristiche restano quelli della scheda prodotto.' ),
+			array( 'tag', 'Prima dell’uso', 'Verifica sempre ingredienti, allergeni, conservazione e certificazioni della specifica referenza.' ),
+		),
+		'tin-caviar' => array(
+			array( 'utensils', 'Uso professionale', 'Le lattine sono destinate al confezionamento di caviale e uova di pesce.' ),
+			array( 'sparkles', 'Quantità per cartone', 'Seleziona il numero di pezzi richiesto tra le combinazioni attualmente acquistabili.' ),
+			array( 'book-open', 'Formato della lattina', 'Abbina la capacità della lattina alle esigenze di confezionamento indicate nella scheda.' ),
+			array( 'tag', 'Prima dell’acquisto', 'Controlla entrambe le opzioni della variante: quantità per cartone e formato in grammi.' ),
 		),
 	);
 	$items = $guides[ $slug ] ?? $guides['salse-tartufo'];
