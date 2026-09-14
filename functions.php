@@ -545,64 +545,39 @@ function ugolini_group_render_product_list_parity( $block_content, $block ) {
 }
 add_filter( 'render_block_surecart/product-list', 'ugolini_group_render_product_list_parity', 10, 2 );
 
-/** Split imported descriptions at their original section headings. */
-function ugolini_group_description_sections( $description ) {
-	$sections = array( 'Descrizione' => array() );
-	$label    = 'Descrizione';
-	foreach ( preg_split( '/\R/', trim( $description ) ) as $line ) {
-		$line = trim( $line );
-		if ( '' === $line ) {
-			continue;
-		}
-		if ( 0 === strpos( $line, '## ' ) ) {
-			$label = trim( substr( $line, 3 ) );
-			$sections[ $label ] = $sections[ $label ] ?? array();
-		} else {
-			$sections[ $label ][] = $line;
-		}
-	}
-	return array_filter( $sections );
-}
-
 /** Build the same open product-fact list used by the static preview. */
 function ugolini_group_product_facts_content( $product ) {
 	$fields = array(
+		'full_description'              => 'Descrizione',
 		'ingredients'                   => 'Ingredienti',
 		'allergens'                     => 'Allergeni',
-		'nutritional_information'       => 'Informazioni nutrizionali',
-		'shelf_life'                    => 'Shelf life',
-		'storage_instructions'          => 'Conservazione',
 		'usage_instructions'            => 'Modalità di utilizzo',
+		'nutritional_information'       => 'Valori nutrizionali',
+		'storage_instructions'          => 'Conservazione',
+		'shelf_life'                    => 'Durata',
+		'organoleptic_characteristics'  => 'Caratteristiche organolettiche',
+		'certifications_dietary_claims' => 'Note e certificazioni',
 		'primary_packaging'             => 'Imballo primario',
 		'weight_format'                 => 'Formato',
-		'certifications_dietary_claims' => 'Certificazioni e dichiarazioni',
-		'organoleptic_characteristics'  => 'Caratteristiche organolettiche',
 	);
 
-	$html     = '<div class="preview-product-facts">';
-	$rendered = array();
-	foreach ( ugolini_group_description_sections( $product['full_description'] ?? '' ) as $label => $lines ) {
-		$body = '';
-		foreach ( $lines as $line ) {
-			$body .= 0 === strpos( $line, '### ' )
-				? '<h4>' . esc_html( trim( substr( $line, 4 ) ) ) . '</h4>'
-				: '<p>' . esc_html( $line ) . '</p>';
-		}
-		$html      .= '<details class="ugolini-product-fact" open><summary>' . esc_html( $label ) . '</summary><div class="ugolini-product-fact__body">' . $body . '</div></details>';
-		$rendered[] = sanitize_title( $label );
-	}
+	$html = '<div class="preview-product-facts">';
 	foreach ( $fields as $key => $label ) {
-		if ( empty( $product[ $key ] ) || in_array( sanitize_title( $label ), $rendered, true ) ) {
+		if ( empty( trim( $product[ $key ] ?? '' ) ) ) {
 			continue;
 		}
-		$html .= '<details class="ugolini-product-fact" open><summary>' . esc_html( $label ) . '</summary><p>' . nl2br( esc_html( $product[ $key ] ) ) . '</p></details>';
+		$body = '';
+		foreach ( preg_split( '/\R+/', trim( $product[ $key ] ) ) as $paragraph ) {
+			$body .= '<p>' . esc_html( trim( $paragraph ) ) . '</p>';
+		}
+		$html .= '<details class="ugolini-product-fact" open><summary>' . esc_html( $label ) . '</summary><div class="ugolini-product-fact__body">' . $body . '</div></details>';
 	}
 	return '<!-- wp:html -->' . $html . '</div><!-- /wp:html -->';
 }
 
 /** Synchronize SureCart product order and factual detail content with preview. */
 function ugolini_group_seed_product_details() {
-	if ( ! current_user_can( 'manage_options' ) || get_option( 'ugolini_group_products_730_seeded' ) ) {
+	if ( ! current_user_can( 'manage_options' ) || get_option( 'ugolini_group_products_740_seeded' ) ) {
 		return;
 	}
 
@@ -632,7 +607,7 @@ function ugolini_group_seed_product_details() {
 	}
 
 	if ( $complete ) {
-		update_option( 'ugolini_group_products_730_seeded', 1, false );
+		update_option( 'ugolini_group_products_740_seeded', 1, false );
 	}
 }
 add_action( 'init', 'ugolini_group_seed_product_details', 101 );

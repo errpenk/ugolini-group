@@ -66,6 +66,44 @@ def short_description(body_html: str) -> str:
     return paragraph[:500].rstrip()
 
 
+SEMANTIC_SECTIONS = (
+    ("ingredients", re.compile(r"\bingredient", re.I)),
+    ("allergens", re.compile(r"\ballergen", re.I)),
+    ("nutritional_information", re.compile(r"nutriz|energia|grassi|carboidrati|proteine|zuccheri|\bsale\b|sodio", re.I)),
+    ("storage_instructions", re.compile(r"conserv|scongel|ricongel|temperatura|catena del freddo|scadenza", re.I)),
+    ("shelf_life", re.compile(r"shelf[ -]?life|durata", re.I)),
+    ("usage_instructions", re.compile(r"modalit[aà].*(?:uso|consumo)|come (?:us|utilizz|serv)|consigli? d.?uso|preparazione|abbinament|ideale per|perfett[oa] per|consiglio da chef", re.I)),
+    ("weight_format", re.compile(r"\bformati?\b|peso netto|contenuto netto", re.I)),
+    ("organoleptic_characteristics", re.compile(r"organolett|profilo sensoriale|profilo aromatico|aroma e gusto|\btexture\b", re.I)),
+    ("certifications_dietary_claims", re.compile(r"certific|sicurezza|origine|tracciabil|perch[eé] scegliere|domande frequenti|\bfaq\b|senza glutine", re.I)),
+)
+
+
+def semantic_product_fields(description: str) -> dict[str, str]:
+    """Group copy by meaning into a stable product-information hierarchy."""
+    buckets: dict[str, list[str]] = {"full_description": []}
+    current = "full_description"
+
+    for raw_line in (description or "").splitlines():
+        line = re.sub(r"^#{2,3}\s*", "", raw_line).strip(" \t:-")
+        if not line or line.lower().startswith("scheda originale"):
+            continue
+
+        heading = raw_line.lstrip().startswith("##")
+        matched = next((key for key, pattern in SEMANTIC_SECTIONS if pattern.search(line)), None)
+        if matched and (heading or len(line) < 90 or matched in {"nutritional_information", "storage_instructions"}):
+            current = matched
+            buckets.setdefault(current, [])
+            # Keep inline facts such as "Formato: 250 ml", but discard navigation-like labels.
+            if ":" in line and len(line.split(":", 1)[1].strip()) > 1:
+                buckets[current].append(line)
+            continue
+
+        buckets.setdefault(current, []).append(line)
+
+    return {key: "\n".join(lines).strip() for key, lines in buckets.items() if lines}
+
+
 def cents(value: str) -> int:
     return round(float(value) * 100)
 
@@ -139,6 +177,7 @@ def product_row(product: dict, brand: str, site: str, source_url: str, include_u
             import_product["variants"].append(item)
 
     source_product_url = f"{source_url}/products/{product['handle']}"
+    semantic = semantic_product_fields(text_from_html(product.get("body_html", "")))
     csv_row = {
         "source_wordpress_id": "",
         "source_surecart_product_id": f"{site}:{product['id']}",
@@ -152,17 +191,17 @@ def product_row(product: dict, brand: str, site: str, source_url: str, include_u
         "source_url": source_product_url,
         "image_urls": " | ".join(image["src"] for image in product.get("images", [])),
         "short_description": import_product["description"],
-        "full_description": text_from_html(product.get("body_html", "")),
-        "ingredients": "",
-        "allergens": "",
-        "nutritional_information": "",
-        "shelf_life": "",
-        "storage_instructions": "",
-        "usage_instructions": "",
+        "full_description": semantic.get("full_description", import_product["description"]),
+        "ingredients": semantic.get("ingredients", ""),
+        "allergens": semantic.get("allergens", ""),
+        "nutritional_information": semantic.get("nutritional_information", ""),
+        "shelf_life": semantic.get("shelf_life", ""),
+        "storage_instructions": semantic.get("storage_instructions", ""),
+        "usage_instructions": semantic.get("usage_instructions", ""),
         "primary_packaging": "",
-        "weight_format": " | ".join(variant["title"] for variant in variants if variant["title"] != "Default Title"),
-        "certifications_dietary_claims": "",
-        "organoleptic_characteristics": "",
+        "weight_format": semantic.get("weight_format", "") or " | ".join(variant["title"] for variant in variants if variant["title"] != "Default Title"),
+        "certifications_dietary_claims": semantic.get("certifications_dietary_claims", ""),
+        "organoleptic_characteristics": semantic.get("organoleptic_characteristics", ""),
         "source_stock_enabled": str(not available).lower(),
         "source_available_stock": "" if available else "0",
         "source_allow_out_of_stock_purchases": str(available).lower(),

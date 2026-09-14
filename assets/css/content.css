@@ -28,7 +28,7 @@
 .ugolini-journal-grid .wp-block-post-excerpt__more-text,
 .preview-journal-grid .ugolini-card-link { margin-top: auto; }
 .ugolini-journal-grid .wp-block-post-excerpt__more-link,
-.preview-journal-grid .ugolini-card-link { display: inline-flex; gap: 0.55rem; color: #615955; font-family: var(--wp--preset--font-family--display); font-size: 0.85rem; font-weight: 600; letter-spacing: 0.04em; text-decoration: none; text-transform: uppercase; }
+.preview-journal-grid .ugolini-card-link { display: inline-flex; gap: 0.55rem; color: #171714; font-family: var(--wp--preset--font-family--display); font-size: 0.85rem; font-weight: 600; letter-spacing: 0.04em; text-decoration: none; text-transform: uppercase; }
 .ugolini-journal-grid .wp-block-post-excerpt__more-link:hover,
 .preview-journal-grid .ugolini-card-link:hover { color: var(--wp--preset--color--brand-dark); transform: scale(1.04); transform-origin: left center; }
 

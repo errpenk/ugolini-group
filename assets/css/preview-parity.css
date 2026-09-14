@@ -154,12 +154,14 @@ a { color: inherit; }
 .preview-shop-bar { display: flex; align-items: stretch; flex-direction: column; gap: 2rem; margin-bottom: 2.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--wp--preset--color--border); }
 .preview-shop-tabs,
 .preview-shop-actions { display: flex; align-items: center; flex-wrap: wrap; }
-.preview-shop-tabs { min-width: 0; gap: 0.75rem; margin-block: -0.4rem; padding-block: 0.4rem; flex-wrap: nowrap; overflow-x: auto; }
+.preview-shop-tabs { min-width: 0; gap: 0.75rem; margin-block: -0.4rem; padding: 0.4rem 2px; flex-wrap: nowrap; overflow-x: auto; }
 .preview-shop-actions { justify-content: flex-end; gap: clamp(2.5rem, 4vw, 4.5rem); flex-wrap: nowrap; }
 .preview-shop-tabs button,
 .preview-shop-actions button,
 .preview-shop-actions :where(input, select) { min-height: 48px; padding-inline: 1rem; border: 1px solid var(--wp--preset--color--border); background: transparent; color: inherit; }
 .preview-shop-tabs button { height: 48px; border-color: var(--wp--preset--color--text); border-radius: 999px; cursor: pointer; }
+.preview-shop-tabs button:hover,
+.preview-shop-tabs button:focus-visible { transform: none !important; }
 .preview-shop-tabs button.is-active { border-color: var(--wp--preset--color--text); background: var(--wp--preset--color--text); color: var(--wp--preset--color--white); }
 .preview-shop-actions [data-filter-open] { display: inline-flex; align-items: center; gap: 0.55rem; padding-inline: 0; border: 0; }
 .preview-shop-actions [data-filter-open] .lucide,

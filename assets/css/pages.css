@@ -11,8 +11,9 @@
 .ugolini-page-hero-content > * { margin-inline: 0 !important; margin-block-start: 0 !important; }
 .ugolini-page-hero-content > p:last-child { margin-bottom: 1em; }
 .ugolini-page-hero--image :where(h1, h2, h3, p, .ugolini-eyebrow) { color: var(--wp--preset--color--white) !important; }
-.ugolini-events-hero { min-height: clamp(620px, 78svh, 860px); display: grid; align-content: end; color: #fff; background: linear-gradient(90deg, rgb(0 0 0 / 72%), rgb(0 0 0 / 20%)), url('../images/events/sial-paris-2026-ugolini.png') center 44% / cover no-repeat; }
-.ugolini-events-hero .ugolini-page-hero-content { width: 100%; }
+.ugolini-events-hero { width: 100% !important; max-width: none !important; min-height: clamp(620px, 78svh, 860px); display: grid; align-content: end; margin: 0 !important; padding-block: 0; color: #fff; background: linear-gradient(90deg, rgb(0 0 0 / 72%), rgb(0 0 0 / 20%)), url('../images/events/sial-paris-2026-ugolini.png') center 44% / cover no-repeat; }
+.ugolini-events-hero .ugolini-page-hero-content { width: min(calc(100% - (2 * var(--ugolini-gutter))), var(--ugolini-container)) !important; max-width: var(--ugolini-container) !important; margin-inline: auto !important; padding: clamp(4rem, 8vw, 7rem) 0; }
+.ugolini-events-hero .ugolini-page-hero-content > * { max-width: 48rem; }
 .ugolini-events-hero :where(h1, p, .ugolini-eyebrow) { color: #fff !important; }
 
 .ugolini-intro-grid,

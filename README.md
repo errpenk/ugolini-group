@@ -279,6 +279,9 @@ published price display “Prezzo su richiesta”.
 V7.3 shows all ten collections in the home discovery grid, adds enlarged
 burgundy hover states, equalizes the Events hero, and splits imported product
 descriptions into open semantic accordions.
+V7.4 groups every imported description by meaning rather than source headings,
+aligns the Events hero to the shared content grid, removes clipped hover states,
+and renders Blog read-more links in deep black.
 V6.63 hardens deployed WordPress parity: footer fallback branding and column
 alignment, stable three-icon header geometry, persistent transparent hero
 navigation, legacy Events shortcode expansion, hidden duplicate SureCart
