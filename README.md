@@ -14,6 +14,9 @@ adds a compact desktop footer with accessible mobile accordion sections.
 Version 7.5.0 refines footer branding and columns, prevents mobile navigation
 swipes from becoming taps, centers related posts and differentiates the about
 timeline with scroll-revealed editorial imagery.
+Version 7.5.1 restores the six-column desktop footer and mobile accordions,
+hardens mouse-only deep-red menu hover, and gives Chi siamo unique copy with
+alternating imagery on the shared animated timeline axis.
 
 ## Data boundary
 

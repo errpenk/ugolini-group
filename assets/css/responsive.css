@@ -256,3 +256,8 @@
 @media (prefers-reduced-motion: reduce) {
 	*, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
 }
+
+/* Mouse hover only: touch scrolling must never synthesize a menu colour state. */
+@media (hover: hover) and (pointer: fine) {
+	body .ugolini-primary-navigation :where(.wp-block-navigation-item__content, .ugolini-page-submenu a):hover { color: var(--wp--preset--color--brand-dark) !important; }
+}

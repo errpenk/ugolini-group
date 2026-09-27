@@ -108,16 +108,18 @@
 .ugolini-product-information .wp-block-post-content h2 { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--wp--preset--color--border); font-size: clamp(1.75rem, 3vw, 2.5rem); }
 .ugolini-related-products { background: var(--wp--preset--color--background); }
 
-/* Chi siamo keeps the shared animated axis, with an editorial image on each chapter. */
-.ugolini-timeline--about { background: #f3ede4; }
-.ugolini-timeline--about header { max-width: 52rem; margin-inline: auto; }
-.ugolini-timeline--about header p { max-width: 42rem; margin: 1.25rem auto 0; color: var(--wp--preset--color--secondary-text); }
-.ugolini-timeline--about article { min-height: 430px; align-items: center; }
-.ugolini-timeline--about article > div { padding: 2rem 2.5rem; border-left: 3px solid var(--wp--preset--color--brand-dark); background: #fff; text-align: left; }
-.ugolini-timeline--about article:nth-child(even) > div { padding: 2rem 2.5rem; }
+/* Chi siamo keeps the animated axis, but uses a distinct editorial narrative. */
+.ugolini-timeline--about { counter-reset: about-chapter; background: transparent; }
+.ugolini-timeline--about header { max-width: 58rem; margin-inline: 0; text-align: left; }
+.ugolini-timeline--about header span { margin-inline: 0; }
+.ugolini-timeline--about header p { max-width: 42rem; margin: 1.25rem 0 0; color: var(--wp--preset--color--secondary-text); }
+.ugolini-timeline--about article { min-height: 470px; align-items: center; counter-increment: about-chapter; }
+.ugolini-timeline--about article > div { position: relative; padding: 1rem 3rem 1rem 0; border: 0; background: transparent; text-align: left; }
+.ugolini-timeline--about article:nth-child(even) > div { padding: 1rem 0 1rem 3rem; }
+.ugolini-timeline--about article > div::before { content: "0" counter(about-chapter); display: block; margin-bottom: 1.25rem; color: var(--wp--preset--color--brand-dark); font-family: var(--wp--preset--font-family--interface); font-size: .72rem; font-weight: 700; letter-spacing: .16em; }
 .ugolini-timeline--about article p,
 .ugolini-timeline--about article:nth-child(even) p { margin-inline: 0; }
-.ugolini-timeline--about article figure { grid-column: 3; grid-row: 1; height: 310px; margin: 0 0 0 2.5rem; overflow: hidden; opacity: 0; transform: translateY(2rem); transition: opacity 500ms ease, transform 650ms var(--ugolini-motion-ease); }
+.ugolini-timeline--about article figure { grid-column: 3; grid-row: 1; height: 360px; margin: 0 0 0 2.5rem; overflow: hidden; opacity: 0; transform: translateY(2rem); transition: opacity 500ms ease, transform 650ms var(--ugolini-motion-ease); }
 .ugolini-timeline--about article:nth-child(even) figure { grid-column: 1; margin: 0 2.5rem 0 0; }
 .ugolini-timeline--about article figure.is-visible { opacity: 1; transform: none; }
 .ugolini-timeline--about article figure img { width: 100%; height: 100%; display: block; object-fit: cover; }

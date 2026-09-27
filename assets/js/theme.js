@@ -636,9 +636,19 @@ for (const nav of document.querySelectorAll('.ugolini-primary-navigation')) {
 	const timeline = document.querySelector('[data-timeline]');
 	if (!timeline) return;
 	timeline.classList.add('ugolini-timeline--about');
-	const intro = document.createElement('p');
-	intro.textContent = 'Quattro capitoli, dalla passione per la cucina italiana a una gamma pensata per la tavola contemporanea.';
-	timeline.querySelector('header')?.append(intro);
+	const header = timeline.querySelector('header');
+	const timelineTitle = header?.querySelector('h2');
+	if (timelineTitle) timelineTitle.textContent = 'Dalla cucina a Ugolini Gourmet';
+	const intro = header?.querySelector('p') || document.createElement('p');
+	intro.classList.add('ugolini-timeline-about-intro');
+	intro.textContent = 'Persone, scelte e incontri che hanno trasformato un sapere gastronomico in un progetto italiano contemporaneo.';
+	if (!intro.isConnected) header?.append(intro);
+	const chapters = [
+		['Il punto di partenza', 'Una cucina prima di un marchio', 'L’intuizione nasce osservando il lavoro quotidiano in cucina: tempi precisi, materie prime riconoscibili e ricette capaci di conservare carattere anche nel servizio professionale.'],
+		['Il metodo', 'L’esperienza diventa metodo', 'Il confronto con ristoratori e chef trasforma l’esperienza in un metodo fatto di ascolto, prove e continuità. Ogni prodotto deve essere semplice da usare, ma mai anonimo nel gusto.'],
+		['Il progetto', 'Un’identità prende forma', 'Ugolini Gourmet riunisce tradizione italiana e ricerca in una collezione coerente. Non una semplice gamma, ma strumenti pensati per creare piatti riconoscibili con libertà e precisione.'],
+		['La direzione', 'La qualità guarda avanti', 'Oggi il progetto cresce attraverso filiere attente, ricette inclusive e nuove collaborazioni. L’obiettivo resta lo stesso: portare a ogni tavola un gusto autentico, affidabile e aperto al futuro.'],
+	];
 	const images = [
 		'https://ugolinigroup.com/wp-content/uploads/2026/08/8800-pesto-alla-genovese-ugolini-gourmet-10.jpg',
 		'https://ugolinigroup.com/wp-content/uploads/2026/08/8831-sugo-tartufo-nero-ugolini-gourmet-4.jpg',
@@ -652,9 +662,23 @@ for (const nav of document.querySelectorAll('.ugolini-primary-navigation')) {
 		}
 	}, { threshold: .28 });
 	[...timeline.querySelectorAll('article')].forEach((article, index) => {
-		const figure = document.createElement('figure');
-		figure.innerHTML = `<img src="${images[index]}" alt="" loading="lazy">`;
-		article.append(figure);
+		const [eyebrow, title, copy] = chapters[index] || chapters.at(-1);
+		const text = article.querySelector(':scope > div');
+		if (text) {
+			const label = text.querySelector('small');
+			const heading = text.querySelector('h3');
+			const paragraph = text.querySelector('p');
+			if (label) label.textContent = eyebrow;
+			if (heading) heading.textContent = title;
+			if (paragraph) paragraph.textContent = copy;
+		}
+		let figure = article.querySelector(':scope > figure');
+		if (!figure) {
+			figure = document.createElement('figure');
+			figure.innerHTML = `<img src="${images[index]}" alt="" loading="lazy">`;
+			article.append(figure);
+		}
+		figure.classList.add('ugolini-timeline-about-figure');
 		observer.observe(figure);
 	});
 })();
