@@ -486,7 +486,10 @@ for (const nav of document.querySelectorAll('.ugolini-primary-navigation')) {
 	const activateWidget = () => {
 		if (!switched && typeof window.Tawk_API?.switchWidget === 'function') {
 			switched = true;
-			window.Tawk_API.switchWidget(propertyId, widgetId);
+			window.Tawk_API.switchWidget({ propertyId, widgetId }, error => {
+				if (error) switched = false;
+				schedulePosition();
+			});
 		}
 		schedulePosition();
 	};

@@ -45,7 +45,7 @@ assert.match(script, /sc-total, \.total-price, \.price/);
 assert.match(script, /new MutationObserver\(\(\) => protectPrices\(root\)\)/);
 assert.match(script, /navigator\.languages\?\.\[0\].+language\.startsWith\('it'\).+language\.startsWith\('zh'\)/s);
 assert.match(script, /'1k3hpm76n'.+'1k3i2gojt'.+'1k3i2i3lg'/s);
-assert.match(script, /Tawk_API\.switchWidget\(propertyId, widgetId\)/);
+assert.match(script, /Tawk_API\.switchWidget\(\{ propertyId, widgetId \}, error =>/);
 assert.match(script, /querySelector\('#gt_float_wrapper'\)/);
 assert.match(script, /set\('left', '20px'\).+set\('bottom', `\$\{launcherBottom\}px`\).+set\('transform', 'scale\(\.8\)'\)/s);
 assert.match(script, /shop\|products\?\|collections\?\|prodotto/);
