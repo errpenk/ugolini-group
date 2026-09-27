@@ -85,6 +85,7 @@ assert.match(functions, /add_class\( 'notranslate' \)/);
 assert.match(functions, /function ugolini_group_force_store_currency\(\)/);
 assert.match(functions, /\$_GET\['currency'\]\s+= 'eur'/);
 assert.match(functions, /\$_COOKIE\['sc_current_currency'\] = 'eur'/);
+assert.match(functions, /document\.cookie='sc_current_currency=eur;path=\//);
 assert.match(functions, /SureCart::currency\(\)->convert\( false \)/);
 assert.match(functions, /pre_option_surecart_currency_geolocation_enabled.+__return_false/);
 assert.match(functions, /surecart\/currency\/filter_url.+__return_false/);

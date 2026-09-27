@@ -732,6 +732,14 @@ function ugolini_group_force_store_currency() {
 }
 add_action( 'init', 'ugolini_group_force_store_currency', 0 );
 
+/** Reset stale visitor currency even when LiteSpeed serves a cached page. */
+function ugolini_group_force_store_currency_cookie() {
+	?>
+	<script>document.cookie='sc_current_currency=eur;path=/;max-age=31536000;SameSite=Lax'+(location.protocol==='https:'?';Secure':'');</script>
+	<?php
+}
+add_action( 'wp_head', 'ugolini_group_force_store_currency_cookie', 0 );
+
 /** Override block-level conversion support enabled by individual SureCart blocks. */
 function ugolini_group_disable_currency_conversion( $pre_render ) {
 	if ( class_exists( '\\SureCart' ) ) {
