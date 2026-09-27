@@ -908,10 +908,17 @@ function ugolini_group_enqueue_assets() {
 				set('bottom', `${bottom + 60}px`);
 				set('transform', 'none');
 			} else if (innerWidth <= 767 && frame.parentElement?.id === 'max-widget') {
-				const width = `${Math.max(280, innerWidth - 40)}px`;
+				const width = `${Math.max(280, innerWidth - 16)}px`;
+				const height = `${Math.round(window.visualViewport ? visualViewport.height * .7 : innerHeight * .7)}px`;
+				set('left', '8px');
+				set('bottom', '0px');
+				set('transform', 'none');
 				set('width', width);
 				set('min-width', width);
 				set('max-width', width);
+				set('height', height);
+				set('min-height', height);
+				set('max-height', height);
 			}
 		}
 	};
