@@ -6,7 +6,8 @@
 .preview-footer-brand { display: block; }
 .ugolini-footer-brand > p,
 .preview-footer-brand > p { display: none; }
-.ugolini-footer-logo { width: 160px; height: 60px; display: block; background: url('../images/ugolini-wordmark.svg') left center / contain no-repeat; filter: grayscale(1) brightness(0); }
+.ugolini-footer-grid .ugolini-footer-logo { width: 160px; height: 60px; display: block; }
+.ugolini-footer-logo img { width: 100%; height: 100%; display: block; object-fit: contain; object-position: left center; filter: grayscale(1) brightness(0); }
 
 .ugolini-footer-section { margin: 0; border: 0; }
 .ugolini-footer-section > summary { display: block; margin: 0 0 .75rem; padding: 0; color: inherit; font-family: var(--wp--preset--font-family--interface); font-size: .72rem; font-weight: 700; letter-spacing: .08em; line-height: 1.3; list-style: none; text-transform: uppercase; cursor: default; }
@@ -47,7 +48,7 @@
 @media (max-width: 767px) {
 	.ugolini-footer-grid { display: grid; grid-template-columns: 1fr; gap: 0; padding-block: 2.5rem 1rem; padding-right: 0; }
 	.ugolini-footer-brand { margin-bottom: 2rem !important; }
-	.ugolini-footer-logo { width: 150px; height: 57px; }
+	.ugolini-footer-grid .ugolini-footer-logo { width: 150px; height: 57px; }
 	.ugolini-footer-section { width: 100%; border-top: 1px solid var(--wp--preset--color--border); }
 	.ugolini-footer-section:last-of-type { border-bottom: 1px solid var(--wp--preset--color--border); }
 	.ugolini-footer-section > summary { min-height: 58px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin: 0; cursor: pointer; }

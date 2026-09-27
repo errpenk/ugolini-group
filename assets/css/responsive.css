@@ -259,5 +259,7 @@
 
 /* Mouse hover only: touch scrolling must never synthesize a menu colour state. */
 @media (hover: hover) and (pointer: fine) {
-	body .ugolini-primary-navigation :where(.wp-block-navigation-item__content, .ugolini-page-submenu a):hover { color: var(--wp--preset--color--brand-dark) !important; }
+	body .ugolini-primary-navigation .wp-block-navigation__responsive-container.is-menu-open .ugolini-page-submenu a:hover,
+	body .ugolini-primary-navigation .ugolini-page-submenu a:hover,
+	body .ugolini-primary-navigation .wp-block-navigation-item__content:hover { color: var(--wp--preset--color--brand-dark) !important; }
 }

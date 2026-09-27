@@ -19,6 +19,8 @@ hardens mouse-only deep-red menu hover, and gives Chi siamo unique copy with
 alternating imagery on the shared animated timeline axis.
 Version 7.5.2 makes the higher-specificity desktop submenu hover deep red too.
 Version 7.5.3 purges LiteSpeed automatically after Git-driven theme updates.
+Version 7.5.4 renders a real footer logo image and preserves deep-red submenu
+hover at compact mouse-driven viewport sizes.
 
 ## Data boundary
 
