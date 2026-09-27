@@ -53,7 +53,7 @@ assert.match(functions, /window\.visualViewport\?\.addEventListener\('resize', s
 assert.match(functions, /#min-widget > iframe, #max-widget > iframe, #branding-widget > iframe, #message-preview > iframe/);
 assert.match(functions, /frame\.parentElement\?\.id === 'message-preview'/);
 assert.match(functions, /set\('left', '20px'\).+set\('bottom', `\$\{bottom\}px`\).+set\('transform', 'scale\(\.8\)'\)/s);
-assert.match(functions, /innerWidth <= 767.+innerWidth - 16.+visualViewport\.height \* \.7.+set\('bottom', '0px'\).+set\('min-width', width\).+set\('max-width', width\).+set\('min-height', height\).+set\('max-height', height\)/s);
+assert.match(functions, /innerWidth <= 767.+const width = `\$\{innerWidth\}px`.+visualViewport\.height : innerHeight.+set\('left', '0px'\).+set\('bottom', '0px'\).+set\('min-width', width\).+set\('max-width', width\).+set\('min-height', height\).+set\('max-height', height\)/s);
 assert.match(script, /shop\|products\?\|collections\?\|prodotto/);
 assert.doesNotMatch(script, /sessionStorage\.setItem\('ugolini-nav-from'/);
 assert.doesNotMatch(script, /createElement\('span'\).*ugolini-nav-indicator/s);

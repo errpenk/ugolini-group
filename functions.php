@@ -908,9 +908,9 @@ function ugolini_group_enqueue_assets() {
 				set('bottom', `${bottom + 60}px`);
 				set('transform', 'none');
 			} else if (innerWidth <= 767 && frame.parentElement?.id === 'max-widget') {
-				const width = `${Math.max(280, innerWidth - 16)}px`;
-				const height = `${Math.round(window.visualViewport ? visualViewport.height * .7 : innerHeight * .7)}px`;
-				set('left', '8px');
+				const width = `${innerWidth}px`;
+				const height = `${Math.round(window.visualViewport ? visualViewport.height : innerHeight)}px`;
+				set('left', '0px');
 				set('bottom', '0px');
 				set('transform', 'none');
 				set('width', width);
