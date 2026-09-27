@@ -448,6 +448,65 @@ for (const nav of document.querySelectorAll('.ugolini-primary-navigation')) {
 })();
 
 (() => {
+	const propertyId = '6ab93e3ca532fa3442d54ef6';
+	const widgets = {
+		en: '1k3hpm76n',
+		it: '1k3i2gojt',
+		zh: '1k3i2i3lg',
+	};
+	const language = (navigator.languages?.[0] || navigator.language || 'en').toLowerCase();
+	const widgetId = widgets[language.startsWith('it') ? 'it' : language.startsWith('zh') ? 'zh' : 'en'];
+	let switched = widgetId === widgets.en;
+	let positioningFrame = 0;
+
+	const positionWidget = () => {
+		positioningFrame = 0;
+		const languagePicker = document.querySelector('#gt_float_wrapper');
+		const languageTop = languagePicker?.getBoundingClientRect().top;
+		const launcherBottom = languageTop == null ? 85 : Math.max(20, innerHeight - languageTop + 12);
+		for (const frame of document.querySelectorAll('iframe[title="Chat widget"], iframe[title="Visit tawk.to"]')) {
+			const set = (property, value) => {
+				if (frame.style.getPropertyValue(property) !== value || frame.style.getPropertyPriority(property) !== 'important') {
+					frame.style.setProperty(property, value, 'important');
+				}
+			};
+			set('left', '20px');
+			set('right', 'auto');
+			const bounds = frame.getBoundingClientRect();
+			if (bounds.width <= 100 && bounds.height <= 100) {
+				set('bottom', `${launcherBottom}px`);
+				set('transform', 'scale(.8)');
+				set('transform-origin', 'left bottom');
+			}
+		}
+	};
+	const schedulePosition = () => {
+		if (!positioningFrame) positioningFrame = requestAnimationFrame(positionWidget);
+	};
+	const activateWidget = () => {
+		if (!switched && typeof window.Tawk_API?.switchWidget === 'function') {
+			switched = true;
+			window.Tawk_API.switchWidget(propertyId, widgetId);
+		}
+		schedulePosition();
+	};
+
+	window.Tawk_API = window.Tawk_API || {};
+	const previousOnLoad = window.Tawk_API.onLoad;
+	window.Tawk_API.onLoad = function (...args) {
+		previousOnLoad?.apply(this, args);
+		activateWidget();
+	};
+	new MutationObserver(records => {
+		if (records.some(({ target, type }) => type === 'childList' || target instanceof HTMLIFrameElement)) {
+			activateWidget();
+		}
+	}).observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['style'] });
+	addEventListener('resize', schedulePosition, { passive: true });
+	activateWidget();
+})();
+
+(() => {
 	const presets = [
 		['.ugolini-hero', ['https://ugolinigroup.com/wp-content/uploads/2026/08/8800-pesto-alla-genovese-ugolini-gourmet-10.jpg', 'https://ugolinigroup.com/wp-content/uploads/2026/08/8848-sugo-allarrabbiata-ugolini-gourmet-5.jpg']],
 		['.ugolini-catalogue-panel', ['https://ugolinigroup.com/wp-content/uploads/2026/08/8817-pesto-rosso-ugolini-gourmet-4.jpg', 'https://ugolinigroup.com/wp-content/uploads/2026/08/8855-pesto-vegano-ugolini-gourmet-8-scaled-1.jpg']],
