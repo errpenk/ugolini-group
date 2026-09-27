@@ -151,7 +151,7 @@
 .ugolini-collection-media { display: block; aspect-ratio: 1; overflow: hidden; background: var(--wp--preset--color--beige); }
 .ugolini-collection-media img { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform 600ms ease; }
 .ugolini-collection-card:hover img { transform: scale(1.035); }
-.ugolini-collection-copy { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; padding-block: 1.1rem; border-bottom: 1px solid var(--wp--preset--color--border); }
+.ugolini-collection-copy { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; padding-block: 1.1rem; }
 .ugolini-collection-copy strong { font-family: var(--wp--preset--font-family--display); font-size: clamp(1.35rem, 2vw, 1.8rem); font-weight: 400; line-height: 1.1; }
 .ugolini-collection-copy small { flex: 0 0 auto; color: var(--wp--preset--color--secondary-text); font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; }
 .ugolini-collection-fallback { width: 100%; height: 100%; display: block; background: linear-gradient(145deg, var(--wp--preset--color--beige), var(--wp--preset--color--brand-light)); }
@@ -286,7 +286,7 @@
 .ugolini-discovery-card p:not(.ugolini-eyebrow) { color: rgb(255 255 255 / 82%) !important; }
 .ugolini-discovery-card .wp-block-button { margin-top: 1.25rem; }
 
-/* V6.13: full-image Urbani cards with a separated circular product thumbnail. */
+/* Full-image product cards with a separated circular thumbnail. */
 .ugolini-deal-rail { padding-bottom: clamp(2rem, 4vw, 4rem); }
 .ugolini-deal-rail :where(.ugolini-product-card, .preview-product-card) { flex-basis: clamp(300px, 24vw, 430px); min-height: 0; aspect-ratio: 7 / 11; display: flex !important; flex-direction: column; justify-content: flex-start; gap: 0; padding: 0 1.2rem 0.75rem; border-radius: 16px; overflow: hidden; }
 .ugolini-deal-rail :where(.ugolini-product-card-media, .preview-product-media) { position: relative; inset: auto; flex: 0 0 52%; width: calc(100% + 2.4rem); height: auto; margin: 0 -1.2rem 3.75rem; border-radius: 0; background: var(--wp--preset--color--beige); }
@@ -305,7 +305,7 @@
 .ugolini-showcase__inner { padding-block: clamp(2rem, 5vw, 5rem); }
 
 .ugolini-home-collections .ugolini-collection-grid { gap: 0 clamp(2rem, 5vw, 5rem); }
-.ugolini-home-collections .ugolini-collection-card > a { min-height: 150px; display: grid; grid-template-columns: 92px 1fr; align-items: center; gap: 1.25rem; border-bottom: 1px solid var(--wp--preset--color--border); }
+.ugolini-home-collections .ugolini-collection-card > a { min-height: 150px; display: grid; grid-template-columns: 92px 1fr; align-items: center; gap: 1.25rem; }
 .ugolini-home-collections .ugolini-collection-media { width: 78px; height: 78px; aspect-ratio: 1; border-radius: 50%; }
 .ugolini-home-collections .ugolini-collection-copy { min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 0.35rem; padding: 0; border: 0; }
 .ugolini-home-collections :where(.ugolini-collection-media, .ugolini-collection-copy) { transition: color 240ms ease, width 240ms ease, height 240ms ease; }

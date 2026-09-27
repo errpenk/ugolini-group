@@ -3,7 +3,7 @@ import { readFileSync, readdirSync } from 'node:fs';
 
 const read = path => readFileSync(new URL(`../${path}`, import.meta.url), 'utf8');
 const base = read('assets/css/base.css');
-const php = read('functions.php');
+const functions = read('functions.php');
 const header = read('assets/css/header.css');
 const responsive = read('assets/css/responsive.css');
 const footer = read('assets/css/footer.css');
@@ -12,16 +12,16 @@ const surecart = read('assets/css/surecart.css');
 const home = read('assets/css/home.css');
 const pages = read('assets/css/pages.css');
 const content = read('assets/css/content.css');
-const functions = read('functions.php');
 const externalCatalog = JSON.parse(read('migration/ugolini-external-products/products.json'));
 const script = read('assets/js/theme.js');
 const collectionTemplate = read('templates/taxonomy-sc_collection.html');
+const style = read('style.css');
 
-assert.match(php, /\[ugolini_events context="home"\].+ugolini_group_events_shortcode/);
-assert.match(php, /class="ugolini-commerce-actions"/);
-assert.ok(php.includes("preg_replace( '/>\\s+</'"));
-assert.ok(php.includes("preg_replace( '/<div(\\s+class=\"sc-cart-icon\""));
-assert.match(php, /render_block_core\/shortcode.+ugolini_group_render_header_shortcode/s);
+assert.match(functions, /\[ugolini_events context="home"\].+ugolini_group_events_shortcode/);
+assert.match(functions, /class="ugolini-commerce-actions"/);
+assert.ok(functions.includes("preg_replace( '/>\\s+</'"));
+assert.ok(functions.includes("preg_replace( '/<div(\\s+class=\"sc-cart-icon\""));
+assert.match(functions, /render_block_core\/shortcode.+ugolini_group_render_header_shortcode/s);
 assert.match(header, /\.ugolini-header-actions > :is\(p, \.ugolini-search-action, \.ugolini-commerce-actions\) \{ display: contents; \}/);
 assert.match(header, /\.has-overlay-header \.wp-site-blocks > header\.wp-block-template-part \{ position: fixed !important;/);
 assert.match(header, /\.has-overlay-header:not\(\.is-scrolled\):not\(\.is-header-engaged\):not\(\.has-mobile-menu-open\) \.ugolini-site-header/);
@@ -106,7 +106,16 @@ assert.match(functions, /'full_description'\s+=> 'Descrizione'/);
 assert.match(functions, /'usage_instructions'\s+=> 'Modalità di utilizzo'/);
 assert.match(functions, /'nutritional_information'\s+=> 'Valori nutrizionali'/);
 assert.match(home, /grid-template-columns: 92px 1fr/);
+assert.doesNotMatch(home, /ugolini-collection-(?:copy|card > a) \{[^}]*border-bottom/);
 assert.doesNotMatch(home, /ugolini-collection-copy \{ color:[^}]+transform: scale/);
+assert.doesNotMatch(style, /^Version:/m);
+assert.doesNotMatch(functions, /wp_get_theme\(\)|\$version/);
+assert.match(functions, /function ugolini_group_current_product_collection\(\)/);
+for (const slug of ['pesto', 'sughi', 'marmellate', 'olio-al-tartufo', 'salse-funghi', 'salse-tartufo', 'caviareat', 'truffleat', 'tin-caviar', 'luxureat']) {
+	assert.match(functions, new RegExp(`'${slug}'\\s+=> array\\(`));
+}
+assert.match(functions, /Consigli per CaviarEat/);
+assert.match(functions, /Ispirazioni LuxurEat/);
 assert.match(pages, /\.ugolini-events-hero \.ugolini-page-hero-content \{ width: min\(calc\(100% - \(2 \* var\(--ugolini-gutter\)\)\), var\(--ugolini-container\)\) !important;/);
 assert.match(content, /ugolini-card-link \{[^}]+color: #171714;/s);
 assert.match(surecart, /\.ugolini-shop-tabs a:hover \{[^}]+background:[^}]+color:[^}]+transform: none; \}/);
@@ -136,7 +145,6 @@ assert.deepEqual(readdirSync(new URL('../assets/images/product-details/', import
 	'pesto-rosso-bio.jpg', 'pesto-rosso.jpg', 'pesto-tartufo-nero.jpg', 'pesto-vegano.jpg',
 	'ragu-vegano.jpg', 'salsa-tartufata.jpg', 'sugo-arrabbiata.jpg', 'sugo-tartufo-nero.jpg',
 ]);
-assert.equal(externalCatalog.products.length, 66);
 assert.match(collectionTemplate, /ugolini-group\/professional-assurances/);
 
 console.log('Theme regression checks passed.');

@@ -19,10 +19,9 @@
 .ugolini-journal-grid .wp-block-post-author-name::before { content: "Di "; }
 .ugolini-journal-grid .wp-block-post-author-name::after { content: " •"; margin-left: 0.55rem; }
 .ugolini-journal-grid .wp-block-post-excerpt,
-.preview-journal-grid .ugolini-card-excerpt { margin: 0 0 1.25rem; color: #675f5a; font-family: var(--wp--preset--font-family--display); font-size: 1rem; line-height: 1.6; }
+.preview-journal-grid .ugolini-card-excerpt { min-height: 4.8em !important; height: 4.8em !important; display: -webkit-box !important; margin: 0 0 1.25rem; overflow: hidden !important; color: #675f5a; font-family: var(--wp--preset--font-family--display); font-size: 1rem; line-height: 1.6; white-space: normal !important; text-overflow: clip !important; -webkit-box-orient: vertical !important; -webkit-line-clamp: 3 !important; }
 .ugolini-journal-grid .wp-block-post-excerpt { flex: 1; display: flex; flex-direction: column; }
 .ugolini-journal-grid .wp-block-post-excerpt__excerpt,
-.preview-journal-grid .ugolini-card-excerpt { min-height: 4.8em !important; height: 4.8em !important; display: -webkit-box !important; overflow: hidden !important; white-space: normal !important; text-overflow: clip !important; -webkit-box-orient: vertical !important; -webkit-line-clamp: 3 !important; }
 .ugolini-journal-grid > .wp-block-post:first-child .wp-block-post-excerpt__excerpt,
 .preview-journal-grid > .ugolini-article-card:first-child .ugolini-card-excerpt { -webkit-line-clamp: 2 !important; }
 .ugolini-journal-grid .wp-block-post-excerpt__more-text,

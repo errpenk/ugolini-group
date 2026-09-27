@@ -242,8 +242,7 @@ a { color: inherit; }
 .preview-gallery-thumbnails img { width: 100%; height: 100%; display: block; object-fit: cover; }
 .preview-product-summary { position: sticky; top: var(--ugolini-sticky-top); }
 .preview-product-summary > .ugolini-product-card-meta { display: none; }
-.preview-product-summary h1 { margin: 0.4rem 0 1rem; font-family: var(--wp--preset--font-family--display); font-size: clamp(2.2rem, 3vw, 3.25rem); font-weight: 400; letter-spacing: -0.035em; line-height: 1.05; }
-.preview-product-summary h1 { font-size: clamp(2.6rem, 4.4vw, 4.8rem); }
+.preview-product-summary h1 { margin: 0.4rem 0 1rem; font-family: var(--wp--preset--font-family--display); font-size: clamp(2.6rem, 4.4vw, 4.8rem); font-weight: 400; letter-spacing: -0.035em; line-height: 1.05; }
 .preview-product-summary > .preview-product-price { margin-block: 1.5rem; font-size: clamp(1.7rem, 2.4vw, 2.25rem); }
 .preview-surecart-panel { margin-block: 2rem; padding: 0; border: 0; background: transparent; }
 .preview-surecart-panel > p { margin: 0 0 1.5rem; color: var(--wp--preset--color--secondary-text); font-size: 0.78rem; }

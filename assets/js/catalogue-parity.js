@@ -52,19 +52,3 @@ if (shop) {
 	addEventListener('hashchange', () => selectCollection(routeCollection()));
 	selectCollection(routeCollection());
 }
-
-for (const deal of document.querySelectorAll('[data-deal-rail]')) {
-	const rail = deal.querySelector('.preview-product-grid');
-	if (!rail) continue;
-	for (const card of rail.querySelectorAll('.preview-product-card')) {
-		const media = card.querySelector('.preview-product-media');
-		if (!media || card.querySelector('.ugolini-deal-thumb')) continue;
-		const thumb = document.createElement('span');
-		thumb.className = 'ugolini-deal-thumb';
-		thumb.innerHTML = media.innerHTML;
-		media.after(thumb);
-	}
-	const move = direction => rail.scrollBy({ left: direction * Math.max(280, rail.clientWidth * 0.8), behavior: 'smooth' });
-	deal.querySelector('[data-deal-prev]')?.addEventListener('click', () => move(-1));
-	deal.querySelector('[data-deal-next]')?.addEventListener('click', () => move(1));
-}

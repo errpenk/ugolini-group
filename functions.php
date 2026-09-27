@@ -826,14 +826,11 @@ add_action( 'wp_head', 'ugolini_group_checkout_locale_bootstrap', 0 );
  * Load the theme stylesheet and the conservative SureCart layer when relevant.
  */
 function ugolini_group_enqueue_assets() {
-	$theme = wp_get_theme();
-	$version = $theme->get( 'Version' );
-
 	wp_enqueue_style(
 		'ugolini-group',
 		get_stylesheet_uri(),
 		array(),
-		$version
+		null
 	);
 
 	$styles = array(
@@ -850,7 +847,7 @@ function ugolini_group_enqueue_assets() {
 			'ugolini-group-' . $name,
 			get_theme_file_uri( 'assets/css/' . $name . '.css' ),
 			$dependencies,
-			$version
+			null
 		);
 	}
 
@@ -860,22 +857,22 @@ function ugolini_group_enqueue_assets() {
 		'ugolini-group-surecart',
 		get_theme_file_uri( 'assets/css/surecart.css' ),
 		array( 'ugolini-group-footer' ),
-		$version
+		null
 	);
 	wp_enqueue_style(
 		'ugolini-group-responsive',
 		get_theme_file_uri( 'assets/css/responsive.css' ),
 		array( 'ugolini-group-surecart' ),
-		$version
+		null
 	);
 	wp_enqueue_style(
 		'ugolini-group-preview-parity',
 		get_theme_file_uri( 'assets/css/preview-parity.css' ),
 		array( 'ugolini-group-responsive' ),
-		$version
+		null
 	);
-	wp_enqueue_script( 'ugolini-group-interactions', get_theme_file_uri( 'assets/js/theme.js' ), array(), $version, true );
-	wp_enqueue_script( 'ugolini-group-catalogue-parity', get_theme_file_uri( 'assets/js/catalogue-parity.js' ), array(), $version, true );
+	wp_enqueue_script( 'ugolini-group-interactions', get_theme_file_uri( 'assets/js/theme.js' ), array(), null, true );
+	wp_enqueue_script( 'ugolini-group-catalogue-parity', get_theme_file_uri( 'assets/js/catalogue-parity.js' ), array(), null, true );
 }
 add_action( 'wp_enqueue_scripts', 'ugolini_group_enqueue_assets' );
 
@@ -1247,10 +1244,15 @@ function ugolini_group_events_shortcode( $attributes = array() ) {
 }
 add_shortcode( 'ugolini_events', 'ugolini_group_events_shortcode' );
 
+/** Return the current product's first SureCart collection. */
+function ugolini_group_current_product_collection() {
+	$terms = is_singular() ? wp_get_post_terms( get_the_ID(), 'sc_collection' ) : array();
+	return is_array( $terms ) && isset( $terms[0] ) && $terms[0] instanceof WP_Term ? $terms[0] : null;
+}
+
 /** Collection-aware editorial and cooking blocks for product pages. */
 function ugolini_group_product_story_shortcode() {
-	$terms = is_singular() ? wp_get_post_terms( get_the_ID(), 'sc_collection' ) : array();
-	$term  = is_array( $terms ) ? ( $terms[0] ?? null ) : null;
+	$term = ugolini_group_current_product_collection();
 	$slug = $term instanceof WP_Term ? $term->slug : 'salse-tartufo';
 	$link = $term instanceof WP_Term ? get_term_link( $term ) : home_url( '/shop/' );
 	$copy = array(
@@ -1277,8 +1279,7 @@ add_shortcode( 'ugolini_product_story', 'ugolini_group_product_story_shortcode' 
 
 /** Series-specific tasting and use guide. Product labels remain the authority. */
 function ugolini_group_product_guide_shortcode() {
-	$terms = is_singular() ? wp_get_post_terms( get_the_ID(), 'sc_collection' ) : array();
-	$term  = is_array( $terms ) ? ( $terms[0] ?? null ) : null;
+	$term  = ugolini_group_current_product_collection();
 	$slug  = $term instanceof WP_Term ? $term->slug : 'salse-tartufo';
 	$guides = array(
 		'pesto' => array(
@@ -1335,6 +1336,12 @@ function ugolini_group_product_guide_shortcode() {
 			array( 'book-open', 'Formato della lattina', 'Abbina la capacità della lattina alle esigenze di confezionamento indicate nella scheda.' ),
 			array( 'tag', 'Prima dell’acquisto', 'Controlla entrambe le opzioni della variante: quantità per cartone e formato in grammi.' ),
 		),
+		'luxureat' => array(
+			array( 'utensils', 'Come servirlo', 'Segui la modalità d’uso della singola referenza: caviale, tartare, burger e condimenti richiedono preparazioni differenti.' ),
+			array( 'sparkles', 'Costruire il contrasto', 'Abbina sapidità, freschezza e consistenze con misura, lasciando riconoscibile il carattere dell’ingrediente principale.' ),
+			array( 'book-open', 'Una selezione contemporanea', 'LuxurEat riunisce specialità diverse per aperitivi, primi e secondi piatti; consulta sempre la scheda specifica.' ),
+			array( 'tag', 'Prima dell’uso', 'Verifica ingredienti, allergeni, conservazione e disponibilità della variante scelta.' ),
+		),
 	);
 	$items = $guides[ $slug ] ?? $guides['salse-tartufo'];
 	$images = $term instanceof WP_Term ? ugolini_group_collection_images( $term ) : array();
@@ -1350,14 +1357,26 @@ function ugolini_group_product_guide_shortcode() {
 add_shortcode( 'ugolini_product_guide', 'ugolini_group_product_guide_shortcode' );
 
 function ugolini_group_cooking_suggestions_shortcode() {
-	$cards = array(
-		array( 'https://ugolinigroup.com/wp-content/uploads/2026/08/8886-pesto-rosso-bio-ugolini-gourmet-9-scaled-1.jpg', 'Tagliatelle mediterranee', 'Pesto rosso biologico' ),
-		array( 'https://ugolinigroup.com/wp-content/uploads/2026/08/8831-sugo-tartufo-nero-ugolini-gourmet-7.jpg', 'Pasta al tartufo', 'Sugo al tartufo nero' ),
-		array( 'https://ugolinigroup.com/wp-content/uploads/2026/08/8800-pesto-alla-genovese-ugolini-gourmet-10.jpg', 'Crostini al pesto', 'Pesto alla Genovese' ),
+	$term = ugolini_group_current_product_collection();
+	$slug = $term instanceof WP_Term ? $term->slug : 'salse-tartufo';
+	$ideas = array(
+		'pesto'           => array( 'Consigli per i pesti', 'Pasta, pane e verdure', array( array( 'Pasta mantecata', 'Completa con poca acqua di cottura.' ), array( 'Bruschette e focacce', 'Aggiungi il pesto appena prima del servizio.' ), array( 'Verdure e piatti freddi', 'Usalo come condimento o finitura.' ) ) ),
+		'sughi'           => array( 'Consigli per i sughi', 'Primi piatti dal gusto italiano', array( array( 'Pasta e gnocchi', 'Scalda dolcemente e termina in padella.' ), array( 'Polenta e cereali', 'Scegli il sugo in base alla consistenza.' ), array( 'Crostini conviviali', 'Servi le ricette più dense in piccole porzioni.' ) ) ),
+		'marmellate'      => array( 'Abbinamenti gastronomici', 'Taglieri, formaggi e carni', array( array( 'Formaggi stagionati', 'Parti da una piccola quantità.' ), array( 'Salumi e taglieri', 'Crea un contrasto agrodolce equilibrato.' ), array( 'Carni e aperitivi', 'Aggiungi la marmellata al momento del servizio.' ) ) ),
+		'olio-al-tartufo' => array( 'Finiture al tartufo', 'Poche gocce, molto carattere', array( array( 'Risotti e pasta', 'Versa l’olio sul piatto pronto.' ), array( 'Uova e patate', 'Dosa gradualmente e assaggia.' ), array( 'Carni e verdure', 'Usalo come ultima finitura aromatica.' ) ) ),
+		'salse-funghi'    => array( 'Idee con i funghi', 'Pasta, polenta e secondi piatti', array( array( 'Pasta e risotti', 'Regola la crema con poco liquido caldo.' ), array( 'Polenta e carni', 'Scalda la salsa senza farla asciugare.' ), array( 'Crostini e ripieni', 'Mantieni una consistenza più compatta.' ) ) ),
+		'salse-tartufo'   => array( 'Idee al tartufo', 'Pasta, uova e crostini', array( array( 'Pasta e risotti', 'Scalda il condimento con delicatezza.' ), array( 'Uova e patate', 'Inizia con una dose contenuta.' ), array( 'Carni e crostini', 'Completa il piatto poco prima di servire.' ) ) ),
+		'caviareat'       => array( 'Consigli per CaviarEat', 'Servire, degustare, celebrare', array( array( 'Degustazione essenziale', 'Scegli accompagnamenti dal gusto neutro.' ), array( 'Aperitivo contemporaneo', 'Crea piccoli assaggi curati e bilanciati.' ), array( 'Occasioni speciali', 'Segui temperatura e servizio della referenza.' ) ) ),
+		'truffleat'       => array( 'Consigli per Truffleat', 'Il tartufo in ogni portata', array( array( 'Primi piatti', 'Abbina formato e condimento alla ricetta.' ), array( 'Uova, carne e verdure', 'Dosa il tartufo senza coprire gli ingredienti.' ), array( 'Finitura e servizio', 'Completa seguendo la scheda del prodotto.' ) ) ),
+		'tin-caviar'      => array( 'Guida per Tin Caviar', 'Formato, confezionamento, presentazione', array( array( 'Scegli il formato', 'Abbina la capacità alla quantità prevista.' ), array( 'Organizza i quantitativi', 'Controlla i pezzi inclusi in ogni cartone.' ), array( 'Cura la presentazione', 'Verifica materiali e misure nella scheda.' ) ) ),
+		'luxureat'        => array( 'Ispirazioni LuxurEat', 'Contrasti gourmet contemporanei', array( array( 'Aperitivo creativo', 'Costruisci assaggi piccoli e riconoscibili.' ), array( 'Primi e secondi piatti', 'Scegli la referenza adatta alla preparazione.' ), array( 'Degustazione e finitura', 'Valorizza consistenze e sapidità con misura.' ) ) ),
 	);
+	$content = $ideas[ $slug ] ?? $ideas['salse-tartufo'];
+	$images  = $term instanceof WP_Term ? ugolini_group_collection_images( $term ) : array();
+	if ( ! $images ) $images = array( 'https://ugolinigroup.com/wp-content/uploads/2026/08/8831-sugo-tartufo-nero-ugolini-gourmet-7.jpg' );
 	$html = '';
-	foreach ( $cards as $card ) $html .= '<article><img src="' . esc_url( $card[0] ) . '" alt="' . esc_attr( $card[1] ) . '" loading="lazy"><div><strong>' . esc_html( $card[1] ) . '</strong><span>Prodotto consigliato: ' . esc_html( $card[2] ) . '</span></div></article>';
-	return '<section class="ugolini-cooking"><div class="ugolini-section-heading"><div><p class="ugolini-eyebrow">Consigli dalla cucina</p><h2>Idee da portare in tavola</h2></div></div><div class="ugolini-cooking-grid">' . $html . '</div></section>';
+	foreach ( $content[2] as $index => $card ) $html .= '<article><img src="' . esc_url( $images[ $index % count( $images ) ] ) . '" alt="' . esc_attr( $card[0] ) . '" loading="lazy"><div><strong>' . esc_html( $card[0] ) . '</strong><span>' . esc_html( $card[1] ) . '</span></div></article>';
+	return '<section class="ugolini-cooking"><div class="ugolini-section-heading"><div><p class="ugolini-eyebrow">' . esc_html( $content[0] ) . '</p><h2>' . esc_html( $content[1] ) . '</h2></div></div><div class="ugolini-cooking-grid">' . $html . '</div></section>';
 }
 add_shortcode( 'ugolini_cooking_suggestions', 'ugolini_group_cooking_suggestions_shortcode' );
 
