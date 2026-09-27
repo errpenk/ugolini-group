@@ -18,9 +18,11 @@ Version 7.5.1 restores the six-column desktop footer and mobile accordions,
 hardens mouse-only deep-red menu hover, and gives Chi siamo unique copy with
 alternating imagery on the shared animated timeline axis.
 Version 7.5.2 makes the higher-specificity desktop submenu hover deep red too.
-Version 7.5.3 purges LiteSpeed automatically after Git-driven theme updates.
+Version 7.5.3 prepared automatic cache clearing for Git-driven updates; the
+Deployer plugin's native LiteSpeed flush option now owns that responsibility.
 Version 7.5.4 renders a real footer logo image and preserves deep-red submenu
 hover at compact mouse-driven viewport sizes.
+Version 7.5.5 relies on Deployer's native post-deploy LiteSpeed purge.
 
 ## Data boundary
 
