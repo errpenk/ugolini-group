@@ -47,6 +47,7 @@ assert.match(script, /navigator\.languages\?\.\[0\].+language\.startsWith\('it'\
 assert.match(script, /'1k3hpm76n'.+'1k3i2gojt'.+'1k3i2i3lg'/s);
 assert.match(script, /Tawk_API\.switchWidget\(\{ propertyId, widgetId \}, error =>/);
 assert.match(functions, /wp_add_inline_script\(.+ugoliniTawkPositioning.+querySelector\('#gt_float_wrapper'\)/s);
+assert.match(functions, /querySelector\('\.ugolini-scroll-top'\).+target\.height - source\.height/s);
 assert.match(functions, /set\('left', '20px'\).+set\('bottom', `\$\{bottom\}px`\).+set\('transform', 'scale\(\.8\)'\)/s);
 assert.match(functions, /innerWidth <= 767.+innerWidth - 40.+set\('min-width', width\).+set\('max-width', width\)/s);
 assert.match(script, /shop\|products\?\|collections\?\|prodotto/);
@@ -55,6 +56,7 @@ assert.doesNotMatch(script, /createElement\('span'\).*ugolini-nav-indicator/s);
 assert.doesNotMatch(header, /\.ugolini-nav-indicator/);
 assert.match(script, /removeAttribute\('aria-current'\)/);
 assert.match(responsive, /\.ugolini-mobile-shop-link\.ugolini-has-page-submenu \{ display: grid !important; \}/);
+assert.match(responsive, /\.ugolini-wholesale-services__stage \{[^}]+align-content: start;/);
 assert.match(responsive, /\.wp-block-navigation__responsive-container\.is-menu-open \.wp-block-navigation__responsive-container-content \{ padding-top: 3\.5rem; align-items: stretch; \}/);
 assert.match(responsive, /\.wp-block-navigation__responsive-container\.is-menu-open \.wp-block-navigation__container \{ position: static !important; inset: auto !important;/);
 assert.match(responsive, /\.wp-block-navigation-item \{ width: 100%; align-items: stretch; border: 0 !important; text-align: left; \}/);

@@ -882,6 +882,13 @@ function ugolini_group_enqueue_assets() {
 	const position = () => {
 		frameRequest = 0;
 		const picker = document.querySelector('#gt_float_wrapper');
+		const scrollTop = document.querySelector('.ugolini-scroll-top');
+		if (picker && scrollTop) {
+			const target = scrollTop.getBoundingClientRect();
+			const source = picker.getBoundingClientRect();
+			const bottom = Math.max(16, innerHeight - target.bottom + (target.height - source.height) / 2);
+			picker.style.setProperty('bottom', `${bottom}px`, 'important');
+		}
 		const bottom = picker ? Math.max(20, innerHeight - picker.getBoundingClientRect().top + 12) : 85;
 		for (const frame of document.querySelectorAll('iframe[title="Chat widget"], iframe[title="Visit tawk.to"]')) {
 			const set = (property, value) => {
