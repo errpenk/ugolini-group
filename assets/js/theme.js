@@ -457,41 +457,13 @@ for (const nav of document.querySelectorAll('.ugolini-primary-navigation')) {
 	const language = (navigator.languages?.[0] || navigator.language || 'en').toLowerCase();
 	const widgetId = widgets[language.startsWith('it') ? 'it' : language.startsWith('zh') ? 'zh' : 'en'];
 	let switched = widgetId === widgets.en;
-	let positioningFrame = 0;
-
-	const positionWidget = () => {
-		positioningFrame = 0;
-		const languagePicker = document.querySelector('#gt_float_wrapper');
-		const languageTop = languagePicker?.getBoundingClientRect().top;
-		const launcherBottom = languageTop == null ? 85 : Math.max(20, innerHeight - languageTop + 12);
-		for (const frame of document.querySelectorAll('iframe[title="Chat widget"], iframe[title="Visit tawk.to"]')) {
-			const set = (property, value) => {
-				if (frame.style.getPropertyValue(property) !== value || frame.style.getPropertyPriority(property) !== 'important') {
-					frame.style.setProperty(property, value, 'important');
-				}
-			};
-			set('left', '20px');
-			set('right', 'auto');
-			const bounds = frame.getBoundingClientRect();
-			if (bounds.width <= 100 && bounds.height <= 100) {
-				set('bottom', `${launcherBottom}px`);
-				set('transform', 'scale(.8)');
-				set('transform-origin', 'left bottom');
-			}
-		}
-	};
-	const schedulePosition = () => {
-		if (!positioningFrame) positioningFrame = requestAnimationFrame(positionWidget);
-	};
 	const activateWidget = () => {
 		if (!switched && typeof window.Tawk_API?.switchWidget === 'function') {
 			switched = true;
 			window.Tawk_API.switchWidget({ propertyId, widgetId }, error => {
 				if (error) switched = false;
-				schedulePosition();
 			});
 		}
-		schedulePosition();
 	};
 
 	window.Tawk_API = window.Tawk_API || {};
@@ -500,12 +472,6 @@ for (const nav of document.querySelectorAll('.ugolini-primary-navigation')) {
 		previousOnLoad?.apply(this, args);
 		activateWidget();
 	};
-	new MutationObserver(records => {
-		if (records.some(({ target, type }) => type === 'childList' || target instanceof HTMLIFrameElement)) {
-			activateWidget();
-		}
-	}).observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['style'] });
-	addEventListener('resize', schedulePosition, { passive: true });
 	activateWidget();
 })();
 

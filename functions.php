@@ -872,6 +872,41 @@ function ugolini_group_enqueue_assets() {
 		null
 	);
 	wp_enqueue_script( 'ugolini-group-interactions', get_theme_file_uri( 'assets/js/theme.js' ), array(), null, true );
+	wp_add_inline_script(
+		'ugolini-group-interactions',
+		<<<'JS'
+(() => {
+	if (window.ugoliniTawkPositioning) return;
+	window.ugoliniTawkPositioning = true;
+	let frameRequest = 0;
+	const position = () => {
+		frameRequest = 0;
+		const picker = document.querySelector('#gt_float_wrapper');
+		const bottom = picker ? Math.max(20, innerHeight - picker.getBoundingClientRect().top + 12) : 85;
+		for (const frame of document.querySelectorAll('iframe[title="Chat widget"], iframe[title="Visit tawk.to"]')) {
+			const set = (property, value) => {
+				if (frame.style.getPropertyValue(property) !== value || frame.style.getPropertyPriority(property) !== 'important') {
+					frame.style.setProperty(property, value, 'important');
+				}
+			};
+			set('left', '20px');
+			set('right', 'auto');
+			const bounds = frame.getBoundingClientRect();
+			if (bounds.width <= 100 && bounds.height <= 100) {
+				set('bottom', `${bottom}px`);
+				set('transform', 'scale(.8)');
+				set('transform-origin', 'left bottom');
+			}
+		}
+	};
+	const schedule = () => { if (!frameRequest) frameRequest = requestAnimationFrame(position); };
+	new MutationObserver(schedule).observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['style'] });
+	addEventListener('resize', schedule, { passive: true });
+	schedule();
+})();
+JS,
+		'after'
+	);
 	wp_enqueue_script( 'ugolini-group-catalogue-parity', get_theme_file_uri( 'assets/js/catalogue-parity.js' ), array(), null, true );
 }
 add_action( 'wp_enqueue_scripts', 'ugolini_group_enqueue_assets' );
