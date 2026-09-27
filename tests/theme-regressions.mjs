@@ -69,6 +69,7 @@ assert.match(script, /ugoliniCloseMobileNavigation\(nav\);[\s\S]+requestAnimatio
 assert.match(script, /nav\.addEventListener\('click', followSubmenuLink, true\);/);
 assert.match(responsive, /\.ugolini-page-submenu a \{ width: max-content; max-width: 100%; min-height: 48px;/);
 assert.match(header, /\.ugolini-page-submenu a\):hover \{ color: var\(--wp--preset--color--brand-dark\) !important;/);
+assert.match(header, /\.ugolini-page-submenu a:hover \{ color: var\(--wp--preset--color--brand-dark\) !important;/);
 assert.match(responsive, /@media \(hover: hover\) and \(pointer: fine\)[\s\S]+\.ugolini-page-submenu a\):hover \{ color: var\(--wp--preset--color--brand-dark\) !important;/);
 assert.match(script, /toggle\.addEventListener\('click', event => \{\s+event\.preventDefault\(\);\s+event\.stopPropagation\(\);/);
 assert.match(script, /pointerleave', event => \{ if \(event\.pointerType !== 'touch'\) engage\(false\); \}/);
