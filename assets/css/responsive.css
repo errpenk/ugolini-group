@@ -7,11 +7,6 @@
 	:where(.wp-block-surecart-product-template) { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
 	.ugolini-deal-rail :where(.ugolini-product-template, .preview-product-grid) { display: flex !important; }
 	.ugolini-product-columns { grid-template-columns: minmax(0, 1fr) minmax(360px, 0.9fr); gap: 2.5rem; }
-	.ugolini-footer-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-	.ugolini-footer-shop { width: 100% !important; }
-	.ugolini-footer-brand,
-	.preview-footer-brand { grid-column: 1 / -1; }
-	.ugolini-footer-social { grid-column: 1 / -1; }
 }
 
 @media (max-width: 900px) {
@@ -237,29 +232,11 @@
 	.ugolini-wholesale-benefits li span { grid-column: 1 / -1; }
 	.ugolini-b2b-catalogue .ugolini-catalogue-panel { height: auto; aspect-ratio: 16 / 9; }
 	.ugolini-discovery-art { top: 2.5rem; left: 30%; width: 70%; height: 30%; }
-	.ugolini-footer-grid { grid-template-columns: 1fr 1fr; }
-	.ugolini-footer-grid > :first-child { grid-column: 1 / -1; }
-	.ugolini-footer-social { grid-column: 1 / -1; }
-	.ugolini-footer-social { position: static; }
-	.ugolini-footer-brand,
-	.preview-footer-brand { grid-template-columns: 1fr; gap: 1rem; }
-	.ugolini-footer-brand > :where(.wp-block-site-logo, .wp-block-site-title),
-	.preview-footer-brand > .preview-logo-image,
-	.ugolini-footer-brand > p,
-	.preview-footer-brand > p { grid-column: 1; grid-row: auto; }
-	.ugolini-footer-collection-links { grid-template-columns: 1fr; }
-	.ugolini-footer-bottom { flex-direction: column; }
-	.ugolini-footer-support { align-items: flex-start !important; text-align: left; }
-	.ugolini-footer-support .wp-block-navigation__container { align-items: flex-start !important; }
 }
 
 @media (max-width: 430px) {
-	.ugolini-range-list,
-	.ugolini-footer-grid { grid-template-columns: 1fr; }
+	.ugolini-range-list { grid-template-columns: 1fr; }
 	.ugolini-story-products { grid-template-columns: 1fr; }
-	.ugolini-footer-grid > :first-child { grid-column: auto; }
-	.ugolini-footer-brand,
-	.ugolini-footer-social { grid-column: auto; }
 }
 
 @media (max-width: 374px) {

@@ -75,7 +75,8 @@
 .ugolini-contact-form button:hover { background: var(--wp--preset--color--text); color: var(--wp--preset--color--white); }
 .ugolini-contact-form > p { margin: -1rem 0 0; color: var(--wp--preset--color--secondary-text); font-size: 0.82rem; text-align: center; }
 
-.ugolini-collection-editorial-section { padding-block: 0; overflow: hidden; }
+.ugolini-collection-editorial-section { padding-block: 0 !important; overflow: hidden; }
+.ugolini-collection-editorial-section + .ugolini-professional-assurances { margin-block-start: 0 !important; }
 .ugolini-collection-editorial,
 .preview-collection-editorials { width: 100vw !important; max-width: none !important; margin-left: calc(50% - 50vw) !important; }
 .preview-collection-editorials .ugolini-collection-editorial { width: 100%; margin-left: 0; }
@@ -218,9 +219,9 @@
 .ugolini-product-information .wp-block-post-content > :first-child,
 .ugolini-product-information .preview-product-facts > :first-child { margin-top: 0; padding-top: 0; border-top: 0; }
 
-.ugolini-product-after { padding-top: 0; background: var(--wp--preset--color--background); }
-.ugolini-product-after > .ugolini-product-story { max-width: none !important; margin-inline: 0 !important; }
-.ugolini-product-after > .ugolini-product-guide { max-width: none !important; margin-inline: 0 !important; }
+.ugolini-product-after { padding-top: 0 !important; background: var(--wp--preset--color--background); }
+.ugolini-product-after > .ugolini-product-story { max-width: none !important; margin: 0 !important; }
+.ugolini-product-after > .ugolini-product-guide { max-width: none !important; margin: 0 !important; }
 .ugolini-product-after > .ugolini-cooking { max-width: none !important; margin: 0 auto !important; }
 .ugolini-product-story { position: relative; isolation: isolate; min-height: clamp(560px, 52vw, 780px); display: grid; align-items: center; overflow: hidden; background: #171714; color: #fff; }
 .ugolini-product-story::after { content: ""; position: absolute; z-index: 1; inset: 0; background: linear-gradient(90deg, rgb(10 9 7 / 76%), rgb(10 9 7 / 35%)); pointer-events: none; }

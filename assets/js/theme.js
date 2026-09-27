@@ -47,6 +47,15 @@
 })();
 
 (() => {
+	const sections = [...document.querySelectorAll('.ugolini-footer-section')];
+	if (!sections.length) return;
+	const mobile = matchMedia('(max-width: 767px)');
+	const sync = () => sections.forEach(section => section.toggleAttribute('open', !mobile.matches));
+	sync();
+	mobile.addEventListener('change', sync);
+})();
+
+(() => {
 	for (const deck of document.querySelectorAll('[data-event-deck]')) {
 		const slides = [...deck.querySelectorAll('[data-event-slide]')];
 		const thumbs = [...deck.querySelectorAll('[data-event-go]')];

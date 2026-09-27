@@ -9,6 +9,8 @@ SureCart checkout follow the visitor's phone language: Simplified Chinese and
 Italian use their native checkout translations, with English as the fallback.
 Version 7.4.8 excludes only product, cart and checkout price nodes from
 GTranslate so every displayed and charged amount remains in euros.
+Version 7.4.9 removes the residual spacing between the collection panels and
+adds a compact desktop footer with accessible mobile accordion sections.
 
 ## Data boundary
 
