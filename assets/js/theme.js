@@ -1,4 +1,35 @@
 (() => {
+	const priceSelectors = [
+		'[data-wp-text*="display_amount"]',
+		'[data-wp-text*="DisplayAmount"]',
+		'.preview-product-price',
+		'.wp-block-surecart-product-list-price',
+		'.wp-block-surecart-product-price',
+		'.wp-block-surecart-product-selected-price-amount',
+		'.wp-block-surecart-product-selected-price-scratch-amount',
+		'.wp-block-surecart-price-amount',
+		'.wp-block-surecart-price-scratch-amount',
+		'sc-total',
+	].join(',');
+	const watched = new WeakSet();
+	const protectPrices = (root = document) => {
+		const selectors = root === document ? priceSelectors : `${priceSelectors}, sc-total, .total-price, .price, [slot="price"], [slot="price-description"]`;
+		for (const price of root.querySelectorAll(selectors)) {
+			price.classList.add('notranslate');
+			price.setAttribute('translate', 'no');
+		}
+		for (const element of root.querySelectorAll('*')) if (element.shadowRoot) protectPrices(element.shadowRoot);
+		if (watched.has(root)) return;
+		watched.add(root);
+		new MutationObserver(() => protectPrices(root)).observe(root, { childList: true, subtree: true });
+	};
+	protectPrices();
+	for (const tag of ['sc-total', 'sc-product-line-item', 'sc-line-item-total', 'sc-order-summary']) {
+		customElements.whenDefined(tag).then(() => protectPrices());
+	}
+})();
+
+(() => {
 	const products = document.querySelector('.ugolini-products-section');
 	if (!products) return;
 	products.id = 'ugolini-products';

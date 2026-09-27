@@ -7,6 +7,8 @@ payments or checkout logic.
 Version 7.4.7 keeps GTranslate language selection manual and makes the public
 SureCart checkout follow the visitor's phone language: Simplified Chinese and
 Italian use their native checkout translations, with English as the fallback.
+Version 7.4.8 excludes only product, cart and checkout price nodes from
+GTranslate so every displayed and charged amount remains in euros.
 
 ## Data boundary
 

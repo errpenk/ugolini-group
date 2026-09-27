@@ -28,6 +28,11 @@ assert.match(footer, /\.wp-block-site-logo:has\(img\) \+ \.wp-block-site-title/)
 assert.doesNotMatch(footer, /\.ugolini-footer-brand a,/);
 assert.match(surecart, /\.wp-block-surecart-cart-icon \{ display: none !important; \}/);
 assert.match(script, /firstSection\?\.querySelector\(':scope > :first-child:is\(/);
+assert.match(script, /\[data-wp-text\*="display_amount"\]/);
+assert.match(script, /price\.classList\.add\('notranslate'\)/);
+assert.match(script, /price\.setAttribute\('translate', 'no'\)/);
+assert.match(script, /sc-total, \.total-price, \.price/);
+assert.match(script, /new MutationObserver\(\(\) => protectPrices\(root\)\)/);
 assert.match(script, /shop\|products\?\|collections\?\|prodotto/);
 assert.doesNotMatch(script, /sessionStorage\.setItem\('ugolini-nav-from'/);
 assert.doesNotMatch(script, /createElement\('span'\).*ugolini-nav-indicator/s);
