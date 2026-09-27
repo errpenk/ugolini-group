@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 
 const read = path => readFileSync(new URL(`../${path}`, import.meta.url), 'utf8');
+const base = read('assets/css/base.css');
 const php = read('functions.php');
 const header = read('assets/css/header.css');
 const responsive = read('assets/css/responsive.css');
@@ -42,6 +43,18 @@ assert.match(responsive, /\.wp-block-navigation__responsive-container\.is-menu-o
 assert.match(script, /new MutationObserver\(sync\)\.observe\(menu/);
 assert.match(script, /const visible = menuOpen \|\| isProduct \|\| scrollY > 12 \|\| topContext;/);
 assert.match(script, /if \(menuOpen && !active\) active = ugoliniSectionTargets\.values\(\)\.next\(\)\.value \|\| '';/);
+assert.match(script, /'Home': \['Scopri i prodotti'/);
+assert.doesNotMatch(script, /'copri i prodotti'/);
+assert.match(script, /const ugoliniCloseMobileNavigation = nav =>/);
+assert.match(script, /menu\?\.querySelector\('\.wp-block-navigation__responsive-container-close'\)\?\.click\(\);/);
+assert.match(script, /menu\.classList\.remove\('is-menu-open'\);[\s\S]+document\.documentElement\.classList\.remove\('has-modal-open'\);/);
+assert.match(script, /nav\.addEventListener\('click', event => \{\s+const anchor = event\.target\.closest\('\.ugolini-page-submenu a'\);/);
+assert.match(script, /ugoliniCloseMobileNavigation\(nav\);[\s\S]+requestAnimationFrame\(\(\) => requestAnimationFrame\(\(\) => target\.scrollIntoView/);
+assert.match(script, /\}, true\);/);
+assert.match(script, /toggle\.addEventListener\('click', event => \{\s+event\.preventDefault\(\);\s+event\.stopPropagation\(\);/);
+assert.match(script, /target\.scrollIntoView\(\{ behavior: 'smooth', block: 'start' \}\)/);
+assert.match(script, /heading\?\.closest\('\.ugolini-faq-section > :first-child, \.ugolini-b2b-partner__benefits, \.ugolini-wholesale-services__stage'\) \|\| heading/);
+assert.match(header, /main \[id\^="sezione-"\] \{ scroll-margin-top: var\(--ugolini-sticky-top\); \}/);
 assert.doesNotMatch(script, /Boolean\(document\.querySelector\('main article'\)\)/);
 assert.match(surecart, /\.swiper-button-prev, \.swiper-button-next\) \{ width: 52px; height: 52px; border: 2px/);
 assert.match(surecart, /box-shadow: none !important;/);
@@ -60,7 +73,20 @@ assert.match(home, /grid-template-columns: 92px 1fr/);
 assert.doesNotMatch(home, /ugolini-collection-copy \{ color:[^}]+transform: scale/);
 assert.match(pages, /\.ugolini-events-hero \.ugolini-page-hero-content \{ width: min\(calc\(100% - \(2 \* var\(--ugolini-gutter\)\)\), var\(--ugolini-container\)\) !important;/);
 assert.match(content, /ugolini-card-link \{[^}]+color: #171714;/s);
-assert.match(surecart, /\.ugolini-shop-tabs a:hover \{ transform: none; \}/);
+assert.match(surecart, /\.ugolini-shop-tabs a:hover \{[^}]+background:[^}]+color:[^}]+transform: none; \}/);
+assert.match(pages, /\.ugolini-product-story a:hover,[\s\S]+background: #fff; color: #171714; \}/);
+assert.match(base, /--ugolini-sticky-top: calc\(var\(--ugolini-header-bottom, var\(--ugolini-header-height\)\) \+ 2\.75rem\);/);
+assert.equal((pages.match(/position: sticky; top: var\(--ugolini-sticky-top\)/g) || []).length, 7);
+assert.match(pages, /\.ugolini-wholesale-services__stage \{ position: sticky; top: max\(10svh, var\(--ugolini-sticky-top\)\)/);
+assert.match(surecart, /\.ugolini-product-summary \{ position: sticky; top: var\(--ugolini-sticky-top\); \}/);
+assert.equal((read('assets/css/preview-parity.css').match(/position: sticky; top: var\(--ugolini-sticky-top\)/g) || []).length, 2);
+assert.match(responsive, /\.ugolini-wholesale-services__stage \{ top: var\(--ugolini-sticky-top\); height: calc\(100svh - var\(--ugolini-sticky-top\)\)/);
+assert.match(functions, /render_block_surecart\/product-media.+ugolini_group_append_product_detail_photo/s);
+assert.deepEqual(readdirSync(new URL('../assets/images/product-details/', import.meta.url)).sort(), [
+	'bruschetta-piccantina.jpg', 'confit-cipolle-rosse.jpg', 'crema-funghi-porcini.jpg',
+	'pesto-rosso-bio.jpg', 'pesto-rosso.jpg', 'pesto-tartufo-nero.jpg', 'pesto-vegano.jpg',
+	'ragu-vegano.jpg', 'salsa-tartufata.jpg', 'sugo-arrabbiata.jpg', 'sugo-tartufo-nero.jpg',
+]);
 assert.equal(externalCatalog.products.length, 66);
 assert.match(collectionTemplate, /ugolini-group\/professional-assurances/);
 

@@ -207,7 +207,7 @@ body.admin-bar header.wp-block-template-part:has(.ugolini-site-header) { top: 0;
 .ugolini-breadcrumbs .ugolini-breadcrumbs__page { flex: 0 1 auto; font-weight: 400; font-style: normal; }
 .ugolini-breadcrumbs.has-section .ugolini-breadcrumbs__page { color: inherit; font-weight: 600; }
 .ugolini-breadcrumbs__section { font-weight: 400; font-style: italic; }
-main :is(h1, h2, h3)[id^="sezione-"] { scroll-margin-top: calc(var(--ugolini-header-height) + 72px); }
+main [id^="sezione-"] { scroll-margin-top: var(--ugolini-sticky-top); }
 @media (max-width: 782px) {
 	body.admin-bar > header:has(.ugolini-site-header),
 	body.admin-bar header.wp-block-template-part:has(.ugolini-site-header) { top: 14px; }

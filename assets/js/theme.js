@@ -288,9 +288,23 @@ const ugoliniNormalizePath = value => {
 	const path = new URL(value, location.href).pathname.replace(/\/index\.html$/, '/').replace(/\.html$/, '').replace(/\/$/, '');
 	return path || '/';
 };
+const ugoliniCloseMobileNavigation = nav => {
+	const menu = nav.querySelector('.wp-block-navigation__responsive-container.is-menu-open');
+	menu?.querySelector('.wp-block-navigation__responsive-container-close')?.click();
+	nav.querySelector('#preview-menu.is-open')?.classList.remove('is-open');
+	requestAnimationFrame(() => {
+		if (!menu?.classList.contains('is-menu-open')) return;
+		menu.classList.remove('is-menu-open');
+		menu.setAttribute('aria-hidden', 'true');
+		nav.querySelector('.wp-block-navigation__responsive-container-open')?.setAttribute('aria-expanded', 'false');
+		document.documentElement.classList.remove('has-modal-open');
+		document.body.classList.remove('has-mobile-menu-open');
+		dispatchEvent(new CustomEvent('ugolini:mobile-menu'));
+	});
+};
 const ugoliniPagePath = ugoliniNormalizePath(location.href);
 const ugoliniPageMenus = {
-	'Home': ['copri i prodotti', 'Sapori per ogni tavola', 'Perché scegliere Ugolini', 'Tradizione, esperienza e innovazione'],
+	'Home': ['Scopri i prodotti', 'Sapori per ogni tavola', 'Perché scegliere Ugolini', 'Tradizione, esperienza e innovazione'],
 	'Shop': ['Sapori per ogni tavola', 'Tutta la gamma Ugolini Gourmet'],
 	'Chi siamo': ['Le radici di una passione italiana', 'Tradizione, esperienza e innovazione', 'Perché scegliere Ugolini', 'Scopri le specialità nate dalla passione Ugolini'],
 	'Event': ['Prossimi eventi', 'Eventi passati'],
@@ -326,7 +340,10 @@ for (const nav of document.querySelectorAll('.ugolini-primary-navigation')) {
 		submenu.className = 'ugolini-page-submenu';
 		for (const label of labels) {
 			const id = ugoliniSlug(label);
-			const target = path === ugoliniPagePath ? ugoliniHeadings.find(heading => heading.textContent.trim() === label) : null;
+			const heading = path === ugoliniPagePath ? ugoliniHeadings.find(item => item.textContent.trim() === label) : null;
+			const target = label === 'Scopri i prodotti' && path === ugoliniPagePath
+				? document.querySelector('.ugolini-products-section')
+				: heading?.closest('.ugolini-faq-section > :first-child, .ugolini-b2b-partner__benefits, .ugolini-wholesale-services__stage') || heading;
 			if (target) {
 				target.id ||= id;
 				ugoliniSectionTargets.set(target, label);
@@ -338,7 +355,9 @@ for (const nav of document.querySelectorAll('.ugolini-primary-navigation')) {
 			row.append(anchor);
 			submenu.append(row);
 		}
-		toggle.addEventListener('click', () => {
+		toggle.addEventListener('click', event => {
+			event.preventDefault();
+			event.stopPropagation();
 			const open = !submenu.classList.contains('is-open');
 			for (const sibling of list.querySelectorAll('.ugolini-page-submenu.is-open')) sibling.classList.remove('is-open');
 			for (const button of list.querySelectorAll('.ugolini-submenu-toggle[aria-expanded="true"]')) button.setAttribute('aria-expanded', 'false');
@@ -353,6 +372,19 @@ for (const nav of document.querySelectorAll('.ugolini-primary-navigation')) {
 		});
 		item.append(toggle, submenu);
 	}
+	nav.addEventListener('click', event => {
+		const anchor = event.target.closest('.ugolini-page-submenu a');
+		if (innerWidth >= 768 || !anchor) return;
+		const url = new URL(anchor.href, location.href);
+		if (ugoliniNormalizePath(url.href) !== ugoliniPagePath || !url.hash) return;
+		const target = document.getElementById(decodeURIComponent(url.hash.slice(1)));
+		if (!target) return;
+		event.preventDefault();
+		event.stopPropagation();
+		ugoliniCloseMobileNavigation(nav);
+		history.pushState(null, '', url.hash);
+		requestAnimationFrame(() => requestAnimationFrame(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' })));
+	}, true);
 }
 
 (() => {

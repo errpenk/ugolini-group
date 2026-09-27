@@ -282,6 +282,18 @@ descriptions into open semantic accordions.
 V7.4 groups every imported description by meaning rather than source headings,
 aligns the Events hero to the shared content grid, removes clipped hover states,
 and renders Blog read-more links in deep black.
+V7.4.1 adds layout-stable black hover states to Shop collection pills and a
+white-background, black-text hover state to the product-story collection link.
+V7.4.2 adds the eleven verified portrait photos as supplementary images on
+their matching product detail pages without replacing the SureCart main image.
+V7.4.3 keeps every sticky content panel below the live header and breadcrumb
+stack on desktop and mobile instead of using the header height alone. Mobile
+section links now close the navigation drawer and scroll the complete sticky
+panel—including its eyebrow—to the same safe top offset used by product details.
+The mobile drawer also falls back to synchronizing WordPress modal state when
+its native close action does not release the page. Submenu links are handled
+at the navigation capture boundary so parent accordion events cannot swallow
+the tap before the link closes the drawer and scrolls.
 V6.63 hardens deployed WordPress parity: footer fallback branding and column
 alignment, stable three-icon header geometry, persistent transparent hero
 navigation, legacy Events shortcode expansion, hidden duplicate SureCart

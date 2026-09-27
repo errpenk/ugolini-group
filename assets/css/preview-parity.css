@@ -159,9 +159,9 @@ a { color: inherit; }
 .preview-shop-tabs button,
 .preview-shop-actions button,
 .preview-shop-actions :where(input, select) { min-height: 48px; padding-inline: 1rem; border: 1px solid var(--wp--preset--color--border); background: transparent; color: inherit; }
-.preview-shop-tabs button { height: 48px; border-color: var(--wp--preset--color--text); border-radius: 999px; cursor: pointer; }
+.preview-shop-tabs button { height: 48px; border-color: var(--wp--preset--color--text); border-radius: 999px; cursor: pointer; transition: background-color var(--ugolini-transition), color var(--ugolini-transition); }
 .preview-shop-tabs button:hover,
-.preview-shop-tabs button:focus-visible { transform: none !important; }
+.preview-shop-tabs button:focus-visible { background: var(--wp--preset--color--text); color: var(--wp--preset--color--white); transform: none !important; }
 .preview-shop-tabs button.is-active { border-color: var(--wp--preset--color--text); background: var(--wp--preset--color--text); color: var(--wp--preset--color--white); }
 .preview-shop-actions [data-filter-open] { display: inline-flex; align-items: center; gap: 0.55rem; padding-inline: 0; border: 0; }
 .preview-shop-actions [data-filter-open] .lucide,
@@ -223,7 +223,7 @@ a { color: inherit; }
 .preview-footer-brand p { max-width: 26rem; color: var(--wp--preset--color--secondary-text); }
 
 .preview-product-detail { display: grid; grid-template-columns: minmax(0, 1fr) minmax(420px, 0.94fr); gap: clamp(3rem, 5.5vw, 6rem); align-items: start; }
-.preview-product-gallery { position: sticky; top: calc(var(--ugolini-header-height) + 2rem); align-self: start; min-width: 0; padding-left: 88px; }
+.preview-product-gallery { position: sticky; top: var(--ugolini-sticky-top); align-self: start; min-width: 0; padding-left: 88px; }
 .preview-gallery-stage { position: relative; aspect-ratio: 1; overflow: hidden; background: transparent; }
 .preview-gallery-stage > img { width: 100%; height: 100%; display: block; object-fit: contain; }
 .preview-gallery-control { position: absolute; top: 50%; min-width: 44px; min-height: 44px; border: 1px solid rgb(23 23 20 / 22%); border-radius: 50%; background: transparent; color: var(--wp--preset--color--text); transform: translateY(-50%); transition: background-color var(--ugolini-transition), color var(--ugolini-transition); cursor: pointer; }
@@ -240,7 +240,7 @@ a { color: inherit; }
 .preview-gallery-thumbnails button { width: 100%; aspect-ratio: 1; flex: 0 0 auto; padding: 0; border: 1px solid transparent; background: var(--wp--preset--color--beige); cursor: pointer; }
 .preview-gallery-thumbnails button[aria-current="true"] { border-color: var(--wp--preset--color--text); }
 .preview-gallery-thumbnails img { width: 100%; height: 100%; display: block; object-fit: cover; }
-.preview-product-summary { position: sticky; top: calc(var(--ugolini-header-height) + 2rem); }
+.preview-product-summary { position: sticky; top: var(--ugolini-sticky-top); }
 .preview-product-summary > .ugolini-product-card-meta { display: none; }
 .preview-product-summary h1 { margin: 0.4rem 0 1rem; font-family: var(--wp--preset--font-family--display); font-size: clamp(2.2rem, 3vw, 3.25rem); font-weight: 400; letter-spacing: -0.035em; line-height: 1.05; }
 .preview-product-summary h1 { font-size: clamp(2.6rem, 4.4vw, 4.8rem); }

@@ -51,6 +51,7 @@
 :root {
 	--ugolini-header-height: 76px;
 	--ugolini-announcement-height: 32px;
+	--ugolini-sticky-top: calc(var(--ugolini-header-bottom, var(--ugolini-header-height)) + 2.75rem);
 	--ugolini-control-height: 48px;
 	--ugolini-container: 1392px;
 	--ugolini-gutter: 24px;

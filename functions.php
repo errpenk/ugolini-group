@@ -545,6 +545,24 @@ function ugolini_group_render_product_list_parity( $block_content, $block ) {
 }
 add_filter( 'render_block_surecart/product-list', 'ugolini_group_render_product_list_parity', 10, 2 );
 
+/** Append the matched bundled photo without replacing SureCart's primary gallery. */
+function ugolini_group_append_product_detail_photo( $block_content ) {
+	if ( ! is_singular( 'sc_product' ) ) {
+		return $block_content;
+	}
+
+	$post_id = get_queried_object_id();
+	$slug    = sanitize_title( get_post_field( 'post_name', $post_id ) );
+	$file    = 'assets/images/product-details/' . $slug . '.jpg';
+	if ( ! $slug || ! is_readable( get_theme_file_path( $file ) ) ) {
+		return $block_content;
+	}
+
+	$alt = sprintf( __( '%s – dettaglio prodotto', 'ugolini-group' ), get_the_title( $post_id ) );
+	return $block_content . '<figure class="ugolini-product-detail-photo"><img src="' . esc_url( get_theme_file_uri( $file ) ) . '" alt="' . esc_attr( $alt ) . '" loading="lazy" decoding="async"></figure>';
+}
+add_filter( 'render_block_surecart/product-media', 'ugolini_group_append_product_detail_photo' );
+
 /** Build the same open product-fact list used by the static preview. */
 function ugolini_group_product_facts_content( $product ) {
 	$fields = array(
