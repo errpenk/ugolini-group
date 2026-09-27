@@ -296,6 +296,8 @@ at the navigation capture boundary so parent accordion events cannot swallow
 the tap before the link closes the drawer and scrolls.
 V7.4.5 prevents touch-generated pointer-leave events from collapsing a mobile
 submenu before the browser dispatches its link click.
+V7.4.6 follows mobile submenu links on touch-end, before WordPress can reflow
+the drawer and retarget its synthesized click to the next navigation item.
 V6.63 hardens deployed WordPress parity: footer fallback branding and column
 alignment, stable three-icon header geometry, persistent transparent hero
 navigation, legacy Events shortcode expansion, hidden duplicate SureCart

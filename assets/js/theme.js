@@ -372,19 +372,27 @@ for (const nav of document.querySelectorAll('.ugolini-primary-navigation')) {
 		});
 		item.append(toggle, submenu);
 	}
-	nav.addEventListener('click', event => {
-		const anchor = event.target.closest('.ugolini-page-submenu a');
+	const followSubmenuLink = event => {
+		const anchor = event.target.closest?.('.ugolini-page-submenu a');
 		if (innerWidth >= 768 || !anchor) return;
 		const url = new URL(anchor.href, location.href);
-		if (ugoliniNormalizePath(url.href) !== ugoliniPagePath || !url.hash) return;
-		const target = document.getElementById(decodeURIComponent(url.hash.slice(1)));
-		if (!target) return;
 		event.preventDefault();
 		event.stopPropagation();
+		if (ugoliniNormalizePath(url.href) !== ugoliniPagePath || !url.hash) {
+			location.assign(url.href);
+			return;
+		}
+		const target = document.getElementById(decodeURIComponent(url.hash.slice(1)));
+		if (!target) {
+			location.assign(url.href);
+			return;
+		}
 		ugoliniCloseMobileNavigation(nav);
 		history.pushState(null, '', url.hash);
 		requestAnimationFrame(() => requestAnimationFrame(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' })));
-	}, true);
+	};
+	nav.addEventListener('touchend', followSubmenuLink, { capture: true, passive: false });
+	nav.addEventListener('click', followSubmenuLink, true);
 }
 
 (() => {
