@@ -67,6 +67,7 @@
 .preview-article-navigation > :last-child:hover { color: var(--wp--preset--color--brand-dark); transform: scale(1.025); transform-origin: right center; }
 .ugolini-related-content { width: 100% !important; max-width: none !important; margin: var(--wp--preset--spacing--section) 0 0 !important; padding: clamp(3rem, 6vw, 6rem) 0; border-top: 0; background: #3b302c; color: var(--wp--preset--color--white); }
 .ugolini-related-content h2 { margin: 0 0 0.83em; color: inherit; text-transform: uppercase; }
+@media (min-width: 768px) { .ugolini-related-content h2 { text-align: center; } }
 .ugolini-related-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1.5rem, 3vw, 3rem); max-width: 76rem; margin-inline: auto; }
 .ugolini-related-content .ugolini-related-grid { margin-top: 0 !important; }
 .ugolini-related-card { background: var(--wp--preset--color--white); color: var(--wp--preset--color--text); }

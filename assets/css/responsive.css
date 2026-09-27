@@ -64,7 +64,7 @@
 	.ugolini-primary-navigation ul.ugolini-page-submenu.is-open { display: grid; }
 	.ugolini-primary-navigation .ugolini-page-submenu li { width: 100%; border: 0; }
 	.ugolini-primary-navigation :where(.ugolini-submenu-toggle, .ugolini-page-submenu a) { color: var(--wp--preset--color--text) !important; }
-	.ugolini-primary-navigation .ugolini-page-submenu a { min-height: 48px; display: flex; align-items: center; font-family: var(--wp--preset--font-family--interface); font-size: 1.05rem; font-weight: 500; letter-spacing: 0; line-height: 1.25; text-transform: none; }
+	.ugolini-primary-navigation .ugolini-page-submenu a { width: max-content; max-width: 100%; min-height: 48px; display: flex; align-items: center; font-family: var(--wp--preset--font-family--interface); font-size: 1.05rem; font-weight: 500; letter-spacing: 0; line-height: 1.25; text-transform: none; }
 	.ugolini-primary-navigation :where(.wp-block-navigation-item__content, #preview-menu > li > a, .ugolini-page-submenu a) { transition: none !important; }
 	.ugolini-primary-navigation :where(.wp-block-navigation-item__content, #preview-menu > li > a, .ugolini-page-submenu a):hover { transform: none !important; }
 	.ugolini-primary-navigation :where(.wp-block-navigation-item__content, a).is-current:hover::after { transform: none; }
@@ -112,6 +112,10 @@
 	.ugolini-timeline article i { grid-column: 1; width: 46px; }
 	.ugolini-timeline article p,
 	.ugolini-timeline article:nth-child(even) p { margin-inline: 0; }
+	.ugolini-timeline--about article > div,
+	.ugolini-timeline--about article:nth-child(even) > div { padding: 1.35rem; }
+	.ugolini-timeline--about article figure,
+	.ugolini-timeline--about article:nth-child(even) figure { grid-column: 2; grid-row: 2; height: 220px; margin: 1.25rem 0 0; }
 	.ugolini-collection-editorial__media { min-height: 760px; aspect-ratio: auto; }
 	.ugolini-collection-editorial__content { grid-template-columns: 1fr; gap: 2rem; }
 	.ugolini-collection-editorial__media h2 { font-size: clamp(2.6rem, 13vw, 4.5rem); }

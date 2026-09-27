@@ -11,6 +11,9 @@ Version 7.4.8 excludes only product, cart and checkout price nodes from
 GTranslate so every displayed and charged amount remains in euros.
 Version 7.4.9 removes the residual spacing between the collection panels and
 adds a compact desktop footer with accessible mobile accordion sections.
+Version 7.5.0 refines footer branding and columns, prevents mobile navigation
+swipes from becoming taps, centers related posts and differentiates the about
+timeline with scroll-revealed editorial imagery.
 
 ## Data boundary
 

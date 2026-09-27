@@ -431,7 +431,6 @@ for (const nav of document.querySelectorAll('.ugolini-primary-navigation')) {
 		history.pushState(null, '', url.hash);
 		requestAnimationFrame(() => requestAnimationFrame(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' })));
 	};
-	nav.addEventListener('touchend', followSubmenuLink, { capture: true, passive: false });
 	nav.addEventListener('click', followSubmenuLink, true);
 }
 
@@ -630,6 +629,34 @@ for (const nav of document.querySelectorAll('.ugolini-primary-navigation')) {
 		};
 		new IntersectionObserver(entries => { if (entries[0].isIntersecting) animate(); }, { threshold: .35 }).observe(section);
 	}
+})();
+
+(() => {
+	if (!ugoliniPagePath.endsWith('/chi-siamo')) return;
+	const timeline = document.querySelector('[data-timeline]');
+	if (!timeline) return;
+	timeline.classList.add('ugolini-timeline--about');
+	const intro = document.createElement('p');
+	intro.textContent = 'Quattro capitoli, dalla passione per la cucina italiana a una gamma pensata per la tavola contemporanea.';
+	timeline.querySelector('header')?.append(intro);
+	const images = [
+		'https://ugolinigroup.com/wp-content/uploads/2026/08/8800-pesto-alla-genovese-ugolini-gourmet-10.jpg',
+		'https://ugolinigroup.com/wp-content/uploads/2026/08/8831-sugo-tartufo-nero-ugolini-gourmet-4.jpg',
+		'https://ugolinigroup.com/wp-content/uploads/2026/08/8817-pesto-rosso-ugolini-gourmet-4.jpg',
+		'https://ugolinigroup.com/wp-content/uploads/2026/08/8855-pesto-vegano-ugolini-gourmet-8-scaled-1.jpg',
+	];
+	const observer = new IntersectionObserver(entries => {
+		for (const entry of entries) if (entry.isIntersecting) {
+			entry.target.classList.add('is-visible');
+			observer.unobserve(entry.target);
+		}
+	}, { threshold: .28 });
+	[...timeline.querySelectorAll('article')].forEach((article, index) => {
+		const figure = document.createElement('figure');
+		figure.innerHTML = `<img src="${images[index]}" alt="" loading="lazy">`;
+		article.append(figure);
+		observer.observe(figure);
+	});
 })();
 
 for (const timeline of document.querySelectorAll('[data-timeline]')) {

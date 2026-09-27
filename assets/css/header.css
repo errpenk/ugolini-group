@@ -154,6 +154,7 @@
 	.ugolini-primary-navigation .ugolini-page-submenu li { width: min(100%, 420px); }
 	.ugolini-primary-navigation .ugolini-page-submenu a { min-height: 42px; display: flex; align-items: center; color: inherit !important; font-family: var(--wp--preset--font-family--interface); font-size: .82rem; font-weight: 500; letter-spacing: 0; text-decoration: none; text-transform: none; transform-origin: left center; transition: color 180ms ease, transform 180ms ease; }
 	.ugolini-primary-navigation .ugolini-page-submenu a:hover { color: var(--wp--preset--color--brand) !important; transform: scale(1.02); }
+	.ugolini-primary-navigation :where(.wp-block-navigation-item__content, .ugolini-page-submenu a):hover { color: var(--wp--preset--color--brand-dark) !important; }
 	.ugolini-primary-navigation .ugolini-has-page-submenu:is(:hover, :focus-within) > .ugolini-page-submenu,
 	.ugolini-primary-navigation .ugolini-page-submenu.is-open { opacity: 1; visibility: visible; transform: none; pointer-events: auto; }
 }
