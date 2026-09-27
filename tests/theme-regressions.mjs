@@ -52,6 +52,7 @@ assert.match(script, /nav\.addEventListener\('click', event => \{\s+const anchor
 assert.match(script, /ugoliniCloseMobileNavigation\(nav\);[\s\S]+requestAnimationFrame\(\(\) => requestAnimationFrame\(\(\) => target\.scrollIntoView/);
 assert.match(script, /\}, true\);/);
 assert.match(script, /toggle\.addEventListener\('click', event => \{\s+event\.preventDefault\(\);\s+event\.stopPropagation\(\);/);
+assert.match(script, /pointerleave', event => \{ if \(event\.pointerType !== 'touch'\) engage\(false\); \}/);
 assert.match(script, /target\.scrollIntoView\(\{ behavior: 'smooth', block: 'start' \}\)/);
 assert.match(script, /heading\?\.closest\('\.ugolini-faq-section > :first-child, \.ugolini-b2b-partner__benefits, \.ugolini-wholesale-services__stage'\) \|\| heading/);
 assert.match(header, /main \[id\^="sezione-"\] \{ scroll-margin-top: var\(--ugolini-sticky-top\); \}/);

@@ -468,8 +468,8 @@ for (const nav of document.querySelectorAll('.ugolini-primary-navigation')) {
 		}
 		dispatchEvent(new CustomEvent('ugolini:header-engagement', { detail: engaged }));
 	};
-	header.addEventListener('pointerenter', () => engage(true));
-	header.addEventListener('pointerleave', () => engage(false));
+	header.addEventListener('pointerenter', event => { if (event.pointerType !== 'touch') engage(true); });
+	header.addEventListener('pointerleave', event => { if (event.pointerType !== 'touch') engage(false); });
 	header.addEventListener('focusin', () => engage(true));
 	header.addEventListener('focusout', () => requestAnimationFrame(() => {
 		if (!header.contains(document.activeElement)) engage(false);
