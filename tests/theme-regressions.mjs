@@ -50,6 +50,8 @@ assert.match(functions, /wp_add_inline_script\(.+ugoliniTawkPositioning.+querySe
 assert.match(functions, /querySelector\('\.ugolini-scroll-top'\).+target\.height - source\.height/s);
 assert.match(functions, /window\.visualViewport \? visualViewport\.offsetTop \+ visualViewport\.height : innerHeight/);
 assert.match(functions, /window\.visualViewport\?\.addEventListener\('resize', schedule/);
+assert.match(functions, /#min-widget > iframe, #max-widget > iframe, #branding-widget > iframe, #message-preview > iframe/);
+assert.match(functions, /frame\.parentElement\?\.id === 'message-preview'/);
 assert.match(functions, /set\('left', '20px'\).+set\('bottom', `\$\{bottom\}px`\).+set\('transform', 'scale\(\.8\)'\)/s);
 assert.match(functions, /innerWidth <= 767.+innerWidth - 40.+set\('min-width', width\).+set\('max-width', width\)/s);
 assert.match(script, /shop\|products\?\|collections\?\|prodotto/);

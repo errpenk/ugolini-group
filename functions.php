@@ -891,7 +891,7 @@ function ugolini_group_enqueue_assets() {
 			picker.style.setProperty('bottom', `${bottom}px`, 'important');
 		}
 		const bottom = picker ? Math.max(20, viewportBottom - picker.getBoundingClientRect().top + 12) : 85;
-		for (const frame of document.querySelectorAll('iframe[title="Chat widget"], iframe[title="Visit tawk.to"]')) {
+		for (const frame of document.querySelectorAll('#min-widget > iframe, #max-widget > iframe, #branding-widget > iframe, #message-preview > iframe')) {
 			const set = (property, value) => {
 				if (frame.style.getPropertyValue(property) !== value || frame.style.getPropertyPriority(property) !== 'important') {
 					frame.style.setProperty(property, value, 'important');
@@ -899,12 +899,15 @@ function ugolini_group_enqueue_assets() {
 			};
 			set('left', '20px');
 			set('right', 'auto');
-			const bounds = frame.getBoundingClientRect();
-			if (bounds.width <= 100 && bounds.height <= 100) {
+			set('top', 'auto');
+			if (frame.parentElement?.id === 'min-widget') {
 				set('bottom', `${bottom}px`);
 				set('transform', 'scale(.8)');
 				set('transform-origin', 'left bottom');
-			} else if (innerWidth <= 767 && frame.title === 'Chat widget') {
+			} else if (frame.parentElement?.id === 'message-preview') {
+				set('bottom', `${bottom + 60}px`);
+				set('transform', 'none');
+			} else if (innerWidth <= 767 && frame.parentElement?.id === 'max-widget') {
 				const width = `${Math.max(280, innerWidth - 40)}px`;
 				set('width', width);
 				set('min-width', width);
