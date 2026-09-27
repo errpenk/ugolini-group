@@ -896,6 +896,11 @@ function ugolini_group_enqueue_assets() {
 				set('bottom', `${bottom}px`);
 				set('transform', 'scale(.8)');
 				set('transform-origin', 'left bottom');
+			} else if (innerWidth <= 767 && frame.title === 'Chat widget') {
+				const width = `${Math.max(280, innerWidth - 40)}px`;
+				set('width', width);
+				set('min-width', width);
+				set('max-width', width);
 			}
 		}
 	};
