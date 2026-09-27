@@ -881,15 +881,16 @@ function ugolini_group_enqueue_assets() {
 	let frameRequest = 0;
 	const position = () => {
 		frameRequest = 0;
+		const viewportBottom = window.visualViewport ? visualViewport.offsetTop + visualViewport.height : innerHeight;
 		const picker = document.querySelector('#gt_float_wrapper');
 		const scrollTop = document.querySelector('.ugolini-scroll-top');
 		if (picker && scrollTop) {
 			const target = scrollTop.getBoundingClientRect();
 			const source = picker.getBoundingClientRect();
-			const bottom = Math.max(16, innerHeight - target.bottom + (target.height - source.height) / 2);
+			const bottom = Math.max(16, viewportBottom - target.bottom + (target.height - source.height) / 2);
 			picker.style.setProperty('bottom', `${bottom}px`, 'important');
 		}
-		const bottom = picker ? Math.max(20, innerHeight - picker.getBoundingClientRect().top + 12) : 85;
+		const bottom = picker ? Math.max(20, viewportBottom - picker.getBoundingClientRect().top + 12) : 85;
 		for (const frame of document.querySelectorAll('iframe[title="Chat widget"], iframe[title="Visit tawk.to"]')) {
 			const set = (property, value) => {
 				if (frame.style.getPropertyValue(property) !== value || frame.style.getPropertyPriority(property) !== 'important') {
@@ -914,6 +915,8 @@ function ugolini_group_enqueue_assets() {
 	const schedule = () => { if (!frameRequest) frameRequest = requestAnimationFrame(position); };
 	new MutationObserver(schedule).observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['style'] });
 	addEventListener('resize', schedule, { passive: true });
+	window.visualViewport?.addEventListener('resize', schedule, { passive: true });
+	window.visualViewport?.addEventListener('scroll', schedule, { passive: true });
 	schedule();
 })();
 JS,

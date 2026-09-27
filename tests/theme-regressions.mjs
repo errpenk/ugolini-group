@@ -48,6 +48,8 @@ assert.match(script, /'1k3hpm76n'.+'1k3i2gojt'.+'1k3i2i3lg'/s);
 assert.match(script, /Tawk_API\.switchWidget\(\{ propertyId, widgetId \}, error =>/);
 assert.match(functions, /wp_add_inline_script\(.+ugoliniTawkPositioning.+querySelector\('#gt_float_wrapper'\)/s);
 assert.match(functions, /querySelector\('\.ugolini-scroll-top'\).+target\.height - source\.height/s);
+assert.match(functions, /window\.visualViewport \? visualViewport\.offsetTop \+ visualViewport\.height : innerHeight/);
+assert.match(functions, /window\.visualViewport\?\.addEventListener\('resize', schedule/);
 assert.match(functions, /set\('left', '20px'\).+set\('bottom', `\$\{bottom\}px`\).+set\('transform', 'scale\(\.8\)'\)/s);
 assert.match(functions, /innerWidth <= 767.+innerWidth - 40.+set\('min-width', width\).+set\('max-width', width\)/s);
 assert.match(script, /shop\|products\?\|collections\?\|prodotto/);
