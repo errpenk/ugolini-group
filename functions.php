@@ -655,6 +655,134 @@ add_filter( 'render_block', 'ugolini_group_expand_legacy_shortcodes', 99 );
 add_filter( 'the_content', 'ugolini_group_expand_legacy_shortcodes', 99 );
 
 /**
+ * Keep GTranslate opt-in: visitors choose the page language themselves.
+ *
+ * @param mixed $settings Stored GTranslate settings.
+ * @return mixed
+ */
+function ugolini_group_disable_gtranslate_browser_detection( $settings ) {
+	if ( is_array( $settings ) ) {
+		$settings['detect_browser_language'] = 0;
+	}
+	return $settings;
+}
+add_filter( 'option_GTranslate', 'ugolini_group_disable_gtranslate_browser_detection' );
+
+/** Check the request path without waiting for the main WordPress query. */
+function ugolini_group_is_checkout_request() {
+	$path = wp_parse_url( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ), PHP_URL_PATH );
+	return '/checkout' === untrailingslashit( (string) $path );
+}
+
+/**
+ * Convert the browser locale supplied by the checkout bootstrap to WordPress.
+ * Chinese and Italian are native; every other system language uses English.
+ */
+function ugolini_group_checkout_locale() {
+	if ( ! ugolini_group_is_checkout_request() ) {
+		return '';
+	}
+
+	$requested = wp_unslash( $_GET['ugolini_checkout_locale'] ?? '' );
+	$requested = is_string( $requested ) ? sanitize_text_field( $requested ) : '';
+	$requested = strtolower( str_replace( '_', '-', $requested ) );
+	if ( str_starts_with( $requested, 'zh' ) ) {
+		return 'zh_CN';
+	}
+	if ( str_starts_with( $requested, 'it' ) ) {
+		return 'it_IT';
+	}
+	return 'en_US';
+}
+
+/** Use one locale for SureCart components, address data and WordPress translations. */
+function ugolini_group_checkout_determine_locale( $locale ) {
+	return ugolini_group_checkout_locale() ?: $locale;
+}
+add_filter( 'determine_locale', 'ugolini_group_checkout_determine_locale', 20 );
+
+/** Keep SureCart's public component configuration on the same checkout locale. */
+function ugolini_group_checkout_component_data( $data ) {
+	$locale = ugolini_group_checkout_locale();
+	if ( $locale && is_array( $data ) ) {
+		$data['locale'] = str_replace( '_', '-', $locale );
+	}
+	return $data;
+}
+add_filter( 'surecart-components/scData', 'ugolini_group_checkout_component_data' );
+
+/**
+ * Localize labels saved literally in the SureCart form and keep GTranslate
+ * from translating the system-language checkout a second time.
+ */
+function ugolini_group_localize_checkout_block( $block_content ) {
+	$locale = ugolini_group_checkout_locale();
+	if ( ! $locale ) {
+		return $block_content;
+	}
+
+	$translations = array(
+		'it_IT' => array(
+			'label="Name"'                                      => 'label="Nome"',
+			'placeholder="Your Full Name"'                      => 'placeholder="Nome e cognome"',
+			'Test Mode'                                           => 'Modalità di prova',
+			'This is a secure, encrypted payment.'                => 'Questo è un pagamento sicuro e crittografato.',
+			'>Purchase<'                                          => '>Acquista<',
+			'>Subtotal<'                                          => '>Subtotale<',
+			'label="Trial"'                                     => 'label="Prova"',
+			'placeholder="Enter coupon code"'                   => 'placeholder="Inserisci il codice sconto"',
+			'>Total<'                                             => '>Totale<',
+			'>Total Due Today<'                                   => '>Totale dovuto oggi<',
+			'component.label = "Payment"'                        => 'component.label = "Pagamento"',
+		),
+		'zh_CN' => array(
+			'label="Name"'                                      => 'label="姓名"',
+			'placeholder="Your Full Name"'                      => 'placeholder="您的姓名"',
+			'Test Mode'                                           => '测试模式',
+			'This is a secure, encrypted payment.'                => '这是安全的加密支付。',
+			'>Purchase<'                                          => '>购买<',
+			'>Subtotal<'                                          => '>小计<',
+			'label="Trial"'                                     => 'label="试用"',
+			'placeholder="Enter coupon code"'                   => 'placeholder="输入优惠码"',
+			'>Total<'                                             => '>总计<',
+			'>Total Due Today<'                                   => '>今日应付总额<',
+			'component.label = "Payment"'                        => 'component.label = "支付"',
+		),
+	);
+	$block_content = strtr( $block_content, $translations[ $locale ] ?? array() );
+
+	$tags = new WP_HTML_Tag_Processor( $block_content );
+	if ( $tags->next_tag( array( 'class_name' => 'wp-block-surecart-checkout-form' ) ) ) {
+		$tags->add_class( 'notranslate' );
+		$tags->set_attribute( 'translate', 'no' );
+		$block_content = $tags->get_updated_html();
+	}
+
+	return $block_content;
+}
+add_filter( 'render_block_surecart/checkout-form', 'ugolini_group_localize_checkout_block' );
+
+/** Reload checkout once with the phone locale so PHP can load native strings. */
+function ugolini_group_checkout_locale_bootstrap() {
+	if ( ! ugolini_group_is_checkout_request() ) {
+		return;
+	}
+	?>
+	<script>
+	(() => {
+		const language = (navigator.languages?.[0] || navigator.language || 'en-US').toLowerCase();
+		const locale = language.startsWith('zh') ? 'zh-CN' : language.startsWith('it') ? 'it-IT' : 'en-US';
+		const url = new URL(location.href);
+		if (url.searchParams.get('ugolini_checkout_locale') === locale) return;
+		url.searchParams.set('ugolini_checkout_locale', locale);
+		location.replace(url.href);
+	})();
+	</script>
+	<?php
+}
+add_action( 'wp_head', 'ugolini_group_checkout_locale_bootstrap', 0 );
+
+/**
  * Load the theme stylesheet and the conservative SureCart layer when relevant.
  */
 function ugolini_group_enqueue_assets() {

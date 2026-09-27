@@ -4,6 +4,10 @@ Uploadable Full Site Editing theme for the independent `ugolinigroup.com`
 WordPress + SureCart store. It contains no product records, prices, inventory,
 payments or checkout logic.
 
+Version 7.4.7 keeps GTranslate language selection manual and makes the public
+SureCart checkout follow the visitor's phone language: Simplified Chinese and
+Italian use their native checkout translations, with English as the fallback.
+
 ## Data boundary
 
 - SureCart owns products, prices, purchase state, collections, cart and checkout.
