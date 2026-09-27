@@ -18,6 +18,8 @@ const script = read('assets/js/theme.js');
 const collectionTemplate = read('templates/taxonomy-sc_collection.html');
 
 assert.match(php, /\[ugolini_events context="home"\].+ugolini_group_events_shortcode/);
+assert.match(php, /upgrader_process_complete.+ugolini_group_purge_cache_after_theme_update/s);
+assert.match(php, /do_action\( 'litespeed_purge_all' \)/);
 assert.match(php, /class="ugolini-commerce-actions"/);
 assert.ok(php.includes("preg_replace( '/>\\s+</'"));
 assert.ok(php.includes("preg_replace( '/<div(\\s+class=\"sc-cart-icon\""));

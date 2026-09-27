@@ -33,6 +33,21 @@ function ugolini_group_setup() {
 }
 add_action( 'after_setup_theme', 'ugolini_group_setup' );
 
+/** Purge LiteSpeed after Git-driven theme updates so new asset versions appear immediately. */
+function ugolini_group_purge_cache_after_theme_update( $upgrader, $options ) {
+	if ( 'update' !== ( $options['action'] ?? '' ) || 'theme' !== ( $options['type'] ?? '' ) ) {
+		return;
+	}
+
+	$themes = (array) ( $options['themes'] ?? array() );
+	if ( $themes && ! in_array( get_stylesheet(), $themes, true ) ) {
+		return;
+	}
+
+	do_action( 'litespeed_purge_all' );
+}
+add_action( 'upgrader_process_complete', 'ugolini_group_purge_cache_after_theme_update', 10, 2 );
+
 /**
  * Return the block markup for a bundled page pattern.
  *
