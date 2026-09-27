@@ -712,6 +712,38 @@ function ugolini_group_checkout_component_data( $data ) {
 add_filter( 'surecart-components/scData', 'ugolini_group_checkout_component_data' );
 
 /**
+ * Keep every SureCart surface in the store's base currency (EUR).
+ *
+ * SureCart otherwise restores a visitor's former selection from a cookie or
+ * infers CNY from the browser locale. Disabling conversion preserves the real
+ * product amounts instead of merely replacing the displayed currency symbol.
+ */
+function ugolini_group_force_store_currency() {
+	$_GET['currency']                = 'eur';
+	$_COOKIE['sc_current_currency'] = 'eur';
+
+	if ( function_exists( 'sc_setcookie' ) ) {
+		sc_setcookie( 'sc_current_currency', 'eur', time() + YEAR_IN_SECONDS );
+	}
+
+	if ( class_exists( '\\SureCart' ) ) {
+		\SureCart::currency()->convert( false );
+	}
+}
+add_action( 'init', 'ugolini_group_force_store_currency', 0 );
+
+/** Override block-level conversion support enabled by individual SureCart blocks. */
+function ugolini_group_disable_currency_conversion( $pre_render ) {
+	if ( class_exists( '\\SureCart' ) ) {
+		\SureCart::currency()->convert( false );
+	}
+	return $pre_render;
+}
+add_filter( 'pre_render_block', 'ugolini_group_disable_currency_conversion', PHP_INT_MAX );
+add_filter( 'pre_option_surecart_currency_geolocation_enabled', '__return_false' );
+add_filter( 'surecart/currency/filter_url', '__return_false' );
+
+/**
  * Localize labels saved literally in the SureCart form and keep GTranslate
  * from translating the system-language checkout a second time.
  */

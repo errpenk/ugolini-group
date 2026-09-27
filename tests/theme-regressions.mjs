@@ -82,6 +82,12 @@ assert.match(functions, /str_starts_with\( \$requested, 'it' \).+return 'it_IT'/
 assert.match(functions, /surecart-components\/scData.+ugolini_group_checkout_component_data/);
 assert.match(functions, /render_block_surecart\/checkout-form.+ugolini_group_localize_checkout_block/);
 assert.match(functions, /add_class\( 'notranslate' \)/);
+assert.match(functions, /function ugolini_group_force_store_currency\(\)/);
+assert.match(functions, /\$_GET\['currency'\]\s+= 'eur'/);
+assert.match(functions, /\$_COOKIE\['sc_current_currency'\] = 'eur'/);
+assert.match(functions, /SureCart::currency\(\)->convert\( false \)/);
+assert.match(functions, /pre_option_surecart_currency_geolocation_enabled.+__return_false/);
+assert.match(functions, /surecart\/currency\/filter_url.+__return_false/);
 assert.match(script, /heading\?\.closest\('\.ugolini-faq-section > :first-child, \.ugolini-b2b-partner__benefits, \.ugolini-wholesale-services__stage'\) \|\| heading/);
 assert.match(header, /main \[id\^="sezione-"\] \{ scroll-margin-top: var\(--ugolini-sticky-top\); \}/);
 assert.doesNotMatch(script, /Boolean\(document\.querySelector\('main article'\)\)/);
