@@ -855,7 +855,7 @@ function ugolini_group_enqueue_assets() {
 	 * browser-cached GTranslate stylesheet cannot restore the old white card. */
 	wp_add_inline_style(
 		'ugolini-group-base',
-		'#gt_float_wrapper .gt_float_switcher{overflow:hidden;border:1px solid var(--wp--preset--color--text)!important;border-radius:18px!important;background:rgb(247 243 238 / 94%)!important;box-shadow:none!important}#gt_float_wrapper .gt_float_switcher :is(.gt-selected,.gt-current-lang,.gt_options){background:transparent!important;color:var(--wp--preset--color--text)!important}#gt_float_wrapper .gt_float_switcher .gt-current-lang{padding:10px 14px!important}#gt_float_wrapper .gt_float_switcher .gt_options{border-top:1px solid rgb(23 23 20 / 18%)}#gt_float_wrapper .gt_float_switcher .gt_options a{color:var(--wp--preset--color--text)!important}#gt_float_wrapper .gt_float_switcher .gt_options a:hover{background:var(--wp--preset--color--text)!important;color:var(--wp--preset--color--white)!important}@media (min-width:768px){.ugolini-footer-grid .ugolini-footer-logo{width:170px!important;height:56px!important;margin-left:0!important;margin-right:auto!important}}@media (max-width:767px){.ugolini-footer-grid .ugolini-footer-logo{width:145px!important;height:50px!important;margin-inline:auto!important}}'
+		'#gt_float_wrapper .gt_float_switcher{overflow:hidden;border:1px solid var(--wp--preset--color--text)!important;border-radius:18px!important;background:rgb(247 243 238 / 94%)!important;box-shadow:none!important}#gt_float_wrapper .gt_float_switcher :is(.gt-selected,.gt-current-lang,.gt_options){background:transparent!important;color:var(--wp--preset--color--text)!important}#gt_float_wrapper .gt_float_switcher .gt-current-lang{padding:10px 14px!important}#gt_float_wrapper .gt_float_switcher .gt_options{border-top:1px solid rgb(23 23 20 / 18%)}#gt_float_wrapper .gt_float_switcher .gt_options a{color:var(--wp--preset--color--text)!important}#gt_float_wrapper .gt_float_switcher .gt_options a:hover{background:var(--wp--preset--color--text)!important;color:var(--wp--preset--color--white)!important}@media (min-width:768px){.ugolini-footer-grid .ugolini-footer-logo{width:clamp(150px,14vw,230px)!important;height:66px!important;margin-left:0!important;margin-right:auto!important}}@media (max-width:767px){.ugolini-footer-grid .ugolini-footer-logo{width:145px!important;height:50px!important;margin-inline:auto!important}}'
 	);
 
 	/* This small layer is inert when SureCart is absent and keeps the editor
@@ -926,6 +926,8 @@ function ugolini_group_enqueue_assets() {
 				set('min-height', height);
 				set('max-height', height);
 			} else if (frame.parentElement?.id === 'max-widget') {
+				set('left', 'auto');
+				set('right', '20px');
 				set('bottom', '20px');
 			}
 		}
