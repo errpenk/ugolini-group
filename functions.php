@@ -896,6 +896,11 @@ function ugolini_group_enqueue_assets() {
 			picker.style.setProperty('left', 'max(1rem, var(--ugolini-gutter))', 'important');
 		}
 		const bottom = picker ? Math.max(20, innerHeight - picker.getBoundingClientRect().top + 12) : 85;
+		const chatToggle = document.querySelector('.ugolini-chat-toggle');
+		if (chatToggle) {
+			chatToggle.style.setProperty('left', `${picker?.getBoundingClientRect().left || 20}px`, 'important');
+			chatToggle.style.setProperty('bottom', `${bottom}px`, 'important');
+		}
 		for (const frame of document.querySelectorAll('#min-widget > iframe, #max-widget > iframe, #branding-widget > iframe, #message-preview > iframe')) {
 			const set = (property, value) => {
 				if (frame.style.getPropertyValue(property) !== value || frame.style.getPropertyPriority(property) !== 'important') {
@@ -907,9 +912,7 @@ function ugolini_group_enqueue_assets() {
 			set('right', 'auto');
 			set('top', 'auto');
 			if (frame.parentElement?.id === 'min-widget') {
-				set('bottom', `${bottom}px`);
-				set('transform', 'scale(.8)');
-				set('transform-origin', 'left bottom');
+				set('display', 'none');
 			} else if (frame.parentElement?.id === 'message-preview') {
 				set('bottom', `${bottom + 60}px`);
 				set('transform', 'none');
@@ -926,7 +929,7 @@ function ugolini_group_enqueue_assets() {
 				set('min-height', height);
 				set('max-height', height);
 			} else if (frame.parentElement?.id === 'max-widget') {
-				set('bottom', '20px');
+				set('bottom', `${bottom + 60}px`);
 			}
 		}
 	};
