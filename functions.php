@@ -895,8 +895,7 @@ function ugolini_group_enqueue_assets() {
 			picker.style.setProperty('bottom', 'max(1rem, var(--ugolini-gutter))', 'important');
 			picker.style.setProperty('left', 'max(1rem, var(--ugolini-gutter))', 'important');
 		}
-		const pickerButton = picker?.querySelector('.gt-current-lang') || picker;
-		const bottom = pickerButton ? Math.max(20, innerHeight - pickerButton.getBoundingClientRect().top + 12) : 85;
+		const bottom = picker ? Math.max(20, innerHeight - picker.getBoundingClientRect().top + 12) : 85;
 		for (const frame of document.querySelectorAll('#min-widget > iframe, #max-widget > iframe, #branding-widget > iframe, #message-preview > iframe')) {
 			const set = (property, value) => {
 				if (frame.style.getPropertyValue(property) !== value || frame.style.getPropertyPriority(property) !== 'important') {
@@ -930,7 +929,7 @@ function ugolini_group_enqueue_assets() {
 		}
 	};
 	const schedule = () => { if (!frameRequest) frameRequest = requestAnimationFrame(position); };
-	new MutationObserver(schedule).observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['style'] });
+	new MutationObserver(schedule).observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['style', 'class'] });
 	addEventListener('resize', schedule, { passive: true });
 	window.visualViewport?.addEventListener('resize', schedule, { passive: true });
 	window.visualViewport?.addEventListener('scroll', schedule, { passive: true });

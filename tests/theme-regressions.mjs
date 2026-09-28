@@ -50,8 +50,8 @@ assert.match(functions, /wp_add_inline_script\(.+ugoliniTawkPositioning.+querySe
 assert.match(functions, /picker\.style\.setProperty\('position', 'fixed', 'important'\)/);
 assert.match(functions, /picker\.style\.setProperty\('bottom', 'max\(1rem, var\(--ugolini-gutter\)\)', 'important'\)/);
 assert.match(functions, /picker\.style\.setProperty\('left', 'max\(1rem, var\(--ugolini-gutter\)\)', 'important'\)/);
-assert.match(functions, /picker\?\.querySelector\('\.gt-current-lang'\) \|\| picker/);
-assert.match(functions, /innerHeight - pickerButton\.getBoundingClientRect\(\)\.top \+ 12/);
+assert.match(functions, /innerHeight - picker\.getBoundingClientRect\(\)\.top \+ 12/);
+assert.match(functions, /attributeFilter: \['style', 'class'\]/);
 assert.doesNotMatch(functions, /visualViewport\.offsetTop/);
 assert.match(functions, /window\.visualViewport\?\.addEventListener\('resize', schedule/);
 assert.match(functions, /#min-widget > iframe, #max-widget > iframe, #branding-widget > iframe, #message-preview > iframe/);
