@@ -902,6 +902,7 @@ function ugolini_group_enqueue_assets() {
 					frame.style.setProperty(property, value, 'important');
 				}
 			};
+			set('position', 'fixed');
 			set('left', '20px');
 			set('right', 'auto');
 			set('top', 'auto');

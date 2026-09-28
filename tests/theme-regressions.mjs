@@ -53,6 +53,7 @@ assert.match(functions, /picker\.style\.setProperty\('left', 'max\(1rem, var\(--
 assert.doesNotMatch(functions, /visualViewport\.offsetTop/);
 assert.match(functions, /window\.visualViewport\?\.addEventListener\('resize', schedule/);
 assert.match(functions, /#min-widget > iframe, #max-widget > iframe, #branding-widget > iframe, #message-preview > iframe/);
+assert.match(functions, /set\('position', 'fixed'\);\s+set\('left', '20px'\)/);
 assert.match(functions, /frame\.parentElement\?\.id === 'message-preview'/);
 assert.match(functions, /set\('left', '20px'\).+set\('bottom', `\$\{bottom\}px`\).+set\('transform', 'scale\(\.8\)'\)/s);
 assert.match(functions, /innerWidth <= 767.+const width = `\$\{innerWidth\}px`.+const height = `\$\{innerHeight\}px`.+set\('left', '0px'\).+set\('bottom', '0px'\).+set\('min-width', width\).+set\('max-width', width\).+set\('min-height', height\).+set\('max-height', height\)/s);
