@@ -80,25 +80,6 @@ html {
 .ugolini-scroll-top.is-visible:hover { background: var(--wp--preset--color--text); color: var(--wp--preset--color--white); transform: scale(1.06); }
 .ugolini-scroll-top svg { width: 21px; height: 21px; }
 
-/* Match the floating language control to the site's fixed navigation UI. */
-#gt_float_wrapper .gt_float_switcher {
-	overflow: hidden;
-	border: 1px solid var(--wp--preset--color--text) !important;
-	border-radius: 999px !important;
-	background: rgb(247 243 238 / 94%) !important;
-	box-shadow: none !important;
-}
-#gt_float_wrapper .gt_float_switcher .gt-selected,
-#gt_float_wrapper .gt_float_switcher .gt-current-lang,
-#gt_float_wrapper .gt_float_switcher .gt_options {
-	background: transparent !important;
-	color: var(--wp--preset--color--text) !important;
-}
-#gt_float_wrapper .gt_float_switcher .gt-current-lang { padding: 10px 14px !important; }
-#gt_float_wrapper .gt_float_switcher .gt_options { border-top: 1px solid rgb(23 23 20 / 18%); }
-#gt_float_wrapper .gt_float_switcher .gt_options a { color: var(--wp--preset--color--text) !important; }
-#gt_float_wrapper .gt_float_switcher .gt_options a:hover { background: var(--wp--preset--color--text) !important; color: var(--wp--preset--color--white) !important; }
-
 body {
 	overflow-x: clip;
 }

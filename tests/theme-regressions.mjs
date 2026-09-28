@@ -58,7 +58,8 @@ assert.match(functions, /innerWidth <= 767.+const width = `\$\{innerWidth\}px`.+
 assert.match(responsive, /\.ugolini-wholesale-services \{ height: 560svh; padding-top: 1\.5rem; \}/);
 assert.match(responsive, /\.ugolini-wholesale-services__stage[^}]+padding-block: 2rem 1rem; overflow: visible/);
 assert.match(responsive, /\.ugolini-wholesale-services__heading \{ min-height: 7\.5rem; padding-top: \.75rem; \}/);
-assert.match(base, /#gt_float_wrapper \.gt_float_switcher[^}]+border: 1px solid[^}]+border-radius: 999px[^}]+box-shadow: none/s);
+assert.match(functions, /wp_add_inline_style\([\s\S]+#gt_float_wrapper \.gt_float_switcher\{[^}]+border:1px solid[^}]+border-radius:999px[^}]+box-shadow:none/s);
+assert.doesNotMatch(base, /#gt_float_wrapper \.gt_float_switcher/);
 assert.match(script, /shop\|products\?\|collections\?\|prodotto/);
 assert.doesNotMatch(script, /sessionStorage\.setItem\('ugolini-nav-from'/);
 assert.doesNotMatch(script, /createElement\('span'\).*ugolini-nav-indicator/s);
