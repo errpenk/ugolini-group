@@ -888,15 +888,14 @@ function ugolini_group_enqueue_assets() {
 	let frameRequest = 0;
 	const position = () => {
 		frameRequest = 0;
-		const viewportBottom = window.visualViewport ? visualViewport.offsetTop + visualViewport.height : innerHeight;
 		const picker = document.querySelector('#gt_float_wrapper');
-		const scrollTop = document.querySelector('.ugolini-scroll-top');
-		if (picker && scrollTop) {
-			const target = scrollTop.getBoundingClientRect();
-			const bottom = Math.max(16, viewportBottom - target.bottom);
-			picker.style.setProperty('bottom', `${bottom}px`, 'important');
+		if (picker) {
+			picker.style.setProperty('position', 'fixed', 'important');
+			picker.style.setProperty('right', 'auto', 'important');
+			picker.style.setProperty('bottom', 'max(1rem, var(--ugolini-gutter))', 'important');
+			picker.style.setProperty('left', 'max(1rem, var(--ugolini-gutter))', 'important');
 		}
-		const bottom = picker ? Math.max(20, viewportBottom - picker.getBoundingClientRect().top + 12) : 85;
+		const bottom = picker ? Math.max(20, innerHeight - picker.getBoundingClientRect().top + 12) : 85;
 		for (const frame of document.querySelectorAll('#min-widget > iframe, #max-widget > iframe, #branding-widget > iframe, #message-preview > iframe')) {
 			const set = (property, value) => {
 				if (frame.style.getPropertyValue(property) !== value || frame.style.getPropertyPriority(property) !== 'important') {

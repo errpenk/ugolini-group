@@ -47,9 +47,10 @@ assert.match(script, /navigator\.languages\?\.\[0\].+language\.startsWith\('it'\
 assert.match(script, /'1k3hpm76n'.+'1k3i2gojt'.+'1k3i2i3lg'/s);
 assert.match(script, /Tawk_API\.switchWidget\(\{ propertyId, widgetId \}, error =>/);
 assert.match(functions, /wp_add_inline_script\(.+ugoliniTawkPositioning.+querySelector\('#gt_float_wrapper'\)/s);
-assert.match(functions, /querySelector\('\.ugolini-scroll-top'\).+viewportBottom - target\.bottom/s);
-assert.doesNotMatch(functions, /target\.height - source\.height/);
-assert.match(functions, /window\.visualViewport \? visualViewport\.offsetTop \+ visualViewport\.height : innerHeight/);
+assert.match(functions, /picker\.style\.setProperty\('position', 'fixed', 'important'\)/);
+assert.match(functions, /picker\.style\.setProperty\('bottom', 'max\(1rem, var\(--ugolini-gutter\)\)', 'important'\)/);
+assert.match(functions, /picker\.style\.setProperty\('left', 'max\(1rem, var\(--ugolini-gutter\)\)', 'important'\)/);
+assert.doesNotMatch(functions, /visualViewport\.offsetTop/);
 assert.match(functions, /window\.visualViewport\?\.addEventListener\('resize', schedule/);
 assert.match(functions, /#min-widget > iframe, #max-widget > iframe, #branding-widget > iframe, #message-preview > iframe/);
 assert.match(functions, /frame\.parentElement\?\.id === 'message-preview'/);
