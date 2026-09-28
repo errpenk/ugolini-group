@@ -886,8 +886,7 @@ function ugolini_group_enqueue_assets() {
 		const scrollTop = document.querySelector('.ugolini-scroll-top');
 		if (picker && scrollTop) {
 			const target = scrollTop.getBoundingClientRect();
-			const source = picker.getBoundingClientRect();
-			const bottom = Math.max(16, viewportBottom - target.bottom + (target.height - source.height) / 2 + 12);
+			const bottom = Math.max(16, viewportBottom - target.bottom);
 			picker.style.setProperty('bottom', `${bottom}px`, 'important');
 		}
 		const bottom = picker ? Math.max(20, viewportBottom - picker.getBoundingClientRect().top + 12) : 85;

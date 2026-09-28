@@ -210,9 +210,9 @@
 	.ugolini-contact-intro { padding-bottom: 1rem; }
 	.ugolini-contact-form-section { padding-top: 1rem; }
 	.ugolini-b2b-form__row { grid-template-columns: 1fr; }
-	.ugolini-wholesale-services { height: 560svh; }
-	.ugolini-wholesale-services__stage { top: var(--ugolini-sticky-top); height: calc(100svh - var(--ugolini-sticky-top)); min-height: calc(100svh - var(--ugolini-sticky-top)); max-height: none; grid-template-rows: auto 330px auto 96px; align-content: start; gap: .65rem; padding-block: 3rem 1rem; }
-	.ugolini-wholesale-services__heading { min-height: 6.5rem; }
+	.ugolini-wholesale-services { height: 560svh; padding-top: 1.5rem; }
+	.ugolini-wholesale-services__stage { top: var(--ugolini-sticky-top); height: calc(100svh - var(--ugolini-sticky-top)); min-height: calc(100svh - var(--ugolini-sticky-top)); max-height: none; grid-template-rows: auto 330px auto 96px; align-content: start; gap: .65rem; padding-block: 2rem 1rem; overflow: visible; }
+	.ugolini-wholesale-services__heading { min-height: 7.5rem; padding-top: .75rem; }
 	.ugolini-wholesale-services__heading h2 { white-space: normal; }
 	.ugolini-wholesale-services__slides { min-height: 330px; }
 	.ugolini-wholesale-services__slides article { grid-template-columns: 3.5rem 1fr; align-content: center; }
