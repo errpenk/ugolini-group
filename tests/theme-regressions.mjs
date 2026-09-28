@@ -47,7 +47,7 @@ assert.match(script, /navigator\.languages\?\.\[0\].+language\.startsWith\('it'\
 assert.match(script, /'1k3hpm76n'.+'1k3i2gojt'.+'1k3i2i3lg'/s);
 assert.match(script, /Tawk_API\.switchWidget\(\{ propertyId, widgetId \}, error =>/);
 assert.match(functions, /chatToggle\.className = 'ugolini-chat-toggle'/);
-assert.match(functions, /window\.Tawk_API\?\.toggle\?\.\(\)/);
+assert.match(functions, /document\.createElement\('span'\)/);
 assert.match(functions, /wp_add_inline_script\(.+ugoliniTawkPositioning.+querySelector\('#gt_float_wrapper'\)/s);
 assert.match(functions, /picker\.style\.setProperty\('position', 'fixed', 'important'\)/);
 assert.match(functions, /picker\.style\.setProperty\('bottom', 'max\(1rem, var\(--ugolini-gutter\)\)', 'important'\)/);
@@ -59,7 +59,7 @@ assert.match(functions, /window\.visualViewport\?\.addEventListener\('resize', s
 assert.match(functions, /#min-widget > iframe, #max-widget > iframe, #branding-widget > iframe, #message-preview > iframe/);
 assert.match(functions, /set\('position', 'fixed'\);\s+set\('left', '20px'\)/);
 assert.match(functions, /frame\.parentElement\?\.id === 'message-preview'/);
-assert.match(functions, /frame\.parentElement\?\.id === 'min-widget'\) \{\s+set\('display', 'none'\)/);
+assert.match(functions, /frame\.parentElement\?\.id === 'min-widget'\)[\s\S]+set\('opacity', '0'\)[\s\S]+set\('pointer-events', 'auto'\)[\s\S]+set\('transform', 'scale\(\.8\)'\)/);
 assert.match(functions, /innerWidth <= 767.+const width = `\$\{innerWidth\}px`.+const height = `\$\{innerHeight\}px`.+set\('left', '0px'\).+set\('bottom', '0px'\).+set\('min-width', width\).+set\('max-width', width\).+set\('min-height', height\).+set\('max-height', height\)/s);
 assert.match(functions, /else if \(frame\.parentElement\?\.id === 'max-widget'\) \{\s+set\('bottom', `\$\{bottom \+ 60\}px`\)/);
 assert.match(functions, /\.ugolini-chat-toggle\{[^}]+width:48px;height:48px;/s);
