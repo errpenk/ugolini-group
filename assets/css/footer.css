@@ -6,7 +6,7 @@
 .preview-footer-brand { display: block; }
 .ugolini-footer-brand > p,
 .preview-footer-brand > p { display: none; }
-.ugolini-footer-grid .ugolini-footer-logo { width: clamp(150px, 14vw, 230px); height: 66px; display: block; margin-left: 0 !important; margin-right: auto !important; }
+.ugolini-footer-grid .ugolini-footer-logo { width: 170px; height: 56px; display: block; margin-left: 0 !important; margin-right: auto !important; }
 .ugolini-footer-logo img { width: 100%; height: 100%; display: block; object-fit: contain; object-position: left center; filter: grayscale(1) brightness(0); }
 
 .ugolini-footer-section { margin: 0; border: 0; }
