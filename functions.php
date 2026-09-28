@@ -887,7 +887,7 @@ function ugolini_group_enqueue_assets() {
 		if (picker && scrollTop) {
 			const target = scrollTop.getBoundingClientRect();
 			const source = picker.getBoundingClientRect();
-			const bottom = Math.max(16, viewportBottom - target.bottom + (target.height - source.height) / 2);
+			const bottom = Math.max(16, viewportBottom - target.bottom + (target.height - source.height) / 2 + 12);
 			picker.style.setProperty('bottom', `${bottom}px`, 'important');
 		}
 		const bottom = picker ? Math.max(20, viewportBottom - picker.getBoundingClientRect().top + 12) : 85;
@@ -909,7 +909,7 @@ function ugolini_group_enqueue_assets() {
 				set('transform', 'none');
 			} else if (innerWidth <= 767 && frame.parentElement?.id === 'max-widget') {
 				const width = `${innerWidth}px`;
-				const height = `${Math.round(window.visualViewport ? visualViewport.height : innerHeight)}px`;
+				const height = `${innerHeight}px`;
 				set('left', '0px');
 				set('bottom', '0px');
 				set('transform', 'none');

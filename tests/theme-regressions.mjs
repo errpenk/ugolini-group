@@ -47,13 +47,15 @@ assert.match(script, /navigator\.languages\?\.\[0\].+language\.startsWith\('it'\
 assert.match(script, /'1k3hpm76n'.+'1k3i2gojt'.+'1k3i2i3lg'/s);
 assert.match(script, /Tawk_API\.switchWidget\(\{ propertyId, widgetId \}, error =>/);
 assert.match(functions, /wp_add_inline_script\(.+ugoliniTawkPositioning.+querySelector\('#gt_float_wrapper'\)/s);
-assert.match(functions, /querySelector\('\.ugolini-scroll-top'\).+target\.height - source\.height/s);
+assert.match(functions, /querySelector\('\.ugolini-scroll-top'\).+target\.height - source\.height.+\+ 12/s);
 assert.match(functions, /window\.visualViewport \? visualViewport\.offsetTop \+ visualViewport\.height : innerHeight/);
 assert.match(functions, /window\.visualViewport\?\.addEventListener\('resize', schedule/);
 assert.match(functions, /#min-widget > iframe, #max-widget > iframe, #branding-widget > iframe, #message-preview > iframe/);
 assert.match(functions, /frame\.parentElement\?\.id === 'message-preview'/);
 assert.match(functions, /set\('left', '20px'\).+set\('bottom', `\$\{bottom\}px`\).+set\('transform', 'scale\(\.8\)'\)/s);
-assert.match(functions, /innerWidth <= 767.+const width = `\$\{innerWidth\}px`.+visualViewport\.height : innerHeight.+set\('left', '0px'\).+set\('bottom', '0px'\).+set\('min-width', width\).+set\('max-width', width\).+set\('min-height', height\).+set\('max-height', height\)/s);
+assert.match(functions, /innerWidth <= 767.+const width = `\$\{innerWidth\}px`.+const height = `\$\{innerHeight\}px`.+set\('left', '0px'\).+set\('bottom', '0px'\).+set\('min-width', width\).+set\('max-width', width\).+set\('min-height', height\).+set\('max-height', height\)/s);
+assert.match(responsive, /\.ugolini-wholesale-services__stage[^}]+padding-block: 3rem 1rem/);
+assert.match(responsive, /\.ugolini-wholesale-services__heading \{ min-height: 6\.5rem; \}/);
 assert.match(script, /shop\|products\?\|collections\?\|prodotto/);
 assert.doesNotMatch(script, /sessionStorage\.setItem\('ugolini-nav-from'/);
 assert.doesNotMatch(script, /createElement\('span'\).*ugolini-nav-indicator/s);
