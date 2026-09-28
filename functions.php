@@ -925,6 +925,8 @@ function ugolini_group_enqueue_assets() {
 				set('height', height);
 				set('min-height', height);
 				set('max-height', height);
+			} else if (frame.parentElement?.id === 'max-widget') {
+				set('bottom', '20px');
 			}
 		}
 	};

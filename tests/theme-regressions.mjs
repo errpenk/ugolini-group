@@ -59,6 +59,7 @@ assert.match(functions, /set\('position', 'fixed'\);\s+set\('left', '20px'\)/);
 assert.match(functions, /frame\.parentElement\?\.id === 'message-preview'/);
 assert.match(functions, /set\('left', '20px'\).+set\('bottom', `\$\{bottom\}px`\).+set\('transform', 'scale\(\.8\)'\)/s);
 assert.match(functions, /innerWidth <= 767.+const width = `\$\{innerWidth\}px`.+const height = `\$\{innerHeight\}px`.+set\('left', '0px'\).+set\('bottom', '0px'\).+set\('min-width', width\).+set\('max-width', width\).+set\('min-height', height\).+set\('max-height', height\)/s);
+assert.match(functions, /else if \(frame\.parentElement\?\.id === 'max-widget'\) \{\s+set\('bottom', '20px'\)/);
 assert.match(responsive, /\.ugolini-wholesale-services \{ height: 560svh; padding-top: 1\.5rem; \}/);
 assert.match(responsive, /\.ugolini-wholesale-services__stage[^}]+padding-block: 2rem 1rem; overflow: visible/);
 assert.match(responsive, /\.ugolini-wholesale-services__heading \{ min-height: 7\.5rem; padding-top: \.75rem; \}/);
