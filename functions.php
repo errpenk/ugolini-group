@@ -926,9 +926,9 @@ function ugolini_group_enqueue_assets() {
 				set('min-height', height);
 				set('max-height', height);
 			} else if (frame.parentElement?.id === 'max-widget') {
-				set('left', 'auto');
-				set('right', '20px');
-				set('bottom', '20px');
+				set('left', '20px');
+				set('right', 'auto');
+				set('bottom', `${bottom + 60}px`);
 			}
 		}
 	};
