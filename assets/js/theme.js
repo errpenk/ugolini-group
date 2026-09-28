@@ -456,13 +456,6 @@ for (const nav of document.querySelectorAll('.ugolini-primary-navigation')) {
 	};
 	const language = (navigator.languages?.[0] || navigator.language || 'en').toLowerCase();
 	const widgetId = widgets[language.startsWith('it') ? 'it' : language.startsWith('zh') ? 'zh' : 'en'];
-	const launcher = document.createElement('button');
-	launcher.className = 'ugolini-chat-toggle';
-	launcher.type = 'button';
-	launcher.setAttribute('aria-label', 'Apri o chiudi la chat');
-	launcher.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg>';
-	launcher.addEventListener('click', () => window.Tawk_API?.toggle?.());
-	document.body.append(launcher);
 	let switched = widgetId === widgets.en;
 	const activateWidget = () => {
 		if (!switched && typeof window.Tawk_API?.switchWidget === 'function') {
@@ -478,9 +471,7 @@ for (const nav of document.querySelectorAll('.ugolini-primary-navigation')) {
 	window.Tawk_API.onLoad = function (...args) {
 		previousOnLoad?.apply(this, args);
 		activateWidget();
-		launcher.classList.add('is-ready');
 	};
-	if (typeof window.Tawk_API.toggle === 'function') launcher.classList.add('is-ready');
 	activateWidget();
 })();
 

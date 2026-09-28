@@ -79,9 +79,6 @@ html {
 .ugolini-scroll-top.is-visible { opacity: 1; pointer-events: auto; transform: none; }
 .ugolini-scroll-top.is-visible:hover { background: var(--wp--preset--color--text); color: var(--wp--preset--color--white); transform: scale(1.06); }
 .ugolini-scroll-top svg { width: 21px; height: 21px; }
-.ugolini-chat-toggle { position: fixed; z-index: 1000004; width: 48px; height: 48px; display: grid; place-items: center; padding: 0; border: 0; border-radius: 50%; background: var(--wp--preset--color--brand-dark); color: var(--wp--preset--color--white); cursor: pointer; opacity: 0; pointer-events: none; }
-.ugolini-chat-toggle.is-ready { opacity: 1; pointer-events: auto; }
-.ugolini-chat-toggle svg { width: 21px; height: 21px; }
 
 body {
 	overflow-x: clip;

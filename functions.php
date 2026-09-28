@@ -855,7 +855,7 @@ function ugolini_group_enqueue_assets() {
 	 * browser-cached GTranslate stylesheet cannot restore the old white card. */
 	wp_add_inline_style(
 		'ugolini-group-base',
-		'#gt_float_wrapper .gt_float_switcher{overflow:hidden;border:1px solid var(--wp--preset--color--text)!important;border-radius:18px!important;background:rgb(247 243 238 / 94%)!important;box-shadow:none!important}#gt_float_wrapper .gt_float_switcher :is(.gt-selected,.gt-current-lang,.gt_options){background:transparent!important;color:var(--wp--preset--color--text)!important}#gt_float_wrapper .gt_float_switcher .gt-current-lang{padding:10px 14px!important}#gt_float_wrapper .gt_float_switcher .gt_options{border-top:1px solid rgb(23 23 20 / 18%)}#gt_float_wrapper .gt_float_switcher .gt_options a{color:var(--wp--preset--color--text)!important}#gt_float_wrapper .gt_float_switcher .gt_options a:hover{background:var(--wp--preset--color--text)!important;color:var(--wp--preset--color--white)!important}'
+		'#gt_float_wrapper .gt_float_switcher{overflow:hidden;border:1px solid var(--wp--preset--color--text)!important;border-radius:18px!important;background:rgb(247 243 238 / 94%)!important;box-shadow:none!important}#gt_float_wrapper .gt_float_switcher :is(.gt-selected,.gt-current-lang,.gt_options){background:transparent!important;color:var(--wp--preset--color--text)!important}#gt_float_wrapper .gt_float_switcher .gt-current-lang{padding:10px 14px!important}#gt_float_wrapper .gt_float_switcher .gt_options{border-top:1px solid rgb(23 23 20 / 18%)}#gt_float_wrapper .gt_float_switcher .gt_options a{color:var(--wp--preset--color--text)!important}#gt_float_wrapper .gt_float_switcher .gt_options a:hover{background:var(--wp--preset--color--text)!important;color:var(--wp--preset--color--white)!important}.ugolini-chat-toggle{position:fixed;z-index:1000004;width:48px;height:48px;display:grid;place-items:center;padding:0;border:0;border-radius:50%;background:var(--wp--preset--color--brand-dark);color:var(--wp--preset--color--white);cursor:pointer;opacity:0;pointer-events:none}.ugolini-chat-toggle.is-ready{opacity:1;pointer-events:auto}.ugolini-chat-toggle svg{width:21px;height:21px}@media(min-width:768px){.ugolini-footer-grid .ugolini-footer-logo{margin-left:0!important;margin-right:auto!important}}@media(max-width:767px){.ugolini-footer-grid .ugolini-footer-logo{margin-inline:auto!important}}'
 	);
 
 	/* This small layer is inert when SureCart is absent and keeps the editor
@@ -885,6 +885,20 @@ function ugolini_group_enqueue_assets() {
 (() => {
 	if (window.ugoliniTawkPositioning) return;
 	window.ugoliniTawkPositioning = true;
+	const chatToggle = document.createElement('button');
+	chatToggle.className = 'ugolini-chat-toggle';
+	chatToggle.type = 'button';
+	chatToggle.setAttribute('aria-label', 'Apri o chiudi la chat');
+	chatToggle.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg>';
+	chatToggle.addEventListener('click', () => window.Tawk_API?.toggle?.());
+	document.body.append(chatToggle);
+	window.Tawk_API = window.Tawk_API || {};
+	const previousTawkOnLoad = window.Tawk_API.onLoad;
+	window.Tawk_API.onLoad = function (...args) {
+		previousTawkOnLoad?.apply(this, args);
+		chatToggle.classList.add('is-ready');
+	};
+	if (typeof window.Tawk_API.toggle === 'function') chatToggle.classList.add('is-ready');
 	let frameRequest = 0;
 	const position = () => {
 		frameRequest = 0;
@@ -896,11 +910,8 @@ function ugolini_group_enqueue_assets() {
 			picker.style.setProperty('left', 'max(1rem, var(--ugolini-gutter))', 'important');
 		}
 		const bottom = picker ? Math.max(20, innerHeight - picker.getBoundingClientRect().top + 12) : 85;
-		const chatToggle = document.querySelector('.ugolini-chat-toggle');
-		if (chatToggle) {
-			chatToggle.style.setProperty('left', `${picker?.getBoundingClientRect().left || 20}px`, 'important');
-			chatToggle.style.setProperty('bottom', `${bottom}px`, 'important');
-		}
+		chatToggle.style.setProperty('left', `${picker?.getBoundingClientRect().left || 20}px`, 'important');
+		chatToggle.style.setProperty('bottom', `${bottom}px`, 'important');
 		for (const frame of document.querySelectorAll('#min-widget > iframe, #max-widget > iframe, #branding-widget > iframe, #message-preview > iframe')) {
 			const set = (property, value) => {
 				if (frame.style.getPropertyValue(property) !== value || frame.style.getPropertyPriority(property) !== 'important') {
