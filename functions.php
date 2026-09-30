@@ -847,7 +847,7 @@ function ugolini_group_enqueue_assets() {
 		'ugolini-group',
 		get_stylesheet_uri(),
 		array(),
-		null
+		filemtime( get_stylesheet_directory() . '/style.css' )
 	);
 
 	$styles = array(
@@ -864,7 +864,7 @@ function ugolini_group_enqueue_assets() {
 			'ugolini-group-' . $name,
 			get_theme_file_uri( 'assets/css/' . $name . '.css' ),
 			$dependencies,
-			null
+			filemtime( get_theme_file_path( 'assets/css/' . $name . '.css' ) )
 		);
 	}
 
@@ -895,13 +895,40 @@ function ugolini_group_enqueue_assets() {
 		array( 'ugolini-group-responsive' ),
 		null
 	);
-	wp_enqueue_script( 'ugolini-group-interactions', get_theme_file_uri( 'assets/js/theme.js' ), array(), null, true );
+	wp_enqueue_script( 'ugolini-group-interactions', get_theme_file_uri( 'assets/js/theme.js' ), array(), filemtime( get_theme_file_path( 'assets/js/theme.js' ) ), true );
 	wp_add_inline_script(
 		'ugolini-group-interactions',
 		<<<'JS'
 (() => {
 	if (window.ugoliniTawkPositioning) return;
 	window.ugoliniTawkPositioning = true;
+	const desktop = matchMedia('(min-width: 768px)');
+	const launcher = document.createElement('button');
+	launcher.className = 'ugolini-chat-launcher';
+	launcher.type = 'button';
+	launcher.setAttribute('aria-label', 'Apri la chat');
+	launcher.setAttribute('aria-expanded', 'false');
+	launcher.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg>';
+	document.body.append(launcher);
+	const setOpen = open => {
+		launcher.setAttribute('aria-expanded', String(open));
+		launcher.setAttribute('aria-label', open ? 'Chiudi la chat' : 'Apri la chat');
+	};
+	launcher.addEventListener('click', () => {
+		const open = launcher.getAttribute('aria-expanded') === 'true';
+		if (open) window.Tawk_API?.minimize?.();
+		else window.Tawk_API?.maximize?.();
+	});
+	const chain = (name, handler) => {
+		const previous = window.Tawk_API?.[name];
+		window.Tawk_API = window.Tawk_API || {};
+		window.Tawk_API[name] = function (...args) {
+			previous?.apply(this, args);
+			handler();
+		};
+	};
+	chain('onChatMaximized', () => setOpen(true));
+	chain('onChatMinimized', () => setOpen(false));
 	let frameRequest = 0;
 	const position = () => {
 		frameRequest = 0;
@@ -913,28 +940,23 @@ function ugolini_group_enqueue_assets() {
 			picker.style.setProperty('left', 'max(1rem, var(--ugolini-gutter))', 'important');
 		}
 		const bottom = picker ? Math.max(20, innerHeight - picker.getBoundingClientRect().top + 12) : 85;
+		document.documentElement.style.setProperty('--ugolini-chat-bottom', `${bottom}px`);
 		for (const frame of document.querySelectorAll('#min-widget > iframe, #max-widget > iframe, #branding-widget > iframe, #message-preview > iframe')) {
 			const set = (property, value) => {
 				if (frame.style.getPropertyValue(property) !== value || frame.style.getPropertyPriority(property) !== 'important') {
 					frame.style.setProperty(property, value, 'important');
 				}
 			};
-			set('position', 'fixed');
-			set('left', '20px');
-			set('right', 'auto');
-			set('top', 'auto');
-			if (frame.parentElement?.id === 'min-widget') {
-				set('bottom', `${bottom}px`);
-				/* Avoid transformed cross-origin iframes: Safari can offset their hit area. */
-				set('transform', 'none');
-				set('transform-origin', 'left bottom');
-			} else if (frame.parentElement?.id === 'message-preview') {
-				set('bottom', `${bottom + 60}px`);
-				set('transform', 'none');
-			} else if (innerWidth <= 767 && frame.parentElement?.id === 'max-widget') {
+			if (desktop.matches && frame.parentElement?.id === 'min-widget') {
+				set('visibility', 'hidden');
+				set('pointer-events', 'none');
+			} else if (!desktop.matches && frame.parentElement?.id === 'max-widget') {
 				const width = `${innerWidth}px`;
 				const height = `${innerHeight}px`;
+				set('position', 'fixed');
 				set('left', '0px');
+				set('right', 'auto');
+				set('top', 'auto');
 				set('bottom', '0px');
 				set('transform', 'none');
 				set('width', width);
@@ -943,16 +965,13 @@ function ugolini_group_enqueue_assets() {
 				set('height', height);
 				set('min-height', height);
 				set('max-height', height);
-			} else if (frame.parentElement?.id === 'max-widget') {
-				set('left', '20px');
-				set('right', 'auto');
-				set('bottom', `${bottom + 60}px`);
 			}
 		}
 	};
 	const schedule = () => { if (!frameRequest) frameRequest = requestAnimationFrame(position); };
 	new MutationObserver(schedule).observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['style', 'class'] });
 	addEventListener('resize', schedule, { passive: true });
+	desktop.addEventListener('change', schedule);
 	window.visualViewport?.addEventListener('resize', schedule, { passive: true });
 	window.visualViewport?.addEventListener('scroll', schedule, { passive: true });
 	schedule();

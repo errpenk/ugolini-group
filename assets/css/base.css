@@ -77,6 +77,11 @@ html {
 }
 .ugolini-scroll-top { position: fixed; z-index: 90; right: max(1rem, var(--ugolini-gutter)); bottom: max(1rem, var(--ugolini-gutter)); width: 48px; height: 48px; display: grid; place-items: center; border: 1px solid currentColor; border-radius: 50%; background: rgb(247 243 238 / 94%); color: var(--wp--preset--color--text); box-shadow: none; cursor: pointer; opacity: 0; pointer-events: none; transform: translateY(10px); transition: opacity 180ms ease, transform 180ms ease, background-color 180ms ease, color 180ms ease; }
 .ugolini-scroll-top.is-visible { opacity: 1; pointer-events: auto; transform: none; }
+
+.ugolini-chat-launcher { position: fixed; z-index: 1000004; left: max(1rem, var(--ugolini-gutter)); bottom: var(--ugolini-chat-bottom, 5.5rem); width: 64px; height: 64px; display: grid; place-items: center; padding: 0; border: 0; border-radius: 50%; background: var(--wp--preset--color--brand-dark); color: #fff; box-shadow: 0 12px 30px rgb(37 15 13 / 24%); cursor: pointer; transition: transform 180ms ease, box-shadow 180ms ease; }
+.ugolini-chat-launcher:hover, .ugolini-chat-launcher:focus-visible { transform: translateY(-2px); box-shadow: 0 16px 36px rgb(37 15 13 / 30%); }
+.ugolini-chat-launcher svg { width: 28px; height: 28px; }
+@media (max-width: 767px) { .ugolini-chat-launcher { display: none; } }
 .ugolini-scroll-top.is-visible:hover { background: var(--wp--preset--color--text); color: var(--wp--preset--color--white); transform: scale(1.06); }
 .ugolini-scroll-top svg { width: 21px; height: 21px; }
 
