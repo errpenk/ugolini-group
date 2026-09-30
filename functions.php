@@ -183,6 +183,23 @@ function ugolini_group_seed_preview_pages() {
 }
 add_action( 'init', 'ugolini_group_seed_preview_pages', 99 );
 
+/** Refresh the about page once so the new family story asset reaches existing installs. */
+function ugolini_group_refresh_about_666() {
+	if ( ! current_user_can( 'manage_options' ) || get_option( 'ugolini_group_about_666_refreshed' ) ) {
+		return;
+	}
+
+	$page    = get_page_by_path( 'chi-siamo', OBJECT, 'page' );
+	$content = ugolini_group_page_pattern_content( 'page-about' );
+	if ( $page && '' !== $content ) {
+		$result = wp_update_post( array( 'ID' => $page->ID, 'post_content' => $content ), true );
+		if ( ! is_wp_error( $result ) ) {
+			update_option( 'ugolini_group_about_666_refreshed', 1, false );
+		}
+	}
+}
+add_action( 'init', 'ugolini_group_refresh_about_666', 100 );
+
 /** Keep the public Blog label and card excerpts aligned with the theme preview. */
 function ugolini_group_refresh_blog_presentation() {
 	if ( ! get_option( 'ugolini_group_blog_630_refreshed' ) ) {
@@ -908,7 +925,8 @@ function ugolini_group_enqueue_assets() {
 			set('top', 'auto');
 			if (frame.parentElement?.id === 'min-widget') {
 				set('bottom', `${bottom}px`);
-				set('transform', 'scale(.8)');
+				/* Avoid transformed cross-origin iframes: Safari can offset their hit area. */
+				set('transform', 'none');
 				set('transform-origin', 'left bottom');
 			} else if (frame.parentElement?.id === 'message-preview') {
 				set('bottom', `${bottom + 60}px`);

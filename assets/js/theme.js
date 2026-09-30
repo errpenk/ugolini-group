@@ -711,6 +711,25 @@ for (const nav of document.querySelectorAll('.ugolini-primary-navigation')) {
 	});
 })();
 
+(() => {
+	const figures = document.querySelectorAll('[data-story-reveal]');
+	if (!figures.length) return;
+	if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
+		for (const figure of figures) figure.classList.add('is-visible');
+		return;
+	}
+	const observer = new IntersectionObserver(entries => {
+		for (const entry of entries) if (entry.isIntersecting) {
+			entry.target.classList.add('is-visible');
+			observer.unobserve(entry.target);
+		}
+	}, { threshold: .2 });
+	for (const figure of figures) {
+		figure.classList.add('is-reveal-ready');
+		observer.observe(figure);
+	}
+})();
+
 for (const timeline of document.querySelectorAll('[data-timeline]')) {
 	const update = () => {
 		const bounds = timeline.getBoundingClientRect();

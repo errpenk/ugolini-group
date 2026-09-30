@@ -59,7 +59,7 @@ assert.match(functions, /window\.visualViewport\?\.addEventListener\('resize', s
 assert.match(functions, /#min-widget > iframe, #max-widget > iframe, #branding-widget > iframe, #message-preview > iframe/);
 assert.match(functions, /set\('position', 'fixed'\);\s+set\('left', '20px'\)/);
 assert.match(functions, /frame\.parentElement\?\.id === 'message-preview'/);
-assert.match(functions, /set\('left', '20px'\).+set\('bottom', `\$\{bottom\}px`\).+set\('transform', 'scale\(\.8\)'\)/s);
+assert.match(functions, /set\('left', '20px'\).+set\('bottom', `\$\{bottom\}px`\).+set\('transform', 'none'\)/s);
 assert.match(functions, /innerWidth <= 767.+const width = `\$\{innerWidth\}px`.+const height = `\$\{innerHeight\}px`.+set\('left', '0px'\).+set\('bottom', '0px'\).+set\('min-width', width\).+set\('max-width', width\).+set\('min-height', height\).+set\('max-height', height\)/s);
 assert.match(functions, /else if \(frame\.parentElement\?\.id === 'max-widget'\) \{\s+set\('left', '20px'\);\s+set\('right', 'auto'\);\s+set\('bottom', `\$\{bottom \+ 60\}px`\)/);
 assert.match(responsive, /\.ugolini-wholesale-services \{ height: 560svh; padding-top: 1\.5rem; \}/);
@@ -158,6 +158,11 @@ assert.match(script, /let figure = article\.querySelector\(':scope > figure'\)/)
 assert.match(script, /figure\.classList\.add\('ugolini-timeline-about-figure'\)/);
 assert.match(pages, /\.ugolini-timeline--about article figure\.is-visible \{ opacity: 1; transform: none; \}/);
 assert.match(pages, /\.ugolini-timeline--about article > div \{[^}]+background: transparent/s);
+assert.match(pages, /\.ugolini-timeline--about header \{[^}]+margin-inline: auto;[^}]+text-align: center;/s);
+assert.match(pages, /\.ugolini-timeline--about header p \{[^}]+margin: 1\.25rem auto 0;/s);
+assert.match(home, /\.ugolini-home-story__family\.is-reveal-ready:not\(\.is-visible\)/);
+assert.match(script, /document\.querySelectorAll\('\[data-story-reveal\]'\)/);
+assert.match(functions, /ugolini_group_about_666_refreshed/);
 assert.match(base, /--ugolini-sticky-top: calc\(var\(--ugolini-header-bottom, var\(--ugolini-header-height\)\) \+ 2\.75rem\);/);
 assert.equal((pages.match(/position: sticky; top: var\(--ugolini-sticky-top\)/g) || []).length, 7);
 assert.match(pages, /\.ugolini-wholesale-services__stage \{ position: sticky; top: max\(10svh, var\(--ugolini-sticky-top\)\)/);

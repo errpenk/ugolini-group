@@ -110,9 +110,9 @@
 
 /* Chi siamo keeps the animated axis, but uses a distinct editorial narrative. */
 .ugolini-timeline--about { counter-reset: about-chapter; background: transparent; }
-.ugolini-timeline--about header { max-width: 58rem; margin-inline: 0; text-align: left; }
-.ugolini-timeline--about header span { margin-inline: 0; }
-.ugolini-timeline--about header p { max-width: 42rem; margin: 1.25rem 0 0; color: var(--wp--preset--color--secondary-text); }
+.ugolini-timeline--about header { max-width: 58rem; margin-inline: auto; text-align: center; }
+.ugolini-timeline--about header span { margin-inline: auto; }
+.ugolini-timeline--about header p { max-width: 42rem; margin: 1.25rem auto 0; color: var(--wp--preset--color--secondary-text); }
 .ugolini-timeline--about article { min-height: 470px; align-items: center; counter-increment: about-chapter; }
 .ugolini-timeline--about article > div { position: relative; padding: 1rem 3rem 1rem 0; border: 0; background: transparent; text-align: left; }
 .ugolini-timeline--about article:nth-child(even) > div { padding: 1rem 0 1rem 3rem; }
