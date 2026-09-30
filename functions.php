@@ -916,6 +916,7 @@ function ugolini_group_enqueue_assets() {
 	};
 	launcher.addEventListener('click', () => {
 		const open = launcher.getAttribute('aria-expanded') === 'true';
+		setOpen(!open);
 		if (open) window.Tawk_API?.minimize?.();
 		else window.Tawk_API?.maximize?.();
 	});
