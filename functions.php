@@ -899,63 +899,67 @@ function ugolini_group_enqueue_assets() {
 	wp_add_inline_script(
 		'ugolini-group-interactions',
 		<<<'JS'
-(() => {
+
+(function () {
 	if (window.ugoliniTawkPositioning) return;
 	window.ugoliniTawkPositioning = true;
-	const desktop = matchMedia('(min-width: 768px)');
-	const widgets = { en: '1k3hpm76n', it: '1k3i2gojt', zh: '1k3i2i3lg' };
-	const language = (navigator.languages?.[0] || navigator.language || 'en').toLowerCase();
-	const widgetId = widgets[language.startsWith('it') ? 'it' : language.startsWith('zh') ? 'zh' : 'en'];
-	const launcher = document.createElement('button');
+	var widgets = { en: '1k3hpm76n', it: '1k3i2gojt', zh: '1k3i2i3lg' };
+	var language = ((navigator.languages && navigator.languages[0]) || navigator.language || 'en').toLowerCase();
+	var widgetId = widgets[language.indexOf('it') === 0 ? 'it' : language.indexOf('zh') === 0 ? 'zh' : 'en'];
+	var launcher = document.createElement('button');
 	launcher.className = 'ugolini-chat-launcher';
 	launcher.type = 'button';
 	launcher.setAttribute('aria-label', 'Apri la chat');
 	launcher.setAttribute('aria-expanded', 'false');
 	launcher.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg>';
-	const panel = document.createElement('div');
+	var panel = document.createElement('div');
 	panel.className = 'ugolini-chat-panel';
 	panel.hidden = true;
 	panel.innerHTML = '<button class="ugolini-chat-panel__close" type="button" aria-label="Chiudi la chat">×</button><iframe title="Ugolini customer support" loading="lazy"></iframe>';
-	document.body.append(launcher, panel);
-	const chatFrame = panel.querySelector('iframe');
-	const close = () => {
+	document.body.appendChild(launcher);
+	document.body.appendChild(panel);
+	var chatFrame = panel.querySelector('iframe');
+	var close = function () {
 		panel.hidden = true;
 		launcher.setAttribute('aria-expanded', 'false');
 		launcher.setAttribute('aria-label', 'Apri la chat');
 	};
-	launcher.addEventListener('click', () => {
-		if (!chatFrame.hasAttribute('src')) chatFrame.src = `https://tawk.to/chat/6ab93e3ca532fa3442d54ef6/${widgetId}`;
+	launcher.addEventListener('click', function () {
+		if (!chatFrame.hasAttribute('src')) chatFrame.src = 'https://tawk.to/chat/6ab93e3ca532fa3442d54ef6/' + widgetId;
 		panel.hidden = false;
 		launcher.setAttribute('aria-expanded', 'true');
 		launcher.setAttribute('aria-label', 'Chat aperta');
 	});
 	panel.querySelector('.ugolini-chat-panel__close').addEventListener('click', close);
-	let frameRequest = 0;
-	const position = () => {
+	var frameRequest = 0;
+	var position = function () {
 		frameRequest = 0;
-		const picker = document.querySelector('#gt_float_wrapper');
+		var picker = document.querySelector('#gt_float_wrapper');
 		if (picker) {
 			picker.style.setProperty('position', 'fixed', 'important');
 			picker.style.setProperty('right', 'auto', 'important');
 			picker.style.setProperty('bottom', 'max(1rem, var(--ugolini-gutter))', 'important');
 			picker.style.setProperty('left', 'max(1rem, var(--ugolini-gutter))', 'important');
 		}
-		const bottom = picker ? Math.max(20, innerHeight - picker.getBoundingClientRect().top + 12) : 85;
-		document.documentElement.style.setProperty('--ugolini-chat-bottom', `${bottom}px`);
-		if (desktop.matches) {
-			for (const frame of document.querySelectorAll('#min-widget > iframe, #max-widget > iframe, #branding-widget > iframe, #message-preview > iframe')) {
+		var bottom = picker ? Math.max(20, innerHeight - picker.getBoundingClientRect().top + 12) : 85;
+		document.documentElement.style.setProperty('--ugolini-chat-bottom', bottom + 'px');
+		if (window.innerWidth >= 768) {
+			var frames = document.querySelectorAll('#min-widget > iframe, #max-widget > iframe, #branding-widget > iframe, #message-preview > iframe');
+			for (var index = 0; index < frames.length; index += 1) {
+				var frame = frames[index];
 				if (frame.style.getPropertyValue('display') !== 'none' || frame.style.getPropertyPriority('display') !== 'important') {
 					frame.style.setProperty('display', 'none', 'important');
 				}
 			}
 		}
 	};
-	const schedule = () => { if (!frameRequest) frameRequest = requestAnimationFrame(position); };
+	var schedule = function () { if (!frameRequest) frameRequest = requestAnimationFrame(position); };
 	new MutationObserver(schedule).observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['style', 'class'] });
-	addEventListener('resize', schedule, { passive: true });
-	desktop.addEventListener?.('change', schedule);
-	window.visualViewport?.addEventListener('resize', schedule, { passive: true });
-	window.visualViewport?.addEventListener('scroll', schedule, { passive: true });
+	window.addEventListener('resize', schedule, false);
+	if (window.visualViewport) {
+		window.visualViewport.addEventListener('resize', schedule, false);
+		window.visualViewport.addEventListener('scroll', schedule, false);
+	}
 	schedule();
 })();
 JS,

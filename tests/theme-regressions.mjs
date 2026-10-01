@@ -55,11 +55,11 @@ assert.match(functions, /picker\.style\.setProperty\('left', 'max\(1rem, var\(--
 assert.match(functions, /innerHeight - picker\.getBoundingClientRect\(\)\.top \+ 12/);
 assert.match(functions, /attributeFilter: \['style', 'class'\]/);
 assert.doesNotMatch(functions, /visualViewport\.offsetTop/);
-assert.match(functions, /window\.visualViewport\?\.addEventListener\('resize', schedule/);
+assert.match(functions, /if \(window\.visualViewport\) \{\s+window\.visualViewport\.addEventListener\('resize', schedule/);
 assert.match(functions, /#min-widget > iframe, #max-widget > iframe, #branding-widget > iframe, #message-preview > iframe/);
 assert.match(functions, /className = 'ugolini-chat-launcher'/);
 assert.match(functions, /className = 'ugolini-chat-panel'/);
-assert.match(functions, /https:\/\/tawk\.to\/chat\/6ab93e3ca532fa3442d54ef6\/\$\{widgetId\}/);
+assert.match(functions, /https:\/\/tawk\.to\/chat\/6ab93e3ca532fa3442d54ef6\/' \+ widgetId/);
 assert.match(functions, /frame\.style\.setProperty\('display', 'none', 'important'\)/);
 assert.doesNotMatch(functions, /Tawk_API\?\.(?:maximize|minimize)/);
 assert.doesNotMatch(functions, /const maxWidget = document\.querySelector\('#max-widget'\)/);
