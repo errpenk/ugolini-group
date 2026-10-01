@@ -903,11 +903,33 @@ function ugolini_group_enqueue_assets() {
 	if (window.ugoliniTawkPositioning) return;
 	window.ugoliniTawkPositioning = true;
 	const desktop = matchMedia('(min-width: 768px)');
-	const launcher = document.createElement('div');
+	const widgets = { en: '1k3hpm76n', it: '1k3i2gojt', zh: '1k3i2i3lg' };
+	const language = (navigator.languages?.[0] || navigator.language || 'en').toLowerCase();
+	const widgetId = widgets[language.startsWith('it') ? 'it' : language.startsWith('zh') ? 'zh' : 'en'];
+	const launcher = document.createElement('button');
 	launcher.className = 'ugolini-chat-launcher';
-	launcher.setAttribute('aria-hidden', 'true');
+	launcher.type = 'button';
+	launcher.setAttribute('aria-label', 'Apri la chat');
+	launcher.setAttribute('aria-expanded', 'false');
 	launcher.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg>';
-	document.body.append(launcher);
+	const panel = document.createElement('div');
+	panel.className = 'ugolini-chat-panel';
+	panel.hidden = true;
+	panel.innerHTML = '<button class="ugolini-chat-panel__close" type="button" aria-label="Chiudi la chat">×</button><iframe title="Ugolini customer support" loading="lazy"></iframe>';
+	document.body.append(launcher, panel);
+	const chatFrame = panel.querySelector('iframe');
+	const close = () => {
+		panel.hidden = true;
+		launcher.setAttribute('aria-expanded', 'false');
+		launcher.setAttribute('aria-label', 'Apri la chat');
+	};
+	launcher.addEventListener('click', () => {
+		if (!chatFrame.hasAttribute('src')) chatFrame.src = `https://tawk.to/chat/6ab93e3ca532fa3442d54ef6/${widgetId}`;
+		panel.hidden = false;
+		launcher.setAttribute('aria-expanded', 'true');
+		launcher.setAttribute('aria-label', 'Chat aperta');
+	});
+	panel.querySelector('.ugolini-chat-panel__close').addEventListener('click', close);
 	let frameRequest = 0;
 	const position = () => {
 		frameRequest = 0;
@@ -920,71 +942,18 @@ function ugolini_group_enqueue_assets() {
 		}
 		const bottom = picker ? Math.max(20, innerHeight - picker.getBoundingClientRect().top + 12) : 85;
 		document.documentElement.style.setProperty('--ugolini-chat-bottom', `${bottom}px`);
-		const setStyle = (node, property, value) => {
-			if (node && (node.style.getPropertyValue(property) !== value || node.style.getPropertyPriority(property) !== 'important')) {
-				node.style.setProperty(property, value, 'important');
-			}
-		};
-		for (const frame of document.querySelectorAll('#min-widget > iframe, #max-widget > iframe, #branding-widget > iframe, #message-preview > iframe')) {
-			const set = (property, value) => setStyle(frame, property, value);
-			if (desktop.matches && frame.parentElement?.id === 'min-widget') {
-				set('position', 'fixed');
-				set('left', 'max(1rem, var(--ugolini-gutter))');
-				set('right', 'auto');
-				set('top', 'auto');
-				set('bottom', `${bottom}px`);
-				set('opacity', '0');
-				set('visibility', 'visible');
-				set('pointer-events', 'auto');
-				set('transform', 'none');
-				set('z-index', '1000005');
-			} else if (!desktop.matches && frame.parentElement?.id === 'max-widget') {
-				const width = `${innerWidth}px`;
-				const height = `${innerHeight}px`;
-				set('position', 'fixed');
-				set('left', '0px');
-				set('right', 'auto');
-				set('top', 'auto');
-				set('bottom', '0px');
-				set('transform', 'none');
-				set('width', width);
-				set('min-width', width);
-				set('max-width', width);
-				set('height', height);
-				set('min-height', height);
-				set('max-height', height);
-			}
-		}
 		if (desktop.matches) {
-			const maxWidget = document.querySelector('#max-widget');
-			const maxFrame = maxWidget?.querySelector(':scope > iframe');
-			if (maxWidget && maxFrame) {
-				const height = `${Math.min(520, Math.max(360, innerHeight - bottom - 90))}px`;
-				setStyle(maxWidget, 'position', 'fixed');
-				setStyle(maxWidget, 'left', '20px');
-				setStyle(maxWidget, 'right', 'auto');
-				setStyle(maxWidget, 'top', 'auto');
-				setStyle(maxWidget, 'bottom', `${bottom + 64}px`);
-				setStyle(maxWidget, 'width', '350px');
-				setStyle(maxWidget, 'height', height);
-				setStyle(maxWidget, 'z-index', '1000003');
-				setStyle(maxWidget, 'pointer-events', 'none');
-				setStyle(maxFrame, 'position', 'absolute');
-				setStyle(maxFrame, 'inset', '0px auto auto 0px');
-				setStyle(maxFrame, 'width', '350px');
-				setStyle(maxFrame, 'min-width', '350px');
-				setStyle(maxFrame, 'max-width', '350px');
-				setStyle(maxFrame, 'height', height);
-				setStyle(maxFrame, 'min-height', height);
-				setStyle(maxFrame, 'max-height', height);
-				setStyle(maxFrame, 'pointer-events', 'auto');
+			for (const frame of document.querySelectorAll('#min-widget > iframe, #max-widget > iframe, #branding-widget > iframe, #message-preview > iframe')) {
+				if (frame.style.getPropertyValue('display') !== 'none' || frame.style.getPropertyPriority('display') !== 'important') {
+					frame.style.setProperty('display', 'none', 'important');
+				}
 			}
 		}
 	};
 	const schedule = () => { if (!frameRequest) frameRequest = requestAnimationFrame(position); };
 	new MutationObserver(schedule).observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['style', 'class'] });
 	addEventListener('resize', schedule, { passive: true });
-	desktop.addEventListener('change', schedule);
+	desktop.addEventListener?.('change', schedule);
 	window.visualViewport?.addEventListener('resize', schedule, { passive: true });
 	window.visualViewport?.addEventListener('scroll', schedule, { passive: true });
 	schedule();
