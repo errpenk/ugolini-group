@@ -925,7 +925,21 @@ function ugolini_group_enqueue_assets() {
 		launcher.setAttribute('aria-label', 'Apri la chat');
 	};
 	launcher.addEventListener('click', function () {
-		if (!chatFrame.hasAttribute('src')) chatFrame.src = 'https://tawk.to/chat/6ab93e3ca532fa3442d54ef6/' + widgetId;
+		if (!chatFrame.hasAttribute('data-loaded')) {
+			var chatDocument = chatFrame.contentDocument;
+			var chatWindow = chatFrame.contentWindow;
+			chatDocument.open();
+			chatDocument.write('<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><style>html,body{width:100%;height:100%;margin:0;overflow:hidden}</style></head><body></body></html>');
+			chatDocument.close();
+			chatWindow.Tawk_API = { onLoad: function () { if (typeof chatWindow.Tawk_API.maximize === 'function') chatWindow.Tawk_API.maximize(); } };
+			chatWindow.Tawk_LoadStart = new Date();
+			var embed = chatDocument.createElement('script');
+			embed.async = true;
+			embed.src = 'https://embed.tawk.to/6ab93e3ca532fa3442d54ef6/' + widgetId;
+			embed.setAttribute('crossorigin', '*');
+			chatDocument.head.appendChild(embed);
+			chatFrame.setAttribute('data-loaded', 'true');
+		}
 		panel.hidden = false;
 		launcher.setAttribute('aria-expanded', 'true');
 		launcher.setAttribute('aria-label', 'Chat aperta');

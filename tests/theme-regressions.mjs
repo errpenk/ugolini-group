@@ -59,7 +59,8 @@ assert.match(functions, /if \(window\.visualViewport\) \{\s+window\.visualViewpo
 assert.match(functions, /#min-widget > iframe, #max-widget > iframe, #branding-widget > iframe, #message-preview > iframe/);
 assert.match(functions, /className = 'ugolini-chat-launcher'/);
 assert.match(functions, /className = 'ugolini-chat-panel'/);
-assert.match(functions, /https:\/\/tawk\.to\/chat\/6ab93e3ca532fa3442d54ef6\/' \+ widgetId/);
+assert.match(functions, /chatFrame\.contentDocument/);
+assert.match(functions, /https:\/\/embed\.tawk\.to\/6ab93e3ca532fa3442d54ef6\/' \+ widgetId/);
 assert.match(functions, /frame\.style\.setProperty\('display', 'none', 'important'\)/);
 assert.doesNotMatch(functions, /Tawk_API\?\.(?:maximize|minimize)/);
 assert.doesNotMatch(functions, /const maxWidget = document\.querySelector\('#max-widget'\)/);
