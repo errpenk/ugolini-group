@@ -924,8 +924,6 @@ function ugolini_group_enqueue_assets() {
 	document.body.appendChild(panel);
 	var chatFrame = panel.querySelector('iframe');
 	var mobile = window.matchMedia('(max-width: 767px)');
-	var mobileChatLoaded = false;
-	var pendingTopic = '';
 	var close = function () {
 		panel.hidden = true;
 		shell.hidden = false;
@@ -933,34 +931,12 @@ function ugolini_group_enqueue_assets() {
 		launcher.setAttribute('aria-label', 'Apri la chat');
 	};
 	var openMobile = function (topic) {
-		pendingTopic = topic || '';
+		if (!chatFrame.hasAttribute('data-loaded')) {
+			chatFrame.src = 'https://tawk.to/chat/6ab93e3ca532fa3442d54ef6/' + widgetId;
+			chatFrame.setAttribute('data-loaded', 'true');
+		}
+		panel.hidden = false;
 		shell.hidden = true;
-		window.Tawk_API = window.Tawk_API || {};
-		window.Tawk_API.onLoad = function () {
-			mobileChatLoaded = true;
-			if (typeof window.Tawk_API.maximize === 'function') window.Tawk_API.maximize();
-			if (pendingTopic && typeof window.Tawk_API.addEvent === 'function') window.Tawk_API.addEvent('quick-consultation', { topic: pendingTopic }, function () {});
-		};
-		window.Tawk_API.onChatMaximized = function () { shell.hidden = true; };
-		window.Tawk_API.onChatMinimized = function () {
-			if (typeof window.Tawk_API.hideWidget === 'function') window.Tawk_API.hideWidget();
-			shell.hidden = false;
-		};
-		window.Tawk_API.onChatHidden = function () { shell.hidden = false; };
-		if (mobileChatLoaded && typeof window.Tawk_API.maximize === 'function') {
-			window.Tawk_API.maximize();
-			if (pendingTopic && typeof window.Tawk_API.addEvent === 'function') window.Tawk_API.addEvent('quick-consultation', { topic: pendingTopic }, function () {});
-			return;
-		}
-		if (!document.querySelector('script[data-ugolini-tawk]')) {
-			window.Tawk_LoadStart = new Date();
-			var mobileEmbed = document.createElement('script');
-			mobileEmbed.async = true;
-			mobileEmbed.src = 'https://embed.tawk.to/6ab93e3ca532fa3442d54ef6/' + widgetId;
-			mobileEmbed.setAttribute('crossorigin', '*');
-			mobileEmbed.setAttribute('data-ugolini-tawk', '');
-			document.head.appendChild(mobileEmbed);
-		}
 	};
 	var open = function (topic) {
 		if (mobile.matches) {
@@ -1015,13 +991,6 @@ function ugolini_group_enqueue_assets() {
 			var frame = frames[index];
 			if (frame.style.getPropertyValue('display') !== 'none' || frame.style.getPropertyPriority('display') !== 'important') {
 				frame.style.setProperty('display', 'none', 'important');
-			}
-		}
-		var mobileFrame = mobile.matches ? document.querySelector('#max-widget > iframe') : null;
-		if (mobileFrame) {
-			var fullScreen = { position: 'fixed', top: '0px', right: '0px', bottom: '0px', left: '0px', width: '100vw', height: '100dvh', 'min-width': '100vw', 'min-height': '100dvh', 'max-width': '100vw', 'max-height': '100dvh', 'border-radius': '0px' };
-			for (var property in fullScreen) {
-				if (mobileFrame.style.getPropertyValue(property) !== fullScreen[property] || mobileFrame.style.getPropertyPriority(property) !== 'important') mobileFrame.style.setProperty(property, fullScreen[property], 'important');
 			}
 		}
 	};
