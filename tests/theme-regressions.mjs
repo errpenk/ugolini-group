@@ -61,6 +61,8 @@ assert.match(functions, /className = 'ugolini-chat-launcher'/);
 assert.match(functions, /desktop\.matches && frame\.parentElement\?\.id === 'min-widget'/);
 assert.match(functions, /set\('opacity', '0'\);\s+set\('visibility', 'visible'\);\s+set\('pointer-events', 'auto'\)/);
 assert.doesNotMatch(functions, /Tawk_API\?\.(?:maximize|minimize)/);
+assert.match(functions, /const maxWidget = document\.querySelector\('#max-widget'\)/);
+assert.match(functions, /setStyle\(maxWidget, 'width', '350px'\).+setStyle\(maxWidget, 'height', height\).+setStyle\(maxFrame, 'position', 'absolute'\)/s);
 assert.match(functions, /!desktop\.matches && frame\.parentElement\?\.id === 'max-widget'.+const width = `\$\{innerWidth\}px`.+const height = `\$\{innerHeight\}px`.+set\('left', '0px'\).+set\('bottom', '0px'\).+set\('min-width', width\).+set\('max-width', width\).+set\('min-height', height\).+set\('max-height', height\)/s);
 assert.doesNotMatch(functions, /else if \(frame\.parentElement\?\.id === 'max-widget'\) \{\s+set\('left', '20px'/);
 assert.match(responsive, /\.ugolini-wholesale-services \{ height: 560svh; padding-top: 1\.5rem; \}/);

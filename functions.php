@@ -920,12 +920,13 @@ function ugolini_group_enqueue_assets() {
 		}
 		const bottom = picker ? Math.max(20, innerHeight - picker.getBoundingClientRect().top + 12) : 85;
 		document.documentElement.style.setProperty('--ugolini-chat-bottom', `${bottom}px`);
+		const setStyle = (node, property, value) => {
+			if (node && (node.style.getPropertyValue(property) !== value || node.style.getPropertyPriority(property) !== 'important')) {
+				node.style.setProperty(property, value, 'important');
+			}
+		};
 		for (const frame of document.querySelectorAll('#min-widget > iframe, #max-widget > iframe, #branding-widget > iframe, #message-preview > iframe')) {
-			const set = (property, value) => {
-				if (frame.style.getPropertyValue(property) !== value || frame.style.getPropertyPriority(property) !== 'important') {
-					frame.style.setProperty(property, value, 'important');
-				}
-			};
+			const set = (property, value) => setStyle(frame, property, value);
 			if (desktop.matches && frame.parentElement?.id === 'min-widget') {
 				set('position', 'fixed');
 				set('left', 'max(1rem, var(--ugolini-gutter))');
@@ -952,6 +953,31 @@ function ugolini_group_enqueue_assets() {
 				set('height', height);
 				set('min-height', height);
 				set('max-height', height);
+			}
+		}
+		if (desktop.matches) {
+			const maxWidget = document.querySelector('#max-widget');
+			const maxFrame = maxWidget?.querySelector(':scope > iframe');
+			if (maxWidget && maxFrame) {
+				const height = `${Math.min(520, Math.max(360, innerHeight - bottom - 90))}px`;
+				setStyle(maxWidget, 'position', 'fixed');
+				setStyle(maxWidget, 'left', '20px');
+				setStyle(maxWidget, 'right', 'auto');
+				setStyle(maxWidget, 'top', 'auto');
+				setStyle(maxWidget, 'bottom', `${bottom + 64}px`);
+				setStyle(maxWidget, 'width', '350px');
+				setStyle(maxWidget, 'height', height);
+				setStyle(maxWidget, 'z-index', '1000003');
+				setStyle(maxWidget, 'pointer-events', 'none');
+				setStyle(maxFrame, 'position', 'absolute');
+				setStyle(maxFrame, 'inset', '0px auto auto 0px');
+				setStyle(maxFrame, 'width', '350px');
+				setStyle(maxFrame, 'min-width', '350px');
+				setStyle(maxFrame, 'max-width', '350px');
+				setStyle(maxFrame, 'height', height);
+				setStyle(maxFrame, 'min-height', height);
+				setStyle(maxFrame, 'max-height', height);
+				setStyle(maxFrame, 'pointer-events', 'auto');
 			}
 		}
 	};
