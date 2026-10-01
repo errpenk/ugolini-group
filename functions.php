@@ -914,7 +914,7 @@ function ugolini_group_enqueue_assets() {
 	launcher.type = 'button';
 	launcher.setAttribute('aria-label', 'Apri la chat');
 	launcher.setAttribute('aria-expanded', 'false');
-	launcher.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg>';
+	launcher.innerHTML = '<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3C8.82 3 3 8.28 3 14.8c0 3.7 1.9 7.02 4.88 9.18L6.5 29l5.18-2.55c1.36.42 2.81.65 4.32.65 7.18 0 13-5.28 13-12.3S23.18 3 16 3Z"/><path d="M10.5 17.5h11c-.76 3.1-2.66 4.65-5.5 4.65s-4.74-1.55-5.5-4.65Z" fill="#571418"/></svg>';
 	shell.appendChild(launcher);
 	var panel = document.createElement('div');
 	panel.className = 'ugolini-chat-panel';
@@ -923,13 +923,50 @@ function ugolini_group_enqueue_assets() {
 	document.body.appendChild(shell);
 	document.body.appendChild(panel);
 	var chatFrame = panel.querySelector('iframe');
+	var mobile = window.matchMedia('(max-width: 767px)');
+	var mobileChatLoaded = false;
+	var pendingTopic = '';
 	var close = function () {
 		panel.hidden = true;
 		shell.hidden = false;
 		launcher.setAttribute('aria-expanded', 'false');
 		launcher.setAttribute('aria-label', 'Apri la chat');
 	};
+	var openMobile = function (topic) {
+		pendingTopic = topic || '';
+		shell.hidden = true;
+		window.Tawk_API = window.Tawk_API || {};
+		window.Tawk_API.onLoad = function () {
+			mobileChatLoaded = true;
+			if (typeof window.Tawk_API.maximize === 'function') window.Tawk_API.maximize();
+			if (pendingTopic && typeof window.Tawk_API.addEvent === 'function') window.Tawk_API.addEvent('quick-consultation', { topic: pendingTopic }, function () {});
+		};
+		window.Tawk_API.onChatMaximized = function () { shell.hidden = true; };
+		window.Tawk_API.onChatMinimized = function () {
+			if (typeof window.Tawk_API.hideWidget === 'function') window.Tawk_API.hideWidget();
+			shell.hidden = false;
+		};
+		window.Tawk_API.onChatHidden = function () { shell.hidden = false; };
+		if (mobileChatLoaded && typeof window.Tawk_API.maximize === 'function') {
+			window.Tawk_API.maximize();
+			if (pendingTopic && typeof window.Tawk_API.addEvent === 'function') window.Tawk_API.addEvent('quick-consultation', { topic: pendingTopic }, function () {});
+			return;
+		}
+		if (!document.querySelector('script[data-ugolini-tawk]')) {
+			window.Tawk_LoadStart = new Date();
+			var mobileEmbed = document.createElement('script');
+			mobileEmbed.async = true;
+			mobileEmbed.src = 'https://embed.tawk.to/6ab93e3ca532fa3442d54ef6/' + widgetId;
+			mobileEmbed.setAttribute('crossorigin', '*');
+			mobileEmbed.setAttribute('data-ugolini-tawk', '');
+			document.head.appendChild(mobileEmbed);
+		}
+	};
 	var open = function (topic) {
+		if (mobile.matches) {
+			openMobile(topic);
+			return;
+		}
 		if (!chatFrame.hasAttribute('data-loaded')) {
 			var chatDocument = chatFrame.contentDocument;
 			var chatWindow = chatFrame.contentWindow;
@@ -972,7 +1009,8 @@ function ugolini_group_enqueue_assets() {
 		}
 		var bottom = picker ? Math.max(20, innerHeight - picker.getBoundingClientRect().top + 12) : 85;
 		document.documentElement.style.setProperty('--ugolini-chat-bottom', bottom + 'px');
-		var frames = document.querySelectorAll('#min-widget > iframe, #max-widget > iframe, #branding-widget > iframe, #message-preview > iframe');
+		var frameSelector = mobile.matches ? '#min-widget > iframe, #branding-widget > iframe, #message-preview > iframe' : '#min-widget > iframe, #max-widget > iframe, #branding-widget > iframe, #message-preview > iframe';
+		var frames = document.querySelectorAll(frameSelector);
 		for (var index = 0; index < frames.length; index += 1) {
 			var frame = frames[index];
 			if (frame.style.getPropertyValue('display') !== 'none' || frame.style.getPropertyPriority('display') !== 'important') {

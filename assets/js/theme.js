@@ -448,34 +448,6 @@ for (const nav of document.querySelectorAll('.ugolini-primary-navigation')) {
 })();
 
 (() => {
-	const propertyId = '6ab93e3ca532fa3442d54ef6';
-	const widgets = {
-		en: '1k3hpm76n',
-		it: '1k3i2gojt',
-		zh: '1k3i2i3lg',
-	};
-	const language = (navigator.languages?.[0] || navigator.language || 'en').toLowerCase();
-	const widgetId = widgets[language.startsWith('it') ? 'it' : language.startsWith('zh') ? 'zh' : 'en'];
-	let switched = widgetId === widgets.en;
-	const activateWidget = () => {
-		if (!switched && typeof window.Tawk_API?.switchWidget === 'function') {
-			switched = true;
-			window.Tawk_API.switchWidget({ propertyId, widgetId }, error => {
-				if (error) switched = false;
-			});
-		}
-	};
-
-	window.Tawk_API = window.Tawk_API || {};
-	const previousOnLoad = window.Tawk_API.onLoad;
-	window.Tawk_API.onLoad = function (...args) {
-		previousOnLoad?.apply(this, args);
-		activateWidget();
-	};
-	activateWidget();
-})();
-
-(() => {
 	const presets = [
 		['.ugolini-hero', ['https://ugolinigroup.com/wp-content/uploads/2026/08/8800-pesto-alla-genovese-ugolini-gourmet-10.jpg', 'https://ugolinigroup.com/wp-content/uploads/2026/08/8848-sugo-allarrabbiata-ugolini-gourmet-5.jpg']],
 		['.ugolini-catalogue-panel', ['https://ugolinigroup.com/wp-content/uploads/2026/08/8817-pesto-rosso-ugolini-gourmet-4.jpg', 'https://ugolinigroup.com/wp-content/uploads/2026/08/8855-pesto-vegano-ugolini-gourmet-8-scaled-1.jpg']],
