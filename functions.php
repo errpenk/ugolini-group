@@ -906,32 +906,40 @@ function ugolini_group_enqueue_assets() {
 	var widgets = { en: '1k3hpm76n', it: '1k3i2gojt', zh: '1k3i2i3lg' };
 	var language = ((navigator.languages && navigator.languages[0]) || navigator.language || 'en').toLowerCase();
 	var widgetId = widgets[language.indexOf('it') === 0 ? 'it' : language.indexOf('zh') === 0 ? 'zh' : 'en'];
+	var shell = document.createElement('div');
+	shell.className = 'ugolini-chat-shell';
+	shell.innerHTML = '<section class="ugolini-chat-welcome" aria-label="Assistenza Ugolini"><div class="ugolini-chat-welcome__message"><span class="ugolini-chat-welcome__wave" aria-hidden="true">👋</span><p>Ciao! Come possiamo aiutarti?</p><button class="ugolini-chat-welcome__close" type="button" aria-label="Chiudi il messaggio di benvenuto">×</button></div><div class="ugolini-chat-welcome__actions"><button type="button" data-chat-topic="Prodotti e ordini">Ho una domanda</button><button type="button" data-chat-topic="Ugolini Gourmet">Scopri di più</button></div></section>';
 	var launcher = document.createElement('button');
 	launcher.className = 'ugolini-chat-launcher';
 	launcher.type = 'button';
 	launcher.setAttribute('aria-label', 'Apri la chat');
 	launcher.setAttribute('aria-expanded', 'false');
 	launcher.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg>';
+	shell.appendChild(launcher);
 	var panel = document.createElement('div');
 	panel.className = 'ugolini-chat-panel';
 	panel.hidden = true;
 	panel.innerHTML = '<button class="ugolini-chat-panel__close" type="button" aria-label="Chiudi la chat">×</button><iframe title="Ugolini customer support" loading="lazy"></iframe>';
-	document.body.appendChild(launcher);
+	document.body.appendChild(shell);
 	document.body.appendChild(panel);
 	var chatFrame = panel.querySelector('iframe');
 	var close = function () {
 		panel.hidden = true;
+		shell.hidden = false;
 		launcher.setAttribute('aria-expanded', 'false');
 		launcher.setAttribute('aria-label', 'Apri la chat');
 	};
-	launcher.addEventListener('click', function () {
+	var open = function (topic) {
 		if (!chatFrame.hasAttribute('data-loaded')) {
 			var chatDocument = chatFrame.contentDocument;
 			var chatWindow = chatFrame.contentWindow;
 			chatDocument.open();
 			chatDocument.write('<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><style>html,body{width:100%;height:100%;margin:0;overflow:hidden}</style></head><body></body></html>');
 			chatDocument.close();
-			chatWindow.Tawk_API = { onLoad: function () { if (typeof chatWindow.Tawk_API.maximize === 'function') chatWindow.Tawk_API.maximize(); } };
+			chatWindow.Tawk_API = { onLoad: function () {
+				if (typeof chatWindow.Tawk_API.maximize === 'function') chatWindow.Tawk_API.maximize();
+				if (topic && typeof chatWindow.Tawk_API.addEvent === 'function') chatWindow.Tawk_API.addEvent('quick-consultation', { topic: topic }, function () {});
+			} };
 			chatWindow.Tawk_LoadStart = new Date();
 			var embed = chatDocument.createElement('script');
 			embed.async = true;
@@ -941,9 +949,16 @@ function ugolini_group_enqueue_assets() {
 			chatFrame.setAttribute('data-loaded', 'true');
 		}
 		panel.hidden = false;
+		shell.hidden = true;
 		launcher.setAttribute('aria-expanded', 'true');
 		launcher.setAttribute('aria-label', 'Chat aperta');
-	});
+	};
+	launcher.addEventListener('click', function () { open(''); });
+	shell.querySelector('.ugolini-chat-welcome__close').addEventListener('click', function () { shell.querySelector('.ugolini-chat-welcome').hidden = true; });
+	var topicButtons = shell.querySelectorAll('[data-chat-topic]');
+	for (var topicIndex = 0; topicIndex < topicButtons.length; topicIndex += 1) {
+		topicButtons[topicIndex].addEventListener('click', function () { open(this.getAttribute('data-chat-topic')); });
+	}
 	panel.querySelector('.ugolini-chat-panel__close').addEventListener('click', close);
 	var frameRequest = 0;
 	var position = function () {
@@ -957,13 +972,11 @@ function ugolini_group_enqueue_assets() {
 		}
 		var bottom = picker ? Math.max(20, innerHeight - picker.getBoundingClientRect().top + 12) : 85;
 		document.documentElement.style.setProperty('--ugolini-chat-bottom', bottom + 'px');
-		if (window.innerWidth >= 768) {
-			var frames = document.querySelectorAll('#min-widget > iframe, #max-widget > iframe, #branding-widget > iframe, #message-preview > iframe');
-			for (var index = 0; index < frames.length; index += 1) {
-				var frame = frames[index];
-				if (frame.style.getPropertyValue('display') !== 'none' || frame.style.getPropertyPriority('display') !== 'important') {
-					frame.style.setProperty('display', 'none', 'important');
-				}
+		var frames = document.querySelectorAll('#min-widget > iframe, #max-widget > iframe, #branding-widget > iframe, #message-preview > iframe');
+		for (var index = 0; index < frames.length; index += 1) {
+			var frame = frames[index];
+			if (frame.style.getPropertyValue('display') !== 'none' || frame.style.getPropertyPriority('display') !== 'important') {
+				frame.style.setProperty('display', 'none', 'important');
 			}
 		}
 	};
@@ -982,6 +995,16 @@ JS,
 	wp_enqueue_script( 'ugolini-group-catalogue-parity', get_theme_file_uri( 'assets/js/catalogue-parity.js' ), array(), null, true );
 }
 add_action( 'wp_enqueue_scripts', 'ugolini_group_enqueue_assets' );
+
+/** Keep Tawk's plugin settings, but replace its eager green launcher. */
+function ugolini_group_disable_tawk_auto_embed() {
+	global $tawkto;
+
+	if ( is_object( $tawkto ) ) {
+		remove_action( 'wp_footer', array( $tawkto, 'print_embed_code' ) );
+	}
+}
+add_action( 'after_setup_theme', 'ugolini_group_disable_tawk_auto_embed', 99 );
 
 /**
  * Group bundled patterns in the block inserter.

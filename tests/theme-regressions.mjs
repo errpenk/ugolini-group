@@ -59,9 +59,14 @@ assert.match(functions, /if \(window\.visualViewport\) \{\s+window\.visualViewpo
 assert.match(functions, /#min-widget > iframe, #max-widget > iframe, #branding-widget > iframe, #message-preview > iframe/);
 assert.match(functions, /className = 'ugolini-chat-launcher'/);
 assert.match(functions, /className = 'ugolini-chat-panel'/);
+assert.match(functions, /className = 'ugolini-chat-shell'/);
+assert.match(functions, /Ciao! Come possiamo aiutarti\?/);
+assert.match(functions, /data-chat-topic="Prodotti e ordini"/);
 assert.match(functions, /chatFrame\.contentDocument/);
 assert.match(functions, /https:\/\/embed\.tawk\.to\/6ab93e3ca532fa3442d54ef6\/' \+ widgetId/);
 assert.match(functions, /frame\.style\.setProperty\('display', 'none', 'important'\)/);
+assert.doesNotMatch(functions, /if \(window\.innerWidth >= 768\)/);
+assert.match(functions, /remove_action\( 'wp_footer', array\( \$tawkto, 'print_embed_code' \) \)/);
 assert.doesNotMatch(functions, /Tawk_API\?\.(?:maximize|minimize)/);
 assert.doesNotMatch(functions, /const maxWidget = document\.querySelector\('#max-widget'\)/);
 assert.match(responsive, /\.ugolini-wholesale-services \{ height: 560svh; padding-top: 1\.5rem; \}/);
@@ -69,6 +74,9 @@ assert.match(responsive, /\.ugolini-wholesale-services__stage[^}]+padding-block:
 assert.match(responsive, /\.ugolini-wholesale-services__heading \{ min-height: 7\.5rem; padding-top: \.75rem; \}/);
 assert.match(functions, /wp_add_inline_style\([\s\S]+#gt_float_wrapper \.gt_float_switcher\{[^}]+border:1px solid[^}]+border-radius:18px[^}]+box-shadow:none/s);
 assert.doesNotMatch(base, /#gt_float_wrapper \.gt_float_switcher/);
+assert.doesNotMatch(base, /@media \(max-width: 767px\) \{ \.ugolini-chat-launcher/);
+assert.match(base, /\.ugolini-chat-panel \{[^}]+bottom: var\(--ugolini-chat-bottom/s);
+assert.match(base, /\.ugolini-chat-launcher \{[^}]+background: #8ce8df;[^}]+color: #111;/s);
 assert.match(script, /shop\|products\?\|collections\?\|prodotto/);
 assert.doesNotMatch(script, /sessionStorage\.setItem\('ugolini-nav-from'/);
 assert.doesNotMatch(script, /createElement\('span'\).*ugolini-nav-indicator/s);
