@@ -903,33 +903,11 @@ function ugolini_group_enqueue_assets() {
 	if (window.ugoliniTawkPositioning) return;
 	window.ugoliniTawkPositioning = true;
 	const desktop = matchMedia('(min-width: 768px)');
-	const launcher = document.createElement('button');
+	const launcher = document.createElement('div');
 	launcher.className = 'ugolini-chat-launcher';
-	launcher.type = 'button';
-	launcher.setAttribute('aria-label', 'Apri la chat');
-	launcher.setAttribute('aria-expanded', 'false');
+	launcher.setAttribute('aria-hidden', 'true');
 	launcher.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg>';
 	document.body.append(launcher);
-	const setOpen = open => {
-		launcher.setAttribute('aria-expanded', String(open));
-		launcher.setAttribute('aria-label', open ? 'Chiudi la chat' : 'Apri la chat');
-	};
-	launcher.addEventListener('click', () => {
-		const open = launcher.getAttribute('aria-expanded') === 'true';
-		setOpen(!open);
-		if (open) window.Tawk_API?.minimize?.();
-		else window.Tawk_API?.maximize?.();
-	});
-	const chain = (name, handler) => {
-		const previous = window.Tawk_API?.[name];
-		window.Tawk_API = window.Tawk_API || {};
-		window.Tawk_API[name] = function (...args) {
-			previous?.apply(this, args);
-			handler();
-		};
-	};
-	chain('onChatMaximized', () => setOpen(true));
-	chain('onChatMinimized', () => setOpen(false));
 	let frameRequest = 0;
 	const position = () => {
 		frameRequest = 0;
@@ -949,8 +927,16 @@ function ugolini_group_enqueue_assets() {
 				}
 			};
 			if (desktop.matches && frame.parentElement?.id === 'min-widget') {
-				set('visibility', 'hidden');
-				set('pointer-events', 'none');
+				set('position', 'fixed');
+				set('left', 'max(1rem, var(--ugolini-gutter))');
+				set('right', 'auto');
+				set('top', 'auto');
+				set('bottom', `${bottom}px`);
+				set('opacity', '0');
+				set('visibility', 'visible');
+				set('pointer-events', 'auto');
+				set('transform', 'none');
+				set('z-index', '1000005');
 			} else if (!desktop.matches && frame.parentElement?.id === 'max-widget') {
 				const width = `${innerWidth}px`;
 				const height = `${innerHeight}px`;
