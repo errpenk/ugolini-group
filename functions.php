@@ -914,7 +914,7 @@ function ugolini_group_enqueue_assets() {
 	launcher.type = 'button';
 	launcher.setAttribute('aria-label', 'Apri la chat');
 	launcher.setAttribute('aria-expanded', 'false');
-	launcher.innerHTML = '<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3C8.82 3 3 8.28 3 14.8c0 3.7 1.9 7.02 4.88 9.18L6.5 29l5.18-2.55c1.36.42 2.81.65 4.32.65 7.18 0 13-5.28 13-12.3S23.18 3 16 3Z"/><path d="M10.5 17.5h11c-.76 3.1-2.66 4.65-5.5 4.65s-4.74-1.55-5.5-4.65Z" fill="#571418"/></svg>';
+	launcher.innerHTML = '<svg viewBox="0 0 800 800" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M400 26.2c-193.3 0-350 156.7-350 350 0 136.2 77.9 254.3 191.5 312.1 15.4 8.1 31.4 15.1 48.1 20.8l-16.5 63.5c-2 7.8 5.4 14.7 13 12.1l229.8-77.6c14.6-5.3 28.8-11.6 42.4-18.7C672 630.6 750 512.5 750 376.2c0-193.3-156.7-350-350-350zm211.1 510.7c-10.8 26.5-41.9 77.2-121.5 77.2-79.9 0-110.9-51-121.6-77.4-2.8-6.8 5-13.4 13.8-11.8 76.2 13.7 147.7 13 215.3.3 8.9-1.8 16.8 4.8 14 11.7z"/></svg>';
 	shell.appendChild(launcher);
 	var panel = document.createElement('div');
 	panel.className = 'ugolini-chat-panel';
@@ -924,6 +924,8 @@ function ugolini_group_enqueue_assets() {
 	document.body.appendChild(panel);
 	var chatFrame = panel.querySelector('iframe');
 	var mobile = window.matchMedia('(max-width: 767px)');
+	var mobileLoaded = false;
+	var openWhenReady = false;
 	var close = function () {
 		panel.hidden = true;
 		shell.hidden = false;
@@ -931,12 +933,31 @@ function ugolini_group_enqueue_assets() {
 		launcher.setAttribute('aria-label', 'Apri la chat');
 	};
 	var openMobile = function (topic) {
-		if (!chatFrame.hasAttribute('data-loaded')) {
-			chatFrame.src = 'https://tawk.to/chat/6ab93e3ca532fa3442d54ef6/' + widgetId;
-			chatFrame.setAttribute('data-loaded', 'true');
-		}
-		panel.hidden = false;
 		shell.hidden = true;
+		openWhenReady = true;
+		if (typeof window.Tawk_API?.maximize === 'function') {
+			window.Tawk_API.maximize();
+			return;
+		}
+		if (mobileLoaded) return;
+		mobileLoaded = true;
+		window.Tawk_API = window.Tawk_API || {};
+		window.Tawk_API.onLoad = function () {
+			schedule();
+			if (openWhenReady && typeof window.Tawk_API.maximize === 'function') window.Tawk_API.maximize();
+		};
+		window.Tawk_API.onChatMaximized = function () { shell.hidden = true; };
+		window.Tawk_API.onChatMinimized = function () {
+			if (typeof window.Tawk_API.hideWidget === 'function') window.Tawk_API.hideWidget();
+			shell.hidden = false;
+		};
+		window.Tawk_API.onChatHidden = function () { shell.hidden = false; };
+		window.Tawk_LoadStart = new Date();
+		var mobileEmbed = document.createElement('script');
+		mobileEmbed.id = 'ugolini-tawk';
+		mobileEmbed.async = true;
+		mobileEmbed.src = 'https://embed.tawk.to/6ab93e3ca532fa3442d54ef6/' + widgetId;
+		document.head.appendChild(mobileEmbed);
 	};
 	var open = function (topic) {
 		if (mobile.matches) {
@@ -985,11 +1006,20 @@ function ugolini_group_enqueue_assets() {
 		}
 		var bottom = picker ? Math.max(20, innerHeight - picker.getBoundingClientRect().top + 12) : 85;
 		document.documentElement.style.setProperty('--ugolini-chat-bottom', bottom + 'px');
-		var frameSelector = mobile.matches ? '#min-widget > iframe, #branding-widget > iframe, #message-preview > iframe' : '#min-widget > iframe, #max-widget > iframe, #branding-widget > iframe, #message-preview > iframe';
-		var frames = document.querySelectorAll(frameSelector);
+		var frames = document.querySelectorAll('#min-widget > iframe, #max-widget > iframe, #branding-widget > iframe, #message-preview > iframe');
 		for (var index = 0; index < frames.length; index += 1) {
 			var frame = frames[index];
-			if (frame.style.getPropertyValue('display') !== 'none' || frame.style.getPropertyPriority('display') !== 'important') {
+			if (frame.parentElement?.id === 'max-widget' && mobile.matches) {
+				var viewport = window.visualViewport;
+				var viewportWidth = Math.round(viewport?.width || innerWidth) + 'px';
+				var viewportHeight = Math.round(viewport?.height || innerHeight) + 'px';
+				var viewportLeft = Math.round(viewport?.offsetLeft || 0) + 'px';
+				var viewportTop = Math.round(viewport?.offsetTop || 0) + 'px';
+				var fullScreen = { position: 'fixed', left: viewportLeft, top: viewportTop, right: 'auto', bottom: 'auto', width: viewportWidth, 'min-width': viewportWidth, 'max-width': viewportWidth, height: viewportHeight, 'min-height': viewportHeight, 'max-height': viewportHeight, transform: 'none', 'border-radius': '0px' };
+				for (var property in fullScreen) {
+					if (frame.style.getPropertyValue(property) !== fullScreen[property] || frame.style.getPropertyPriority(property) !== 'important') frame.style.setProperty(property, fullScreen[property], 'important');
+				}
+			} else if (frame.style.getPropertyValue('display') !== 'none' || frame.style.getPropertyPriority('display') !== 'important') {
 				frame.style.setProperty('display', 'none', 'important');
 			}
 		}
