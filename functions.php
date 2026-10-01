@@ -1017,6 +1017,13 @@ function ugolini_group_enqueue_assets() {
 				frame.style.setProperty('display', 'none', 'important');
 			}
 		}
+		var mobileFrame = mobile.matches ? document.querySelector('#max-widget > iframe') : null;
+		if (mobileFrame) {
+			var fullScreen = { position: 'fixed', top: '0px', right: '0px', bottom: '0px', left: '0px', width: '100vw', height: '100dvh', 'min-width': '100vw', 'min-height': '100dvh', 'max-width': '100vw', 'max-height': '100dvh', 'border-radius': '0px' };
+			for (var property in fullScreen) {
+				if (mobileFrame.style.getPropertyValue(property) !== fullScreen[property] || mobileFrame.style.getPropertyPriority(property) !== 'important') mobileFrame.style.setProperty(property, fullScreen[property], 'important');
+			}
+		}
 	};
 	var schedule = function () { if (!frameRequest) frameRequest = requestAnimationFrame(position); };
 	new MutationObserver(schedule).observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['style', 'class'] });

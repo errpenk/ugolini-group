@@ -65,6 +65,8 @@ assert.match(functions, /data-chat-topic="Prodotti e ordini"/);
 assert.match(functions, /matchMedia\('\(max-width: 767px\)'\)/);
 assert.match(functions, /mobileEmbed\.setAttribute\('data-ugolini-tawk', ''\)/);
 assert.match(functions, /Tawk_API\.onChatMinimized/);
+assert.match(functions, /document\.querySelector\('#max-widget > iframe'\)/);
+assert.match(functions, /'max-height': '100dvh'/);
 assert.match(functions, /chatFrame\.contentDocument/);
 assert.match(functions, /https:\/\/embed\.tawk\.to\/6ab93e3ca532fa3442d54ef6\/' \+ widgetId/);
 assert.match(functions, /frame\.style\.setProperty\('display', 'none', 'important'\)/);
