@@ -47,12 +47,15 @@
 })();
 
 (() => {
-	const sections = [...document.querySelectorAll('.ugolini-footer-section')];
-	if (!sections.length) return;
-	const mobile = matchMedia('(max-width: 767px)');
-	const sync = () => sections.forEach(section => section.toggleAttribute('open', !mobile.matches));
-	sync();
+	const columns = document.querySelectorAll('.ugolini-footer-column');
+	if (!columns.length) return;
+	const mobile = matchMedia('(max-width: 680px)');
+	const sync = () => columns.forEach(column => { column.open = !mobile.matches; });
 	mobile.addEventListener('change', sync);
+	columns.forEach(column => column.querySelector('summary').addEventListener('click', event => {
+		if (!mobile.matches) event.preventDefault();
+	}));
+	sync();
 })();
 
 (() => {
