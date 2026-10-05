@@ -658,6 +658,7 @@ function ugolini_group_expand_legacy_shortcodes( $content ) {
 		'[ugolini_cooking_suggestions]'  => 'ugolini_group_cooking_suggestions_shortcode',
 		'[ugolini_events context="home"]' => static fn() => ugolini_group_events_shortcode( array( 'context' => 'home' ) ),
 		'[ugolini_events context="archive"]' => static fn() => ugolini_group_events_shortcode( array( 'context' => 'archive' ) ),
+		'[ugolini_news]'                 => 'ugolini_group_news_archive',
 	);
 	foreach ( $shortcodes as $token => $callback ) {
 		if ( false !== strpos( $content, $token ) ) {
@@ -1422,6 +1423,120 @@ function ugolini_group_events_shortcode( $attributes = array() ) {
 	return '<div class="ugolini-events-archive ugolini-section"><div class="alignwide">' . $html . '</div></div>';
 }
 add_shortcode( 'ugolini_events', 'ugolini_group_events_shortcode' );
+
+/** LuxurEat brand news live in Events but use the existing Blog article template. */
+function ugolini_group_register_news() {
+	register_post_type( 'ugolini_news', array(
+		'labels'       => array( 'name' => 'Notizie Eventi', 'singular_name' => 'Notizia Evento' ),
+		'public'       => true,
+		'has_archive'  => false,
+		'show_in_rest' => true,
+		'menu_icon'    => 'dashicons-megaphone',
+		'rewrite'      => array( 'slug' => 'events/notizie' ),
+		'supports'     => array( 'title', 'editor', 'excerpt', 'thumbnail', 'author' ),
+		'taxonomies'   => array( 'category' ),
+	) );
+}
+add_action( 'init', 'ugolini_group_register_news', 0 );
+
+function ugolini_group_news_data() {
+	$data = json_decode( (string) file_get_contents( get_theme_file_path( 'data/events.json' ) ), true );
+	return array_values( array_filter( is_array( $data ) ? $data : array(), static fn( $item ) => is_array( $item ) && ( $item['kind'] ?? '' ) === 'news' && ! empty( $item['id'] ) && ! empty( $item['title'] ) ) );
+}
+
+/** Keep article media on Ugolini, reusing a previously imported source image. */
+function ugolini_group_news_image( $url, $post_id ) {
+	if ( ! $url || ! wp_http_validate_url( $url ) || 'luxureat.cn' !== wp_parse_url( $url, PHP_URL_HOST ) ) return 0;
+	$existing = get_posts( array( 'post_type' => 'attachment', 'post_status' => 'inherit', 'fields' => 'ids', 'posts_per_page' => 1, 'meta_key' => '_ugolini_news_source', 'meta_value' => $url ) );
+	if ( $existing ) return (int) $existing[0];
+	require_once ABSPATH . 'wp-admin/includes/media.php';
+	require_once ABSPATH . 'wp-admin/includes/file.php';
+	require_once ABSPATH . 'wp-admin/includes/image.php';
+	$id = media_sideload_image( $url, $post_id, null, 'id' );
+	if ( is_wp_error( $id ) ) return 0;
+	update_post_meta( $id, '_ugolini_news_source', $url );
+	return (int) $id;
+}
+
+/** Import one article per administrator visit, so media processing stays bounded. */
+function ugolini_group_import_news() {
+	if ( ! current_user_can( 'manage_options' ) ) return;
+	if ( ! get_option( 'ugolini_group_news_701_initialized' ) ) {
+		flush_rewrite_rules( false );
+		update_option( 'ugolini_group_news_701_initialized', 1, false );
+	}
+	foreach ( ugolini_group_news_data() as $news ) {
+		$slug = sanitize_title( $news['id'] );
+		$existing = get_page_by_path( $slug, OBJECT, 'ugolini_news' );
+		if ( $existing && 'publish' === $existing->post_status ) {
+			if ( get_the_date( 'Y-m-d', $existing ) !== $news['date'] ) wp_update_post( array( 'ID' => $existing->ID, 'post_date' => $news['date'] . ' 12:00:00', 'edit_date' => true ) );
+			continue;
+		}
+		$terms = term_exists( 'Notizie', 'category' );
+		if ( ! $terms ) $terms = wp_insert_term( 'Notizie', 'category' );
+		$category = ! is_wp_error( $terms ) ? (int) ( is_array( $terms ) ? $terms['term_id'] : $terms ) : 0;
+		$post_id = $existing ? (int) $existing->ID : wp_insert_post( array(
+			'post_type' => 'ugolini_news', 'post_status' => 'draft', 'post_name' => $slug,
+			'post_title' => sanitize_text_field( $news['title'] ),
+			'post_excerpt' => sanitize_text_field( $news['intro'] ),
+			'post_date' => $news['date'] . ' 12:00:00',
+			'post_category' => $category ? array( $category ) : array(),
+			'comment_status' => 'closed', 'ping_status' => 'closed',
+		), true );
+		if ( is_wp_error( $post_id ) ) return;
+		update_post_meta( $post_id, '_ugolini_news_author', sanitize_text_field( $news['author'] ?? 'LuxurEat' ) );
+		update_post_meta( $post_id, '_ugolini_news_source', esc_url_raw( $news['sourceUrl'] ?? '' ) );
+		$images = array();
+		$cover_id = ugolini_group_news_image( $news['cardImage'] ?? '', $post_id );
+		if ( $cover_id ) {
+			set_post_thumbnail( $post_id, $cover_id );
+			$images[ $news['cardImage'] ] = wp_get_attachment_url( $cover_id );
+		}
+		$content = '<p class="ugolini-news-intro"><strong>' . esc_html( $news['intro'] ) . '</strong></p>';
+		foreach ( $news['opening'] ?? array() as $paragraph ) $content .= '<p>' . esc_html( $paragraph ) . '</p>';
+		foreach ( $news['sections'] ?? array() as $section ) {
+			$content .= '<h2>' . esc_html( $section['heading'] ) . '</h2>';
+			foreach ( $section['paragraphs'] ?? array() as $paragraph ) $content .= '<p>' . esc_html( $paragraph ) . '</p>';
+			foreach ( $section['media'] ?? array() as $media ) {
+				if ( 'video' === ( $media['type'] ?? '' ) && ! empty( $news['video'] ) ) {
+					$content .= '<figure class="wp-block-video"><video controls preload="none" poster="' . esc_url( $news['videoPoster'] ?? '' ) . '" src="' . esc_url( $news['video'] ) . '"></video></figure>';
+				} elseif ( ! empty( $media['src'] ) ) {
+					if ( ! isset( $images[ $media['src'] ] ) ) {
+						$id = ugolini_group_news_image( $media['src'], $post_id );
+						$images[ $media['src'] ] = $id ? wp_get_attachment_url( $id ) : $media['src'];
+					}
+					$content .= '<figure class="wp-block-image"><img src="' . esc_url( $images[ $media['src'] ] ) . '" alt="' . esc_attr( $media['alt'] ?? '' ) . '" loading="lazy"></figure>';
+				}
+			}
+		}
+		if ( ! empty( $news['sourceUrl'] ) ) $content .= '<p class="ugolini-news-source"><a href="' . esc_url( $news['sourceUrl'] ) . '" rel="noopener noreferrer" target="_blank">Fonte originale ↗</a></p>';
+		wp_update_post( array( 'ID' => $post_id, 'post_content' => wp_kses_post( $content ), 'post_status' => 'publish', 'post_date' => $news['date'] . ' 12:00:00', 'edit_date' => true ) );
+		return;
+	}
+}
+add_action( 'admin_init', 'ugolini_group_import_news', 30 );
+
+function ugolini_group_news_archive() {
+	$posts = get_posts( array( 'post_type' => 'ugolini_news', 'post_status' => 'publish', 'posts_per_page' => -1, 'orderby' => 'date', 'order' => 'DESC' ) );
+	$published = array();
+	foreach ( $posts as $post ) $published[ $post->post_name ] = $post;
+	$cards = '';
+	foreach ( ugolini_group_news_data() as $news ) {
+		$post = $published[ sanitize_title( $news['id'] ) ] ?? null;
+		$link = $post ? get_permalink( $post ) : ( $news['sourceUrl'] ?? '' );
+		if ( ! $link ) continue;
+		$image = $post && has_post_thumbnail( $post ) ? get_the_post_thumbnail( $post, 'large', array( 'loading' => 'lazy' ) ) : '<img src="' . esc_url( $news['cardImage'] ?? '' ) . '" alt="' . esc_attr( $news['title'] ) . '" loading="lazy">';
+		$cards .= '<article class="ugolini-news-card"><a href="' . esc_url( $link ) . '">' . $image . '<span class="ugolini-news-card__body"><time datetime="' . esc_attr( $news['date'] ?? '' ) . '">' . esc_html( $news['date'] ?? '' ) . '</time><h3>' . esc_html( $news['title'] ) . '</h3><p>' . esc_html( $news['intro'] ?? '' ) . '</p><span class="ugolini-news-card__link">Leggi la notizia →</span></span></a></article>';
+	}
+	if ( ! $cards ) return '';
+	return '<section class="ugolini-news-archive ugolini-section"><div class="alignwide"><div class="ugolini-section-heading"><div><p class="ugolini-eyebrow">LuxurEat</p><h2>Notizie dal gruppo</h2></div></div><div class="ugolini-news-grid">' . $cards . '</div></div></section>';
+}
+add_shortcode( 'ugolini_news', 'ugolini_group_news_archive' );
+
+add_filter( 'render_block_core/post-content', static function( $html ) {
+	if ( is_page( 'events' ) && ! str_contains( $html, 'ugolini-news-archive' ) && ! str_contains( $html, '[ugolini_news]' ) ) return $html . ugolini_group_news_archive();
+	return $html;
+} );
 
 /** Return the current product's first SureCart collection. */
 function ugolini_group_current_product_collection() {

@@ -202,7 +202,7 @@ body.admin-bar > header:has(.ugolini-site-header),
 body.admin-bar header.wp-block-template-part:has(.ugolini-site-header) { top: 0; }
 .has-overlay-header.admin-bar > header,
 .has-overlay-header.admin-bar .wp-site-blocks > header.wp-block-template-part { top: var(--wp-admin--admin-bar--height, 32px) !important; }
-.ugolini-breadcrumbs { position: static; z-index: 95; height: 0; min-height: 0; display: flex; align-items: center; overflow: hidden; border: 0 solid var(--wp--preset--color--border); background: rgb(247 243 238 / 97%); color: var(--wp--preset--color--text); opacity: 0; pointer-events: none; backdrop-filter: blur(14px); transition: height 220ms cubic-bezier(.22,1,.36,1), min-height 220ms cubic-bezier(.22,1,.36,1), opacity 220ms ease; }
+.ugolini-breadcrumbs { position: static; z-index: 95; height: 0; min-height: 0; display: flex; align-items: center; overflow: hidden; border: 0 solid var(--wp--preset--color--border); background: var(--wp--preset--color--background); color: var(--wp--preset--color--text); opacity: 0; pointer-events: none; transition: height 220ms cubic-bezier(.22,1,.36,1), min-height 220ms cubic-bezier(.22,1,.36,1), opacity 220ms ease; }
 .has-overlay-header .ugolini-breadcrumbs { position: absolute; top: 100%; right: 0; left: 0; }
 .ugolini-breadcrumbs.is-visible { height: 48px; min-height: 48px; border-top-width: 1px; border-bottom-width: 1px; opacity: 1; pointer-events: auto; }
 .ugolini-breadcrumbs.is-top-context { height: 48px; min-height: 48px; }

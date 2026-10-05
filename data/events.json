@@ -10,7 +10,12 @@
     "lead": "Parigi, arriviamo! 🇫🇷",
     "description": "Vieni a trovarci a SIAL Paris 2026 e scopri il mondo di LuxurEat, Truffleat, Caviareat e Ugolini Gourmet. Tartufi, caviale e l’eccellenza gastronomica italiana si incontrano per ispirare nuovi sapori, idee e opportunità di business.",
     "highlight": "Assapora l’eccellenza italiana. Ispira nuove opportunità.",
-    "brands": ["LuxurEat", "Truffleat", "Caviareat", "Ugolini Gourmet"]
+    "brands": [
+      "LuxurEat",
+      "Truffleat",
+      "Caviareat",
+      "Ugolini Gourmet"
+    ]
   },
   {
     "id": "sial-paris-2026-caviar",
@@ -23,6 +28,475 @@
     "lead": "Scopri l’eccellenza del caviale a SIAL Paris 2026.",
     "description": "Incontra TinCaviar e Caviareat e scopri una selezione dedicata al caviale premium, alla qualità e al mercato internazionale del food. Dai prodotti d’eccellenza alle nuove opportunità di business, vieni a trovarci a Parigi e scopri il mondo del caviale.",
     "highlight": "Assapora l’eccellenza. Scopri il caviale. Incontriamoci a Parigi.",
-    "brands": ["TinCaviar", "Caviareat"]
+    "brands": [
+      "TinCaviar",
+      "Caviareat"
+    ]
+  },
+  {
+    "kind": "news",
+    "id": "cifce-changsha-2026-spotlight",
+    "date": "2026-09-17",
+    "author": "CIFCE – China International Food & Catering Expo",
+    "title": "Focus sull’espositore: TRUFFLE EAT S.R.L. porta LuxurEat a Changsha",
+    "intro": "L’11ª China International Food & Catering Expo si terrà dal 18 al 20 settembre 2026 al Changsha International Convention and Exhibition Center. TRUFFLE EAT S.R.L. presenterà LuxurEat allo stand M10 del padiglione W2.",
+    "opening": [
+      "La China International Food & Catering Expo è una manifestazione importante per il commercio e la distribuzione alimentare in Cina. Dalla prima edizione del 2016 ha continuato a crescere, rafforzando il suo profilo professionale, commerciale e internazionale."
+    ],
+    "category": "Notizie",
+    "sourceUrl": "https://mp.weixin.qq.com/s/t6Qa2EmtE7wwcR1JIq9D5w",
+    "cardImage": "https://luxureat.cn/wp-content/themes/luxureat-wordpress-theme/assets/media/brand-news/cifce-changsha-2026.webp",
+    "video": null,
+    "videoPoster": null,
+    "sections": [
+      {
+        "heading": "La fiera",
+        "paragraphs": [
+          "L’11ª edizione si svolgerà dal 18 al 20 settembre 2026 al Changsha International Convention and Exhibition Center. Le aree professionali comprenderanno ristorazione, ingredienti, cereali e oli, caffè e bevande, preparazioni alimentari, prodotti importati e snack, condimenti, ristorazione intelligente, forniture alberghiere, attrezzature per produzione, confezionamento e cucina, franchising, agricoltura ecologica e prodotti trasformati.",
+          "La fiera occuperà circa 70.000 metri quadrati e ospiterà oltre 20 attività professionali, tra forum, concorsi, valutazioni e incontri commerciali. Sono attese più di 150.000 presenze."
+        ],
+        "media": [
+          {
+            "type": "image",
+            "src": "https://luxureat.cn/wp-content/themes/luxureat-wordpress-theme/assets/media/brand-news/cifce-changsha-2026.webp",
+            "alt": "The 11th China International Food and Catering Expo"
+          }
+        ]
+      },
+      {
+        "heading": "L’azienda",
+        "paragraphs": [
+          "Azienda: TRUFFLE EAT S.R.L.",
+          "Stand: M10, padiglione W2.",
+          "LuxurEat coniuga rispetto per la cultura gastronomica tradizionale, apertura e innovazione. Qualità, carattere distintivo e tracciabilità guidano la selezione dei prodotti. Collaboriamo con partner qualificati che condividono i nostri valori, seguendo principi di approvvigionamento responsabile e standard di produzione rigorosi."
+        ],
+        "media": [
+          {
+            "type": "image",
+            "src": "https://luxureat.cn/wp-content/themes/luxureat-wordpress-theme/assets/media/brand-news/cifce-brand-introduction.webp",
+            "alt": "LuxurEat brand introduction"
+          },
+          {
+            "type": "image",
+            "src": "https://luxureat.cn/wp-content/themes/luxureat-wordpress-theme/assets/media/brand-news/cifce-family-table.webp",
+            "alt": "LuxurEat Italian family table"
+          }
+        ]
+      },
+      {
+        "heading": "I prodotti",
+        "paragraphs": [
+          "LuxurEat affonda le proprie radici nella cultura gastronomica italiana, nello sviluppo dei prodotti e nella cura artigianale. La maggior parte delle specialità viene prodotta e confezionata in Italia. Caviale e altri ingredienti pregiati provengono da partner professionali selezionati in Italia e all’estero.",
+          "Questo approccio conserva l’autenticità dei sapori italiani e risponde alle esigenze dei mercati internazionali in termini di qualità e flessibilità della fornitura. Tra i prodotti presentati figurano olio al tartufo bianco, salsa al pomodoro e basilico, salsa al tartufo nero, salsa piccante al pomodoro, salsa ai funghi e pesto italiano."
+        ],
+        "media": [
+          {
+            "type": "image",
+            "src": "https://luxureat.cn/wp-content/themes/luxureat-wordpress-theme/assets/media/brand-news/cifce-truffle-sauce.webp",
+            "alt": "Ugolini truffle sauce products"
+          },
+          {
+            "type": "image",
+            "src": "https://luxureat.cn/wp-content/themes/luxureat-wordpress-theme/assets/media/brand-news/cifce-featured-products.webp",
+            "alt": "LuxurEat featured products"
+          },
+          {
+            "type": "image",
+            "src": "https://luxureat.cn/wp-content/themes/luxureat-wordpress-theme/assets/media/brand-news/cifce-pesto.webp",
+            "alt": "Ugolini Italian pesto"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "kind": "news",
+    "id": "roma-bar-show-2026",
+    "date": "2026-09-16",
+    "author": "arsial.lazio",
+    "title": "LuxurEat presenta TRUFFLEAT e CAVIAREAT al Roma Bar Show",
+    "intro": "Il gruppo LuxurEat ha partecipato al Roma Bar Show con TRUFFLEAT e CAVIAREAT, esplorando nuove possibilità per gli ingredienti italiani di alta qualità nella mixology contemporanea e nell’ospitalità internazionale.",
+    "opening": [],
+    "category": "Notizie",
+    "sourceUrl": "https://www.instagram.com/reel/DdWIa09AHPA/",
+    "cardImage": "https://luxureat.cn/wp-content/themes/luxureat-wordpress-theme/assets/media/brand-news/roma-bar-show-2026-cover.webp",
+    "video": "https://luxureat.cn/wp-content/themes/luxureat-wordpress-theme/assets/media/brand-news/roma-bar-show-2026.mp4?v=h264",
+    "videoPoster": "https://luxureat.cn/wp-content/themes/luxureat-wordpress-theme/assets/media/brand-news/roma-bar-show-2026-video-poster.jpg",
+    "sections": [
+      {
+        "heading": "Roma Bar Show",
+        "paragraphs": [
+          "Il Roma Bar Show riunisce aziende, professionisti e nuove tendenze del settore beverage e mixology. Con il sostegno di ARSIAL e Regione Lazio, LuxurEat ha partecipato a una collettiva di 13 aziende laziali, dedicata alla qualità dei prodotti, alla sicurezza alimentare e a esperienze beverage più inclusive."
+        ],
+        "media": [
+          {
+            "type": "video"
+          }
+        ]
+      },
+      {
+        "heading": "TRUFFLEAT e CAVIAREAT",
+        "paragraphs": [
+          "LuxurEat ha presentato TRUFFLEAT e CAVIAREAT, portando tartufo, caviale e altre specialità gastronomiche al dialogo con il mondo del beverage e della mixology. L’evento ha offerto l’occasione di esplorare nuove applicazioni nella ristorazione, nei bar e nell’ospitalità, incontrando professionisti e partner di diversi mercati."
+        ],
+        "media": []
+      },
+      {
+        "heading": "Produzione senza glutine e inclusività",
+        "paragraphs": [
+          "Un tema centrale della partecipazione collettiva è stato quello dei prodotti senza glutine e dell’inclusività. L’incontro tra prodotti sicuri e certificati senza glutine e il settore internazionale del beverage mostra come qualità, gusto e sicurezza alimentare possano creare esperienze accessibili a più consumatori.",
+          "Per LuxurEat, il Roma Bar Show è stato una vetrina e un’occasione di collegamento tra l’eccellenza alimentare italiana e i mercati internazionali di beverage, ospitalità e ristorazione. Il gruppo continuerà a sviluppare la presenza internazionale di TRUFFLEAT e CAVIAREAT attraverso qualità, cultura e collaborazione professionale."
+        ],
+        "media": []
+      }
+    ]
+  },
+  {
+    "kind": "news",
+    "id": "marca-china-2026-recap",
+    "date": "2026-09-14",
+    "author": "Truffleat Thailand",
+    "title": "Da Guangzhou a nuove esperienze gastronomiche globali: Truffleat, Luxureat e Ugolini a Marca China 2026",
+    "intro": "L’8 e il 9 settembre il team di Truffleat Thailand ha partecipato a Marca China Private Label Fair 2026 a Guangzhou, riunendo quattro marchi del gruppo in un unico spazio espositivo.",
+    "opening": [
+      "La fiera, ospitata al Guangzhou Poly World Trade Expo Centre, ha riunito alimentari, bevande, salute, bellezza, tecnologia, prodotti industriali e innovazioni. Truffleat, Caviareat, Luxureat e Ugolini hanno presentato insieme l’ampiezza dell’offerta del gruppo."
+    ],
+    "category": "Notizie",
+    "sourceUrl": "https://luxureat.cn/brand/#news-center",
+    "cardImage": "https://luxureat.cn/wp-content/themes/luxureat-wordpress-theme/assets/media/brand-news/marca-recap-hero.webp",
+    "video": null,
+    "videoPoster": null,
+    "sections": [
+      {
+        "heading": "Che cos’è Marca China e perché è importante?",
+        "paragraphs": [
+          "Marca China Private Label Fair è collegata a Marca by BolognaFiere, una delle principali fiere professionali europee dedicate alla marca del distributore. La manifestazione di Guangzhou estende questa rete, mettendo in contatto produttori di qualità con acquirenti asiatici e internazionali.",
+          "Giunta alla quinta edizione, Marca China riunisce oltre 500 stand di prodotti alimentari e non alimentari. Attira supermercati, distribuzione moderna, piattaforme di e-commerce, MCN e operatori di hotel, ristoranti e del più ampio settore HoReCa."
+        ],
+        "media": [
+          {
+            "type": "image",
+            "src": "https://luxureat.cn/wp-content/themes/luxureat-wordpress-theme/assets/media/brand-news/marca-recap-hero.webp",
+            "alt": "LuxurEat booth and Marca China 2026 poster"
+          },
+          {
+            "type": "image",
+            "src": "https://luxureat.cn/wp-content/themes/luxureat-wordpress-theme/assets/media/brand-news/marca-recap-booth.webp",
+            "alt": "Italian Pavilion and LuxurEat booth at Marca China"
+          }
+        ]
+      },
+      {
+        "heading": "Che cosa significano HoReCa e MCN?",
+        "paragraphs": [
+          "HO indica hotel, RE ristorante e CA café o catering. Una MCN è una rete o società intermediaria che gestisce e supporta gruppi di creatori di contenuti e influencer, soprattutto sulle piattaforme social."
+        ],
+        "media": [
+          {
+            "type": "image",
+            "src": "https://luxureat.cn/wp-content/themes/luxureat-wordpress-theme/assets/media/brand-news/marca-recap-visitors.webp",
+            "alt": "Visitors discovering products at the LuxurEat booth"
+          }
+        ]
+      },
+      {
+        "heading": "Due giorni di incontri",
+        "paragraphs": [
+          "Partecipare a una fiera internazionale di queste dimensioni significa più che allestire uno stand e vendere prodotti: è un’opportunità per costruire relazioni commerciali con acquirenti e distributori di tutto il mondo.",
+          "Il nostro stand ha accolto molti visitatori interessati a tartufi freschi, caviale, salse, oli e pasta. Con loro abbiamo discusso anche delle possibilità di portare i prodotti Truffleat in Cina e nei mercati vicini."
+        ],
+        "media": []
+      },
+      {
+        "heading": "Quattro marchi, un unico stand",
+        "paragraphs": [
+          "Riunire Truffleat, Caviareat, Luxureat e Ugolini è stata una scelta precisa: presentare il gruppo come partner completo per prodotti di alta qualità in diverse categorie, dagli ingredienti rari alle proposte lifestyle di fascia alta."
+        ],
+        "media": [
+          {
+            "type": "image",
+            "src": "https://luxureat.cn/wp-content/themes/luxureat-wordpress-theme/assets/media/brand-news/marca-recap-products.webp",
+            "alt": "Products from Truffleat, Caviareat, Luxureat and Ugolini"
+          }
+        ]
+      },
+      {
+        "heading": "Cosa abbiamo imparato dal mercato cinese",
+        "paragraphs": [
+          "L’esperienza diretta ci ha mostrato quanto consumatori e acquirenti cinesi attribuiscano crescente importanza alla trasparenza sull’origine dei prodotti e alla storia del marchio. È un approccio coerente con l’attenzione di Truffleat per la qualità e la competenza specialistica sul tartufo."
+        ],
+        "media": []
+      },
+      {
+        "heading": "Il prossimo passo di Truffleat",
+        "paragraphs": [
+          "La partecipazione a Marca China Private Label Fair 2026 rappresenta un’altra tappa e l’inizio di nuove opportunità di collaborazione. Ringraziamo tutte le persone che hanno visitato lo stand, scoperto i prodotti e parlato con il nostro team.",
+          "Per informazioni sui prodotti o su possibili collaborazioni, è possibile contattarci tramite Luxureat.cn, Xiaohongshu (LuxurEat) o Douyin (露意膳（上海）贸易有限公司)."
+        ],
+        "media": []
+      }
+    ]
+  },
+  {
+    "kind": "news",
+    "id": "marca-china-2026-countdown",
+    "date": "2026-09-01",
+    "author": "Marca China – Guangzhou International Private Label Fair",
+    "title": "Mancano sette giorni a Marca China: scopri i prodotti protagonisti",
+    "intro": "La Guangzhou International Private Label Fair riunisce espositori dei settori alimentare, bellezza, casa e prodotti per animali, offrendo nuove idee di selezione a rivenditori, marchi, e-commerce e buyer.",
+    "opening": [
+      "Dalle bevande al cocco senza zucchero, kombucha e polpette di manzo di Chaoshan all’olio extravergine di oliva e alla pizza surgelata; dalla cura dei capelli ai sieri alla vitamina C e alla cosmesi profumata, fino ai prodotti per la pulizia e per gli animali: si prepara una rassegna dedicata a qualità, innovazione e nuove tendenze di consumo."
+    ],
+    "category": "Notizie",
+    "sourceUrl": "https://mp.weixin.qq.com/s/X9CxFZIQIJQdjPiCqROGDg",
+    "cardImage": "https://luxureat.cn/wp-content/themes/luxureat-wordpress-theme/assets/media/brand-news/marca-countdown-products.webp",
+    "video": null,
+    "videoPoster": null,
+    "sections": [
+      {
+        "heading": "Categorie diverse e filiere di qualità",
+        "paragraphs": [
+          "La fiera riunisce espositori dell’alimentare, della bellezza e cura della persona, della casa, dei prodotti per animali e di altri settori, presentando novità, specialità e prodotti popolari con potenziale di mercato.",
+          "Dall’innovazione della filiera cinese alla qualità e ai sapori del Padiglione Italia, l’offerta propone nuove idee a rivenditori, marchi, e-commerce e buyer. È un’occasione per scoprire prodotti, individuare possibili bestseller, incontrare fornitori e valutare collaborazioni."
+        ],
+        "media": [
+          {
+            "type": "image",
+            "src": "https://luxureat.cn/wp-content/themes/luxureat-wordpress-theme/assets/media/brand-news/marca-countdown-products.webp",
+            "alt": "Marca China 2026 featured product preview"
+          }
+        ]
+      },
+      {
+        "heading": "Le salse LuxurEat",
+        "paragraphs": [
+          "LuxurEat unisce il rispetto per la cultura gastronomica tradizionale a un approccio aperto e innovativo, selezionando prodotti per qualità, carattere distintivo e tracciabilità. La fiera è un’occasione per scoprirli in anteprima."
+        ],
+        "media": [
+          {
+            "type": "image",
+            "src": "https://luxureat.cn/wp-content/themes/luxureat-wordpress-theme/assets/media/brand-news/marca-exhibitor-profile.webp",
+            "alt": "Marca China exhibitor profile"
+          },
+          {
+            "type": "image",
+            "src": "https://luxureat.cn/wp-content/themes/luxureat-wordpress-theme/assets/media/brand-news/marca-luxureat-sauce.webp",
+            "alt": "LuxurEat truffle sauce products"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "kind": "news",
+    "id": "marca-china-2026-italian-pavilion",
+    "date": "2026-08-27",
+    "author": "ITAGuangzhou",
+    "title": "Il Padiglione Italia debutta a Marca China 2026 con dieci aziende",
+    "intro": "L’Agenzia ICE parteciperà per la prima volta con un Padiglione Italia ufficiale, portando dieci aziende a Marca China 2026. LuxurEat sarà allo stand 1D04.",
+    "opening": [
+      "Marca China 2026 si terrà l’8 e il 9 settembre nel padiglione 1 del Poly World Trade Center Expo di Guangzhou. Sono previsti 10.000 metri quadrati di esposizione, oltre 300 produttori e più di 10.000 buyer professionali."
+    ],
+    "category": "Notizie",
+    "sourceUrl": "https://mp.weixin.qq.com/s/AaAbA-tySlYoQuU44FKW9g",
+    "cardImage": "https://luxureat.cn/wp-content/themes/luxureat-wordpress-theme/assets/media/brand-news/marca-italian-pavilion.webp",
+    "video": null,
+    "videoPoster": null,
+    "sections": [
+      {
+        "heading": "Il Padiglione Italia",
+        "paragraphs": [
+          "Una delle novità è la prima partecipazione dell’Agenzia ICE con un Padiglione Italia ufficiale di dieci aziende. I prodotti comprenderanno olio extravergine di oliva, caffè di qualità, pizza italiana, salse, formaggi, specialità al tartufo, snack da forno, conserve vegetali, piatti pronti e prodotti per la pulizia della casa.",
+          "Le aziende italiane intendono rafforzare i rapporti con rivenditori e distributori cinesi ed esplorare soluzioni personalizzate per il mercato locale."
+        ],
+        "media": [
+          {
+            "type": "image",
+            "src": "https://luxureat.cn/wp-content/themes/luxureat-wordpress-theme/assets/media/brand-news/marca-italian-pavilion.webp",
+            "alt": "Italian National Pavilion at Marca China 2026"
+          },
+          {
+            "type": "image",
+            "src": "https://luxureat.cn/wp-content/themes/luxureat-wordpress-theme/assets/media/brand-news/marca-italian-pavilion-poster.webp",
+            "alt": "Italian National Pavilion poster"
+          }
+        ]
+      },
+      {
+        "heading": "LuxurEat nel Padiglione Italia",
+        "paragraphs": [
+          "Stand: 1D04.",
+          "Azienda: LUXUREAT.",
+          "LuxurEat combina il rispetto per la cultura gastronomica tradizionale con apertura e innovazione. Selezioniamo i prodotti in base a qualità, unicità e tracciabilità, collaborando con partner qualificati che condividono i nostri valori e seguono principi di approvvigionamento responsabile e standard produttivi rigorosi."
+        ],
+        "media": [
+          {
+            "type": "image",
+            "src": "https://luxureat.cn/wp-content/themes/luxureat-wordpress-theme/assets/media/brand-news/marca-luxureat-logo.webp",
+            "alt": "LuxurEat brand mark"
+          }
+        ]
+      },
+      {
+        "heading": "I prodotti principali",
+        "paragraphs": [
+          "LuxurEat nasce dalla cultura gastronomica italiana, dallo sviluppo dei prodotti e dalla cura artigianale. Molte specialità sono prodotte e confezionate in Italia; caviale e altri ingredienti pregiati provengono da partner selezionati in Italia e all’estero, con attenzione al gusto autentico, alla qualità e alla flessibilità della fornitura."
+        ],
+        "media": [
+          {
+            "type": "image",
+            "src": "https://luxureat.cn/wp-content/themes/luxureat-wordpress-theme/assets/media/brand-news/marca-luxureat-sauce.webp",
+            "alt": "LuxurEat truffle sauce products"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "kind": "news",
+    "id": "marca-china-2026-taste-of-italy",
+    "date": "2026-08-18",
+    "author": "Marca China – Guangzhou International Private Label Fair",
+    "title": "Il gusto d’Italia a Marca China: tradizione e innovazione nel private label",
+    "intro": "Quando la lunga tradizione gastronomica italiana incontra l’evoluzione della domanda globale, nasce un dialogo tra sapore, qualità e innovazione.",
+    "opening": [
+      "Dall’olio mediterraneo alle salse tradizionali, dalla pizza surgelata al caffè, ai latticini e alle specialità alimentari: il Padiglione Italia riunirà aziende capaci di presentare sapori autentici, cura artigianale e moderne capacità produttive."
+    ],
+    "category": "Notizie",
+    "sourceUrl": "https://mp.weixin.qq.com/s/adZji0AWAVdNTQsF94_6NQ",
+    "cardImage": "https://luxureat.cn/wp-content/themes/luxureat-wordpress-theme/assets/media/brand-news/marca-taste-italy.webp",
+    "video": null,
+    "videoPoster": null,
+    "sections": [
+      {
+        "heading": "Dalle ricette tradizionali alla produzione moderna",
+        "paragraphs": [
+          "Dalla selezione degli ingredienti all’origine alle soluzioni personalizzate per la marca del distributore, il Padiglione Italia porterà specialità classiche e competenze di sviluppo e filiera per i mercati internazionali, creando opportunità per rivenditori, marchi e buyer professionali."
+        ],
+        "media": [
+          {
+            "type": "image",
+            "src": "https://luxureat.cn/wp-content/themes/luxureat-wordpress-theme/assets/media/brand-news/marca-taste-italy.webp",
+            "alt": "Italian Pavilion brands and products at Marca China"
+          }
+        ]
+      },
+      {
+        "heading": "LuxurEat",
+        "paragraphs": [
+          "LuxurEat coniuga rispetto per la cultura gastronomica tradizionale e apertura all’innovazione, scegliendo prodotti per qualità, sapori distintivi e tracciabilità.",
+          "L’azienda collabora con partner affidabili che condividono i suoi valori e seguono principi di approvvigionamento responsabile e standard produttivi rigorosi, per offrire sapori tradizionali, qualità affidabile ed esperienze innovative."
+        ],
+        "media": [
+          {
+            "type": "image",
+            "src": "https://luxureat.cn/wp-content/themes/luxureat-wordpress-theme/assets/media/brand-news/marca-luxureat-logo.webp",
+            "alt": "LuxurEat brand mark"
+          }
+        ]
+      },
+      {
+        "heading": "I prodotti",
+        "paragraphs": [
+          "Le salse LuxurEat affondano le radici nella cultura gastronomica italiana, nello sviluppo dei prodotti e nella cura artigianale. Molte specialità vengono prodotte e confezionate in Italia, mentre caviale e altri ingredienti pregiati provengono da partner selezionati in Italia e all’estero.",
+          "Luogo: Poly World Trade Center Expo, Guangzhou. Date: 8–9 settembre 2026."
+        ],
+        "media": [
+          {
+            "type": "image",
+            "src": "https://luxureat.cn/wp-content/themes/luxureat-wordpress-theme/assets/media/brand-news/marca-luxureat-sauce.webp",
+            "alt": "LuxurEat truffle sauce products"
+          }
+        ]
+      },
+      {
+        "heading": "Marca China",
+        "paragraphs": [
+          "Marca China 2026 è una fiera professionale dedicata al private label e alla collaborazione nelle filiere OEM/ODM. Si prevedono 10.000 metri quadrati espositivi, oltre 300 produttori e più di 10.000 visitatori professionali nei settori alimentare, casa, bellezza, animali e benessere."
+        ],
+        "media": [
+          {
+            "type": "image",
+            "src": "https://luxureat.cn/wp-content/themes/luxureat-wordpress-theme/assets/media/brand-news/marca-italian-pavilion.webp",
+            "alt": "Italian Pavilion at Marca China"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "kind": "news",
+    "id": "cicc-member-luxureat-2025",
+    "date": "2025-09-29",
+    "author": "China-Italy Chamber of Commerce (CICC)",
+    "title": "La Camera di Commercio Italiana in Cina presenta LuxurEat",
+    "intro": "Fondata da Roberto Ugolini, LuxurEat unisce oltre 25 anni di esperienza nei mercati asiatici a una profonda tradizione gastronomica italiana.",
+    "opening": [
+      "Originario di Roma, Ugolini ha lavorato per decenni in Asia, soprattutto in Thailandia, costruendo tra consumatori e operatori la fiducia nell’autenticità e nella qualità dei prodotti gastronomici italiani."
+    ],
+    "category": "Notizie",
+    "sourceUrl": "https://mp.weixin.qq.com/s/4yZIHxJ3SOVJSdzk-27Eag",
+    "cardImage": "https://luxureat.cn/wp-content/themes/luxureat-wordpress-theme/assets/media/brand-news/cicc-luxureat-logo.webp",
+    "video": null,
+    "videoPoster": null,
+    "sections": [
+      {
+        "heading": "Tradizione italiana e innovazione di prodotto",
+        "paragraphs": [
+          "LuxurEat si dedica alla selezione, produzione e distribuzione di specialità gastronomiche italiane di fascia alta: tartufi, caviale, salse, oli, condimenti e altri prodotti selezionati. I prodotti sono realizzati in Italia, con attenzione alla tradizione, alla cura artigianale e all’innovazione.",
+          "Ugolini collabora strettamente con la famiglia nello sviluppo dei prodotti, esplorando nuove proposte, comprese opzioni Kosher e adatte a consumatori vegani, per rispondere all’evoluzione delle preferenze alimentari."
+        ],
+        "media": [
+          {
+            "type": "image",
+            "src": "https://luxureat.cn/wp-content/themes/luxureat-wordpress-theme/assets/media/brand-news/cicc-luxureat-logo.webp",
+            "alt": "LuxurEat brand mark"
+          },
+          {
+            "type": "image",
+            "src": "https://luxureat.cn/wp-content/themes/luxureat-wordpress-theme/assets/media/brand-news/cicc-truffle-sauce.webp",
+            "alt": "Truffleat black truffle sauce"
+          }
+        ]
+      },
+      {
+        "heading": "Un ponte tra Italia e mercati globali",
+        "paragraphs": [
+          "Grazie all’esperienza nel commercio alimentare internazionale e nell’ospitalità, Roberto Ugolini ha costruito relazioni con chef, distributori e importatori in Asia e in Europa. Le sue competenze nello sviluppo dei mercati, nella logistica e nel posizionamento premium aiutano LuxurEat a collegare l’eccellenza italiana ai consumatori gastronomici internazionali.",
+          "LuxurEat si rivolge a chef, consumatori attenti alla qualità, importatori e ristorazione di alto livello. Il catalogo comprende tartufi freschi e conservati, oli e salse al tartufo, condimenti artigianali, caviale vegano, linee Kosher e conserve italiane, con attenzione al gusto, alla tracciabilità e all’autenticità."
+        ],
+        "media": [
+          {
+            "type": "image",
+            "src": "https://luxureat.cn/wp-content/themes/luxureat-wordpress-theme/assets/media/brand-news/cicc-truffleat-booth.webp",
+            "alt": "Truffleat booth and live tasting"
+          },
+          {
+            "type": "image",
+            "src": "https://luxureat.cn/wp-content/themes/luxureat-wordpress-theme/assets/media/brand-news/cicc-caviar-table.webp",
+            "alt": "Caviareat caviar presentation"
+          }
+        ]
+      },
+      {
+        "heading": "Un ponte tra tradizione e mercato",
+        "paragraphs": [
+          "LuxurEat è più di un marchio: collega la tradizione culinaria italiana ai mercati esteri del food di alta gamma. L’esperienza nella regione Asia-Pacifico, in particolare in Thailandia, offre conoscenze di mercato ai partner interessati a importazione, distribuzione e collaborazioni.",
+          "LuxurEat sta inoltre preparando l’ingresso nel mercato cinese, portando tartufi, caviale e specialità gastronomiche a nuovi consumatori interessati ai sapori italiani autentici."
+        ],
+        "media": [
+          {
+            "type": "image",
+            "src": "https://luxureat.cn/wp-content/themes/luxureat-wordpress-theme/assets/media/brand-news/cicc-smoked-sea-salt.webp",
+            "alt": "Truffleat smoked sea salt"
+          },
+          {
+            "type": "image",
+            "src": "https://luxureat.cn/wp-content/themes/luxureat-wordpress-theme/assets/media/brand-news/cicc-product-range.webp",
+            "alt": "LuxurEat, Truffleat and Caviareat product range"
+          }
+        ]
+      }
+    ]
   }
 ]

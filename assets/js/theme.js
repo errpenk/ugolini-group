@@ -89,6 +89,16 @@
 })();
 
 (() => {
+	const title = document.querySelector('.ugolini-product-information .alignwide > .ugolini-eyebrow');
+	const gallery = document.querySelector('.ugolini-product-gallery');
+	if (title && gallery) {
+		const updateProductImage = () => {
+			const image = gallery.querySelector('.swiper-slide-active img[src], .swiper-wrapper img[src], img[src]');
+			if (image) title.style.setProperty('--ugolini-sticky-image', `url("${image.currentSrc || image.src}")`);
+		};
+		updateProductImage();
+		new MutationObserver(updateProductImage).observe(gallery, { attributes: true, attributeFilter: ['class', 'src', 'srcset'], childList: true, subtree: true });
+	}
 	const visuals = document.querySelectorAll('.ugolini-faq-section > :first-child, .ugolini-product-information .alignwide > .ugolini-eyebrow, .ugolini-product-guide__visual');
 	if (!visuals.length) return;
 	if (!('IntersectionObserver' in window)) { visuals.forEach(visual => visual.classList.add('ugolini-image-revealed')); return; }
@@ -721,12 +731,12 @@ for (const nav of document.querySelectorAll('.ugolini-primary-navigation')) {
 			if (heading) heading.textContent = title;
 			if (paragraph) paragraph.textContent = copy;
 		}
-		let figure = article.querySelector(':scope > figure');
+		let figure = article.querySelector(':scope > figure, :scope > div > figure');
 		if (!figure) {
 			figure = document.createElement('figure');
 			figure.innerHTML = `<img src="${images[index]}" alt="" loading="lazy">`;
-			article.append(figure);
 		}
+		text?.append(figure);
 		figure.classList.add('ugolini-timeline-about-figure');
 		observer.observe(figure);
 	});
