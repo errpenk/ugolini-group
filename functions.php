@@ -881,19 +881,19 @@ function ugolini_group_enqueue_assets() {
 		'ugolini-group-surecart',
 		get_theme_file_uri( 'assets/css/surecart.css' ),
 		array( 'ugolini-group-footer' ),
-		null
+		filemtime( get_theme_file_path( 'assets/css/surecart.css' ) )
 	);
 	wp_enqueue_style(
 		'ugolini-group-responsive',
 		get_theme_file_uri( 'assets/css/responsive.css' ),
 		array( 'ugolini-group-surecart' ),
-		null
+		filemtime( get_theme_file_path( 'assets/css/responsive.css' ) )
 	);
 	wp_enqueue_style(
 		'ugolini-group-preview-parity',
 		get_theme_file_uri( 'assets/css/preview-parity.css' ),
 		array( 'ugolini-group-responsive' ),
-		null
+		filemtime( get_theme_file_path( 'assets/css/preview-parity.css' ) )
 	);
 	wp_enqueue_script( 'ugolini-group-interactions', get_theme_file_uri( 'assets/js/theme.js' ), array(), filemtime( get_theme_file_path( 'assets/js/theme.js' ) ), true );
 	wp_add_inline_script(
@@ -1041,7 +1041,7 @@ function ugolini_group_enqueue_assets() {
 JS,
 		'after'
 	);
-	wp_enqueue_script( 'ugolini-group-catalogue-parity', get_theme_file_uri( 'assets/js/catalogue-parity.js' ), array(), null, true );
+	wp_enqueue_script( 'ugolini-group-catalogue-parity', get_theme_file_uri( 'assets/js/catalogue-parity.js' ), array(), filemtime( get_theme_file_path( 'assets/js/catalogue-parity.js' ) ), true );
 }
 add_action( 'wp_enqueue_scripts', 'ugolini_group_enqueue_assets' );
 
