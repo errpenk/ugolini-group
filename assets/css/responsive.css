@@ -5,8 +5,30 @@
 	.ugolini-primary-navigation { justify-self: center; }
 	.ugolini-product-template,
 	:where(.wp-block-surecart-product-template) { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+	.ugolini-home-collections .ugolini-collection-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 	.ugolini-deal-rail :where(.ugolini-product-template, .preview-product-grid) { display: flex !important; }
 	.ugolini-product-columns { grid-template-columns: minmax(0, 1fr) minmax(360px, 0.9fr); gap: 2.5rem; }
+	.ugolini-footer-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+	.ugolini-footer-shop { width: 100% !important; }
+	.ugolini-footer-brand,
+	.preview-footer-brand { grid-column: 1 / -1; }
+	.ugolini-footer-social { grid-column: 1 / -1; }
+}
+
+@media (min-width: 768px) and (max-width: 1099px) {
+	.ugolini-header-inner { grid-template-columns: auto auto minmax(0, 1fr) auto; gap: 0.4rem; }
+	.ugolini-brand .wp-block-site-title a { width: 130px; }
+	.ugolini-primary-navigation .wp-block-navigation__container { gap: clamp(0.35rem, 0.8vw, 0.75rem); }
+	.ugolini-primary-navigation .wp-block-navigation-item__content,
+	.ugolini-mega-menu > summary { font-size: 0.625rem; letter-spacing: 0.06em; }
+	.ugolini-header-actions { grid-template-columns: repeat(3, 44px); gap: 0; }
+}
+
+@media (min-width: 768px) and (max-width: 950px) {
+	.ugolini-primary-navigation .wp-block-navigation__container { flex-wrap: nowrap; gap: 0.25rem; }
+	.ugolini-primary-navigation .wp-block-navigation-item__content,
+	.ugolini-mega-menu > summary { font-size: 0.56rem; letter-spacing: 0.03em; }
+	.ugolini-header-actions :where(a, button) { width: 36px; min-width: 36px; }
 }
 
 @media (max-width: 900px) {
@@ -28,43 +50,45 @@
 	:root { --ugolini-header-height: 66px; --ugolini-gutter: 14px; }
 	html { scroll-behavior: auto; }
 	.ugolini-section { padding-block: var(--wp--preset--spacing--section-mobile); }
+	.ugolini-collection-editorial-section { padding-block: 0; }
 	.ugolini-section-heading { grid-template-columns: 1fr; align-items: start; gap: 1rem; }
 	.ugolini-header-inner { grid-template-columns: 108px minmax(0, 1fr) 108px; gap: 0; }
 	.ugolini-header-inner > .wp-block-shortcode { display: none; }
 	.ugolini-header-inner .ugolini-mega-menu { display: none !important; }
-	.ugolini-primary-navigation .ugolini-mobile-shop-link { display: flex !important; }
-	.ugolini-primary-navigation .ugolini-mobile-shop-link.ugolini-has-page-submenu { display: grid !important; }
+	.ugolini-primary-navigation .ugolini-mobile-shop-link { display: grid !important; }
 	.ugolini-brand { grid-column: 2; grid-row: 1; justify-self: center; }
-	.ugolini-brand .wp-block-site-logo img { width: 145px; max-height: 50px; }
-	.ugolini-brand .wp-block-site-title a { width: 145px; height: 50px; }
+	.ugolini-brand .wp-block-site-logo img { width: clamp(118px, 33vw, 130px); max-height: 50px; }
+	.ugolini-brand .wp-block-site-title a { width: clamp(118px, 33vw, 130px); height: 50px; }
 	.ugolini-primary-navigation { grid-column: 1; grid-row: 1; align-self: stretch; justify-self: start; display: flex; align-items: center; }
 	.ugolini-header-actions { grid-column: 3; grid-row: 1; align-self: stretch; grid-template-columns: repeat(3, 34px); align-content: center; gap: 4px; justify-self: end; }
+	.ugolini-header-actions > * { display: inline-flex; }
 	.ugolini-header-actions > .wp-block-shortcode { display: contents; }
-	.ugolini-header-actions :where(.ugolini-search-open, .ugolini-header-icon, .wp-block-surecart-cart-menu-icon-button) { width: 34px; min-width: 34px; height: 44px; min-height: 44px; padding-inline: 0.3rem; }
-	.ugolini-primary-navigation .wp-block-navigation__responsive-container.is-menu-open { position: fixed !important; top: var(--ugolini-header-bottom) !important; right: 0 !important; bottom: 0 !important; left: 0 !important; z-index: 1000; width: 100vw !important; height: auto !important; max-height: none !important; padding: 1.5rem; overflow-y: auto; background: var(--wp--preset--color--background); color: var(--wp--preset--color--text); animation: none !important; transition: none !important; }
+	.ugolini-header-actions :where(.ugolini-search-open, .ugolini-header-icon, .sc-button, .wp-element-button) { width: 34px; min-width: 34px; height: 44px; min-height: 44px; padding-inline: 0.3rem; }
+	.ugolini-primary-navigation .wp-block-navigation__responsive-container.is-menu-open { position: fixed !important; top: calc(var(--ugolini-header-bottom) - var(--ugolini-submenu-offset, 0px)) !important; right: 0 !important; bottom: 0 !important; left: 0 !important; z-index: 1000; width: 100vw !important; height: auto !important; max-height: none !important; padding: 1.5rem 1.5rem calc(12rem + env(safe-area-inset-bottom)); overflow-y: auto; background: var(--wp--preset--color--background); color: var(--wp--preset--color--text); transition: top 220ms cubic-bezier(.22,1,.36,1); }
+	body:has(.ugolini-primary-navigation .wp-block-navigation__responsive-container.is-menu-open) .ugolini-breadcrumbs { display: none !important; }
+	body.ugolini-mobile-menu-open .ugolini-breadcrumbs { display: none !important; }
 	body.has-overlay-header:not(.is-scrolled) .ugolini-primary-navigation .wp-block-navigation__responsive-container.is-menu-open,
 	body.has-overlay-header:not(.is-scrolled) .ugolini-primary-navigation .wp-block-navigation__responsive-container.is-menu-open :where(a, button) { color: var(--wp--preset--color--text) !important; }
-	.ugolini-primary-navigation .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content { padding-top: 3.5rem; align-items: stretch; }
-	.ugolini-primary-navigation .wp-block-navigation__responsive-container-close,
-	.ugolini-primary-navigation .ugolini-submenu-toggle { width: 44px; min-width: 44px; height: 44px; min-height: 44px; display: grid !important; place-items: center; padding: 0; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
-	.ugolini-primary-navigation .wp-block-navigation__responsive-container-close svg { width: 24px; height: 24px; display: block; margin: 0; }
-	.ugolini-primary-navigation .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__container { position: static !important; inset: auto !important; width: 100%; max-height: none; display: flex; flex-direction: column; align-items: stretch; justify-content: flex-start !important; gap: 0; padding: 0; overflow: visible; border: 0; }
-	.ugolini-primary-navigation .wp-block-navigation-item { width: 100%; align-items: stretch; border: 0 !important; text-align: left; }
-	.ugolini-primary-navigation .wp-block-navigation-item__content { width: 100%; min-height: 64px; justify-content: flex-start !important; margin-inline: 0 !important; font-family: var(--wp--preset--font-family--display); font-size: 1.8rem; font-weight: 400; letter-spacing: -0.01em; text-align: left; text-transform: none; }
+	.ugolini-primary-navigation .wp-block-navigation__responsive-container-content { padding-top: 5rem; align-items: flex-start; }
+	.ugolini-primary-navigation .wp-block-navigation__container { width: 100%; align-items: stretch; gap: 0; }
+	.ugolini-primary-navigation .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__container > li { justify-content: flex-start !important; align-items: flex-start !important; text-align: left; }
+	.ugolini-primary-navigation .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__container > li > a { margin-inline: 0 !important; align-self: start; justify-content: flex-start; text-align: left; }
+	.ugolini-primary-navigation .wp-block-navigation-item { width: 100%; border-bottom: 1px solid var(--wp--preset--color--border); }
+	.ugolini-primary-navigation :where(.wp-block-navigation__container, ul) > .wp-block-navigation-item:last-of-type { border-bottom: 0 !important; }
+	.ugolini-primary-navigation .wp-block-navigation-item__content { width: 100%; min-height: 64px; font-family: var(--wp--preset--font-family--display); font-size: 1.8rem; font-weight: 400; letter-spacing: -0.01em; text-transform: none; }
 	.ugolini-primary-navigation #preview-menu.is-open > li > a { min-height: 64px; display: flex; align-items: center; font-family: var(--wp--preset--font-family--display); font-size: 1.8rem; font-weight: 400; letter-spacing: -.01em; text-transform: none; }
-	.ugolini-primary-navigation :where(.wp-block-navigation-item__content, a).is-current { position: relative; width: max-content !important; max-width: 100%; align-self: flex-start; justify-self: start; margin-inline: 0 !important; padding-bottom: .7rem; text-align: left; }
+	.ugolini-primary-navigation :where(.wp-block-navigation-item__content, a).is-current { position: relative; width: max-content !important; max-width: 100%; justify-self: start; padding-bottom: .7rem; }
 	.ugolini-primary-navigation :where(.wp-block-navigation-item__content, a).is-current::after { content: ""; position: absolute; right: 0; bottom: 2px; left: 0; width: auto; height: 2px; border-radius: 999px; background: currentColor; }
 	.ugolini-primary-navigation .ugolini-has-page-submenu { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 44px; align-items: center; }
-	.ugolini-primary-navigation .ugolini-has-page-submenu > :where(a, .wp-block-navigation-item__content) { width: auto; }
-	.ugolini-primary-navigation .ugolini-submenu-toggle { width: 44px; height: 44px; display: grid; place-items: center; padding: 0; border: 0; background: transparent; color: inherit; cursor: pointer; }
-	.ugolini-primary-navigation .ugolini-submenu-toggle::before { content: ""; width: 9px; height: 9px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: translateY(-2px) rotate(45deg); transition: none; }
-	.ugolini-primary-navigation .wp-block-navigation__responsive-container.is-menu-open .ugolini-submenu-toggle::before { transition: none; }
+	.ugolini-primary-navigation .ugolini-has-page-submenu > :where(a, .wp-block-navigation-item__content) { grid-column: 1; grid-row: 1; width: auto; }
+	.ugolini-primary-navigation .ugolini-submenu-toggle { grid-column: 2; grid-row: 1; width: 44px; height: 44px; display: grid; place-items: center; padding: 0; border: 0; background: transparent; color: inherit; cursor: pointer; }
+	.ugolini-primary-navigation .ugolini-submenu-toggle::before { content: ""; width: 9px; height: 9px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: translateY(-2px) rotate(45deg); transition: transform 180ms ease; }
 	.ugolini-primary-navigation .ugolini-submenu-toggle[aria-expanded="true"]::before { transform: translateY(2px) rotate(225deg); }
-	.ugolini-primary-navigation ul.ugolini-page-submenu { position: static; inset: auto; width: 100%; display: none; grid-column: 1 / -1; gap: 0; padding: 0 0 1rem 1rem; border: 0; background: transparent; box-shadow: none; }
+	.ugolini-primary-navigation ul.ugolini-page-submenu { position: static; inset: auto; width: 100%; display: none; grid-column: 1 / -1; grid-row: 2; gap: 0; padding: 0 0 1rem 1rem; border: 0; background: transparent; box-shadow: none; }
 	.ugolini-primary-navigation ul.ugolini-page-submenu.is-open { display: grid; }
 	.ugolini-primary-navigation .ugolini-page-submenu li { width: 100%; border: 0; }
 	.ugolini-primary-navigation :where(.ugolini-submenu-toggle, .ugolini-page-submenu a) { color: var(--wp--preset--color--text) !important; }
-	.ugolini-primary-navigation .ugolini-page-submenu a { width: max-content; max-width: 100%; min-height: 48px; display: flex; align-items: center; font-family: var(--wp--preset--font-family--interface); font-size: 1.05rem; font-weight: 500; letter-spacing: 0; line-height: 1.25; text-transform: none; }
+	.ugolini-primary-navigation .ugolini-page-submenu a { position: relative; z-index: 1; min-height: 48px; display: flex; align-items: center; pointer-events: auto; touch-action: manipulation; font-family: var(--wp--preset--font-family--interface); font-size: 1.05rem; font-weight: 500; letter-spacing: 0; line-height: 1.25; text-transform: none; }
 	.ugolini-primary-navigation :where(.wp-block-navigation-item__content, #preview-menu > li > a, .ugolini-page-submenu a) { transition: none !important; }
 	.ugolini-primary-navigation :where(.wp-block-navigation-item__content, #preview-menu > li > a, .ugolini-page-submenu a):hover { transform: none !important; }
 	.ugolini-primary-navigation :where(.wp-block-navigation-item__content, a).is-current:hover::after { transform: none; }
@@ -112,10 +136,6 @@
 	.ugolini-timeline article i { grid-column: 1; width: 46px; }
 	.ugolini-timeline article p,
 	.ugolini-timeline article:nth-child(even) p { margin-inline: 0; }
-	.ugolini-timeline--about article > div,
-	.ugolini-timeline--about article:nth-child(even) > div { padding: 1.35rem; }
-	.ugolini-timeline--about article figure,
-	.ugolini-timeline--about article:nth-child(even) figure { grid-column: 2; grid-row: 2; height: 220px; margin: 1.25rem 0 0; }
 	.ugolini-collection-editorial__media { min-height: 760px; aspect-ratio: auto; }
 	.ugolini-collection-editorial__content { grid-template-columns: 1fr; gap: 2rem; }
 	.ugolini-collection-editorial__media h2 { font-size: clamp(2.6rem, 13vw, 4.5rem); }
@@ -127,7 +147,7 @@
 	.ugolini-faq-layout { grid-template-columns: 1fr; gap: 2.5rem; }
 	.ugolini-faq-layout > :first-child { position: static; }
 	.ugolini-faq-section { grid-template-columns: 1fr; gap: 1.5rem; }
-	.ugolini-faq-section > :first-child { position: static; }
+	.ugolini-faq-section > :first-child { position: sticky; z-index: 1; top: calc(var(--ugolini-header-bottom, var(--ugolini-header-height)) + .5rem); padding-block: .5rem; background: var(--wp--preset--color--background); }
 	.ugolini-editorial-split--reverse .ugolini-editorial-copy { order: 2; }
 	.ugolini-editorial-media { min-height: 92vw; }
 	.ugolini-editorial-copy { padding: 3.5rem var(--wp--style--root--padding-right); }
@@ -193,7 +213,7 @@
 	.ugolini-product-guide > .alignwide { grid-template-columns: 1fr; gap: 2rem; }
 	.ugolini-product-guide__visual { position: static; grid-row: 1; }
 	.ugolini-b2b-partner__benefits { position: static; min-height: 0; }
-	:where(.ugolini-faq-section > :first-child, .ugolini-product-information .alignwide > .ugolini-eyebrow, .ugolini-product-guide__visual)::after { display: none; }
+	:where(.ugolini-faq-section > :first-child, .ugolini-product-information .alignwide > .ugolini-eyebrow, .ugolini-product-guide__visual)::after { height: clamp(160px, 38vw, 260px); }
 	.ugolini-product-story { grid-template-columns: 1fr; }
 	.ugolini-product-story__copy, .ugolini-catalogue-panel__copy, .ugolini-context-cta__copy { grid-template-columns: 1fr; gap: 1.5rem; align-content: center; }
 	.ugolini-quality-reviews { background-attachment: scroll; background-size: auto 130%; }
@@ -210,9 +230,8 @@
 	.ugolini-contact-intro { padding-bottom: 1rem; }
 	.ugolini-contact-form-section { padding-top: 1rem; }
 	.ugolini-b2b-form__row { grid-template-columns: 1fr; }
-	.ugolini-wholesale-services { height: 560svh; padding-top: 1.5rem; }
-	.ugolini-wholesale-services__stage { top: var(--ugolini-sticky-top); height: calc(100svh - var(--ugolini-sticky-top)); min-height: calc(100svh - var(--ugolini-sticky-top)); max-height: none; grid-template-rows: auto 330px auto 96px; align-content: start; gap: .65rem; padding-block: 2rem 1rem; overflow: visible; }
-	.ugolini-wholesale-services__heading { min-height: 7.5rem; padding-top: .75rem; }
+	.ugolini-wholesale-services { height: 560svh; }
+	.ugolini-wholesale-services__stage { top: 0; height: 100svh; min-height: 100svh; max-height: none; grid-template-rows: auto 330px auto 96px; gap: .65rem; padding-block: 2.25rem 1.25rem; }
 	.ugolini-wholesale-services__heading h2 { white-space: normal; }
 	.ugolini-wholesale-services__slides { min-height: 330px; }
 	.ugolini-wholesale-services__slides article { grid-template-columns: 3.5rem 1fr; align-content: center; }
@@ -237,30 +256,41 @@
 	.ugolini-wholesale-benefits li span { grid-column: 1 / -1; }
 	.ugolini-b2b-catalogue .ugolini-catalogue-panel { height: auto; aspect-ratio: 16 / 9; }
 	.ugolini-discovery-art { top: 2.5rem; left: 30%; width: 70%; height: 30%; }
+	.ugolini-footer-grid { grid-template-columns: 1fr 1fr; }
+	.ugolini-footer-grid > :first-child { grid-column: 1 / -1; }
+	.ugolini-footer-social { grid-column: 1 / -1; }
+	.ugolini-footer-social { position: static; }
+	.ugolini-footer-brand,
+	.preview-footer-brand { grid-template-columns: 1fr; gap: 1rem; }
+	.ugolini-footer-brand > :where(.wp-block-site-logo, .wp-block-site-title),
+	.preview-footer-brand > .preview-logo-image,
+	.ugolini-footer-brand > p,
+	.preview-footer-brand > p { grid-column: 1; grid-row: auto; }
+	.ugolini-footer-collection-links { grid-template-columns: 1fr; }
+	.ugolini-footer-bottom { flex-direction: column; }
+	.ugolini-footer-support { align-items: flex-start !important; text-align: left; }
+	.ugolini-footer-support .wp-block-navigation__container { align-items: flex-start !important; }
 }
 
 @media (max-width: 430px) {
-	.ugolini-range-list { grid-template-columns: 1fr; }
+	.ugolini-range-list,
+	.ugolini-footer-grid { grid-template-columns: 1fr; }
 	.ugolini-story-products { grid-template-columns: 1fr; }
+	.ugolini-footer-grid > :first-child { grid-column: auto; }
+	.ugolini-footer-brand,
+	.ugolini-footer-social { grid-column: auto; }
 }
 
 @media (max-width: 374px) {
 	:root { --ugolini-gutter: 12px; }
 	.ugolini-header-inner { grid-template-columns: 96px minmax(0, 1fr) 96px; gap: 0; }
-	.ugolini-brand .wp-block-site-title a { width: 126px; height: 56px; }
+	.ugolini-brand .wp-block-site-title a { width: 118px; height: 50px; }
 	.ugolini-header-actions { grid-template-columns: repeat(3, 30px); gap: 2px; }
-	.ugolini-header-actions :where(.ugolini-search-open, .ugolini-header-icon, .wp-block-surecart-cart-menu-icon-button) { width: 30px; min-width: 30px; }
+	.ugolini-header-actions :where(.ugolini-search-open, .ugolini-header-icon, .sc-button, .wp-element-button) { width: 30px; min-width: 30px; }
 	.ugolini-product-template,
 	:where(.wp-block-surecart-product-template) { gap: 1.1rem 0.75rem !important; }
 }
 
 @media (prefers-reduced-motion: reduce) {
 	*, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
-}
-
-/* Mouse hover only: touch scrolling must never synthesize a menu colour state. */
-@media (hover: hover) and (pointer: fine) {
-	body .ugolini-primary-navigation .wp-block-navigation__responsive-container.is-menu-open .ugolini-page-submenu a:hover,
-	body .ugolini-primary-navigation .ugolini-page-submenu a:hover,
-	body .ugolini-primary-navigation .wp-block-navigation-item__content:hover { color: var(--wp--preset--color--brand-dark) !important; }
 }

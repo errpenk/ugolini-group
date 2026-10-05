@@ -6,8 +6,8 @@
  * Keywords: hero, food, shop
  */
 ?>
-<!-- wp:cover {"url":"<?php echo esc_url( get_theme_file_uri( 'assets/images/home-hero-ugolini.jpeg' ) ); ?>","alt":"Selezione gastronomica Ugolini Gourmet","dimRatio":54,"overlayColor":"dark-section","isUserOverlayColor":true,"align":"full","className":"ugolini-hero"} -->
-<div class="wp-block-cover alignfull ugolini-hero"><span aria-hidden="true" class="wp-block-cover__background has-dark-section-background-color has-background-dim"></span><img class="wp-block-cover__image-background" alt="Selezione gastronomica Ugolini Gourmet" src="<?php echo esc_url( get_theme_file_uri( 'assets/images/home-hero-ugolini.jpeg' ) ); ?>" data-object-fit="cover"/>
+<!-- wp:cover {"url":"<?php echo esc_url( get_theme_file_uri( 'assets/images/home-hero-ugolini-latest.jpeg' ) ); ?>","alt":"Selezione gastronomica Ugolini Gourmet","dimRatio":54,"overlayColor":"dark-section","isUserOverlayColor":true,"align":"full","className":"ugolini-hero"} -->
+<div class="wp-block-cover alignfull ugolini-hero"><span aria-hidden="true" class="wp-block-cover__background has-dark-section-background-color has-background-dim"></span><img class="wp-block-cover__image-background" alt="Selezione gastronomica Ugolini Gourmet" src="<?php echo esc_url( get_theme_file_uri( 'assets/images/home-hero-ugolini-latest.jpeg' ) ); ?>" data-object-fit="cover"/>
 <div class="wp-block-cover__inner-container"><!-- wp:group {"align":"wide","className":"ugolini-hero-content","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignwide ugolini-hero-content"><!-- wp:paragraph {"className":"ugolini-eyebrow"} --><p class="ugolini-eyebrow">Eccellenze gastronomiche italiane</p><!-- /wp:paragraph -->
 <!-- wp:heading {"level":1,"fontSize":"hero"} --><h1 class="wp-block-heading has-hero-font-size">Scopri il gusto autentico italiano.</h1><!-- /wp:heading -->

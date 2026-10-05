@@ -1,19 +1,24 @@
 /* Editorial pages, company, B2B, catalogue, contact and product detail. */
-.ugolini-page-hero { padding-block: clamp(6rem, 11vw, 11rem); }
+.ugolini-page-hero { min-height: clamp(620px, 78svh, 860px); display: grid; place-content: center; padding-block: clamp(6rem, 11vw, 11rem); text-align: center; }
+.ugolini-page-hero:not(.ugolini-page-hero--image):not(.ugolini-events-hero) { padding-block: clamp(3rem, 6vw, 6rem); color: #fff; background: linear-gradient(rgb(23 23 20 / 54%), rgb(23 23 20 / 54%)), url('../images/home-hero-ugolini.jpeg') center / cover no-repeat; }
+.ugolini-page-hero:not(.ugolini-page-hero--image):not(.ugolini-events-hero) :where(h1, h2, p) { color: inherit; }
 .ugolini-page-hero h1 { max-width: 13ch; margin-bottom: 1.75rem; font-size: clamp(3.5rem, 7vw, 6.5rem); }
 .ugolini-page-hero p:last-child { max-width: 48rem; font-size: 1.08rem; }
 .ugolini-page-hero--dark { background: var(--wp--preset--color--dark-section); color: var(--wp--preset--color--white); }
-.ugolini-page-hero--image.wp-block-cover { width: 100% !important; max-width: none !important; height: auto; min-height: clamp(620px, 78svh, 860px); display: flex; align-items: flex-end; margin: 0 !important; padding-block: 0; color: var(--wp--preset--color--white); }
+.ugolini-page-hero--image.wp-block-cover { width: 100% !important; max-width: none !important; height: auto; min-height: clamp(620px, 78svh, 860px); display: flex; align-items: center; margin: 0 !important; padding-block: 0; color: var(--wp--preset--color--white); }
+.ugolini-page-hero--image.wp-block-cover > .wp-block-cover__inner-container { width: 100%; display: flex; align-items: center; justify-content: center; text-align: center; }
+.ugolini-page-hero--image.wp-block-cover > .wp-block-cover__inner-container { margin-inline: auto; }
 .ugolini-page-hero--image .wp-block-cover__image-background { object-position: center; }
 .ugolini-page-hero.wp-block-cover { padding: 0; }
-.ugolini-page-hero--image .ugolini-page-hero-content { width: min(calc(100% - (2 * var(--ugolini-gutter))), var(--ugolini-container)) !important; max-width: var(--ugolini-container) !important; margin-inline: auto !important; padding: clamp(4rem, 8vw, 7rem) 0; }
+.ugolini-page-hero--image .ugolini-page-hero-content { width: min(calc(100% - (2 * var(--ugolini-gutter))), var(--ugolini-container)) !important; max-width: var(--ugolini-container) !important; display: flex; flex-direction: column; align-items: center; margin-inline: auto !important; padding: clamp(4rem, 8vw, 7rem) 0; }
 .ugolini-page-hero--image .ugolini-page-hero-content > * { max-width: 48rem; }
-.ugolini-page-hero-content > * { margin-inline: 0 !important; margin-block-start: 0 !important; }
+.ugolini-page-hero-content > * { margin-inline: auto !important; margin-block-start: 0 !important; }
+.ugolini-page-hero-content :where(h1, h2, p, .wp-block-buttons) { text-align: center !important; }
+.ugolini-page-hero:not(.wp-block-cover) > .ugolini-page-hero-content { width: min(calc(100% - (2 * var(--ugolini-gutter))), var(--ugolini-container)); margin-inline: auto !important; text-align: center; }
 .ugolini-page-hero-content > p:last-child { margin-bottom: 1em; }
 .ugolini-page-hero--image :where(h1, h2, h3, p, .ugolini-eyebrow) { color: var(--wp--preset--color--white) !important; }
-.ugolini-events-hero { width: 100% !important; max-width: none !important; min-height: clamp(620px, 78svh, 860px); display: grid; align-content: end; margin: 0 !important; padding-block: 0; color: #fff; background: linear-gradient(90deg, rgb(0 0 0 / 72%), rgb(0 0 0 / 20%)), url('../images/events/sial-paris-2026-ugolini.png') center 44% / cover no-repeat; }
-.ugolini-events-hero .ugolini-page-hero-content { width: min(calc(100% - (2 * var(--ugolini-gutter))), var(--ugolini-container)) !important; max-width: var(--ugolini-container) !important; margin-inline: auto !important; padding: clamp(4rem, 8vw, 7rem) 0; }
-.ugolini-events-hero .ugolini-page-hero-content > * { max-width: 48rem; }
+.ugolini-events-hero { min-height: clamp(620px, 78svh, 860px); display: grid; align-content: center; color: #fff; background: linear-gradient(90deg, rgb(0 0 0 / 72%), rgb(0 0 0 / 20%)), url('../images/events/sial-paris-2026-ugolini.png') center 44% / cover no-repeat; }
+.ugolini-events-hero .ugolini-page-hero-content { width: 100%; }
 .ugolini-events-hero :where(h1, p, .ugolini-eyebrow) { color: #fff !important; }
 
 .ugolini-intro-grid,
@@ -75,8 +80,11 @@
 .ugolini-contact-form button:hover { background: var(--wp--preset--color--text); color: var(--wp--preset--color--white); }
 .ugolini-contact-form > p { margin: -1rem 0 0; color: var(--wp--preset--color--secondary-text); font-size: 0.82rem; text-align: center; }
 
-.ugolini-collection-editorial-section { padding-block: 0 !important; overflow: hidden; }
-.ugolini-collection-editorial-section + .ugolini-professional-assurances { margin-block-start: 0 !important; }
+.ugolini-collection-editorial-section { padding-block: 0; overflow: hidden; }
+.ugolini-products-section + .ugolini-collection-editorial-section { margin-block-start: 0 !important; padding-block-start: 0 !important; background: #fff; }
+.ugolini-products-section + .ugolini-collection-editorial-section > .ugolini-collection-editorial { margin-block-start: 0 !important; }
+.ugolini-collection-editorial-section > .ugolini-collection-editorial { margin-block-start: 0 !important; }
+.ugolini-collection-editorial[hidden] { display: none !important; }
 .ugolini-collection-editorial,
 .preview-collection-editorials { width: 100vw !important; max-width: none !important; margin-left: calc(50% - 50vw) !important; }
 .preview-collection-editorials .ugolini-collection-editorial { width: 100%; margin-left: 0; }
@@ -89,6 +97,8 @@
 .ugolini-collection-editorial__intro > p { margin: 0 0 1.25rem; font-family: var(--wp--preset--font-family--display); font-size: clamp(1.35rem, 2.1vw, 2.25rem); line-height: 1.12; }
 .ugolini-collection-editorial details { border-top: 1px solid rgb(255 255 255 / 52%); border-bottom: 1px solid rgb(255 255 255 / 52%); }
 .ugolini-collection-editorial summary { padding-block: 1.25rem; cursor: pointer; font-weight: 700; letter-spacing: 0.06em; list-style: none; text-transform: uppercase; }
+.ugolini-collection-editorial summary:hover,
+.ugolini-collection-editorial summary:focus-visible { color: #fff; }
 .ugolini-collection-editorial summary::after { content: "+"; float: right; }
 .ugolini-collection-editorial details[open] summary::after { content: "−"; }
 .ugolini-collection-editorial details p { max-width: 64ch; margin-top: 0; padding-bottom: 1rem; color: rgb(255 255 255 / 88%); }
@@ -96,8 +106,8 @@
 
 .ugolini-product-page { padding-block: clamp(3rem, 6vw, 7rem); }
 .ugolini-product-columns { gap: clamp(2rem, 5vw, 6.5rem); align-items: start; }
-.ugolini-product-gallery { position: sticky; top: var(--ugolini-sticky-top); align-self: start; min-width: 0; }
-.ugolini-product-summary { position: sticky; top: var(--ugolini-sticky-top); min-width: 0; }
+.ugolini-product-gallery { position: sticky; top: calc(var(--ugolini-header-height) + 2rem); align-self: start; min-width: 0; }
+.ugolini-product-summary { position: sticky; top: calc(var(--ugolini-header-height) + 2rem); min-width: 0; }
 .ugolini-product-summary > * + * { margin-top: 1.25rem; }
 .ugolini-product-summary :where(h1, .wp-block-surecart-product-title) { margin-block: 0; font-size: clamp(2.6rem, 4.4vw, 4.8rem); line-height: 1.05; }
 .ugolini-product-price { font-size: 1.3rem; font-weight: 650; }
@@ -107,25 +117,10 @@
 .ugolini-product-information .wp-block-post-content { max-width: 56rem; }
 .ugolini-product-information .wp-block-post-content h2 { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--wp--preset--color--border); font-size: clamp(1.75rem, 3vw, 2.5rem); }
 .ugolini-related-products { background: var(--wp--preset--color--background); }
+.ugolini-related-products [data-random-products] { width: min(calc(100% - (2 * var(--ugolini-gutter))), var(--ugolini-container)); margin-inline: auto; }
+.ugolini-related-products [data-random-products] > article:nth-child(n+5) { display: none; }
 
-/* Chi siamo keeps the animated axis, but uses a distinct editorial narrative. */
-.ugolini-timeline--about { counter-reset: about-chapter; background: transparent; }
-.ugolini-timeline.ugolini-timeline--about .ugolini-timeline__inner > header { max-width: 58rem; margin-inline: auto; text-align: center; }
-.ugolini-timeline.ugolini-timeline--about .ugolini-timeline__inner > header span { margin-inline: auto; }
-.ugolini-timeline.ugolini-timeline--about .ugolini-timeline__inner > header p { max-width: 42rem; margin: 1.25rem auto 0; text-align: center; color: var(--wp--preset--color--secondary-text); }
-.ugolini-timeline--about article { min-height: 470px; align-items: center; counter-increment: about-chapter; }
-.ugolini-timeline--about article > div { position: relative; padding: 1rem 3rem 1rem 0; border: 0; background: transparent; text-align: left; }
-.ugolini-timeline--about article:nth-child(even) > div { padding: 1rem 0 1rem 3rem; }
-.ugolini-timeline--about article > div::before { content: "0" counter(about-chapter); display: block; margin-bottom: 1.25rem; color: var(--wp--preset--color--brand-dark); font-family: var(--wp--preset--font-family--interface); font-size: .72rem; font-weight: 700; letter-spacing: .16em; }
-.ugolini-timeline--about article p,
-.ugolini-timeline--about article:nth-child(even) p { margin-inline: 0; }
-.ugolini-timeline--about article figure { grid-column: 3; grid-row: 1; height: 360px; margin: 0 0 0 2.5rem; overflow: hidden; opacity: 0; transform: translateY(2rem); transition: opacity 500ms ease, transform 650ms var(--ugolini-motion-ease); }
-.ugolini-timeline--about article:nth-child(even) figure { grid-column: 1; margin: 0 2.5rem 0 0; }
-.ugolini-timeline--about article figure.is-visible { opacity: 1; transform: none; }
-.ugolini-timeline--about article figure img { width: 100%; height: 100%; display: block; object-fit: cover; }
-@media (prefers-reduced-motion: reduce) { .ugolini-timeline--about article figure { opacity: 1; transform: none; } }
-
-/* Product narrative, sticky details and reference contact form. */
+/* V6.12 product narrative, sticky details and reference contact form. */
 .ugolini-contact-form.alignwide { width: min(calc(100% - (2 * var(--ugolini-gutter))), 56rem); max-width: 56rem; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; margin-inline: auto; }
 .ugolini-contact-form__wide, .ugolini-contact-form > p { grid-column: 1 / -1; }
 .ugolini-contact-form :where(input, textarea) { padding: 1.85rem 2rem; border: 1px solid #aaa; background: #fff; font-size: 1.05rem; }
@@ -140,8 +135,12 @@
 .ugolini-wholesale-benefits li { display: grid; grid-template-columns: minmax(10rem, .7fr) 2rem 1fr; gap: 1.5rem; align-items: center; padding-block: 1.45rem; }
 .ugolini-wholesale-benefits .lucide { width: 1.5rem; height: 1.5rem; color: var(--wp--preset--color--brand); }
 .ugolini-wholesale-benefits span { color: var(--wp--preset--color--secondary-text); }
-.ugolini-wholesale-services { position: relative; height: 440svh; background: #171714; color: #fff; }
-.ugolini-wholesale-services__stage { position: sticky; top: max(10svh, var(--ugolini-sticky-top)); width: min(calc(100% - (2 * var(--ugolini-gutter))), var(--ugolini-container)); height: 690px; min-height: 540px; max-height: 80svh; display: grid; grid-template-rows: auto 180px auto 96px; align-content: center; gap: .75rem; margin-inline: auto; padding-block: clamp(1.75rem, 3.5vh, 3rem); overflow: hidden; }
+.ugolini-wholesale-services { position: relative; height: 440svh; isolation: isolate; background: #171714; color: #fff; scroll-margin-top: var(--ugolini-header-height); }
+.ugolini-wholesale-services__background { position: sticky; z-index: 0; top: 0; height: 100svh; overflow: hidden; margin-bottom: -100svh; background: #171714 url("https://ugolinigroup.com/wp-content/uploads/2026/08/8800-pesto-alla-genovese-ugolini-gourmet-10.jpg") center / cover no-repeat; pointer-events: none; }
+.ugolini-wholesale-services__background::after { content: ""; position: absolute; inset: 0; background: rgb(0 0 0 / 52%); }
+.ugolini-wholesale-services__background img { position: absolute; inset: -24px; width: calc(100% + 48px); height: calc(100% + 48px); object-fit: cover; filter: blur(22px) brightness(.55); opacity: 0; transition: opacity 550ms ease; }
+.ugolini-wholesale-services__background img.is-active { opacity: 1; }
+.ugolini-wholesale-services__stage { position: sticky; z-index: 1; top: 10svh; width: min(calc(100% - (2 * var(--ugolini-gutter))), var(--ugolini-container)); height: 690px; min-height: 540px; max-height: 80svh; display: grid; grid-template-rows: auto 180px auto 96px; align-content: center; gap: .75rem; margin-inline: auto; padding-block: clamp(1.75rem, 3.5vh, 3rem); overflow: hidden; }
 .ugolini-wholesale-services__heading { margin: 0; }
 .ugolini-wholesale-services__heading > * { margin-inline: 0 !important; }
 .ugolini-wholesale-services__heading .ugolini-eyebrow { color: #d3a57d; }
@@ -210,9 +209,12 @@
 .ugolini-b2b-partner { display: grid; grid-template-columns: minmax(0, .9fr) minmax(28rem, 1.1fr); align-items: start; background: var(--wp--preset--color--brand); color: #f8f4ee; }
 .ugolini-b2b-partner__benefits,
 .ugolini-b2b-form { padding: clamp(3rem, 6vw, 6rem); }
-.ugolini-b2b-partner__benefits { position: sticky; top: var(--ugolini-sticky-top); min-height: calc(100svh - var(--ugolini-sticky-top)); padding: clamp(2.5rem, 4vw, 4rem); background: var(--wp--preset--color--brand); }
+.ugolini-b2b-partner__benefits { position: sticky; top: calc(var(--ugolini-header-height) + 1px); min-height: calc(100svh - var(--ugolini-header-height)); padding: clamp(2.5rem, 4vw, 4rem); background: var(--wp--preset--color--brand); }
 .ugolini-b2b-partner :where(h2, .ugolini-eyebrow) { color: inherit; }
 .ugolini-b2b-partner__benefits h2 { max-width: 13ch; font-size: clamp(2.6rem, 3.8vw, 4.1rem); line-height: 1; }
+.ugolini-wholesale-more > .alignwide:first-child { text-align: center; }
+.ugolini-wholesale-more > .alignwide:first-child :where(.ugolini-eyebrow, h2) { margin-inline: auto; font-style: italic; }
+.ugolini-b2b-partner__benefits h2 { max-width: none; text-align: center; font-style: italic; }
 .ugolini-b2b-partner__benefits ul { display: grid; gap: 0.8rem; margin: clamp(1.75rem, 3vw, 3rem) 0 0; padding-left: 1.35em; font-size: clamp(1rem, 1.35vw, 1.2rem); }
 .ugolini-b2b-form { display: grid; gap: 1.35rem; background: #eee8df; color: var(--wp--preset--color--text); }
 .ugolini-b2b-form header { margin-bottom: 1rem; text-align: center; }
@@ -228,16 +230,27 @@
 .ugolini-b2b-form button { min-height: 68px; border: 1px solid #000; background: #000; color: #fff; cursor: pointer; font: 700 .78rem/1 var(--wp--preset--font-family--interface); letter-spacing: .12em; text-transform: uppercase; }
 .ugolini-b2b-form button:hover { background: transparent; color: #000; }
 .ugolini-b2b-form small { color: var(--wp--preset--color--secondary-text); text-align: center; }
-.ugolini-b2b-hero .ugolini-page-hero-content { display: flex; flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+.ugolini-b2b-hero .ugolini-page-hero-content { display: flex; flex-direction: column; align-items: center; gap: 1.5rem; }
 .ugolini-b2b-hero .ugolini-page-hero-content > * { margin: 0 !important; }
 
 .ugolini-product-information > .alignwide { align-items: start; }
-.ugolini-product-information .alignwide > .ugolini-eyebrow { position: sticky; top: var(--ugolini-sticky-top); margin: 0; padding-top: 0.12em; font-family: var(--wp--preset--font-family--display); font-size: clamp(2.6rem, 4.4vw, 4.8rem); font-weight: 400; letter-spacing: -0.035em; line-height: 1; text-transform: none; }
+.ugolini-product-information .alignwide > .ugolini-eyebrow { position: sticky; top: calc(var(--ugolini-header-height) + 2.75rem); margin: 0; padding-top: 0.12em; font-family: var(--wp--preset--font-family--display); font-size: clamp(2.6rem, 4.4vw, 4.8rem); font-weight: 400; letter-spacing: -0.035em; line-height: 1; text-transform: none; }
 .ugolini-product-information .wp-block-post-content > :first-child,
 .ugolini-product-information .preview-product-facts > :first-child { margin-top: 0; padding-top: 0; border-top: 0; }
+.ugolini-caviareat-editorial-shell { padding: clamp(3rem, 6vw, 6rem) 0; background: #fff; }
+.ugolini-caviareat-editorial { width: min(calc(100% - (2 * var(--ugolini-gutter))), var(--ugolini-container)); display: grid; gap: clamp(2rem, 4vw, 4rem); margin-inline: auto; color: #171714; font-family: var(--wp--preset--font-family--interface); }
+.ugolini-caviareat-editorial__row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(1.5rem, 3vw, 3rem); align-items: center; }
+.ugolini-caviareat-editorial__row + .ugolini-caviareat-editorial__row { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); align-items: center; }
+.ugolini-caviareat-editorial__copy-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(1.5rem, 3vw, 3rem); align-items: start; }
+.ugolini-caviareat-editorial__row img { width: 100%; aspect-ratio: 1; object-fit: cover; }
+.ugolini-caviareat-editorial :where(h2, h3) { margin: 0 0 .6em; font-family: inherit; font-size: clamp(1.3rem, 2vw, 2rem); font-weight: 700; line-height: 1.2; }
+.ugolini-caviareat-editorial h3 { font-size: clamp(1.1rem, 1.5vw, 1.5rem); }
+.ugolini-caviareat-editorial p { margin: 0 0 1.25em; line-height: 1.55; }
+.ugolini-caviareat-editorial ul { margin: 0; padding-left: 1.35em; }
+@media (max-width: 760px) { .ugolini-caviareat-editorial__row, .ugolini-caviareat-editorial__row + .ugolini-caviareat-editorial__row, .ugolini-caviareat-editorial__copy-grid { grid-template-columns: 1fr; } }
 
-.ugolini-product-after { padding-top: 0 !important; background: var(--wp--preset--color--background); }
-.ugolini-product-after > .ugolini-product-story { max-width: none !important; margin: 0 !important; }
+.ugolini-product-after { padding-top: 0; background: var(--wp--preset--color--background); }
+.ugolini-product-after > .ugolini-product-story { max-width: none !important; margin-inline: 0 !important; }
 .ugolini-product-after > .ugolini-product-guide { max-width: none !important; margin: 0 !important; }
 .ugolini-product-after > .ugolini-cooking { max-width: none !important; margin: 0 auto !important; }
 .ugolini-product-story { position: relative; isolation: isolate; min-height: clamp(560px, 52vw, 780px); display: grid; align-items: center; overflow: hidden; background: #171714; color: #fff; }
@@ -249,12 +262,12 @@
 .ugolini-product-story h2 { max-width: 14ch; margin: 0; color: inherit; font-family: var(--wp--preset--font-family--display); font-size: clamp(3rem, 6vw, 6rem); line-height: 1; }
 .ugolini-product-story__copy > div:last-child > p { margin: 0 0 1.25rem; color: inherit; font-family: var(--wp--preset--font-family--display); font-size: clamp(1.25rem, 1.8vw, 1.8rem); line-height: 1.35; }
 .ugolini-product-story__copy > div:last-child > p + p { color: rgb(255 255 255 / 82%); font-family: var(--wp--preset--font-family--interface); font-size: clamp(.95rem, 1.1vw, 1.08rem); line-height: 1.65; }
-.ugolini-product-story a { width: fit-content; min-height: 54px; display: inline-flex; align-items: center; justify-content: center; padding: .85rem 1.5rem; border: 1px solid #fff; border-radius: 999px; font-weight: 700; text-decoration: none; text-transform: uppercase; transition: background-color var(--ugolini-transition), color var(--ugolini-transition); }
+.ugolini-product-story a { width: fit-content; min-height: 54px; display: inline-flex; align-items: center; justify-content: center; padding: .85rem 1.5rem; border: 1px solid #fff; border-radius: 999px; color: #fff; font-weight: 700; text-decoration: none; text-transform: uppercase; }
 .ugolini-product-story a:hover,
-.ugolini-product-story a:focus-visible { background: #fff; color: #171714; }
+.ugolini-product-story a:focus-visible { border-color: var(--wp--preset--color--brand); background: var(--wp--preset--color--brand); color: #fff; }
 .ugolini-product-guide { padding-block: clamp(4rem, 8vw, 8rem); border-bottom: 1px solid var(--wp--preset--color--border); background: var(--wp--preset--color--white); }
 .ugolini-product-guide > .alignwide { display: grid; grid-template-columns: minmax(0, 1fr) minmax(15rem, .48fr); gap: clamp(3rem, 9vw, 9rem); align-items: start; }
-.ugolini-product-guide__visual { position: sticky; top: var(--ugolini-sticky-top); }
+.ugolini-product-guide__visual { position: sticky; top: calc(var(--ugolini-header-height) + 2.75rem); }
 .ugolini-product-guide__visual > span { display: block; margin-bottom: .9rem; color: var(--wp--preset--color--brand); font-size: .7rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
 .ugolini-product-guide__visual h2 { margin: 0; font-size: clamp(2.6rem, 4.4vw, 4.8rem); line-height: 1; }
 .ugolini-product-guide__visual p { max-width: 30rem; color: var(--wp--preset--color--secondary-text); }
@@ -288,8 +301,11 @@
 .ugolini-faq-sections { display: grid; gap: clamp(4rem, 8vw, 8rem); }
 .ugolini-faq-sections > .ugolini-faq-section { width: 100%; max-width: none !important; }
 .ugolini-faq-section { display: grid; grid-template-columns: minmax(15rem, 0.62fr) minmax(0, 1.38fr); gap: clamp(3rem, 8vw, 8rem); align-items: start; }
-.ugolini-faq-section > :first-child { position: sticky; top: var(--ugolini-sticky-top); }
-.ugolini-faq-layout > :first-child { position: sticky; top: var(--ugolini-sticky-top); }
+.ugolini-faq-divider { position: relative; width: 100vw; max-width: none !important; height: clamp(220px, 23vw, 340px); margin-inline: calc(50% - 50vw) !important; overflow: hidden; background: #171714; }
+.ugolini-faq-divider img { position: absolute; top: 0; left: 0; width: 100%; height: 100svh; min-height: 100%; display: block; object-fit: cover; will-change: transform; }
+.ugolini-faq-section > :first-child { position: sticky; top: calc(var(--ugolini-header-bottom, var(--ugolini-header-height)) + 1.5rem); }
+.ugolini-faq-layout > :first-child { position: sticky; top: calc(var(--ugolini-header-bottom, var(--ugolini-header-height)) + 1.5rem); }
+.ugolini-faq-section { scroll-margin-top: calc(var(--ugolini-header-bottom, var(--ugolini-header-height)) + 1.5rem); }
 .ugolini-faq-layout h2 { margin-bottom: 1.25rem; }
 .ugolini-faq-list { border-top: 1px solid var(--wp--preset--color--border); }
 .ugolini-faq-item { margin: 0; padding-block: 1.35rem; border: 0; border-bottom: 1px solid var(--wp--preset--color--border); }
@@ -302,20 +318,22 @@
 .ugolini-faq-preview { background: var(--wp--preset--color--beige); }
 .ugolini-faq-preview .ugolini-faq-layout > :first-child { padding: clamp(2rem, 4vw, 4rem); background: linear-gradient(rgb(0 0 0 / 74%), rgb(0 0 0 / 74%)), url("https://ugolinigroup.com/wp-content/uploads/2026/08/8831-sugo-tartufo-nero-ugolini-gourmet-7.jpg") center / cover; color: var(--wp--preset--color--white); }
 
-/* Sticky copy stays put while scroll distance reveals the image 1:1, top to bottom. */
+/* Sticky copy and its image remain visible throughout the section. */
 :where(.ugolini-faq-section > :first-child, .ugolini-product-information .alignwide > .ugolini-eyebrow, .ugolini-product-guide__visual)::after {
 	content: "";
 	width: 100%;
-	height: var(--ugolini-sticky-image-height, 240px);
+	height: clamp(170px, 24vh, 320px);
 	display: block;
 	margin-top: var(--ugolini-sticky-image-gap, clamp(1.5rem, 3vw, 3rem));
 	background: var(--ugolini-sticky-image, url("https://ugolinigroup.com/wp-content/uploads/2026/08/8800-pesto-alla-genovese-ugolini-gourmet-10.jpg")) center / cover no-repeat;
-	clip-path: inset(0 0 var(--ugolini-sticky-image-clip, 100%));
-	will-change: clip-path;
+	opacity: 0;
+	transform: translateY(24px);
+	transition: opacity 550ms ease, transform 550ms ease;
 }
-.ugolini-faq-section:nth-child(2) > :first-child { --ugolini-sticky-image: url("https://ugolinigroup.com/wp-content/uploads/2026/08/8848-sugo-allarrabbiata-ugolini-gourmet-5.jpg"); }
-.ugolini-faq-section:nth-child(3) > :first-child { --ugolini-sticky-image: url("https://ugolinigroup.com/wp-content/uploads/2026/08/9371-olio-extra-vergine-di-oliva-al-tartufo-bianco-ugolini-gourmet-7-scaled-1.jpg"); }
-.ugolini-faq-section:nth-child(4) > :first-child { --ugolini-sticky-image: url("https://ugolinigroup.com/wp-content/uploads/2026/08/8886-pesto-rosso-bio-ugolini-gourmet-9-scaled-1.jpg"); }
+.ugolini-image-revealed::after { opacity: 1; transform: none; }
+.ugolini-faq-section--products > :first-child { --ugolini-sticky-image: url("https://ugolinigroup.com/wp-content/uploads/2026/08/8848-sugo-allarrabbiata-ugolini-gourmet-5.jpg"); }
+.ugolini-faq-section--orders > :first-child { --ugolini-sticky-image: url("https://ugolinigroup.com/wp-content/uploads/2026/08/9371-olio-extra-vergine-di-oliva-al-tartufo-bianco-ugolini-gourmet-7-scaled-1.jpg"); }
+.ugolini-faq-section--account > :first-child { --ugolini-sticky-image: url("https://ugolinigroup.com/wp-content/uploads/2026/08/8886-pesto-rosso-bio-ugolini-gourmet-9-scaled-1.jpg"); }
 @supports (interpolate-size: allow-keywords) {
 	:root { interpolate-size: allow-keywords; }
 	.ugolini-faq-item::details-content,
