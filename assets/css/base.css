@@ -77,6 +77,7 @@ html {
 .ugolini-scroll-top.is-visible { opacity: 1; pointer-events: auto; transform: none; }
 .ugolini-chat-shell { position: fixed; z-index: 1000008; left: max(1rem, var(--ugolini-gutter)); bottom: var(--ugolini-chat-bottom, 5.5rem); width: min(358px, calc(100vw - 2rem)); display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
 .ugolini-chat-shell[hidden], .ugolini-chat-welcome[hidden] { display: none; }
+body.has-mobile-menu-open .ugolini-chat-shell { display: none; }
 .ugolini-chat-welcome { width: 100%; }
 .ugolini-chat-welcome__message { position: relative; display: flex; align-items: center; gap: .75rem; min-height: 76px; padding: 1rem 3rem 1rem 1rem; border-radius: 22px; background: #fff; color: #171714; box-shadow: 0 12px 34px rgb(23 23 20 / 18%); }
 .ugolini-chat-welcome__message p { margin: 0; font-family: var(--wp--preset--font-family--display, serif); font-size: 1.1rem; line-height: 1.25; }

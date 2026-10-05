@@ -75,6 +75,7 @@
 	.ugolini-primary-navigation .wp-block-navigation__responsive-container.is-menu-open { position: fixed !important; top: var(--ugolini-header-bottom, 110px) !important; right: 0 !important; bottom: 0 !important; left: 0 !important; z-index: 1000; width: 100vw !important; height: calc(100dvh - var(--ugolini-header-bottom, 110px)) !important; max-height: none !important; display: block !important; padding: 1.5rem 1.5rem calc(3rem + env(safe-area-inset-bottom)); overflow-x: hidden !important; overflow-y: auto !important; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; touch-action: pan-y; background: var(--wp--preset--color--background); color: var(--wp--preset--color--text); }
 	body:has(.ugolini-primary-navigation .wp-block-navigation__responsive-container.is-menu-open) .ugolini-breadcrumbs { display: none !important; }
 	body.ugolini-mobile-menu-open .ugolini-breadcrumbs { display: none !important; }
+	body.has-mobile-menu-open #gt_float_wrapper { display: none !important; }
 	body.has-overlay-header:not(.is-scrolled) .ugolini-primary-navigation .wp-block-navigation__responsive-container.is-menu-open,
 	body.has-overlay-header:not(.is-scrolled) .ugolini-primary-navigation .wp-block-navigation__responsive-container.is-menu-open :where(a, button) { color: var(--wp--preset--color--text) !important; }
 	.ugolini-primary-navigation .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content { height: auto !important; min-height: max-content; justify-content: flex-start !important; padding-top: 5rem; align-items: flex-start; overflow: visible !important; }
@@ -240,8 +241,8 @@
 	.ugolini-contact-form-section { padding-top: 1rem; }
 	.ugolini-b2b-form__row { grid-template-columns: 1fr; }
 	.ugolini-wholesale-services { height: 560svh; }
-	.ugolini-wholesale-services__background::after { background: rgb(0 0 0 / 32%); }
-	.ugolini-wholesale-services__background img { filter: blur(8px) brightness(.9); }
+	.ugolini-wholesale-services__background::after { background: rgb(0 0 0 / 45%); }
+	.ugolini-wholesale-services__background img { filter: blur(8px) brightness(.8); }
 	.ugolini-wholesale-services__stage { top: 0; height: 100svh; min-height: 100svh; max-height: none; grid-template-rows: auto 330px auto 96px; gap: .65rem; padding-block: 2.25rem 1.25rem; }
 	.ugolini-wholesale-services__heading h2 { white-space: normal; }
 	.ugolini-wholesale-services__slides { min-height: 330px; }
