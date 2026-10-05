@@ -63,7 +63,7 @@
 .ugolini-mega-menu.is-panel-visible > summary::after { content: "−"; }
 .ugolini-mega-panel {
 	position: fixed;
-	top: var(--ugolini-site-header-bottom, var(--ugolini-header-height));
+	top: var(--ugolini-header-bottom, var(--ugolini-header-height));
 	left: 0;
 	right: 0;
 	display: grid;

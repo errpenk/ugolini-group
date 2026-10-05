@@ -59,6 +59,46 @@
 })();
 
 (() => {
+	const sections = [...document.querySelectorAll('.ugolini-faq-sections > .ugolini-faq-section')];
+	if (sections.length < 3) return;
+	const images = [
+		'/wp-content/themes/ugolini-group/assets/images/blog/90757930_l-scaled.jpg',
+		'/wp-content/themes/ugolini-group/assets/images/home-hero-ugolini-latest.jpeg',
+	];
+	sections[1].classList.add('ugolini-faq-section--products');
+	sections[2].classList.add('ugolini-faq-section--orders');
+	sections[3]?.classList.add('ugolini-faq-section--account');
+	images.forEach((src, index) => {
+		const divider = document.createElement('div');
+		divider.className = 'ugolini-faq-divider';
+		divider.setAttribute('aria-hidden', 'true');
+		const image = document.createElement('img');
+		image.src = src;
+		image.alt = '';
+		divider.append(image);
+		sections[index + 1].before(divider);
+	});
+	let pending = false;
+	const position = () => {
+		for (const divider of document.querySelectorAll('.ugolini-faq-divider')) divider.querySelector('img').style.transform = innerWidth < 768 ? 'none' : `translate3d(0, ${-divider.getBoundingClientRect().top}px, 0)`;
+		pending = false;
+	};
+	addEventListener('scroll', () => { if (!pending) { pending = true; requestAnimationFrame(position); } }, { passive: true });
+	addEventListener('resize', position);
+	position();
+})();
+
+(() => {
+	const visuals = document.querySelectorAll('.ugolini-faq-section > :first-child, .ugolini-product-information .alignwide > .ugolini-eyebrow, .ugolini-product-guide__visual');
+	if (!visuals.length) return;
+	if (!('IntersectionObserver' in window)) { visuals.forEach(visual => visual.classList.add('ugolini-image-revealed')); return; }
+	const observer = new IntersectionObserver(entries => {
+		for (const entry of entries) if (entry.isIntersecting) { entry.target.classList.add('ugolini-image-revealed'); observer.unobserve(entry.target); }
+	}, { rootMargin: '0px 0px -8% 0px' });
+	visuals.forEach(visual => observer.observe(visual));
+})();
+
+(() => {
 	for (const deck of document.querySelectorAll('[data-event-deck]')) {
 		const slides = [...deck.querySelectorAll('[data-event-slide]')];
 		const thumbs = [...deck.querySelectorAll('[data-event-go]')];
@@ -259,6 +299,11 @@ for (const story of document.querySelectorAll('[data-service-story]')) {
 	const slides = [...story.querySelectorAll('.ugolini-wholesale-services__slides article')];
 	const markers = [...story.querySelectorAll('.ugolini-wholesale-services__axis span')];
 	const images = [...story.querySelectorAll('.ugolini-wholesale-services__media img')];
+	const background = document.createElement('div');
+	background.className = 'ugolini-wholesale-services__background';
+	background.setAttribute('aria-hidden', 'true');
+	const backdrops = images.map(image => background.appendChild(image.cloneNode()));
+	story.prepend(background);
 	let active = -1;
 	const update = () => {
 		const rect = story.getBoundingClientRect();
@@ -269,6 +314,7 @@ for (const story of document.querySelectorAll('[data-service-story]')) {
 		slides.forEach((slide, index) => { slide.classList.toggle('is-active', index === active); slide.setAttribute('aria-hidden', String(index !== active)); });
 		markers.forEach((marker, index) => marker.classList.toggle('is-active', index === active));
 		images.forEach((image, index) => image.classList.toggle('is-active', index === active));
+		backdrops.forEach((image, index) => image.classList.toggle('is-active', index === active));
 	};
 	addEventListener('scroll', update, { passive: true });
 	addEventListener('resize', update, { passive: true });

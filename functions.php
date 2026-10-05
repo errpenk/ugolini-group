@@ -909,6 +909,11 @@ function ugolini_group_enqueue_assets() {
 	var shell = document.createElement('div');
 	shell.className = 'ugolini-chat-shell';
 	shell.innerHTML = '<section class="ugolini-chat-welcome" aria-label="Assistenza Ugolini"><div class="ugolini-chat-welcome__message"><span class="ugolini-chat-welcome__wave" aria-hidden="true">👋</span><p>Ciao! Come possiamo aiutarti?</p><button class="ugolini-chat-welcome__close" type="button" aria-label="Chiudi il messaggio di benvenuto">×</button></div><div class="ugolini-chat-welcome__actions"><button type="button" data-chat-topic="Prodotti e ordini">Ho una domanda</button><button type="button" data-chat-topic="Ugolini Gourmet">Scopri di più</button></div></section>';
+	var welcome = shell.querySelector('.ugolini-chat-welcome');
+	try {
+		welcome.hidden = sessionStorage.getItem('ugolini-chat-welcomed') === '1';
+		sessionStorage.setItem('ugolini-chat-welcomed', '1');
+	} catch (error) { /* Storage can be unavailable in private browsing. */ }
 	var launcher = document.createElement('button');
 	launcher.className = 'ugolini-chat-launcher';
 	launcher.type = 'button';
@@ -988,7 +993,7 @@ function ugolini_group_enqueue_assets() {
 		launcher.setAttribute('aria-label', 'Chat aperta');
 	};
 	launcher.addEventListener('click', function () { open(''); });
-	shell.querySelector('.ugolini-chat-welcome__close').addEventListener('click', function () { shell.querySelector('.ugolini-chat-welcome').hidden = true; });
+	shell.querySelector('.ugolini-chat-welcome__close').addEventListener('click', function () { welcome.hidden = true; });
 	var topicButtons = shell.querySelectorAll('[data-chat-topic]');
 	for (var topicIndex = 0; topicIndex < topicButtons.length; topicIndex += 1) {
 		topicButtons[topicIndex].addEventListener('click', function () { open(this.getAttribute('data-chat-topic')); });
