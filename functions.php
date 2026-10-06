@@ -200,6 +200,23 @@ function ugolini_group_refresh_about_666() {
 }
 add_action( 'init', 'ugolini_group_refresh_about_666', 100 );
 
+/** Refresh Home once so the v6.65.51 image replacements reach existing installs. */
+function ugolini_group_refresh_home_66551() {
+	if ( ! current_user_can( 'manage_options' ) || get_option( 'ugolini_group_home_66551_refreshed' ) ) {
+		return;
+	}
+
+	$page_id = (int) get_option( 'page_on_front' );
+	$content = ugolini_group_page_pattern_content( 'homepage' );
+	if ( $page_id && '' !== $content ) {
+		$result = wp_update_post( array( 'ID' => $page_id, 'post_content' => $content ), true );
+		if ( ! is_wp_error( $result ) ) {
+			update_option( 'ugolini_group_home_66551_refreshed', 1, false );
+		}
+	}
+}
+add_action( 'init', 'ugolini_group_refresh_home_66551', 100 );
+
 /** Keep the public Blog label and card excerpts aligned with the theme preview. */
 function ugolini_group_refresh_blog_presentation() {
 	if ( ! get_option( 'ugolini_group_blog_630_refreshed' ) ) {

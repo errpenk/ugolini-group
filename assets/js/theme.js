@@ -225,6 +225,7 @@ for (const deal of document.querySelectorAll('[data-deal-rail]')) {
 
 		for (const tab of tabs) tab.addEventListener('click', () => {
 			for (const item of tabs) item.setAttribute('aria-selected', String(item === tab));
+			showcase.classList.toggle('has-deeper-overlay', tab.dataset.overlay === 'deeper');
 			showcase.classList.add('is-changing');
 			image.addEventListener('load', () => showcase.classList.remove('is-changing'), { once: true });
 			image.src = tab.dataset.image;
@@ -508,7 +509,7 @@ for (const nav of document.querySelectorAll('.ugolini-primary-navigation')) {
 
 (() => {
 	const presets = [
-		['.ugolini-hero', ['https://ugolinigroup.com/wp-content/uploads/2026/08/8800-pesto-alla-genovese-ugolini-gourmet-10.jpg', 'https://ugolinigroup.com/wp-content/uploads/2026/08/8848-sugo-allarrabbiata-ugolini-gourmet-5.jpg']],
+		['.ugolini-hero', ['home/hero-slide-2.jpg', 'home/hero-slide-3.jpg']],
 		['.ugolini-catalogue-panel', ['https://ugolinigroup.com/wp-content/uploads/2026/08/8817-pesto-rosso-ugolini-gourmet-4.jpg', 'https://ugolinigroup.com/wp-content/uploads/2026/08/8855-pesto-vegano-ugolini-gourmet-8-scaled-1.jpg']],
 	];
 	for (const [selector, urls] of presets) for (const carousel of document.querySelectorAll(selector)) {
@@ -519,7 +520,7 @@ for (const nav of document.querySelectorAll('.ugolini-primary-navigation')) {
 		first.classList.add('ugolini-carousel__slide', 'is-active');
 		for (const url of urls) {
 			const slide = first.cloneNode();
-			slide.src = url;
+			slide.src = new URL(url, first.src).href;
 			slide.removeAttribute('srcset');
 			slide.classList.remove('is-active');
 			carousel.insertBefore(slide, carousel.querySelector('.wp-block-cover__inner-container'));

@@ -3,10 +3,11 @@
 .ugolini-hero.wp-block-cover > .wp-block-cover__inner-container { width: 100%; display: flex; align-items: center; justify-content: center; text-align: center; }
 .ugolini-hero.wp-block-cover > .wp-block-cover__inner-container { margin-inline: auto; }
 .ugolini-hero .wp-block-cover__image-background { object-position: center; }
+.ugolini-hero > .wp-block-cover__background { opacity: .66; }
 .ugolini-hero-content { position: relative; z-index: 1; box-sizing: border-box; width: min(calc(100% - (2 * var(--ugolini-gutter))), 66rem); max-width: 66rem; display: flex; flex-direction: column; align-items: center; margin-inline: auto !important; padding: clamp(4rem, 8vw, 7rem) 0; text-align: center; }
 .ugolini-hero-content > * { margin-inline: auto !important; }
 .ugolini-hero-content :where(h1, p, .wp-block-buttons) { text-align: center !important; }
-.ugolini-hero h1.has-hero-font-size { max-width: 12ch; margin-block: 0 1.5rem; font-size: clamp(3.6rem, 6.8vw, 6.5rem) !important; line-height: 1; letter-spacing: -0.03em; }
+.ugolini-hero h1.has-hero-font-size { max-width: 12ch; margin-block: 0 1.5rem; font-size: clamp(3.6rem, 6.8vw, 6.5rem) !important; font-style: italic; line-height: 1; letter-spacing: -0.03em; }
 .ugolini-hero-copy { max-width: 42rem; margin-block: 0 1em !important; font-size: clamp(1rem, 1.3vw, 1.2rem); }
 .ugolini-hero .wp-block-buttons { max-width: none !important; justify-content: center; margin-block: 0 !important; }
 
@@ -148,6 +149,7 @@
 .ugolini-showcase__background { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; transition: opacity 180ms ease, transform 900ms ease; }
 .ugolini-showcase.is-changing .ugolini-showcase__background { opacity: 0.35; transform: scale(1.015); }
 .ugolini-showcase__overlay { position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgb(18 18 16 / 78%) 0%, rgb(18 18 16 / 54%) 52%, rgb(18 18 16 / 38%) 100%); }
+.ugolini-showcase.has-deeper-overlay .ugolini-showcase__overlay { background: linear-gradient(90deg, rgb(18 18 16 / 84%) 0%, rgb(18 18 16 / 62%) 52%, rgb(18 18 16 / 46%) 100%); }
 .ugolini-showcase__inner { width: min(calc(100% - (2 * var(--ugolini-gutter))), var(--ugolini-container)); display: grid; grid-template-columns: minmax(0, 1fr) minmax(220px, 0.34fr); grid-template-rows: auto 1fr auto; gap: 2rem clamp(3rem, 8vw, 9rem); margin-inline: auto; padding-block: clamp(4rem, 7vw, 7rem); }
 .ugolini-showcase__inner > .ugolini-eyebrow { grid-column: 1 / -1; }
 .ugolini-showcase__inner > h2 { grid-column: 1 / -1; grid-row: 2; align-self: start; max-width: 14ch; margin: 0; color: inherit; font-size: clamp(3.8rem, 7vw, 7rem); line-height: 1; }
