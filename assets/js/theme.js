@@ -508,6 +508,25 @@ for (const nav of document.querySelectorAll('.ugolini-primary-navigation')) {
 })();
 
 (() => {
+	const heroImage = document.querySelector('.ugolini-hero .wp-block-cover__image-background');
+	const homeAsset = filename => heroImage ? new URL(`home/${filename}`, heroImage.src).href : '';
+	if (heroImage) {
+		const storySlides = document.querySelectorAll('.ugolini-context-cta .ugolini-carousel__slide');
+		['story-slide-1.jpg', 'story-slide-2.jpg', 'story-slide-3.jpg'].forEach((filename, index) => {
+			if (storySlides[index]) storySlides[index].src = homeAsset(filename);
+		});
+		const discoveryImage = document.querySelector('.ugolini-discovery-art img');
+		if (discoveryImage) discoveryImage.src = homeAsset('discovery-truffles.jpg');
+		const showcaseImages = {
+			Pesti: 'showcase-pesti.jpg',
+			Tartufi: 'showcase-tartufi.jpg',
+			Condimenti: 'showcase-condimenti.jpeg',
+		};
+		for (const tab of document.querySelectorAll('[data-showcase-tab]')) {
+			if (showcaseImages[tab.dataset.title]) tab.dataset.image = homeAsset(showcaseImages[tab.dataset.title]);
+		}
+	}
+
 	const presets = [
 		['.ugolini-hero', ['home/hero-slide-2.jpg', 'home/hero-slide-3.jpg']],
 		['.ugolini-catalogue-panel', ['https://ugolinigroup.com/wp-content/uploads/2026/08/8817-pesto-rosso-ugolini-gourmet-4.jpg', 'https://ugolinigroup.com/wp-content/uploads/2026/08/8855-pesto-vegano-ugolini-gourmet-8-scaled-1.jpg']],
