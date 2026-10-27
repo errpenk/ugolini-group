@@ -1735,7 +1735,7 @@ add_filter( 'render_block', 'ugolini_group_caviareat_editorial_after_details', 1
 
 /** Keep only the eight public editorial pages in the WordPress page sitemap. */
 function ugolini_group_public_page_slugs() {
-	return array( 'home', 'shop', 'chi-siamo', 'events', 'b2b', 'blog', 'faq', 'contatti', 'supporto', 'privacy-policy', 'cookie-policy', 'termini-e-condizioni', 'spedizioni-e-resi' );
+	return array( 'home', 'shop', 'chi-siamo', 'galleria', 'events', 'b2b', 'blog', 'faq', 'contatti', 'supporto', 'privacy-policy', 'cookie-policy', 'termini-e-condizioni', 'spedizioni-e-resi' );
 }
 
 add_filter( 'wp_sitemaps_posts_query_args', static function( $args, $post_type ) {
@@ -1835,6 +1835,7 @@ add_action( 'wp_head', static function() {
 		'home'                 => 'Scopri Ugolini Gourmet: salse, tartufi, caviale e specialità italiane selezionate per portare gusto e qualità in tavola.',
 		'shop'                 => 'Esplora le collezioni Ugolini Gourmet: salse, sughi, pesti, tartufi, caviale e altre specialità italiane.',
 		'chi-siamo'            => 'Conosci la storia, la famiglia e la passione per la gastronomia italiana che guidano Ugolini Gourmet.',
+		'galleria'             => 'Esplora la galleria aziendale Ugolini Gourmet: foto e video dagli eventi, dalle fiere internazionali e dal mondo dei nostri brand.',
 		'events'               => 'Scopri gli eventi e le novità di Ugolini Gourmet, LuxurEat, Truffleat e Caviareat.',
 		'b2b'                  => 'Scopri le specialità Ugolini Gourmet per professionisti, distributori e partner commerciali.',
 		'blog'                 => 'Leggi gli articoli Ugolini Gourmet su ingredienti, cucina, ricette e specialità italiane.',
@@ -1861,7 +1862,7 @@ add_action( 'wp_head', static function() {
 			$description = $event['description'];
 			$image = get_theme_file_uri( 'assets/images/events/' . $event['image'] );
 		} else {
-			$heroes = array( 'chi-siamo' => 'about/about-hero.jpg', 'events' => 'page-heroes/events.jpg', 'b2b' => 'page-heroes/b2b.jpg', 'blog' => 'page-heroes/blog.jpg', 'faq' => 'page-heroes/faq.jpg', 'contatti' => 'page-heroes/contact.jpg', 'supporto' => 'support/hero.jpg', 'shop' => 'collection-heroes/all.jpg' );
+			$heroes = array( 'chi-siamo' => 'about/about-hero.jpg', 'galleria' => 'page-heroes/gallery-hero-caviar.jpg', 'events' => 'page-heroes/events.jpg', 'b2b' => 'page-heroes/b2b.jpg', 'blog' => 'page-heroes/blog.jpg', 'faq' => 'page-heroes/faq.jpg', 'contatti' => 'page-heroes/contact.jpg', 'supporto' => 'support/hero.jpg', 'shop' => 'collection-heroes/all.jpg' );
 			if ( isset( $heroes[ $page->post_name ] ) ) $image = get_theme_file_uri( 'assets/images/' . $heroes[ $page->post_name ] );
 		}
 		if ( ! $description ) $description = $page->post_excerpt ?: $page->post_content;
