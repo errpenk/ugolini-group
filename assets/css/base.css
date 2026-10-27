@@ -211,7 +211,7 @@ textarea {
 .ugolini-carousel-pagination button.is-active { width: 68px; box-shadow: none; }
 .ugolini-carousel-pagination button.is-active::after { background: #fff; }
 .ugolini-carousel-pagination button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
-.ugolini-context-cta .ugolini-carousel-pagination { bottom: 0; }
+.ugolini-context-cta .ugolini-carousel-pagination { bottom: clamp(2rem, 4vw, 3.5rem); }
 
 :where(.ugolini-hero, .ugolini-featured-collection, .ugolini-campaign-split, .ugolini-catalogue-panel, .ugolini-dark-feature, .ugolini-page-hero--dark, .ugolini-page-hero--image) .has-white-background-color.wp-block-button__link:hover,
 :where(.ugolini-hero, .ugolini-featured-collection, .ugolini-campaign-split, .ugolini-catalogue-panel, .ugolini-dark-feature, .ugolini-page-hero--dark, .ugolini-page-hero--image) .has-white-background-color.wp-element-button:hover {

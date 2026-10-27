@@ -95,7 +95,7 @@
     page = 1;
     renderPage();
     const total = matching.length;
-    count.textContent = `${total} video`;
+    count.textContent = `${total} ${total === 1 ? "contenuto" : "contenuti"}`;
     empty.hidden = total !== 0;
   };
   const show = index => {

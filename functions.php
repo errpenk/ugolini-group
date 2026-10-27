@@ -186,7 +186,7 @@ add_action( 'init', 'ugolini_group_seed_preview_pages', 99 );
 
 /** Create or refresh the gallery page without touching other pages. */
 function ugolini_group_seed_gallery_page() {
-	if ( ! current_user_can( 'manage_options' ) || get_option( 'ugolini_group_gallery_page_v13_seeded' ) ) return;
+	if ( ! current_user_can( 'manage_options' ) || get_option( 'ugolini_group_gallery_page_v14_seeded' ) ) return;
 	$content = ugolini_group_page_pattern_content( 'page-gallery' );
 	if ( ! $content ) return;
 	$page = get_page_by_path( 'galleria', OBJECT, 'page' );
@@ -196,7 +196,7 @@ function ugolini_group_seed_gallery_page() {
 	} else {
 		$result = wp_insert_post( array( 'post_type' => 'page', 'post_status' => 'publish', 'post_title' => 'Galleria aziendale', 'post_name' => 'galleria', 'post_content' => $content ), true );
 	}
-	if ( ! is_wp_error( $result ) ) update_option( 'ugolini_group_gallery_page_v13_seeded', 1, false );
+	if ( ! is_wp_error( $result ) ) update_option( 'ugolini_group_gallery_page_v14_seeded', 1, false );
 }
 add_action( 'init', 'ugolini_group_seed_gallery_page', 100 );
 
@@ -1488,7 +1488,7 @@ function ugolini_group_import_news() {
 	foreach ( ugolini_group_news_data() as $news ) {
 		$slug = sanitize_title( $news['id'] );
 		$existing = get_page_by_path( $slug, OBJECT, 'ugolini_news' );
-		if ( $existing && 'publish' === $existing->post_status ) {
+		if ( $existing && 'publish' === $existing->post_status && ( ! in_array( $news['id'], array( 'fhc-shanghai-2026-breakfast', 'fhc-shanghai-2026-pancakes' ), true ) || get_post_meta( $existing->ID, '_ugolini_news_full_2026', true ) ) ) {
 			if ( get_the_date( 'Y-m-d', $existing ) !== $news['date'] ) wp_update_post( array( 'ID' => $existing->ID, 'post_date' => $news['date'] . ' 12:00:00', 'edit_date' => true ) );
 			continue;
 		}
@@ -1536,6 +1536,7 @@ function ugolini_group_import_news() {
 		if ( ! empty( $news['galleryId'] ) ) $content .= '<p><a href="' . esc_url( add_query_arg( 'evento', sanitize_title( $news['galleryId'] ), home_url( '/galleria/' ) ) ) . '#ugolini-gallery-title">Guarda i video dell’evento →</a></p>';
 		if ( ! empty( $news['sourceUrl'] ) ) $content .= '<p class="ugolini-news-source"><a href="' . esc_url( $news['sourceUrl'] ) . '" rel="noopener noreferrer" target="_blank">Fonte originale ↗</a></p>';
 		wp_update_post( array( 'ID' => $post_id, 'post_content' => wp_kses_post( $content ), 'post_status' => 'publish', 'post_date' => $news['date'] . ' 12:00:00', 'edit_date' => true ) );
+		if ( in_array( $news['id'], array( 'fhc-shanghai-2026-breakfast', 'fhc-shanghai-2026-pancakes' ), true ) ) update_post_meta( $post_id, '_ugolini_news_full_2026', '1' );
 		return;
 	}
 }

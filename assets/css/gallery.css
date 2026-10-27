@@ -1,14 +1,15 @@
 /* Corporate gallery */
 .ugolini-gallery-hero .wp-block-cover__image-background { object-position: center 46%; }
 .ugolini-gallery { padding-block: clamp(4rem, 7vw, 7rem); }
-.ugolini-gallery__intro { display: grid; grid-template-columns: 1.2fr .8fr; gap: 3rem; align-items: end; margin-bottom: 2.4rem; }
-.ugolini-gallery__intro h2 { max-width: 12ch; margin: .4rem 0 0; font-size: clamp(2.8rem, 5vw, 5rem); line-height: 1.04; }
+.ugolini-gallery__intro { margin-bottom: 2.4rem; text-align: center; }
+.ugolini-gallery__intro h2 { margin: 0; font-size: clamp(2.8rem, 5vw, 5rem); line-height: 1.15; }
 .ugolini-gallery__intro > p { max-width: 31rem; margin: 0 0 .3rem; font-size: 1.13rem; line-height: 1.65; }
 .ugolini-gallery__controls { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1rem; align-items: end; margin-bottom: 1rem; }
 .ugolini-gallery__filters { display: grid; gap: .8rem; min-width: 0; }
 .ugolini-gallery__filters label { display: grid; gap: .45rem; min-width: 0; font-size: .9rem; }
 .ugolini-gallery__filters :is(input, select) { box-sizing: border-box; width: 100%; min-height: 3rem; padding: .6rem .8rem; border: 1px solid var(--wp--preset--color--border); border-radius: 0; background: #fff; color: var(--wp--preset--color--text); font: inherit; }
 .ugolini-gallery__advanced summary { display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; width: 100%; min-height: 2.8rem; list-style: none; cursor: pointer; font-size: .9rem; }
+.ugolini-gallery__advanced > summary:is(:hover, :active, :focus-visible) { color: #701b23; transform: none !important; }
 .ugolini-gallery__advanced summary::-webkit-details-marker { display: none; }
 .ugolini-gallery__advanced summary::marker { content: ''; }
 .ugolini-gallery__advanced summary .lucide { display: block; flex: none; width: 1.25rem; height: 1.25rem; transition: transform .32s cubic-bezier(.22, 1, .36, 1); }

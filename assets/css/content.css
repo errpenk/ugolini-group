@@ -40,11 +40,11 @@
 .single-ugolini_news .ugolini-content-shell > .wp-block-post-content > * { width: 100% !important; max-width: 100% !important; margin-right: 0 !important; margin-left: 0 !important; text-align: left !important; }
 .single-ugolini_news .ugolini-content-shell > .wp-block-post-content :where(h2, h3, h4) { margin-block: 1.6em .55em !important; font-size: clamp(1.8rem, 4vw, 3.5rem) !important; line-height: 1.08 !important; }
 .single-ugolini_news .ugolini-content-shell > .wp-block-post-content p { margin-block: 0 1.15em !important; font-size: clamp(1rem, 1.3vw, 1.2rem) !important; line-height: 1.75 !important; }
-.single-ugolini_news .ugolini-content-shell > .wp-block-post-content figure { margin-block: 2rem !important; }
-.single-ugolini_news .ugolini-content-shell > .wp-block-post-content :is(img, video) { display: block; width: 100%; height: auto; }
+.single-ugolini_news .ugolini-content-shell > .wp-block-post-content figure { width: min(100%, 720px) !important; max-width: 720px !important; margin: 2rem auto !important; text-align: center !important; }
+.single-ugolini_news .ugolini-content-shell > .wp-block-post-content figure :is(img, video) { display: block; width: auto; max-width: 100%; height: auto; max-height: min(72svh, 720px); margin-inline: auto; object-fit: contain; }
 .single-ugolini_news .ugolini-news-source { margin-top: 3rem !important; font-size: .85rem !important; }
-.ugolini-news-detail .wp-block-video, .single-ugolini_news .wp-block-video { width: min(100%, 420px); margin: 2rem auto; }
-.ugolini-news-detail .wp-block-video video, .single-ugolini_news .wp-block-video video { display: block; width: 100%; height: auto; }
+.ugolini-news-detail .wp-block-video, .single-ugolini_news .wp-block-video { width: min(100%, 720px); margin: 2rem auto; }
+.ugolini-news-detail .wp-block-video video, .single-ugolini_news .wp-block-video video { display: block; width: auto; max-width: 100%; height: auto; max-height: min(72svh, 720px); margin-inline: auto; object-fit: contain; }
 .ugolini-news-detail .wp-block-video figcaption, .single-ugolini_news .wp-block-video figcaption { margin-top: .5rem; font-size: .8rem; text-align: center; }
 .single-post .ugolini-content-shell > .wp-block-post-content > * { width: 100% !important; max-width: 100% !important; margin-right: 0 !important; margin-left: 0 !important; text-align: left !important; }
 .single-post .ugolini-content-shell > .wp-block-post-content :where(h2, h3, h4) { margin-block: 1.6em .55em !important; font-size: clamp(1.8rem, 4vw, 3.5rem) !important; line-height: 1.08 !important; }

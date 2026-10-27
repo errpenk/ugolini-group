@@ -71,7 +71,11 @@
           "Ugolini Group porta le specialità e la cultura gastronomica italiana a un pubblico globale. LuxurEat China sviluppa questo percorso in Cina, creando un ponte tra i brand italiani, i consumatori e i partner commerciali locali.",
           "L’incontro diretto con buyer e professionisti di diversi Paesi aiuta a comprendere le esigenze dei mercati e a esplorare nuove collaborazioni e opportunità distributive."
         ],
-        "media": [{ "type": "video" }]
+        "media": [
+          {
+            "type": "video"
+          }
+        ]
       },
       {
         "heading": "Il Lazio incontra il mondo",
@@ -99,13 +103,49 @@
     "author": "LuxurEat",
     "title": "LuxurEat a FHC Shanghai 2026: il gusto italiano comincia dalla colazione",
     "intro": "Dal 10 al 12 novembre 2026, LuxurEat sarà al Shanghai New International Expo Centre, padiglione N3, stand N3A10, per presentare nuove idee dedicate alla colazione italiana.",
-    "opening": [],
+    "opening": [
+      "Una famiglia si riunisce intorno alla tavola e sceglie i sapori con cui iniziare la giornata, accompagnando pancake appena preparati. È questa la scena quotidiana che LuxurEat desidera condividere a FHC Shanghai 2026.",
+      "La colazione sarà il punto di partenza per presentare nuovi abbinamenti con i prodotti dei nostri brand. Tra i protagonisti ci sarà TrufflElixir, la linea di topping al tartufo."
+    ],
     "category": "Notizie",
     "sourceUrl": "https://luxureat.cn/news/fhc-shanghai-2026-breakfast/",
     "cardImage": "https://luxureat.cn/wp-content/themes/luxureat-wordpress-theme/assets/media/brand-news/fhc-2026-food-industry.webp",
     "video": null,
     "videoPoster": null,
-    "sections": []
+    "sections": [
+      {
+        "heading": "Oltre lo sciroppo d’acero: nuovi abbinamenti per la colazione",
+        "paragraphs": [
+          "TrufflElixir unisce il tartufo a note dolci e fruttate e offre un’alternativa da provare su pancake, waffle e altre preparazioni della colazione.",
+          "L’idea è semplice: partire da un gesto familiare, versare un topping su un pancake, per scoprire sfumature diverse del gusto del tartufo."
+        ],
+        "media": []
+      },
+      {
+        "heading": "Il tartufo entra nella colazione di casa",
+        "paragraphs": [
+          "Il tartufo viene spesso associato al ristorante e alle occasioni speciali. Con TrufflElixir vogliamo esplorare anche momenti più quotidiani, a cominciare dalla colazione in famiglia.",
+          "Attraverso abbinamenti immediati, bambini, ragazzi e adulti possono conoscere i diversi gusti e trovare le combinazioni preferite. Dalla scoperta del prodotto alla prova a tavola, desideriamo esplorare insieme al mercato cinese nuovi modi di servirlo."
+        ],
+        "media": []
+      },
+      {
+        "heading": "Incontriamo i professionisti del settore alimentare cinese",
+        "paragraphs": [
+          "A FHC Shanghai 2026, LuxurEat sarà presente insieme a Truffleat, CaviarEat e Ugolini Gourmet. Invitiamo importatori, distributori, buyer del retail e dell’e-commerce, nonché professionisti di hotel, caffetterie, panifici e ristorazione a visitare il nostro stand.",
+          "Dalla colazione in famiglia al buffet dell’hotel, dalla caffetteria al negozio, vogliamo confrontarci su applicazioni, prodotti e opportunità di collaborazione."
+        ],
+        "media": []
+      },
+      {
+        "heading": "Ci vediamo a Shanghai",
+        "paragraphs": [
+          "FHC Shanghai 2026 si terrà dal 10 al 12 novembre allo Shanghai New International Expo Centre (SNIEC). Ci troverete nel padiglione N3, stand N3A10.",
+          "Contattateci tramite www.luxureat.cn per fissare un incontro durante la fiera. Vi aspettiamo a Shanghai per scoprire insieme nuove idee per la colazione."
+        ],
+        "media": []
+      }
+    ]
   },
   {
     "kind": "news",
@@ -114,13 +154,32 @@
     "author": "LuxurEat",
     "title": "Pancake a colazione: nuove idee oltre lo sciroppo d’acero",
     "intro": "A FHC Shanghai 2026, LuxurEat presenterà la linea di topping al tartufo TrufflElixir e nuove idee per la colazione di casa.",
-    "opening": [],
+    "opening": [
+      "A novembre LuxurEat porterà la linea TrufflElixir a FHC Shanghai 2026, con nuove idee per abbinare i topping al tartufo alla colazione di casa."
+    ],
     "category": "Notizie",
     "sourceUrl": "https://luxureat.cn/news/fhc-shanghai-2026-pancakes/",
     "cardImage": "https://luxureat.cn/wp-content/themes/luxureat-wordpress-theme/assets/media/brand-news/fhc-breakfast-pairings-2026.webp",
     "video": null,
     "videoPoster": null,
-    "sections": []
+    "sections": [
+      {
+        "heading": "Partire da una colazione familiare",
+        "paragraphs": [
+          "Unire il tartufo a note dolci e fruttate e provarlo su pancake e waffle: con un abbinamento familiare vogliamo aprire la strada alla scoperta di nuovi sapori.",
+          "TrufflElixir propone una possibilità in più accanto allo sciroppo d’acero, da scegliere secondo il proprio gusto."
+        ],
+        "media": []
+      },
+      {
+        "heading": "Ci vediamo a FHC Shanghai",
+        "paragraphs": [
+          "Invitiamo importatori, distributori, buyer del retail e dell’e-commerce e professionisti di hotel, caffetterie, panifici e ristorazione a conoscere LuxurEat, Truffleat, CaviarEat e Ugolini Gourmet e a parlare di possibili collaborazioni.",
+          "L’appuntamento è dal 10 al 12 novembre 2026 allo Shanghai New International Expo Centre (SNIEC), padiglione N3, stand N3A10. Contattateci in anticipo su www.luxureat.cn per organizzare un incontro. Ci vediamo a Shanghai!"
+        ],
+        "media": []
+      }
+    ]
   },
   {
     "kind": "news",
