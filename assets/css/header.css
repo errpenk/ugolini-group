@@ -281,9 +281,3 @@ main :is(h1, h2, h3)[id^="sezione-"] { scroll-margin-top: calc(var(--ugolini-hea
 .ugolini-live-search small { font-family: var(--wp--preset--font-family--interface); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
 .ugolini-live-search span { font-family: var(--wp--preset--font-family--display); font-size: clamp(1.05rem, 1.8vw, 1.35rem); line-height: 1.2; }
 body.has-search-open { overflow: hidden; }
-
-body:has(.ugolini-event-detail) .ugolini-breadcrumbs {
-	height: 48px;
-	min-height: 48px;
-	transition: opacity 160ms ease;
-}

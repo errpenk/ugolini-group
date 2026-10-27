@@ -786,7 +786,7 @@ for (const menu of document.querySelectorAll('.ugolini-primary-navigation .wp-bl
 	}
 	const update = () => {
 		const topContext = !isProduct && scrollY <= 12 && document.body.classList.contains('is-header-engaged');
-		const visible = innerWidth >= 768 && (isProduct || scrollY > 12 || topContext);
+		const visible = innerWidth >= 768 && document.body.classList.contains('is-header-engaged');
 		breadcrumb.classList.toggle('is-top-context', topContext);
 		breadcrumb.classList.toggle('is-visible', visible);
 		document.documentElement.style.setProperty('--ugolini-submenu-offset', visible ? '48px' : '0px');
