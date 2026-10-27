@@ -43,13 +43,27 @@
 .single-ugolini_news .ugolini-content-shell > .wp-block-post-content figure { margin-block: 2rem !important; }
 .single-ugolini_news .ugolini-content-shell > .wp-block-post-content :is(img, video) { display: block; width: 100%; height: auto; }
 .single-ugolini_news .ugolini-news-source { margin-top: 3rem !important; font-size: .85rem !important; }
+.ugolini-news-detail .wp-block-video, .single-ugolini_news .wp-block-video { width: min(100%, 420px); margin: 2rem auto; }
+.ugolini-news-detail .wp-block-video video, .single-ugolini_news .wp-block-video video { display: block; width: 100%; height: auto; }
+.ugolini-news-detail .wp-block-video figcaption, .single-ugolini_news .wp-block-video figcaption { margin-top: .5rem; font-size: .8rem; text-align: center; }
 .single-post .ugolini-content-shell > .wp-block-post-content > * { width: 100% !important; max-width: 100% !important; margin-right: 0 !important; margin-left: 0 !important; text-align: left !important; }
 .single-post .ugolini-content-shell > .wp-block-post-content :where(h2, h3, h4) { margin-block: 1.6em .55em !important; font-size: clamp(1.8rem, 4vw, 3.5rem) !important; line-height: 1.08 !important; }
 .single-post .ugolini-content-shell > .wp-block-post-content p { margin-block: 0 1.15em !important; font-size: clamp(1rem, 1.3vw, 1.2rem) !important; line-height: 1.75 !important; }
 .preview-article-content { width: min(calc(100% - (2 * var(--ugolini-gutter))), 780px); max-width: 780px; margin-inline: auto; overflow-wrap: anywhere; text-align: left; }
 .preview-article-content > * { width: 100% !important; max-width: 100% !important; margin-right: 0 !important; margin-left: 0 !important; text-align: left !important; }
 .preview-article-content :where(h2, h3, h4) { margin-block: 1.6em .55em !important; font-size: clamp(1.8rem, 4vw, 3.5rem) !important; line-height: 1.08 !important; }
+.ugolini-article-image { margin-block: 2.5rem; text-align: center; }
+.ugolini-article-image img { display: block; max-width: 100%; height: auto; margin-inline: auto; }
+.ugolini-article-image figcaption, .ugolini-article-image-credit { margin-top: .6rem; color: var(--wp--preset--color--secondary-text); font-size: .8rem; line-height: 1.5; }
+.ugolini-article-timeline { width: 100%; border-collapse: collapse; }
+.ugolini-article-timeline :where(th, td) { padding: .75rem; border-bottom: 1px solid rgba(0, 0, 0, .14); text-align: left; vertical-align: top; }
 .preview-article-content p { margin-block: 0 1.15em !important; font-size: clamp(1rem, 1.3vw, 1.2rem) !important; line-height: 1.75 !important; }
+.ugolini-share { width: min(100%, 780px); max-width: 780px; margin: 1.25rem auto 0; text-align: center; }
+.ugolini-share__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: .75rem 1.2rem; }
+.ugolini-share__actions :is(a, button) { display: inline-flex; align-items: center; gap: .55rem; min-height: 44px; padding: .35rem .65rem; border: 0; border-radius: .3rem; background: transparent; color: inherit; font: inherit; font-size: .85rem; text-decoration: none; cursor: pointer; transition: background 180ms ease, color 180ms ease; }
+.ugolini-share__actions :is(a, button):is(:hover, :focus-visible) { background: var(--wp--preset--color--brand-dark); color: #fff; }
+.ugolini-share__actions :is(img, svg) { display: block; width: 28px; height: 28px; flex: none; object-fit: contain; }
+.ugolini-share__actions button svg { width: 24px; height: 24px; margin: 2px; }
 .ugolini-content-shell > .wp-block-post-content > p { max-width: none !important; margin: 0 0 1em !important; }
 .ugolini-content-shell > .alignwide { max-width: var(--wp--style--global--wide-size); }
 .ugolini-content-shell > .alignfull { max-width: none; }

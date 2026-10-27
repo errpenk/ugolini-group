@@ -104,6 +104,9 @@ a { color: inherit; }
 	padding: 0;
 	list-style: none;
 }
+@media (min-width: 768px) {
+	.ugolini-primary-navigation #preview-menu > li:not(.preview-mobile-shop) { min-height: 44px; display: flex; align-items: center; }
+}
 
 .ugolini-primary-navigation a,
 .ugolini-header-actions a {
@@ -154,11 +157,12 @@ a { color: inherit; }
 .preview-shop-actions { display: flex; align-items: center; flex-wrap: wrap; }
 .preview-shop-tabs { min-width: 0; gap: 0.75rem; margin-block: -0.4rem; padding-block: 0.4rem; flex-wrap: wrap; overflow: visible; }
 .preview-shop-actions { justify-content: flex-end; gap: clamp(2.5rem, 4vw, 4.5rem); flex-wrap: nowrap; }
-.preview-shop-tabs button,
+.preview-shop-actions > .ugolini-shop-count { min-height: 48px; display: inline-flex; align-items: center; margin: 0 auto 0 0; padding-left: calc(1rem + 1px); font-style: italic; font-family: var(--wp--preset--font-family--interface); font-size: .9rem; font-weight: 600; white-space: nowrap; }
+.preview-shop-tabs :is(button, a),
 .preview-shop-actions button,
 .preview-shop-actions :where(input, select) { min-height: 48px; padding-inline: 1rem; border: 1px solid var(--wp--preset--color--border); background: transparent; color: inherit; }
-.preview-shop-tabs button { flex: 0 1 auto; height: 48px; max-width: 100%; border-color: var(--wp--preset--color--text); border-radius: 999px; cursor: pointer; white-space: normal; }
-.preview-shop-tabs button.is-active { border-color: var(--wp--preset--color--text); background: var(--wp--preset--color--text); color: var(--wp--preset--color--white); }
+.preview-shop-tabs :is(button, a) { flex: 0 1 auto; height: 48px; max-width: 100%; border-color: var(--wp--preset--color--text); border-radius: 999px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; white-space: normal; }
+.preview-shop-tabs :is(button, a).is-active { border-color: var(--wp--preset--color--text); background: var(--wp--preset--color--text); color: var(--wp--preset--color--white); }
 .preview-product-card[hidden] { display: none !important; }
 .preview-shop-actions [data-filter-open] { display: inline-flex; align-items: center; gap: 0.55rem; padding-inline: 0; border: 0; }
 .preview-shop-actions [data-filter-open] .lucide,
@@ -195,6 +199,8 @@ a { color: inherit; }
 .preview-article-hero > div { position: relative; z-index: 2; width: min(calc(100% - (2 * var(--ugolini-gutter))), 76rem); margin-inline: auto; padding-bottom: clamp(1.25rem, 2.5vw, 2.25rem); text-align: center; }
 .preview-article-hero .ugolini-eyebrow { width: max-content; margin-inline: auto; color: var(--wp--preset--color--text); font-size: 0.72rem; }
 .preview-article-hero h1 { max-width: 18ch; margin: 0.65rem auto 0.9rem; font-size: clamp(3rem, 5.7vw, 6rem); line-height: 1.02; }
+.preview-article-hero--long::after { background: linear-gradient(180deg, transparent 0 12%, rgb(247 243 238 / 88%) 51%, var(--wp--preset--color--background) 90%); }
+.preview-article-hero--long h1 { max-width: 23ch; font-size: clamp(2.25rem, 4.5vw, 4.8rem); }
 .preview-article-date { margin: 0; opacity: 0.72; }
 .preview-article-content { width: min(100% - (2 * var(--ugolini-gutter)), 780px); margin-inline: auto; padding: clamp(2rem, 4vw, 3.5rem) 0 clamp(4rem, 8vw, 8rem); font-size: clamp(1rem, 1.3vw, 1.2rem); line-height: 1.75; }
 .preview-article-content :where(h2, h3, h4) { margin-top: 2.2em; line-height: 1.1; }
@@ -281,7 +287,11 @@ a { color: inherit; }
 	.ugolini-header-actions { grid-column: 3; grid-row: 1; }
 	.preview-menu-button { display: inline-flex; min-width: 44px; min-height: 44px; align-items: center; justify-content: center; padding: 0; border: 0; background: transparent; }
 	.ugolini-primary-navigation #preview-menu { position: fixed; top: var(--ugolini-header-bottom); right: 0; bottom: auto; left: 0; max-height: calc(100dvh - var(--ugolini-header-bottom)); display: none; padding: 1.5rem var(--wp--style--root--padding-right); overflow-y: auto; border-bottom: 1px solid var(--wp--preset--color--border); background: var(--wp--preset--color--background); transition: top 220ms cubic-bezier(.22,1,.36,1); }
-	.ugolini-primary-navigation #preview-menu.is-open { display: grid; }
+	.ugolini-primary-navigation #preview-menu.is-open { display: grid; gap: 0; padding-top: 5.5rem; }
+	body.ugolini-mobile-menu-open .preview-menu-button { position: fixed; top: calc(var(--ugolini-header-bottom) + 1.5rem); right: var(--wp--style--root--padding-right); left: auto; z-index: 1002; width: 44px; height: 44px; }
+	.preview-close-icon { display: none; }
+	body.ugolini-mobile-menu-open .preview-menu-button > .lucide { display: none; }
+	body.ugolini-mobile-menu-open .preview-close-icon { display: inline-flex; }
 	body.has-overlay-header:not(.is-scrolled) .ugolini-primary-navigation #preview-menu.is-open,
 	body.has-overlay-header:not(.is-scrolled) .ugolini-primary-navigation #preview-menu.is-open a { color: var(--wp--preset--color--text) !important; }
 	.preview-mobile-shop { display: block; }
@@ -293,8 +303,11 @@ a { color: inherit; }
 	.preview-product-detail { grid-template-columns: 1fr; }
 	.preview-shop-bar { align-items: stretch; flex-direction: column; }
 	.preview-shop-tabs { width: 100%; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.55rem; margin-inline: 0; padding-inline: 0; overflow: visible; }
-	.preview-shop-tabs button { width: 100%; min-width: 0; min-height: 44px; height: auto; padding: 0.6rem 0.65rem; line-height: 1.25; white-space: normal; }
+	.preview-shop-tabs :is(button, a) { width: 100%; min-width: 0; min-height: 44px; height: auto; padding: 0.6rem 0.65rem; line-height: 1.25; white-space: normal; }
 	.preview-shop-actions { display: grid; grid-template-columns: 1fr 1fr; column-gap: 2rem; }
+	.preview-shop-actions > .ugolini-shop-count { grid-column: 1; padding-left: calc(.65rem + 1px); }
+	.preview-shop-actions > [data-filter-open] { grid-column: 2; justify-self: end; }
+	.preview-shop-actions > label:has(select) { grid-column: 1 / -1; }
 	.preview-shop-actions > * { min-width: 0; }
 	.preview-shop-actions select { width: 100%; min-width: 0; }
 	.preview-shop-actions label:has(input) { grid-column: 1 / -1; }

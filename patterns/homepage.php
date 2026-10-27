@@ -7,8 +7,12 @@
  * Inserter: no
  */
 ?>
+<!-- wp:group {"align":"full","className":"ugolini-home-first-screen","layout":{"type":"default"}} -->
+<div class="wp-block-group alignfull ugolini-home-first-screen">
 <!-- wp:pattern {"slug":"ugolini-group/hero"} /-->
 <!-- wp:pattern {"slug":"ugolini-group/trust-strip"} /-->
+</div>
+<!-- /wp:group -->
 <!-- wp:pattern {"slug":"ugolini-group/home-events"} /-->
 <!-- wp:pattern {"slug":"ugolini-group/collection-grid"} /-->
 <!-- wp:pattern {"slug":"ugolini-group/featured-products"} /-->

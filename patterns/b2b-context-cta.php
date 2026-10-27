@@ -1,14 +1,14 @@
 <?php
-/** Title: B2B contact carousel
+/** Title: B2B FAQ carousel
  * Slug: ugolini-group/b2b-context-cta
  * Categories: ugolini-sections
  */
 ?>
 <!-- wp:html -->
 <section class="ugolini-context-cta ugolini-carousel" data-carousel>
-	<img class="ugolini-carousel__slide is-active" src="https://ugolinigroup.com/wp-content/uploads/2026/08/9371-olio-extra-vergine-di-oliva-al-tartufo-bianco-ugolini-gourmet-7-scaled-1.jpg" alt="Olio al tartufo bianco Ugolini Gourmet">
-	<img class="ugolini-carousel__slide" src="https://ugolinigroup.com/wp-content/uploads/2026/08/8800-pesto-alla-genovese-ugolini-gourmet-10.jpg" alt="Pesto Ugolini Gourmet" loading="lazy">
-	<img class="ugolini-carousel__slide" src="https://ugolinigroup.com/wp-content/uploads/2026/08/8824-ragu-alla-bolognese-ugolini-gourmet-10.jpg" alt="Ragù Ugolini Gourmet" loading="lazy">
-	<div class="ugolini-context-cta__copy"><div><span>Partnership professionali</span><h2>Una gamma costruita per il tuo lavoro</h2></div><div><p>Condimenti pronti all’uso, continuità qualitativa e assistenza diretta per ristorazione, retail e distribuzione.</p><p>La selezione riunisce ricette e formati destinati a professionisti e famiglie. Ingredienti, certificazioni e modalità d’uso restano indicati in ogni scheda, mentre il team supporta assortimento, riordino e spedizione internazionale.</p><a href="/contatti/">Parliamo del tuo progetto</a></div></div>
+	<img class="ugolini-carousel__slide is-active" src="<?php echo esc_url( get_theme_file_uri( 'assets/images/b2b/context-01.jpg' ) ); ?>" alt="Team che consulta informazioni">
+	<img class="ugolini-carousel__slide" src="<?php echo esc_url( get_theme_file_uri( 'assets/images/b2b/context-02.jpg' ) ); ?>" alt="Dettaglio di una specialità italiana" loading="lazy">
+	<img class="ugolini-carousel__slide" src="<?php echo esc_url( get_theme_file_uri( 'assets/images/b2b/context-03.jpg' ) ); ?>" alt="Consulenza e assistenza al cliente" loading="lazy">
+	<div class="ugolini-context-cta__copy"><div><span>Domande frequenti</span><h2>Le risposte per scegliere con chiarezza</h2></div><div><p>Hai domande su prodotti, ordini, account o richieste professionali? Le informazioni essenziali sono raccolte nella pagina FAQ.</p><p>Consulta le risposte su ingredienti, allergeni, spedizioni e assistenza; per ogni referenza restano disponibili anche le indicazioni nella scheda prodotto.</p><a href="/faq/">Consulta le FAQ</a></div></div>
 </section>
 <!-- /wp:html -->

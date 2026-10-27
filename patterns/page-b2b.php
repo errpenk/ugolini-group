@@ -7,12 +7,12 @@
  * Block Types: core/post-content
  */
 ?>
-<!-- wp:cover {"url":"https://ugolinigroup.com/wp-content/uploads/2026/08/9371-olio-extra-vergine-di-oliva-al-tartufo-bianco-ugolini-gourmet-7-scaled-1.jpg","alt":"Olio extra vergine di oliva al tartufo bianco Ugolini Gourmet","dimRatio":66,"overlayColor":"dark-section","isUserOverlayColor":true,"align":"full","className":"ugolini-page-hero ugolini-page-hero--image ugolini-b2b-hero"} --><div class="wp-block-cover alignfull ugolini-page-hero ugolini-page-hero--image ugolini-b2b-hero"><span aria-hidden="true" class="wp-block-cover__background has-dark-section-background-color has-background-dim-70 has-background-dim"></span><img class="wp-block-cover__image-background" alt="Olio extra vergine di oliva al tartufo bianco Ugolini Gourmet" src="https://ugolinigroup.com/wp-content/uploads/2026/08/9371-olio-extra-vergine-di-oliva-al-tartufo-bianco-ugolini-gourmet-7-scaled-1.jpg" data-object-fit="cover"/><div class="wp-block-cover__inner-container"><!-- wp:group {"align":"wide","className":"ugolini-page-hero-content","layout":{"type":"constrained"}} --><div class="wp-block-group alignwide ugolini-page-hero-content"><!-- wp:paragraph {"className":"ugolini-eyebrow"} --><p class="ugolini-eyebrow">Ugolini per i professionisti</p><!-- /wp:paragraph --><!-- wp:post-title {"level":1} /--><!-- wp:paragraph --><p>Condimenti pronti all’uso nati da esperienza nella ristorazione, cultura gastronomica e ricerca della continuità qualitativa.</p><!-- /wp:paragraph --></div><!-- /wp:group --></div></div><!-- /wp:cover -->
+<!-- wp:cover {"url":"assets/images/page-heroes/b2b-20261007.jpg","alt":"Professionisti al lavoro","dimRatio":66,"overlayColor":"dark-section","isUserOverlayColor":true,"align":"full","className":"ugolini-page-hero ugolini-page-hero--image ugolini-b2b-hero"} --><div class="wp-block-cover alignfull ugolini-page-hero ugolini-page-hero--image ugolini-b2b-hero"><span aria-hidden="true" class="wp-block-cover__background has-dark-section-background-color has-background-dim-70 has-background-dim"></span><img class="wp-block-cover__image-background" alt="Professionisti al lavoro" src="<?php echo esc_url( get_theme_file_uri( 'assets/images/page-heroes/b2b-20261007.jpg' ) ); ?>" data-object-fit="cover"/><div class="wp-block-cover__inner-container"><!-- wp:group {"align":"wide","className":"ugolini-page-hero-content","layout":{"type":"constrained"}} --><div class="wp-block-group alignwide ugolini-page-hero-content"><!-- wp:paragraph {"className":"ugolini-eyebrow"} --><p class="ugolini-eyebrow">Ugolini per i professionisti</p><!-- /wp:paragraph --><!-- wp:post-title {"level":1} /--><!-- wp:paragraph --><p>Condimenti pronti all’uso nati da esperienza nella ristorazione, cultura gastronomica e ricerca della continuità qualitativa.</p><!-- /wp:paragraph --></div><!-- /wp:group --></div></div><!-- /wp:cover -->
 
 <!-- wp:group {"align":"full","className":"ugolini-section ugolini-wholesale-intro","layout":{"type":"constrained"}} --><div class="wp-block-group alignfull ugolini-section ugolini-wholesale-intro"><!-- wp:group {"align":"wide","className":"ugolini-wholesale-intro__grid","layout":{"type":"default"}} --><div class="wp-block-group alignwide ugolini-wholesale-intro__grid"><!-- wp:group {"layout":{"type":"constrained"}} --><div class="wp-block-group"><!-- wp:paragraph {"className":"ugolini-eyebrow"} --><p class="ugolini-eyebrow">Partnership professionali</p><!-- /wp:paragraph --><!-- wp:heading --><h2 class="wp-block-heading">Sei uno chef, ristoratore o distributore?</h2><!-- /wp:heading --><!-- wp:paragraph --><p>Roberto Ugolini ha trasformato oltre vent’anni di esperienza nella ristorazione in una gamma pensata per le esigenze concrete della cucina professionale e della grande distribuzione.</p><!-- /wp:paragraph --><!-- wp:buttons --><div class="wp-block-buttons"><!-- wp:button --><div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="/contatti/">Parliamo del tuo progetto</a></div><!-- /wp:button --></div><!-- /wp:buttons --></div><!-- /wp:group --><!-- wp:list {"className":"ugolini-wholesale-benefits"} --><ul class="wp-block-list ugolini-wholesale-benefits"><li><strong>Standard qualitativo costante</strong><span>Ricette affidabili anche quando cambia la brigata di cucina.</span></li><li><strong>Condimenti pronti all’uso</strong><span>Funzionalità e continuità per il servizio quotidiano.</span></li><li><strong>Ristorazione e distribuzione</strong><span>Una gamma pensata per professionisti, retail e famiglie.</span></li><li><strong>Mercati internazionali</strong><span>Prodotti Made in Italy spediti nel mondo con DHL Express.</span></li></ul><!-- /wp:list --></div><!-- /wp:group --></div><!-- /wp:group -->
 
 <!-- wp:html -->
-<section class="ugolini-wholesale-services" data-service-story>
+<section id="dalla-selezione-al-riordino" class="ugolini-wholesale-services" data-service-story>
 	<div class="ugolini-wholesale-services__stage">
 		<header class="ugolini-wholesale-services__heading"><p class="ugolini-eyebrow">Un servizio costruito per il tuo lavoro</p><h2>Dalla selezione al riordino</h2></header>
 		<div class="ugolini-wholesale-services__slides" aria-live="polite">
@@ -26,11 +26,11 @@
 		</div>
 		<div class="ugolini-wholesale-services__axis" aria-hidden="true"><i></i><span class="is-active">01</span><span>02</span><span>03</span><span>04</span><span>05</span><span>06</span><span>07</span></div>
 		<div class="ugolini-wholesale-services__media" aria-hidden="true">
-			<img class="is-active" src="https://ugolinigroup.com/wp-content/uploads/2026/08/8800-pesto-alla-genovese-ugolini-gourmet-10.jpg" alt="">
-			<img src="https://ugolinigroup.com/wp-content/uploads/2026/08/8848-sugo-allarrabbiata-ugolini-gourmet-5.jpg" alt="" loading="lazy">
-			<img src="https://ugolinigroup.com/wp-content/uploads/2026/08/8831-sugo-tartufo-nero-ugolini-gourmet-4.jpg" alt="" loading="lazy">
-			<img src="https://ugolinigroup.com/wp-content/uploads/2026/08/9371-olio-extra-vergine-di-oliva-al-tartufo-bianco-ugolini-gourmet-7-scaled-1.jpg" alt="" loading="lazy">
-			<img src="https://ugolinigroup.com/wp-content/uploads/2026/08/8824-ragu-alla-bolognese-ugolini-gourmet-8.jpg" alt="" loading="lazy">
+			<img class="is-active" src="<?php echo esc_url( get_theme_file_uri( 'assets/images/b2b/service-01.jpg' ) ); ?>" alt="">
+			<img src="<?php echo esc_url( get_theme_file_uri( 'assets/images/b2b/service-02.jpg' ) ); ?>" alt="" loading="lazy">
+			<img src="<?php echo esc_url( get_theme_file_uri( 'assets/images/b2b/service-03.jpg' ) ); ?>" alt="" loading="lazy">
+			<img src="<?php echo esc_url( get_theme_file_uri( 'assets/images/b2b/service-04.jpg' ) ); ?>" alt="" loading="lazy">
+			<img src="<?php echo esc_url( get_theme_file_uri( 'assets/images/b2b/service-05.jpg' ) ); ?>" alt="" loading="lazy">
 			<img src="https://ugolinigroup.com/wp-content/uploads/2026/08/8855-pesto-vegano-ugolini-gourmet-8-scaled-1.jpg" alt="" loading="lazy">
 			<img src="https://ugolinigroup.com/wp-content/uploads/2026/08/8817-pesto-rosso-ugolini-gourmet-4.jpg" alt="" loading="lazy">
 		</div>
@@ -51,26 +51,23 @@
 <!-- wp:html -->
 <section class="ugolini-b2b-partner" aria-labelledby="ugolini-b2b-partner-title">
 	<div class="ugolini-b2b-partner__benefits">
-		<p class="ugolini-eyebrow">Vantaggi professionali</p>
-		<h2 id="ugolini-b2b-partner-title">Un rapporto costruito sulla tua attività</h2>
-		<ul>
-			<li>Proposte e condizioni dedicate</li>
-			<li>Ordini online dalla gamma disponibile</li>
-			<li>Assistenza commerciale diretta</li>
-			<li>Formati, ingredienti e certificazioni consultabili</li>
-			<li>Spedizioni internazionali con DHL Express</li>
-			<li>Referenze per ristorazione, retail e distribuzione</li>
-			<li>Riordino semplice dei prodotti già scelti</li>
-		</ul>
+		<p class="ugolini-eyebrow">Soluzioni professionali</p>
+		<h2 id="ugolini-b2b-partner-title">Un servizio costruito intorno alla tua attività</h2>
+		<div class="ugolini-b2b-partner__features">
+			<div><h3>Selezione su misura</h3><p>Prodotti e formati adatti alla tua attività.</p></div>
+			<div><h3>Supporto diretto</h3><p>Assistenza dedicata per ordini e riordini.</p></div>
+			<div><h3>Informazioni di prodotto</h3><p>Ingredienti, certificazioni e documentazione.</p></div>
+			<div><h3>Fornitura internazionale</h3><p>Spedizioni internazionali con DHL Express.</p></div>
+		</div>
 	</div>
 	<form class="ugolini-b2b-form" action="mailto:info@ugolinigroup.com" method="post" enctype="text/plain">
-		<header><p class="ugolini-eyebrow">Richieste B2B</p><h2>Sei uno chef, ristoratore o distributore?</h2><p>Raccontaci la tua attività: il team Ugolini ti ricontatterà per approfondire esigenze, gamma e condizioni.</p></header>
-		<div class="ugolini-b2b-form__row"><label><span>Nome</span><input type="text" name="Nome" autocomplete="given-name" required></label><label><span>Cognome</span><input type="text" name="Cognome" autocomplete="family-name" required></label></div>
-		<label><span>Email</span><input type="email" name="Email" autocomplete="email" required></label>
-		<fieldset><legend>Tipologia di attività</legend><label><input type="radio" name="Attività" value="Chef o ristorante" required> Chef / ristorante</label><label><input type="radio" name="Attività" value="Negozio retail"> Negozio retail</label><label><input type="radio" name="Attività" value="Rivenditore online"> Rivenditore online</label><label><input type="radio" name="Attività" value="Grossista o distributore"> Grossista / distributore</label><label><input type="radio" name="Attività" value="Produttore alimentare"> Produttore alimentare</label></fieldset>
-		<label><span>Paese</span><input type="text" name="Paese" autocomplete="country-name" required></label>
-		<label><span>Telefono</span><input type="tel" name="Telefono" autocomplete="tel"></label>
-		<label><span>Descrivi la tua richiesta</span><textarea name="Richiesta" rows="5" required></textarea></label>
+		<header><p class="ugolini-eyebrow">Contatto professionale</p><h2>Parliamo delle esigenze della tua attività</h2><p>Cerchi prodotti specifici, formati professionali o una fornitura continuativa? Raccontaci di cosa hai bisogno: il nostro team commerciale ti contatterà per individuare la soluzione più adatta.</p></header>
+		<div class="ugolini-b2b-form__row"><label><span>Nome</span><input type="text" name="Nome" placeholder="Nome" autocomplete="given-name" required></label><label><span>Cognome</span><input type="text" name="Cognome" placeholder="Cognome" autocomplete="family-name" required></label></div>
+		<label><span>Email</span><input type="email" name="Email" placeholder="Email" autocomplete="email" required></label>
+		<fieldset><legend>Tipologia di attività</legend><label><input type="radio" name="Attività" value="Ristorante / Chef" required> Ristorante / Chef</label><label><input type="radio" name="Attività" value="Retail"> Retail</label><label><input type="radio" name="Attività" value="E-commerce"> E-commerce</label><label><input type="radio" name="Attività" value="Distributore / Grossista"> Distributore / Grossista</label><label><input type="radio" name="Attività" value="Industria alimentare"> Industria alimentare</label><label><input type="radio" name="Attività" value="Altro"> Altro</label></fieldset>
+		<label><span>Paese / Regione</span><input type="text" name="Paese / Regione" placeholder="Seleziona…" autocomplete="country-name" list="ugolini-b2b-paesi" required></label><datalist id="ugolini-b2b-paesi"><option value="Italia"><option value="Francia"><option value="Germania"><option value="Regno Unito"><option value="Stati Uniti"><option value="Cina"></datalist>
+		<label><span>Telefono</span><input type="tel" name="Telefono" placeholder="Numero di telefono" autocomplete="tel"></label>
+		<label><span>Di cosa hai bisogno?</span><textarea name="Richiesta" rows="5" placeholder="Prodotti di interesse, quantità, mercato di riferimento o altre esigenze…" required></textarea></label>
 		<button type="submit">Invia la richiesta</button>
 		<small>L’invio apre il tuo programma di posta: il sito non conserva i dati inseriti.</small>
 	</form>

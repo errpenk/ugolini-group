@@ -11,10 +11,14 @@
 .ugolini-footer-social a { display: grid; place-items: center; width: 28px; height: 28px; color: #171716; }
 .ugolini-footer-social svg { width: 21px; height: 21px; fill: none; stroke: currentColor; stroke-width: 2; }
 .ugolini-footer-social path { fill: currentColor; stroke: none; }
-.ugolini-footer-bottom { display: flex; justify-content: space-between; align-items: end; gap: 2rem; margin: clamp(4rem, 7vw, 7rem) auto 0; font: 500 .75rem/1.7 var(--wp--preset--font-family--interface); }
-.ugolini-footer-bottom p { margin: 0; }
+.ugolini-footer-bottom { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 1.4rem 2rem; margin: clamp(4rem, 7vw, 7rem) auto 0; font: 500 .75rem/1.7 var(--wp--preset--font-family--interface); }
+.ugolini-footer-legal { grid-column: 1 / -1; min-width: 0; display: grid; gap: .7rem; color: #50504d; }
+.ugolini-footer-legal > strong { color: #171716; font-size: .82rem; letter-spacing: .02em; }
+.ugolini-footer-facts, .ugolini-footer-addresses, .ugolini-footer-contact { display: flex; flex-wrap: wrap; column-gap: 1rem; row-gap: .2rem; }
+.ugolini-footer-legal-last, .ugolini-footer-legal-last nav { display: flex; align-items: center; gap: .8rem; white-space: nowrap; }
+.ugolini-footer-legal-last { color: #171716; }
 .ugolini-footer-bottom a { color: inherit; text-decoration: underline; }
-.ugolini-footer-payments { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .4rem; }
+.ugolini-footer-payments { display: flex; flex-wrap: nowrap; justify-content: flex-end; gap: .4rem; white-space: nowrap; }
 .ugolini-footer-payments > span { display: inline-flex; align-items: center; justify-content: center; min-width: 49px; height: 29px; padding: 0 .35rem; border: 1px solid #dedbd7; border-radius: 4px; background: #fff; color: #182b72; font: 700 .7rem/1 var(--wp--preset--font-family--interface); white-space: nowrap; }
 .ugolini-footer-payments .is-visa { font-style: italic; font-size: .9rem; }
 .ugolini-footer-payments .is-mastercard { gap: 0; }
@@ -26,6 +30,7 @@
 .ugolini-footer-payments .is-google b { margin-right: .15rem; color: #4285f4; font-size: 1rem; }
 .ugolini-footer-payments .is-wechat { color: #19a84b; font-size: .6rem; }
 .ugolini-footer-payments .is-alipay { background: #1677ff; color: #fff; }
+@media (max-width: 900px) { .ugolini-footer-bottom { grid-template-columns: 1fr; gap: 1.5rem; } .ugolini-footer-legal-last, .ugolini-footer-legal-last nav { flex-wrap: wrap; white-space: normal; } .ugolini-footer-payments { justify-content: flex-start; } }
 @media (max-width: 1050px) { .ugolini-footer-layout { grid-template-columns: repeat(4, minmax(0, 1fr)); } .ugolini-footer-logo { grid-column: 1 / -1; } .ugolini-footer-social { grid-column: 1 / -1; } }
 @media (max-width: 680px) {
 	.ugolini-site-footer { padding-block: 3rem 2rem; }
@@ -38,6 +43,14 @@
 	.ugolini-footer-column[open] summary::after { transform: rotate(225deg); }
 	.ugolini-footer-column nav { margin: 0 0 1.2rem; gap: .85rem; }
 	.ugolini-footer-social { margin-top: 2.5rem; }
-	.ugolini-footer-bottom { display: block; margin-top: 3.5rem; text-align: center; }
-	.ugolini-footer-payments { justify-content: center; margin-top: 2rem; }
+	.ugolini-footer-bottom { margin-top: 3.5rem; text-align: left; }
+	.ugolini-footer-payments { flex-wrap: wrap; justify-content: flex-start; }
+}
+
+/* Keep the payment badges anchored to the footer's lower-right edge. */
+.ugolini-footer-payments { flex-wrap: wrap; justify-content: flex-end; align-content: flex-end; justify-self: end; align-self: end; max-width: min(100%, 620px); white-space: normal; }
+.ugolini-footer-payments > span { min-width: 0; padding-inline: .55rem; font-size: .65rem; }
+@media (max-width: 680px) {
+	.ugolini-site-footer .ugolini-footer-payments { justify-content: center !important; justify-self: center !important; }
+	.ugolini-site-footer .ugolini-payment-attribution { text-align: center !important; }
 }

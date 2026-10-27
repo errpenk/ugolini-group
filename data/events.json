@@ -1,6 +1,7 @@
 [
   {
     "id": "sial-paris-2026-ugolini",
+    "galleryId": "sial-paris-2026-ugolini",
     "title": "SIAL Paris 2026",
     "startDate": "2026-10-17",
     "endDate": "2026-10-21",
@@ -15,7 +16,10 @@
       "Truffleat",
       "Caviareat",
       "Ugolini Gourmet"
-    ]
+    ],
+    "detailTitle": "SIAL Paris 2026 | Parigi, arriviamo! 🇫🇷",
+    "detailMeta": "17–21 ottobre 2026 · Parigi · Hall 1 · Regione Lazio",
+    "detailHtml": "<h2>Ci vediamo a SIAL Paris 2026</h2>\n<p>Dal 17 al 21 ottobre 2026 saremo a Parigi per <strong>SIAL Paris 2026</strong>, un importante punto d’incontro internazionale per il settore food, dove brand, professionisti, buyer e partner provenienti da diversi mercati si incontrano per scoprire prodotti, tendenze e nuove opportunità.</p>\n<p>La nostra partecipazione sarà un’occasione per portare a Parigi la tradizione, la qualità e la creatività della gastronomia italiana e condividere con un pubblico internazionale la nostra visione delle materie prime di qualità e dell’esperienza gastronomica contemporanea.</p>\n<h2>Quattro brand, un’unica esperienza italiana</h2>\n<p>A questa edizione parteciperanno insieme <strong>LuxurEat, Truffleat, Caviareat e Ugolini Gourmet</strong>.</p>\n<p>Ogni brand racconta un aspetto diverso dell’eccellenza gastronomica italiana. Dai tartufi e prodotti al tartufo al caviale e alle specialità italiane selezionate, la nostra proposta nasce per offrire nuove possibilità alla ristorazione, al retail e ai partner internazionali.</p>\n<h2>Dalle materie prime a nuove opportunità</h2>\n<p>A SIAL Paris non porteremo soltanto prodotti, ma anche idee legate al gusto, alle applicazioni e alle nuove possibilità di mercato.</p>\n<p>Attraverso tartufi, caviale e specialità gastronomiche italiane, vogliamo confrontarci con professionisti provenienti da diversi Paesi ed esplorare nuove opportunità nella ristorazione, nel retail, nello sviluppo di prodotto e nelle collaborazioni internazionali.</p>\n<h2>Ci vediamo a Parigi</h2>\n<p>Se anche tu parteciperai a SIAL Paris 2026, vieni a trovarci al nostro stand. Sarà l’occasione per conoscere il nostro team, scoprire i nostri prodotti e parlare insieme di nuove idee e opportunità di collaborazione.</p>\n<p class=\"ugolini-event-detail__place\">📍 <strong>Hall 1 · Regione Lazio</strong><br>📅 <strong>17–21 ottobre 2026 · Parigi</strong></p>\n<p class=\"ugolini-event-detail__closing\"><strong>Assapora l’eccellenza italiana. Ispira nuovi sapori, connessioni e opportunità.</strong></p>"
   },
   {
     "id": "sial-paris-2026-caviar",
@@ -31,6 +35,175 @@
     "brands": [
       "TinCaviar",
       "Caviareat"
+    ],
+    "detailTitle": "SIAL Paris 2026",
+    "detailMeta": "17–21 ottobre 2026 · Parigi · Hall 1 · Regione Lazio",
+    "detailHtml": "<p class=\"ugolini-event-detail__lead\"><strong>Scopri l’eccellenza del caviale a SIAL Paris 2026.</strong></p>\n<p>Dal <strong>17 al 21 ottobre 2026</strong>, TinCaviar e Caviareat saranno a Parigi per <strong>SIAL Paris 2026</strong>, uno dei principali appuntamenti internazionali dedicati al settore food. Un’occasione per incontrare professionisti, buyer e partner provenienti da tutto il mondo e presentare una proposta interamente dedicata al caviale e alle sue opportunità nel mercato internazionale.</p>\n<h2>Due brand, una passione per il caviale</h2>\n<p>A SIAL Paris, <strong>TinCaviar e Caviareat</strong> presenteranno insieme la loro esperienza nel mondo del caviale. Qualità, selezione e attenzione al prodotto sono al centro di una proposta pensata per rispondere alle esigenze della ristorazione, del retail e dei professionisti del settore food.</p>\n<p>Dalla selezione del caviale alla sua presentazione, i due brand raccontano un prodotto simbolo dell’alta gastronomia attraverso competenza, identità e una visione orientata ai mercati internazionali.</p>\n<h2>Qualità e mercato internazionale</h2>\n<p>SIAL Paris rappresenta il luogo ideale per creare nuove connessioni e confrontarsi sulle evoluzioni del settore. La partecipazione di TinCaviar e Caviareat sarà un’opportunità per presentare i prodotti, incontrare nuovi interlocutori e sviluppare relazioni con distributori, buyer e professionisti interessati al segmento premium.</p>\n<p>Un incontro tra eccellenza gastronomica e nuove prospettive commerciali, con il caviale come protagonista.</p>\n<h2>Vieni a trovarci a Parigi</h2>\n<p>Se sarai a SIAL Paris 2026, vieni a conoscere <strong>TinCaviar e Caviareat</strong> e a scoprire da vicino la nostra selezione. Ti aspettiamo per condividere prodotti, idee e nuove opportunità di collaborazione.</p>\n<p class=\"ugolini-event-detail__place\">📍 <strong>Hall 1 · Regione Lazio</strong><br>📅 <strong>17–21 ottobre 2026</strong><br>🇫🇷 <strong>Parigi, Francia</strong></p>\n<p class=\"ugolini-event-detail__closing\"><strong>Assapora l’eccellenza. Scopri il caviale. Incontriamoci a Parigi.</strong></p>\n<p class=\"ugolini-event-detail__brands\"><strong>TinCaviar · Caviareat</strong></p>"
+  },
+  {
+    "kind": "news",
+    "id": "sial-paris-2026-lazio-global",
+    "date": "2026-10-26",
+    "author": "LuxurEat",
+    "title": "Dal Lazio ai mercati globali: LuxurEat China e Ugolini Group a SIAL Paris 2026",
+    "intro": "SIAL Paris 2026 ha offerto una vetrina internazionale per l’eccellenza agroalimentare italiana e nuove occasioni di incontro con i mercati globali.",
+    "opening": [
+      "A SIAL Paris 2026, il Lazio ha presentato la qualità, la tradizione e l’innovazione della propria filiera agroalimentare attraverso 17 realtà produttive: 16 imprese e una cooperativa.",
+      "La fiera ha riunito circa 8.000 espositori e ha previsto l’arrivo di circa 295.000 professionisti, creando occasioni di dialogo tra produttori, buyer, distributori e partner internazionali."
+    ],
+    "category": "Notizie",
+    "sourceUrl": "https://luxureat.cn/news/sial-paris-2026-lazio-global/",
+    "cardImage": "https://luxureat.cn/wp-content/themes/luxureat-wordpress-theme/assets/media/brand-news/sial-paris-2026-lazio-cover.webp",
+    "cardImagePreview": "assets/images/gallery-news/sial-paris-2026-lazio-cover.webp",
+    "previewPage": "notizia-sial-paris-2026-lazio-global.html",
+    "video": "https://luxureat.cn/wp-content/themes/luxureat-wordpress-theme/assets/media/brand-news/sial-paris-2026-arsial.mp4",
+    "videoPoster": "https://luxureat.cn/wp-content/themes/luxureat-wordpress-theme/assets/media/brand-news/sial-paris-2026-arsial-poster.webp",
+    "videoAsset": "assets/videos/gallery-events/sial-paris-2026-arsial.mp4",
+    "videoPosterAsset": "assets/images/gallery-events/sial-paris-2026-arsial.webp",
+    "videoCredit": "arsial.lazio",
+    "videoCreditUrl": "https://www.instagram.com/arsial.lazio/",
+    "galleryId": "sial-paris-2026-ugolini",
+    "sections": [
+      {
+        "heading": "Dall’Italia al mercato cinese",
+        "paragraphs": [
+          "Per Ugolini Group e LuxurEat China, SIAL Paris è stata un’occasione per presentare brand e prodotti e per avvicinare la produzione italiana ai mercati internazionali.",
+          "Ugolini Group porta le specialità e la cultura gastronomica italiana a un pubblico globale. LuxurEat China sviluppa questo percorso in Cina, creando un ponte tra i brand italiani, i consumatori e i partner commerciali locali.",
+          "L’incontro diretto con buyer e professionisti di diversi Paesi aiuta a comprendere le esigenze dei mercati e a esplorare nuove collaborazioni e opportunità distributive."
+        ],
+        "media": [{ "type": "video" }]
+      },
+      {
+        "heading": "Il Lazio incontra il mondo",
+        "paragraphs": [
+          "Nel 2026 la Regione Lazio ha sostenuto la promozione internazionale delle imprese agroalimentari con un programma di circa 3,7 milioni di euro, articolato in oltre 20 eventi fieristici in Italia e all’estero.",
+          "La partecipazione a SIAL Paris ha dato alle aziende la possibilità di presentare i prodotti e costruire relazioni durature con operatori del settore food.",
+          "In collaborazione con AIC Lazio, le dimostrazioni di cucina e le degustazioni hanno dato spazio anche ai prodotti senza glutine e a scelte alimentari più inclusive."
+        ],
+        "media": []
+      },
+      {
+        "heading": "Nuove connessioni per il gusto italiano",
+        "paragraphs": [
+          "Dal Lazio a Parigi e poi alla Cina, l’internazionalizzazione significa anche creare relazioni tra persone, imprese e culture gastronomiche.",
+          "SIAL Paris 2026 è stata una tappa di questo percorso: un’occasione per far conoscere l’eccellenza italiana e aprire nuove possibilità di collaborazione nei mercati internazionali."
+        ],
+        "media": []
+      }
+    ]
+  },
+  {
+    "kind": "news",
+    "id": "fhc-shanghai-2026-breakfast",
+    "date": "2026-10-24",
+    "author": "LuxurEat",
+    "title": "LuxurEat a FHC Shanghai 2026: il gusto italiano comincia dalla colazione",
+    "intro": "Dal 10 al 12 novembre 2026, LuxurEat sarà al Shanghai New International Expo Centre, padiglione N3, stand N3A10, per presentare nuove idee dedicate alla colazione italiana.",
+    "opening": [],
+    "category": "Notizie",
+    "sourceUrl": "https://luxureat.cn/news/fhc-shanghai-2026-breakfast/",
+    "cardImage": "https://luxureat.cn/wp-content/themes/luxureat-wordpress-theme/assets/media/brand-news/fhc-2026-food-industry.webp",
+    "video": null,
+    "videoPoster": null,
+    "sections": []
+  },
+  {
+    "kind": "news",
+    "id": "fhc-shanghai-2026-pancakes",
+    "date": "2026-10-24",
+    "author": "LuxurEat",
+    "title": "Pancake a colazione: nuove idee oltre lo sciroppo d’acero",
+    "intro": "A FHC Shanghai 2026, LuxurEat presenterà la linea di topping al tartufo TrufflElixir e nuove idee per la colazione di casa.",
+    "opening": [],
+    "category": "Notizie",
+    "sourceUrl": "https://luxureat.cn/news/fhc-shanghai-2026-pancakes/",
+    "cardImage": "https://luxureat.cn/wp-content/themes/luxureat-wordpress-theme/assets/media/brand-news/fhc-breakfast-pairings-2026.webp",
+    "video": null,
+    "videoPoster": null,
+    "sections": []
+  },
+  {
+    "kind": "news",
+    "id": "sial-paris-2026-preview",
+    "date": "2026-10-06",
+    "author": "LuxurEat",
+    "title": "LuxurEat, Truffleat, Caviareat e Ugolini Gourmet insieme a SIAL Paris 2026",
+    "intro": "Dal 17 al 21 ottobre 2026, quattro brand si incontreranno a Parigi per presentare tartufi, caviale e specialità gastronomiche italiane a SIAL Paris 2026.",
+    "opening": [],
+    "category": "Notizie",
+    "sourceUrl": "https://luxureat.cn/news/sial-paris-2026-preview/",
+    "cardImage": "https://luxureat.cn/wp-content/themes/luxureat-wordpress-theme/assets/media/brand-news/sial-paris-2026-lemons.webp",
+    "video": null,
+    "videoPoster": null,
+    "sections": [
+      {
+        "heading": "Quattro brand si incontrano a Parigi",
+        "paragraphs": [
+          "Dal 17 al 21 ottobre 2026, LuxurEat, Truffleat, Caviareat e Ugolini Gourmet parteciperanno insieme a SIAL Paris 2026, presentando una selezione dedicata all’eccellenza gastronomica italiana nella Hall 1 – Regione Lazio.",
+          "SIAL Paris è uno dei punti d’incontro internazionali dell’industria alimentare. Riunisce produttori, distributori, buyer, importatori e professionisti della ristorazione da tutto il mondo. L’edizione 2026 si terrà a Paris Nord Villepinte. Sono attesi circa 8.000 espositori."
+        ],
+        "media": [
+          {
+            "type": "image",
+            "src": "https://luxureat.cn/wp-content/themes/luxureat-wordpress-theme/assets/media/brand-news/sial-paris-2026-lemons.webp",
+            "alt": "SIAL Paris 2026 campaign image"
+          }
+        ]
+      },
+      {
+        "heading": "Tartufi, caviale e gastronomia italiana",
+        "paragraphs": [
+          "La partecipazione congiunta dei quattro brand riunisce diverse espressioni della gastronomia italiana attraverso ingredienti selezionati, prodotti gourmet e soluzioni per i mercati professionali e internazionali.",
+          "Truffleat presenterà tartufi e prodotti al tartufo, valorizzandone gli aromi e le applicazioni in cucina. Caviareat si concentrerà sul caviale e sull’alta gastronomia; LuxurEat proporrà una selezione premium che collega la cultura gastronomica italiana ai mercati internazionali. Ugolini Gourmet arricchirà la presentazione con la sua attenzione alla qualità e alle specialità italiane selezionate.",
+          "Quattro identità distinte si incontrano a Parigi, unite dall’attenzione alla qualità dei prodotti e alla cultura gastronomica italiana."
+        ],
+        "media": []
+      },
+      {
+        "heading": "Collegare la qualità italiana ai mercati internazionali",
+        "paragraphs": [
+          "Partecipare a SIAL Paris è un’occasione per presentare i prodotti e creare nuove relazioni nell’industria alimentare internazionale.",
+          "Durante i cinque giorni della manifestazione, LuxurEat, Truffleat, Caviareat e Ugolini Gourmet incontreranno buyer, distributori, professionisti della ristorazione e potenziali partner per confrontarsi sulle esigenze dei diversi mercati ed esplorare nuove collaborazioni internazionali.",
+          "A partire dai prodotti, i quattro brand vogliono rafforzare il legame tra tradizione gastronomica italiana, esigenze dei consumatori contemporanei e opportunità commerciali internazionali.",
+          "SIAL Paris sarà uno spazio in cui potranno nascere nuove idee, collaborazioni e progetti futuri."
+        ],
+        "media": [
+          {
+            "type": "image",
+            "src": "https://luxureat.cn/wp-content/themes/luxureat-wordpress-theme/assets/media/brand-news/sial-paris-2026-floor-plan.webp",
+            "alt": "SIAL Paris 2026 floor plan"
+          }
+        ]
+      },
+      {
+        "heading": "L’eccellenza italiana incontra il futuro del food",
+        "paragraphs": [
+          "SIAL Paris 2026 darà spazio all’innovazione e ai cambiamenti dell’industria alimentare globale, riunendo aziende affermate, brand emergenti e operatori del settore per esplorare nuovi prodotti, tecnologie e tendenze di consumo.",
+          "In questo contesto internazionale, LuxurEat, Truffleat, Caviareat e Ugolini Gourmet presenteranno la qualità e l’identità gastronomica italiana, dialogando con professionisti di paesi e mercati diversi.",
+          "Dai tartufi e dal caviale alle specialità gastronomiche italiane, ogni prodotto diventa un punto di partenza per esplorare nuove applicazioni, mercati e collaborazioni."
+        ],
+        "media": [
+          {
+            "type": "image",
+            "src": "https://luxureat.cn/wp-content/themes/luxureat-wordpress-theme/assets/media/brand-news/sial-paris-2026-city.webp",
+            "alt": "Paris skyline and SIAL Paris 2026"
+          }
+        ]
+      },
+      {
+        "heading": "Ci vediamo a Parigi",
+        "paragraphs": [
+          "Dal 17 al 21 ottobre 2026, LuxurEat, Truffleat, Caviareat e Ugolini Gourmet incontreranno i professionisti del settore alimentare a SIAL Paris 2026, nella Hall 1 · Regione Lazio.",
+          "Cinque giorni in cui i sapori italiani incontreranno il mercato internazionale e apriranno nuove possibilità per prodotti, idee e relazioni commerciali.",
+          "SIAL Paris 2026",
+          "17–21 ottobre 2026",
+          "Paris Nord Villepinte · Parigi, Francia",
+          "Hall 1 · Regione Lazio",
+          "LuxurEat · Truffleat · Caviareat · Ugolini Gourmet",
+          "Assapora l’eccellenza italiana. Ispira nuovi sapori, connessioni e opportunità."
+        ],
+        "media": []
+      }
     ]
   },
   {

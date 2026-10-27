@@ -1,0 +1,65 @@
+.ugolini-chat {
+	position: fixed;
+	z-index: 2147483000;
+	left: max(1rem, env(safe-area-inset-left));
+	bottom: var(--ugolini-chat-bottom, calc(5.25rem + env(safe-area-inset-bottom)));
+	width: min(390px, calc(100vw - 2rem));
+	font-family: var(--wp--preset--font-family--interface);
+}
+
+.ugolini-chat__launcher {
+	width: 64px;
+	height: 64px;
+	display: grid;
+	place-items: center;
+	padding: 0;
+	border: 0;
+	border-radius: 50%;
+	background: #781f25;
+	color: #fff;
+	box-shadow: 0 8px 24px rgb(0 0 0 / 18%);
+	cursor: pointer;
+}
+
+.ugolini-chat__launcher:hover { background: #67191e; transform: translateY(-2px); }
+.ugolini-chat__launcher:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+.ugolini-chat__launcher:disabled { cursor: wait; opacity: .65; }
+.ugolini-chat__launcher[hidden] { display: none; }
+.ugolini-chat__launcher svg { width: 34px; height: 34px; fill: currentColor; }
+
+.ugolini-chat__status {
+	width: 100%;
+	margin: 0 0 .75rem;
+	padding: 1.1rem 1.2rem;
+	border: 1px solid rgb(23 23 20 / 14%);
+	border-radius: 18px;
+	background: #fff;
+	color: #171714;
+	box-shadow: 0 16px 44px rgb(0 0 0 / 16%);
+}
+
+.ugolini-chat__welcome { width: 100%; margin-bottom: .9rem; }
+.ugolini-chat__message { position: relative; min-height: 94px; display: flex; align-items: center; gap: .8rem; padding: 1.25rem 3.25rem 1.25rem 1.25rem; border-radius: 18px; background: #fff; color: #171714; box-shadow: 0 16px 44px rgb(0 0 0 / 16%); }
+.ugolini-chat__message p { margin: 0; font-family: var(--wp--preset--font-family--heading, serif); font-size: clamp(1.2rem, 3vw, 1.55rem); line-height: 1.25; }
+.ugolini-chat__wave { flex: 0 0 auto; font-size: 2rem; }
+.ugolini-chat__close { position: absolute; top: .75rem; right: .75rem; width: 32px; height: 32px; padding: 0; border: 0; background: transparent; color: #666; font-size: 1.65rem; line-height: 1; cursor: pointer; }
+.ugolini-chat__actions { display: flex; flex-wrap: wrap; gap: .65rem; margin-top: .8rem; }
+.ugolini-chat__actions button { min-height: 48px; padding: .7rem 1.1rem; border: 1px solid #781f25; border-radius: 14px; background: #fff; color: #781f25; font: inherit; font-weight: 500; cursor: pointer; box-shadow: 0 8px 24px rgb(0 0 0 / 10%); }
+.ugolini-chat__actions button:hover { background: #781f25; color: #fff; }
+.ugolini-chat__status { display: flex; align-items: center; gap: .85rem; min-height: 82px; font-size: .9rem; line-height: 1.4; }
+.ugolini-chat__status[hidden] { display: none; }
+.ugolini-chat__status.is-error .ugolini-chat__spinner { display: none; }
+.ugolini-chat__spinner { width: 24px; height: 24px; flex: 0 0 auto; border: 3px solid rgb(120 31 37 / 20%); border-top-color: #781f25; border-radius: 50%; animation: ugolini-chat-spin .8s linear infinite; }
+
+@keyframes ugolini-chat-spin { to { transform: rotate(1turn); } }
+
+@media (max-width: 480px) {
+	.ugolini-chat { left: .75rem; width: min(22rem, calc(100vw - 1.5rem)); }
+	.ugolini-chat__message { min-height: 82px; padding-block: 1rem; }
+	.ugolini-chat__actions button { flex: 1 1 auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.ugolini-chat * { transition: none !important; }
+	.ugolini-chat__spinner { animation: none; border-color: #781f25; }
+}

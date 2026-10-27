@@ -10,7 +10,7 @@
 <section class="ugolini-testimonials" data-testimonials aria-labelledby="ugolini-testimonials-title">
 	<div class="ugolini-testimonials__inner">
 		<h2 id="ugolini-testimonials-title">I clienti scelgono Ugolini</h2>
-		<p>Due testimonianze pubblicate e otto motivi per scegliere Ugolini Gourmet</p>
+		<p>Testimonianze pubblicate e motivi per scegliere Ugolini Gourmet</p>
 		<div class="ugolini-testimonials__rail" data-testimonials-rail>
 			<blockquote><div class="ugolini-stars" aria-label="5 stelle su 5">★★★★★</div><h3>Qualità evidente fin dal primo assaggio</h3><p>“Spedizione veloce, packaging molto curato e prodotti di altissima qualità. Le salse hanno un gusto equilibrato e si percepisce la ricerca dietro ogni ricetta.”</p><cite>Carlo M. · Testimonianza pubblicata</cite></blockquote>
 			<blockquote><div class="ugolini-stars" aria-label="5 stelle su 5">★★★★★</div><h3>Equilibrate e versatili</h3><p>“Le salse sono equilibrate e versatili, perfette per valorizzare piatti semplici. Si percepisce una grande attenzione ai dettagli.”</p><cite>Daniela P. · Testimonianza pubblicata</cite></blockquote>
