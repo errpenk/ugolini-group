@@ -3,7 +3,7 @@ Theme Name: Ugolini Group
 Theme URI: https://ugolinigroup.com/
 Author: Ugolini Group
 Description: A purpose-built block theme for the Ugolini Group SureCart store.
-Version: 6.66.23
+Version: 6.66.24
 Requires at least: 6.6
 Requires PHP: 8.1
 Text Domain: ugolini-group
@@ -647,7 +647,6 @@ main :is(h1, h2, h3)[id^="sezione-"] { scroll-margin-top: calc(var(--ugolini-hea
 .ugolini-live-search span { font-family: var(--wp--preset--font-family--display); font-size: clamp(1.05rem, 1.8vw, 1.35rem); line-height: 1.2; }
 body.has-search-open { overflow: hidden; }
 
-
 /* home.css */
 /* Homepage campaign, real collections, editorial storytelling and commerce. */
 .ugolini-hero.wp-block-cover { min-height: 100vh; min-height: 100dvh; display: flex; align-items: center; padding: 0; color: var(--wp--preset--color--white); }
@@ -830,8 +829,8 @@ body.ugolini-event-detail-page .ugolini-events-hero { display: none; }
 .ugolini-event-detail header h1 { margin: .65rem 0 1.25rem; font-size: clamp(3rem, 6vw, 6rem); line-height: 1.04; overflow-wrap: anywhere; }
 .ugolini-event-detail__meta { margin: 0; color: var(--wp--preset--color--secondary-text); font-family: var(--wp--preset--font-family--interface); font-size: clamp(.9rem, 1.4vw, 1.1rem); }
 .ugolini-event-detail > .alignwide > figure { position: relative; width: min(100%, 900px); margin: 0; text-align: center; }
-.ugolini-event-detail > .alignwide > figure::after { content: ""; position: absolute; inset: auto 0 0; height: 67%; background: linear-gradient(transparent, var(--wp--preset--color--background)); pointer-events: none; }
-.ugolini-event-detail > .alignwide > .ugolini-event-detail__body { position: relative; z-index: 1; margin-top: calc(-1 * min(24vw, 240px)); }
+.ugolini-event-detail > .alignwide > figure::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent, rgb(247 243 238 / 88%) 30%, var(--wp--preset--color--background) 52%); pointer-events: none; }
+.ugolini-event-detail > .alignwide > .ugolini-event-detail__body { position: relative; z-index: 1; margin-top: calc(-1 * min(17.33vw, 173px)); }
 .ugolini-event-detail figure :is(img, video) { display: block; width: auto; max-width: 100%; height: auto; max-height: min(72svh, 720px); margin-inline: auto; object-fit: contain; }
 .ugolini-event-detail__body :is(img, video, iframe) { display: block; width: auto; max-width: 100%; height: auto; max-height: min(72svh, 720px); margin-inline: auto; object-fit: contain; }
 .ugolini-event-detail__body { width: min(100%, 780px); margin-bottom: clamp(3rem, 6vw, 6rem); font-size: clamp(1rem, 1.35vw, 1.16rem); line-height: 1.75; }
