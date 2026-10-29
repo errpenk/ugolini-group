@@ -1697,6 +1697,13 @@ function ugolini_group_product_guide_shortcode() {
 	$guide_slug = $is_sturgeon_caviar ? 'caviareat' : ( 'caviareat' === $slug ? ( 'caviale-vegano' === $product_slug ? 'caviareat-vegano' : 'caviareat-acciughe' ) : $slug );
 	if ( ! isset( $guides[ $guide_slug ] ) ) return '';
 	$items = $guides[ $guide_slug ];
+	$intros_path = get_theme_file_path( 'data/product-guide-intros.json' );
+	$intros = is_readable( $intros_path ) ? json_decode( file_get_contents( $intros_path ), true ) : array();
+	if ( ! empty( $intros[ $product_slug ] ) ) $items[0] = array( 'sparkles', 'La referenza', $intros[ $product_slug ] );
+	if ( 'tartufo-estivo-intero' === $product_slug ) {
+		$items[1] = array( 'utensils', 'Come usarlo', 'Usa il tartufo estivo intero per rifinire pietanze e antipasti. Anche il liquido di governo può essere usato come condimento.' );
+		$items[2] = array( 'book-open', 'Conservazione', 'Dopo l’apertura conserva a +2 °C / +4 °C e consuma entro 6 giorni, seguendo le indicazioni in etichetta.' );
+	}
 	$images = ugolini_group_product_editorial_media()['guide'];
 	if ( ! $images ) $images = $term instanceof WP_Term ? ugolini_group_editorial_images( $term ) : array();
 	if ( ! $images ) $images = array( 'https://ugolinigroup.com/wp-content/uploads/2026/08/8831-sugo-tartufo-nero-ugolini-gourmet-7.jpg' );

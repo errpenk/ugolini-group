@@ -315,7 +315,8 @@ a { color: inherit; }
 	.preview-product-summary { position: static; }
 	.preview-product-gallery { position: static; display: grid; grid-template-columns: 1fr; gap: 0.5rem; padding-left: 0; }
 	.preview-gallery-stage { grid-column: 1; grid-row: 1; }
-	.preview-gallery-thumbnails { position: static; width: auto; height: auto; max-height: none; grid-column: 1; grid-row: 2; flex-direction: row; margin: 0; overflow-x: auto; transform: none; }
+	.preview-gallery-thumbnails { position: static; width: auto; height: auto; max-height: none; grid-column: 1; grid-row: 2; flex-direction: row; justify-content: center; margin: 0; overflow-x: auto; transform: none; }
+	.preview-gallery-thumbnails:has(button:nth-child(5)) { justify-content: flex-start; }
 	.preview-gallery-thumbnails button { width: 68px; }
 	.preview-quantity-control { width: 112px; }
 	.preview-article-hero { min-height: 78svh; }

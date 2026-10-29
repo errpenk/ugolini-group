@@ -3,7 +3,7 @@ Theme Name: Ugolini Group
 Theme URI: https://ugolinigroup.com/
 Author: Ugolini Group
 Description: A purpose-built block theme for the Ugolini Group SureCart store.
-Version: 6.66.42
+Version: 6.66.43
 Requires at least: 6.6
 Requires PHP: 8.1
 Text Domain: ugolini-group
@@ -2221,6 +2221,8 @@ body > .wp-block-surecart-cart-icon { display: none !important; }
 	.ugolini-product-gallery .sc-image-slider__thumbs .swiper-wrapper { flex-direction: row; }
 	.ugolini-product-gallery .sc-image-slider__thumbs .swiper-wrapper,
 	.ugolini-product-gallery .sc-image-slider__thumbs .swiper-wrapper:has(.swiper-slide:nth-child(6)) { min-height: 0; justify-content: flex-start; }
+	.ugolini-product-gallery .sc-image-slider__thumbs .swiper-wrapper { justify-content: center; }
+	.ugolini-product-gallery .sc-image-slider__thumbs .swiper-wrapper:has(.swiper-slide:nth-child(5)) { justify-content: flex-start; }
 	.ugolini-product-gallery .sc-image-slider__thumbs .swiper-slide { width: 68px !important; height: 68px !important; flex-basis: 68px; }
 	.ugolini-product-summary { position: static; }
 	.ugolini-product-summary > .wp-block-surecart-product-quantity { width: 128px; height: auto; float: none; margin: 1.5rem 0 0 !important; }
@@ -2234,7 +2236,8 @@ body > .wp-block-surecart-cart-icon { display: none !important; }
 	.ugolini-product-information .alignwide { grid-template-columns: 1fr; gap: 1.5rem; }
 	.ugolini-product-information .alignwide > .ugolini-eyebrow { position: static; height: auto; display: block; }
 	.ugolini-product-guide > .alignwide { grid-template-columns: 1fr; gap: 2rem; }
-	.ugolini-product-guide__visual { position: static; grid-row: 1; }
+	.ugolini-product-guide__visual { position: static; grid-row: 1; text-align: center; }
+	.ugolini-product-guide__visual p { margin-inline: auto; }
 	.ugolini-b2b-partner__benefits { position: static; min-height: 0; }
 	:where(.ugolini-faq-section > :first-child, .ugolini-product-information .alignwide > .ugolini-eyebrow, .ugolini-product-guide__visual)::after { height: clamp(160px, 38vw, 260px); }
 	.ugolini-product-information .alignwide > .ugolini-eyebrow::after { height: clamp(160px, 38vw, 260px); }
@@ -2658,7 +2661,8 @@ a { color: inherit; }
 	.preview-product-summary { position: static; }
 	.preview-product-gallery { position: static; display: grid; grid-template-columns: 1fr; gap: 0.5rem; padding-left: 0; }
 	.preview-gallery-stage { grid-column: 1; grid-row: 1; }
-	.preview-gallery-thumbnails { position: static; width: auto; height: auto; max-height: none; grid-column: 1; grid-row: 2; flex-direction: row; margin: 0; overflow-x: auto; transform: none; }
+	.preview-gallery-thumbnails { position: static; width: auto; height: auto; max-height: none; grid-column: 1; grid-row: 2; flex-direction: row; justify-content: center; margin: 0; overflow-x: auto; transform: none; }
+	.preview-gallery-thumbnails:has(button:nth-child(5)) { justify-content: flex-start; }
 	.preview-gallery-thumbnails button { width: 68px; }
 	.preview-quantity-control { width: 112px; }
 	.preview-article-hero { min-height: 78svh; }

@@ -210,6 +210,8 @@
 	.ugolini-product-gallery .sc-image-slider__thumbs .swiper-wrapper { flex-direction: row; }
 	.ugolini-product-gallery .sc-image-slider__thumbs .swiper-wrapper,
 	.ugolini-product-gallery .sc-image-slider__thumbs .swiper-wrapper:has(.swiper-slide:nth-child(6)) { min-height: 0; justify-content: flex-start; }
+	.ugolini-product-gallery .sc-image-slider__thumbs .swiper-wrapper { justify-content: center; }
+	.ugolini-product-gallery .sc-image-slider__thumbs .swiper-wrapper:has(.swiper-slide:nth-child(5)) { justify-content: flex-start; }
 	.ugolini-product-gallery .sc-image-slider__thumbs .swiper-slide { width: 68px !important; height: 68px !important; flex-basis: 68px; }
 	.ugolini-product-summary { position: static; }
 	.ugolini-product-summary > .wp-block-surecart-product-quantity { width: 128px; height: auto; float: none; margin: 1.5rem 0 0 !important; }
@@ -223,7 +225,8 @@
 	.ugolini-product-information .alignwide { grid-template-columns: 1fr; gap: 1.5rem; }
 	.ugolini-product-information .alignwide > .ugolini-eyebrow { position: static; height: auto; display: block; }
 	.ugolini-product-guide > .alignwide { grid-template-columns: 1fr; gap: 2rem; }
-	.ugolini-product-guide__visual { position: static; grid-row: 1; }
+	.ugolini-product-guide__visual { position: static; grid-row: 1; text-align: center; }
+	.ugolini-product-guide__visual p { margin-inline: auto; }
 	.ugolini-b2b-partner__benefits { position: static; min-height: 0; }
 	:where(.ugolini-faq-section > :first-child, .ugolini-product-information .alignwide > .ugolini-eyebrow, .ugolini-product-guide__visual)::after { height: clamp(160px, 38vw, 260px); }
 	.ugolini-product-information .alignwide > .ugolini-eyebrow::after { height: clamp(160px, 38vw, 260px); }
