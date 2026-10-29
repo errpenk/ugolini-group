@@ -1975,8 +1975,7 @@ function ugolini_group_cooking_suggestions_shortcode() {
 	$terms = wp_get_post_terms( get_queried_object_id(), 'sc_collection' );
 	$term = is_array( $terms ) ? ( $terms[0] ?? null ) : null;
 	if ( ! $term instanceof WP_Term ) return '';
-	if ( in_array( $term->slug, array( 'luxureat', 'tin-caviar', 'truffleat' ), true ) ) return '';
-	if ( 'caviareat' === $term->slug && in_array( get_post_field( 'post_name', get_the_ID() ), array( 'caviale-vegano', 'acciughe-sott-olio-100-gr' ), true ) ) return '';
+	$product_slug = get_post_field( 'post_name', get_the_ID() );
 	$copy = array(
 		'caviareat'       => array( 'Idee da portare in tavola', array( 'Servire il caviale', 'Portalo in tavola ben fresco e aggiungilo all’ultimo momento, senza scaldarlo: così le perle conservano consistenza e sapore.' ), array( 'Bocconi delicati', 'Provalo su blinis, tartellette o pane leggermente tostato, con una piccola quantità di crema fresca che accompagni senza coprire il gusto.' ), array( 'Abbinamenti essenziali', 'Assaggialo anche da solo; per un piatto più ricco, completa con uova o patate tiepide e aggiungi il caviale solo prima di servire.' ) ),
 		'luxureat'        => array( 'Idee da portare in tavola', array( 'Tartare e specialità di pesce', 'Condisci con misura e servi fresche: erbe delicate, agrumi e un filo d’olio lasciano spazio al sapore degli ingredienti.' ), array( 'Il tartufo a finitura', 'Aggiungi scaglie di tartufo o un condimento al tartufo a fine preparazione, su tartare, uova o primi piatti, per mantenerne il profumo.' ), array( 'Aperitivo gourmet', 'Componi un tagliere con piccoli assaggi, pane, olive e salumi; servi salse e condimenti a parte perché ciascuno possa dosarli.' ) ),
@@ -1990,6 +1989,27 @@ function ugolini_group_cooking_suggestions_shortcode() {
 		'truffleat'       => array( 'Idee da portare in tavola', array( 'Crostini al tartufo', 'Stendi una piccola quantità di salsa al tartufo sul pane tostato e completa il crostino poco prima di servirlo.' ), array( 'Tartare e tartufo', 'Per una tartare, usa scaglie o condimenti al tartufo con misura e aggiungili a fine preparazione, senza coprire il gusto della carne.' ), array( 'Con i secondi', 'Scalda dolcemente la salsa scelta e servine una piccola dose accanto a carne o verdure; assaggia prima di aggiungerne altra.' ) ),
 	);
 	$data = $copy[ $term->slug ] ?? $copy['salse-tartufo'];
+	if ( 'caviale-vegano' === $product_slug ) {
+		$data = array( 'Idee da portare in tavola', array( 'Crostini vegetali', 'Tosta il pane, aggiungi una crema vegetale delicata e completa con il caviale vegano appena prima di servire.' ), array( 'Insalata fresca', 'Prepara verdure croccanti e un condimento leggero; distribuisci il caviale vegano a finitura per mantenerne la consistenza.' ), array( 'Piccoli assaggi', 'Disponi il caviale vegano su cucchiaini da aperitivo con avocado o cetriolo e servi subito.' ) );
+	} elseif ( 'acciughe-sott-olio-100-gr' === $product_slug ) {
+		$data = array( 'Idee da portare in tavola', array( 'Crostini alle acciughe', 'Tosta il pane, lascialo intiepidire e completa con pomodoro, un filetto di acciuga e qualche foglia di prezzemolo.' ), array( 'Pasta saporita', 'Sciogli delicatamente un filetto di acciuga nell’olio con aglio; unisci la pasta e poca acqua di cottura.' ), array( 'Insalata mediterranea', 'Aggiungi i filetti di acciuga a pomodori, olive e verdure già condite, dosando il sale solo dopo l’assaggio.' ) );
+	} elseif ( in_array( $product_slug, array( 'affettatartufi-in-acciaio-inox', 'affettatartufo-in-polietilene-per-uso-alimentare' ), true ) ) {
+		$data = array( 'Idee per il servizio', array( 'Tagliatelle al tartufo', 'Prepara la pasta e aggiungi il tartufo a lamelle con l’affettatartufi sul piatto pronto, regolando lo spessore secondo il risultato desiderato.' ), array( 'Uova e tartufo', 'Completa le uova calde con lamelle sottili di tartufo appena prima di servire, seguendo le istruzioni dell’accessorio.' ), array( 'Crostini da aperitivo', 'Prepara crostini con una base delicata e aggiungi il tartufo affettato al momento, senza coprirne il profumo.' ) );
+	} elseif ( 'luxureat' === $term->slug && str_contains( $product_slug, 'cioccolatini' ) ) {
+		$data = array( 'Idee da portare in tavola', array( 'Fine pasto', 'Servi i cioccolatini a temperatura ambiente con un caffè espresso, seguendo le indicazioni di conservazione della confezione.' ), array( 'Piccola degustazione', 'Presenta un cioccolatino per ospite su un piattino e lascia che il gusto si esprima senza accompagnamenti invadenti.' ), array( 'Con frutta fresca', 'Accompagna i cioccolatini con piccoli frutti freschi serviti a parte per creare un contrasto di sapori.' ) );
+	} elseif ( 'luxureat' === $term->slug && str_contains( $product_slug, 'burger' ) ) {
+		$data = array( 'Idee da portare in tavola', array( 'Burger con insalata', 'Cuoci il burger secondo le indicazioni della confezione e servilo con insalata fresca e pane appena tostato.' ), array( 'Con patate al forno', 'Prepara patate al forno come contorno; servi il burger caldo e aggiungi eventuali condimenti solo dopo l’assaggio.' ), array( 'Nel piatto', 'Abbina il burger a verdure grigliate e completa con un filo d’olio, rispettando sempre le istruzioni di cottura della referenza.' ) );
+	} elseif ( 'luxureat' === $term->slug && str_contains( $product_slug, 'tartare' ) ) {
+		$data = array( 'Idee da portare in tavola', array( 'Tartare agli agrumi', 'Prepara la tartare secondo le istruzioni della referenza; completa con poco olio e scorza di agrume prima di servire.' ), array( 'Con erbe fresche', 'Aggiungi erbe delicate tritate finemente e mescola con misura per lasciare riconoscibile il sapore del pesce.' ), array( 'Piccoli assaggi', 'Distribuisci la tartare in piccole porzioni e servi con crostini o verdure croccanti, mantenendo il prodotto alla temperatura indicata.' ) );
+	} elseif ( 'truffleat' === $term->slug && str_contains( $product_slug, 'tagliatelle' ) ) {
+		$data = array( 'Idee da portare in tavola', array( 'Tagliatelle al burro', 'Cuoci la pasta secondo la confezione e condiscila con poco burro e acqua di cottura; completa con tartufo a finitura.' ), array( 'Con funghi', 'Salta i funghi in padella, unisci le tagliatelle cotte e lega il condimento con poca acqua di cottura.' ), array( 'Pasta e parmigiano', 'Servi le tagliatelle calde con parmigiano grattugiato al momento, dosandolo per non coprire il profumo del tartufo.' ) );
+	} elseif ( 'truffleat' === $term->slug && str_contains( $product_slug, 'polenta' ) ) {
+		$data = array( 'Idee da portare in tavola', array( 'Polenta cremosa', 'Prepara la polenta secondo la confezione, mescolando fino alla consistenza desiderata; servi calda con poco formaggio.' ), array( 'Con funghi', 'Accompagna la polenta al tartufo con funghi saltati e un filo d’olio, aggiunti solo al momento del servizio.' ), array( 'Crostini di polenta', 'Lascia rassodare la polenta, tagliala a fette e scaldala in padella; completa con un condimento delicato.' ) );
+	} elseif ( 'truffleat' === $term->slug && str_contains( $product_slug, 'riso' ) ) {
+		$data = array( 'Idee da portare in tavola', array( 'Risotto al tartufo', 'Tosta il riso, aggiungi brodo caldo poco alla volta e manteca fuori dal fuoco, seguendo i tempi riportati sulla confezione.' ), array( 'Con funghi', 'Completa il risotto con funghi cotti a parte e aggiungili negli ultimi minuti per conservarne la consistenza.' ), array( 'Piccole porzioni', 'Servi il riso al tartufo in porzioni contenute e completa con parmigiano solo dopo l’assaggio.' ) );
+	} elseif ( 'truffleat' === $term->slug && str_contains( $product_slug, 'tartufo-intero' ) ) {
+		$data = array( 'Idee da portare in tavola', array( 'Pasta al tartufo', 'Completa la pasta calda con lamelle sottili di tartufo appena prima di servire, seguendo le indicazioni della referenza.' ), array( 'Uova e tartufo', 'Aggiungi il tartufo a fettine sulle uova pronte e servi subito per valorizzarne il profumo.' ), array( 'Crostini', 'Disponi le lamelle su pane tiepido con un velo di burro o formaggio delicato e porta subito in tavola.' ) );
+	}
 	$series_images = array(
 		'caviareat'  => array( '211115873_m.jpg', '206245340_m.jpg', '298347544_m.jpg' ),
 		'luxureat'   => array( '253553877_m.jpg', '59780622_m.jpg', '166425501_m.jpg' ),
@@ -2005,6 +2025,9 @@ function ugolini_group_cooking_suggestions_shortcode() {
 	$images = isset( $series_images[ $term->slug ] )
 		? array_map( static fn( $file ) => get_theme_file_uri( 'assets/images/cooking-suggestions/' . $file ), $series_images[ $term->slug ] )
 		: ugolini_group_editorial_images( $term, 3 );
+	if ( in_array( $product_slug, array( 'caviale-vegano', 'acciughe-sott-olio-100-gr' ), true ) ) {
+		$images = array_slice( ugolini_group_product_editorial_media()['guide'], 0, 3 );
+	}
 	if ( ! $images ) return '';
 	$html = '';
 	for ( $i = 1; $i <= 3; $i++ ) $html .= '<article><img src="' . esc_url( $images[ ( $i - 1 ) % count( $images ) ] ) . '" alt="' . esc_attr( $term->name ) . '" loading="lazy"><div><strong>' . esc_html( $data[ $i ][0] ) . '</strong><span>' . esc_html( $data[ $i ][1] ) . '</span></div></article>';
