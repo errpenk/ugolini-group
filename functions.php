@@ -1594,6 +1594,26 @@ function ugolini_group_product_story_shortcode() {
 }
 add_shortcode( 'ugolini_product_story', 'ugolini_group_product_story_shortcode' );
 
+/** Licensed product imagery shared by the guide and collection editorial. */
+function ugolini_group_product_editorial_media( $post_id = 0 ) {
+	static $data = null;
+	if ( null === $data ) {
+		$path = get_theme_file_path( 'data/product-films.json' );
+		$data = is_readable( $path ) ? json_decode( file_get_contents( $path ), true ) : array();
+	}
+	$post_id = $post_id ?: get_queried_object_id();
+	$keys = $data['products'][ get_post_field( 'post_name', $post_id ) ] ?? array();
+	$photos = array();
+	$posters = array();
+	foreach ( $keys as $key ) {
+		$media = $data['media'][ $key ] ?? null;
+		if ( ! $media || empty( $media['photo'] ) ) continue;
+		$photos[] = get_theme_file_uri( 'assets/images/' . $media['photo'] );
+		$posters[] = get_theme_file_uri( 'assets/videos/' . $media['file'] . '.jpg' );
+	}
+	return array( 'photos' => $photos, 'guide' => array_merge( $photos, $posters ) );
+}
+
 /** Series-specific tasting and use guide. Product labels remain the authority. */
 function ugolini_group_product_guide_shortcode() {
 	$terms = is_singular() ? wp_get_post_terms( get_the_ID(), 'sc_collection' ) : array();
@@ -1603,10 +1623,10 @@ function ugolini_group_product_guide_shortcode() {
 	if ( 'caviareat' === $slug && ! $is_sturgeon_caviar ) return '';
 	$guides = array(
 		'caviareat' => array(
-			array( 'sparkles', 'Eccellenza della Materia Prima', 'Solo materie prime selezionate danno vita a un caviale dal gusto autentico e raffinato.\n\nOgni fase della produzione è curata con precisione per garantire qualità, purezza e un sapore inconfondibile, espressione della nostra dedizione all’eccellenza.', 'https://m.media-amazon.com/images/S/aplus-media-library-service-brand-media/6ce8c4445f2094fe7e75a167061558e7.w1108.h1108.__CR0,0,1108,1108_PT0_SX600_V1___.jpg' ),
-			array( 'book-open', 'Benessere e Cura dello Storione', 'Gli storioni crescono in un ambiente controllato e rispettoso, seguendo i loro ritmi naturali.\n\nAttenzione quotidiana, alimentazione equilibrata e tempi di maturazione lunghi assicurano il loro benessere e un caviale di qualità superiore.', 'https://m.media-amazon.com/images/S/aplus-media-library-service-media/91b0c6a7-9aa5-43d6-8788-6a345f805b85.__CR0,0,500,500_PT0_SX600_V1___.png' ),
-			array( 'package-check', 'Confezionamento di Precisione', 'Ogni confezione viene realizzata con cura e competenza per preservare freschezza e gusto.\n\nIl rigoroso controllo della catena del freddo e la tracciabilità completa della filiera garantiscono un prodotto perfetto in ogni dettaglio.', 'https://m.media-amazon.com/images/S/aplus-media-library-service-media/f3fca9e6-da93-4d00-9440-1e387f6d6cc9.__CR0,0,500,500_PT0_SX600_V1___.png' ),
-			array( 'badge-check', 'Consulenza e Servizio Dedicato', 'Offriamo un servizio personalizzato, rapido e attento alle esigenze di ogni cliente.\n\nDalla scelta del caviale alla consegna, accompagniamo ogni esperienza con professionalità, competenza e una passione che fa la differenza.', 'https://m.media-amazon.com/images/S/aplus-media-library-service-media/5b817025-5934-4630-bc7e-9225d8c72928.__CR0,0,500,500_PT0_SX600_V1___.png' ),
+			array( 'sparkles', 'Eccellenza della Materia Prima', 'Solo materie prime selezionate danno vita a un caviale dal gusto autentico e raffinato.\n\nOgni fase della produzione è curata con precisione per garantire qualità, purezza e un sapore inconfondibile, espressione della nostra dedizione all’eccellenza.' ),
+			array( 'book-open', 'Benessere e Cura dello Storione', 'Gli storioni crescono in un ambiente controllato e rispettoso, seguendo i loro ritmi naturali.\n\nAttenzione quotidiana, alimentazione equilibrata e tempi di maturazione lunghi assicurano il loro benessere e un caviale di qualità superiore.' ),
+			array( 'package-check', 'Confezionamento di Precisione', 'Ogni confezione viene realizzata con cura e competenza per preservare freschezza e gusto.\n\nIl rigoroso controllo della catena del freddo e la tracciabilità completa della filiera garantiscono un prodotto perfetto in ogni dettaglio.' ),
+			array( 'badge-check', 'Consulenza e Servizio Dedicato', 'Offriamo un servizio personalizzato, rapido e attento alle esigenze di ogni cliente.\n\nDalla scelta del caviale alla consegna, accompagniamo ogni esperienza con professionalità, competenza e una passione che fa la differenza.' ),
 		),
 		'pesto' => array(
 			array( 'utensils', 'Come servirlo', 'Usalo per condire la pasta oppure come finitura per bruschette, focacce e preparazioni creative. Aggiungilo fuori dal fuoco o a calore moderato per conservarne il profilo aromatico.' ),
@@ -1648,11 +1668,12 @@ function ugolini_group_product_guide_shortcode() {
 	$guide_slug = $is_sturgeon_caviar ? 'caviareat' : $slug;
 	if ( ! isset( $guides[ $guide_slug ] ) ) return '';
 	$items = $guides[ $guide_slug ];
-	$images = $term instanceof WP_Term ? ugolini_group_editorial_images( $term ) : array();
+	$images = ugolini_group_product_editorial_media()['guide'];
+	if ( ! $images ) $images = $term instanceof WP_Term ? ugolini_group_editorial_images( $term ) : array();
 	if ( ! $images ) $images = array( 'https://ugolinigroup.com/wp-content/uploads/2026/08/8831-sugo-tartufo-nero-ugolini-gourmet-7.jpg' );
 	$html  = '';
 	foreach ( $items as $index => $item ) {
-		$html .= '<article class="ugolini-product-guide__item"><div><h3>' . ugolini_group_icon( $item[0] ) . esc_html( $item[1] ) . '</h3><p>' . nl2br( esc_html( str_replace( '\\n', "\n", $item[2] ) ) ) . '</p></div><img src="' . esc_url( $item[3] ?? $images[ $index % count( $images ) ] ) . '" alt="" loading="lazy"></article>';
+		$html .= '<article class="ugolini-product-guide__item"><div><h3>' . ugolini_group_icon( $item[0] ) . esc_html( $item[1] ) . '</h3><p>' . nl2br( esc_html( str_replace( '\\n', "\n", $item[2] ) ) ) . '</p></div><img src="' . esc_url( $images[ $index % count( $images ) ] ) . '" alt="" loading="lazy"></article>';
 	}
 	$image = $images[0];
 	$style = $image ? ' style="--ugolini-sticky-image:url(\'' . esc_url( $image ) . '\')"' : '';
@@ -1683,14 +1704,15 @@ function ugolini_group_product_editorial() {
 			'truffleat'       => array( 'Le specialità Truffleat', 'La gamma riunisce tartufi, oli, salse e condimenti, accanto ad accessori dedicati. Comprende anche pasta, riso e strumenti per il taglio del tartufo: ogni referenza ha caratteristiche proprie.', 'La gamma comprende anche pasta, riso e strumenti per il taglio del tartufo.' ),
 		);
 		if ( ! isset( $copy[ $slug ] ) ) return '';
-		$images = ugolini_group_editorial_images( $term, 2 );
+		$images = ugolini_group_product_editorial_media( $post_id )['photos'];
+		if ( ! $images ) $images = ugolini_group_editorial_images( $term, 2 );
 		$series_images = array(
 			'marmellate' => array( '192687642_m.jpg', '181382010_m.jpg' ),
 			'olio-al-tartufo' => array( '98843234_m.jpg', '178273414_m.jpg' ),
 			'salse-funghi' => array( '74609046_m.jpg', '229065274_m.jpg' ),
 			'tin-caviar' => array( '211109345_m.jpg', '203333167_m.jpg' ),
 		);
-		if ( isset( $series_images[ $slug ] ) ) {
+		if ( ! ugolini_group_product_editorial_media( $post_id )['photos'] && isset( $series_images[ $slug ] ) ) {
 			$images = array_map( static fn( $file ) => get_theme_file_uri( 'assets/images/series-editorial/' . $file ), $series_images[ $slug ] );
 		}
 		if ( ! $images ) return '';
@@ -1702,9 +1724,10 @@ function ugolini_group_product_editorial() {
 		$editorial = '<section class="ugolini-caviareat-editorial ugolini-caviareat-editorial--series" aria-label="' . esc_attr( $term->name ) . '"><div class="ugolini-caviareat-editorial__row"><div><h2>' . esc_html( $data[0] ) . '</h2><p>' . esc_html( $description ) . '</p><p>' . esc_html( $data[1] ) . '</p></div><img src="' . esc_url( $images[0] ) . '" alt="' . esc_attr( $term->name ) . '" loading="lazy"></div><div class="ugolini-caviareat-editorial__row"><img src="' . esc_url( $images[1] ?? $images[0] ) . '" alt="' . esc_attr( $term->name ) . '" loading="lazy"><div class="ugolini-caviareat-editorial__copy-grid"><div><h3>La collezione</h3><p>' . esc_html( $data[2] ) . '</p><h3>Ogni prodotto ha la sua scheda</h3><p>Consulta ingredienti, formati e indicazioni d’uso della singola referenza.</p></div><div><h3>' . esc_html( $term->name ) . '</h3><p>' . esc_html( $description ) . '</p><ul>' . $names . '</ul></div></div></div></section>';
 		return '<section class="ugolini-caviareat-editorial-shell">' . $editorial . '</section>';
 	}
-	$spoons = 'https://m.media-amazon.com/images/S/aplus-media-library-service-brand-media/32f4b5d40059278a55bb5525ef640dd8.w4766.h3177.__CR795,0,3177,3177_PT0_SX900_V1___.jpg';
-	$ice = 'https://m.media-amazon.com/images/S/aplus-media-library-service-media/cd1b2464-d46e-4bad-9543-20bd9c953bdc.__CR205,0,1080,1080_PT0_SX900_V1___.png';
-	$editorial = '<section class="ugolini-caviareat-editorial" aria-label="CaviarEat"><div class="ugolini-caviareat-editorial__row"><div><h2>L’Equilibrio Perfetto tra Natura e Innovazione</h2><p>Ogni fase del nostro processo nasce dal rispetto per la vita e per l’ambiente.</p><p>Tecnologia, esperienza e attenzione quotidiana si fondono per creare un ecosistema armonioso, dove lo storione cresce in modo sano e naturale.</p><p>Un equilibrio che si riflette nella purezza e nell’eccellenza del nostro caviale.</p></div><img src="' . esc_url( $spoons ) . '" alt="Confezioni CaviarEat con cucchiaini" loading="lazy"></div><div class="ugolini-caviareat-editorial__row"><img src="' . esc_url( $ice ) . '" alt="Caviale servito sul ghiaccio" loading="lazy"><div class="ugolini-caviareat-editorial__copy-grid"><div><h3>Sapori autentici</h3><p>Ogni perla di caviale racchiude il piacere autentico della vita.</p><h3>La Cultura del Gusto</h3><p>Il caviale per noi è arte, tradizione e conoscenza.</p><p>Frutto di anni di esperienza e di una visione artigianale che valorizza la materia prima, rappresenta l’incontro tra passione italiana e perfezione naturale.</p></div><div><h3>CaviarEat</h3><p>Un invito a vivere ogni istante con eleganza e passione.</p><ul><li>Selezionato dalle acque più pure</li><li>Lavorato con cura artigianale</li><li>Sfumature, aromi e consistenze per veri intenditori.</li></ul></div></div></div></section>';
+	$caviar_images = ugolini_group_product_editorial_media( $post_id )['photos'];
+	$spoons = $caviar_images[0] ?? get_theme_file_uri( 'assets/images/product-editorial/caviar.jpg' );
+	$ice = $caviar_images[1] ?? get_theme_file_uri( 'assets/images/product-editorial/caviar2.jpg' );
+	$editorial = '<section class="ugolini-caviareat-editorial" aria-label="CaviarEat"><div class="ugolini-caviareat-editorial__row"><div><h2>L’Equilibrio Perfetto tra Natura e Innovazione</h2><p>Ogni fase del nostro processo nasce dal rispetto per la vita e per l’ambiente.</p><p>Tecnologia, esperienza e attenzione quotidiana si fondono per creare un ecosistema armonioso, dove lo storione cresce in modo sano e naturale.</p><p>Un equilibrio che si riflette nella purezza e nell’eccellenza del nostro caviale.</p></div><img src="' . esc_url( $spoons ) . '" alt="Caviale nero, fotografia illustrativa" loading="lazy"></div><div class="ugolini-caviareat-editorial__row"><img src="' . esc_url( $ice ) . '" alt="Caviale nero, fotografia illustrativa" loading="lazy"><div class="ugolini-caviareat-editorial__copy-grid"><div><h3>Sapori autentici</h3><p>Ogni perla di caviale racchiude il piacere autentico della vita.</p><h3>La Cultura del Gusto</h3><p>Il caviale per noi è arte, tradizione e conoscenza.</p><p>Frutto di anni di esperienza e di una visione artigianale che valorizza la materia prima, rappresenta l’incontro tra passione italiana e perfezione naturale.</p></div><div><h3>CaviarEat</h3><p>Un invito a vivere ogni istante con eleganza e passione.</p><ul><li>Selezionato dalle acque più pure</li><li>Lavorato con cura artigianale</li><li>Sfumature, aromi e consistenze per veri intenditori.</li></ul></div></div></div></section>';
 	return '<section class="ugolini-caviareat-editorial-shell">' . $editorial . '</section>';
 }
 /** Product-specific licensed films between facts and collection content. */

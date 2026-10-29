@@ -3,122 +3,170 @@
     "caviar": {
       "file": "caviareat/caviar",
       "alt": "Caviale nero in una preparazione gourmet",
-      "source": "https://www.pexels.com/video/chef-topping-sushi-rolls-with-caviar-8902208/"
+      "source": "https://www.pexels.com/video/chef-topping-sushi-rolls-with-caviar-8902208/",
+      "photo": "product-editorial/caviar.jpg",
+      "photo_source": "https://www.pexels.com/photo/12645210/"
     },
     "anchovy": {
       "file": "caviareat/anchovy",
       "alt": "Filetti di acciughe in conserva",
-      "source": "https://www.pexels.com/video/person-getting-anchovies-using-fork-6398604/"
+      "source": "https://www.pexels.com/video/person-getting-anchovies-using-fork-6398604/",
+      "photo": "product-editorial/anchovy.jpg",
+      "photo_source": "https://www.pexels.com/photo/6399823/"
     },
     "caviar2": {
       "file": "products/caviar2",
       "alt": "Caviale nero servito su una preparazione di pesce",
-      "source": "https://www.pexels.com/video/close-up-shot-of-a-person-preparing-food-8908444/"
+      "source": "https://www.pexels.com/video/close-up-shot-of-a-person-preparing-food-8908444/",
+      "photo": "product-editorial/caviar2.jpg",
+      "photo_source": "https://www.pexels.com/photo/8112435/"
     },
     "truffle": {
       "file": "products/truffle",
       "alt": "Tartufo affettato su un piatto di pasta",
-      "source": "https://www.pexels.com/video/a-person-is-cutting-pasta-with-a-knife-19905869/"
+      "source": "https://www.pexels.com/video/a-person-is-cutting-pasta-with-a-knife-19905869/",
+      "photo": "product-editorial/truffle.jpg",
+      "photo_source": "https://www.pexels.com/photo/37181391/"
     },
     "truffle2": {
       "file": "products/truffle2",
       "alt": "Selezione di tartufi e specialità gastronomiche",
-      "source": "https://www.pexels.com/video/a-buffet-table-with-truffles-and-other-food-19551103/"
+      "source": "https://www.pexels.com/video/a-buffet-table-with-truffles-and-other-food-19551103/",
+      "photo": "product-editorial/truffle2.jpg",
+      "photo_source": "https://www.pexels.com/photo/28442611/"
     },
     "olive": {
       "file": "products/olive",
       "alt": "Olio di oliva versato durante la preparazione",
-      "source": "https://www.pexels.com/video/close-up-view-of-person-pouring-an-olive-oil-in-the-frying-pan-4912633/"
+      "source": "https://www.pexels.com/video/close-up-view-of-person-pouring-an-olive-oil-in-the-frying-pan-4912633/",
+      "photo": "product-editorial/olive.jpg",
+      "photo_source": "https://www.pexels.com/photo/25745498/"
     },
     "olive-bottle": {
       "file": "products/olive-bottle",
       "alt": "Olio di oliva versato in una bottiglia di vetro",
-      "source": "https://www.pexels.com/video/pouring-oil-into-container-7189208/"
+      "source": "https://www.pexels.com/video/pouring-oil-into-container-7189208/",
+      "photo": "product-editorial/olive-bottle.jpg",
+      "photo_source": "https://www.pexels.com/photo/16486887/"
     },
     "tomato": {
       "file": "products/tomato",
       "alt": "Salsa di pomodoro in cottura",
-      "source": "https://www.pexels.com/video/cooking-a-tomato-based-pasta-sauce-4146097/"
+      "source": "https://www.pexels.com/video/cooking-a-tomato-based-pasta-sauce-4146097/",
+      "photo": "product-editorial/tomato.jpg",
+      "photo_source": "https://www.pexels.com/photo/36546509/"
     },
     "pasta": {
       "file": "products/pasta",
       "alt": "Pasta condita con salsa di pomodoro",
-      "source": "https://www.pexels.com/video/person-mixing-spaghetti-with-the-sauce-6221657/"
+      "source": "https://www.pexels.com/video/person-mixing-spaghetti-with-the-sauce-6221657/",
+      "photo": "product-editorial/pasta.jpg",
+      "photo_source": "https://www.pexels.com/photo/36430171/"
     },
     "fish": {
       "file": "products/fish",
       "alt": "Filetto di pesce fresco tagliato a mano",
-      "source": "https://www.pexels.com/video/slicing-a-fish-854567/"
+      "source": "https://www.pexels.com/video/slicing-a-fish-854567/",
+      "photo": "product-editorial/fish.jpg",
+      "photo_source": "https://www.pexels.com/photo/8112421/"
     },
     "tuna": {
       "file": "products/tuna",
       "alt": "Tonno fresco affettato per una preparazione di pesce",
-      "source": "https://www.pexels.com/video/close-up-shot-of-a-person-slicing-tuna-for-sashimi-5789857/"
+      "source": "https://www.pexels.com/video/close-up-shot-of-a-person-slicing-tuna-for-sashimi-5789857/",
+      "photo": "product-editorial/tuna.jpg",
+      "photo_source": "https://www.pexels.com/photo/10806017/"
     },
     "shrimp": {
       "file": "products/shrimp",
       "alt": "Gamberi freschi preparati a mano",
-      "source": "https://www.pexels.com/video/people-shelling-shrimps-at-a-wet-market-10039771/"
+      "source": "https://www.pexels.com/video/people-shelling-shrimps-at-a-wet-market-10039771/",
+      "photo": "product-editorial/shrimp.jpg",
+      "photo_source": "https://www.pexels.com/photo/24289165/"
     },
     "shrimp2": {
       "file": "products/shrimp2",
       "alt": "Piatto di pasta ai gamberi",
-      "source": "https://www.pexels.com/video/seafood-pasta-5065327/"
+      "source": "https://www.pexels.com/video/seafood-pasta-5065327/",
+      "photo": "product-editorial/shrimp2.jpg",
+      "photo_source": "https://www.pexels.com/photo/19674143/"
     },
     "burger": {
       "file": "products/burger",
       "alt": "Hamburger di manzo sulla griglia",
-      "source": "https://www.pexels.com/video/close-up-view-of-a-person-grilling-a-patty-5254603/"
+      "source": "https://www.pexels.com/video/close-up-view-of-a-person-grilling-a-patty-5254603/",
+      "photo": "product-editorial/burger.jpg",
+      "photo_source": "https://www.pexels.com/photo/28442305/"
     },
     "onion": {
       "file": "products/onion",
       "alt": "Cipolle rosse preparate in cucina",
-      "source": "https://www.pexels.com/video/a-person-tossing-onion-slices-on-a-crystal-bowl-with-olive-oil-3195370/"
+      "source": "https://www.pexels.com/video/a-person-tossing-onion-slices-on-a-crystal-bowl-with-olive-oil-3195370/",
+      "photo": "product-editorial/onion.jpg",
+      "photo_source": "https://www.pexels.com/photo/37292883/"
     },
     "rice": {
       "file": "products/rice",
       "alt": "Riso preparato in padella",
-      "source": "https://www.pexels.com/video/cooking-rice-casserole-in-an-iron-pot-3209243/"
+      "source": "https://www.pexels.com/video/cooking-rice-casserole-in-an-iron-pot-3209243/",
+      "photo": "product-editorial/rice.jpg",
+      "photo_source": "https://www.pexels.com/photo/17237178/"
     },
     "basil": {
       "file": "products/basil",
       "alt": "Erbe aromatiche fresche tritate",
-      "source": "https://www.pexels.com/video/cutting-vegetable-7424436/"
+      "source": "https://www.pexels.com/video/cutting-vegetable-7424436/",
+      "photo": "product-editorial/basil.jpg",
+      "photo_source": "https://www.pexels.com/photo/5604824/"
     },
     "mushroom": {
       "file": "products/mushroom",
       "alt": "Funghi freschi tagliati in cucina",
-      "source": "https://www.pexels.com/video/a-person-cutting-fresh-button-mushrooms-into-pieces-3209212/"
+      "source": "https://www.pexels.com/video/a-person-cutting-fresh-button-mushrooms-into-pieces-3209212/",
+      "photo": "product-editorial/mushroom.jpg",
+      "photo_source": "https://www.pexels.com/photo/7418497/"
     },
     "chocolate": {
       "file": "products/chocolate",
       "alt": "Cioccolato lavorato in una preparazione artigianale",
-      "source": "https://www.pexels.com/video/a-close-up-video-of-a-chocolate-being-mixed-4458665/"
+      "source": "https://www.pexels.com/video/a-close-up-video-of-a-chocolate-being-mixed-4458665/",
+      "photo": "product-editorial/chocolate.jpg",
+      "photo_source": "https://www.pexels.com/photo/21348166/"
     },
     "chocolate-candy": {
       "file": "products/chocolate-candy",
       "alt": "Cioccolatini artigianali in preparazione",
-      "source": "https://www.pexels.com/video/crop-person-preparing-chocolate-candies-6112828/"
+      "source": "https://www.pexels.com/video/crop-person-preparing-chocolate-candies-6112828/",
+      "photo": "product-editorial/chocolate-candy.jpg",
+      "photo_source": "https://www.pexels.com/photo/9285191/"
     },
     "seaweed1": {
       "file": "products/seaweed1",
       "alt": "Alghe marine in acqua, ingrediente di ispirazione per il caviale vegano",
-      "source": "https://www.pexels.com/video/seaweed-16473202/"
+      "source": "https://www.pexels.com/video/seaweed-16473202/",
+      "photo": "product-editorial/seaweed1.jpg",
+      "photo_source": "https://www.pexels.com/photo/35479269/"
     },
     "seaweed2": {
       "file": "products/seaweed2",
       "alt": "Alghe marine in acqua cristallina",
-      "source": "https://www.pexels.com/video/kelp-floating-in-the-sea-8823620/"
+      "source": "https://www.pexels.com/video/kelp-floating-in-the-sea-8823620/",
+      "photo": "product-editorial/seaweed2.jpg",
+      "photo_source": "https://www.pexels.com/photo/8849620/"
     },
     "salmon": {
       "file": "products/salmon",
       "alt": "Filetto di salmone fresco preparato a mano",
-      "source": "https://www.pexels.com/video/a-close-up-of-a-person-cutting-a-salmon-fillet-8901917/"
+      "source": "https://www.pexels.com/video/a-close-up-of-a-person-cutting-a-salmon-fillet-8901917/",
+      "photo": "product-editorial/salmon.jpg",
+      "photo_source": "https://www.pexels.com/photo/34759411/"
     },
     "fish2": {
       "file": "products/fish2",
       "alt": "Preparazione di filetti di pesce fresco",
-      "source": "https://www.pexels.com/video/chef-preparing-the-fish-in-kitchen-8626089/"
+      "source": "https://www.pexels.com/video/chef-preparing-the-fish-in-kitchen-8626089/",
+      "photo": "product-editorial/fish2.jpg",
+      "photo_source": "https://www.pexels.com/photo/8629036/"
     }
   },
   "products": {
