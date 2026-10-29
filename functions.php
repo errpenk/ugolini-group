@@ -1995,12 +1995,22 @@ function ugolini_group_cooking_suggestions_shortcode() {
 		$data = array( 'Idee da portare in tavola', array( 'Crostini alle acciughe', 'Tosta il pane, lascialo intiepidire e completa con pomodoro, un filetto di acciuga e qualche foglia di prezzemolo.' ), array( 'Pasta saporita', 'Sciogli delicatamente un filetto di acciuga nell’olio con aglio; unisci la pasta e poca acqua di cottura.' ), array( 'Insalata mediterranea', 'Aggiungi i filetti di acciuga a pomodori, olive e verdure già condite, dosando il sale solo dopo l’assaggio.' ) );
 	} elseif ( in_array( $product_slug, array( 'affettatartufi-in-acciaio-inox', 'affettatartufo-in-polietilene-per-uso-alimentare' ), true ) ) {
 		$data = array( 'Idee per il servizio', array( 'Tagliatelle al tartufo', 'Prepara la pasta e aggiungi il tartufo a lamelle con l’affettatartufi sul piatto pronto, regolando lo spessore secondo il risultato desiderato.' ), array( 'Uova e tartufo', 'Completa le uova calde con lamelle sottili di tartufo appena prima di servire, seguendo le istruzioni dell’accessorio.' ), array( 'Crostini da aperitivo', 'Prepara crostini con una base delicata e aggiungi il tartufo affettato al momento, senza coprirne il profumo.' ) );
+	} elseif ( 'luxureat' === $term->slug && str_contains( $product_slug, 'caviale' ) ) {
+		$data = $copy['caviareat'];
 	} elseif ( 'luxureat' === $term->slug && str_contains( $product_slug, 'cioccolatini' ) ) {
 		$data = array( 'Idee da portare in tavola', array( 'Fine pasto', 'Servi i cioccolatini a temperatura ambiente con un caffè espresso, seguendo le indicazioni di conservazione della confezione.' ), array( 'Piccola degustazione', 'Presenta un cioccolatino per ospite su un piattino e lascia che il gusto si esprima senza accompagnamenti invadenti.' ), array( 'Con frutta fresca', 'Accompagna i cioccolatini con piccoli frutti freschi serviti a parte per creare un contrasto di sapori.' ) );
 	} elseif ( 'luxureat' === $term->slug && str_contains( $product_slug, 'burger' ) ) {
 		$data = array( 'Idee da portare in tavola', array( 'Burger con insalata', 'Cuoci il burger secondo le indicazioni della confezione e servilo con insalata fresca e pane appena tostato.' ), array( 'Con patate al forno', 'Prepara patate al forno come contorno; servi il burger caldo e aggiungi eventuali condimenti solo dopo l’assaggio.' ), array( 'Nel piatto', 'Abbina il burger a verdure grigliate e completa con un filo d’olio, rispettando sempre le istruzioni di cottura della referenza.' ) );
 	} elseif ( 'luxureat' === $term->slug && str_contains( $product_slug, 'tartare' ) ) {
 		$data = array( 'Idee da portare in tavola', array( 'Tartare agli agrumi', 'Prepara la tartare secondo le istruzioni della referenza; completa con poco olio e scorza di agrume prima di servire.' ), array( 'Con erbe fresche', 'Aggiungi erbe delicate tritate finemente e mescola con misura per lasciare riconoscibile il sapore del pesce.' ), array( 'Piccoli assaggi', 'Distribuisci la tartare in piccole porzioni e servi con crostini o verdure croccanti, mantenendo il prodotto alla temperatura indicata.' ) );
+	} elseif ( in_array( $term->slug, array( 'luxureat', 'truffleat' ), true ) && str_contains( $product_slug, 'olio-' ) ) {
+		$data = $copy['olio-al-tartufo'];
+	} elseif ( 'truffleat' === $term->slug && str_contains( $product_slug, 'spray' ) ) {
+		$data = array( 'Idee da portare in tavola', array( 'Su patate calde', 'Prepara le patate e applica lo spray al tartufo solo a fine cottura, seguendo le istruzioni della confezione.' ), array( 'Uova a finitura', 'Completa le uova pronte con una piccola quantità di aroma e assaggia prima di aggiungerne ancora.' ), array( 'Crostini', 'Aggiungi un tocco di spray a crostini con formaggio fresco poco prima di servirli.' ) );
+	} elseif ( 'truffleat' === $term->slug && str_contains( $product_slug, 'sale-' ) ) {
+		$data = array( 'Idee da portare in tavola', array( 'Patate al forno', 'Completa le patate già cotte con poco sale al tartufo, assaggiando prima di aggiungerne altro.' ), array( 'Uova e verdure', 'Usa una piccola quantità di sale al tartufo sulle uova o sulle verdure appena servite.' ), array( 'Crostini', 'Prepara pane tostato con olio e aggiungi un pizzico di sale al tartufo a finitura.' ) );
+	} elseif ( 'luxureat' === $term->slug && ( str_contains( $product_slug, 'salsa-' ) || str_contains( $product_slug, 'maionese-' ) ) ) {
+		$data = array( 'Idee da portare in tavola', array( 'Con verdure', 'Servi una piccola quantità di salsa a parte con verdure cotte o crude, dosandola secondo il piatto.' ), array( 'Panino gourmet', 'Aggiungi un velo di condimento al panino già preparato e assaggia prima di completare.' ), array( 'Piccoli antipasti', 'Accompagna crostini o bocconi da aperitivo con la salsa servita separatamente.' ) );
 	} elseif ( 'truffleat' === $term->slug && str_contains( $product_slug, 'tagliatelle' ) ) {
 		$data = array( 'Idee da portare in tavola', array( 'Tagliatelle al burro', 'Cuoci la pasta secondo la confezione e condiscila con poco burro e acqua di cottura; completa con tartufo a finitura.' ), array( 'Con funghi', 'Salta i funghi in padella, unisci le tagliatelle cotte e lega il condimento con poca acqua di cottura.' ), array( 'Pasta e parmigiano', 'Servi le tagliatelle calde con parmigiano grattugiato al momento, dosandolo per non coprire il profumo del tartufo.' ) );
 	} elseif ( 'truffleat' === $term->slug && str_contains( $product_slug, 'polenta' ) ) {
@@ -2025,7 +2035,7 @@ function ugolini_group_cooking_suggestions_shortcode() {
 	$images = isset( $series_images[ $term->slug ] )
 		? array_map( static fn( $file ) => get_theme_file_uri( 'assets/images/cooking-suggestions/' . $file ), $series_images[ $term->slug ] )
 		: ugolini_group_editorial_images( $term, 3 );
-	if ( in_array( $product_slug, array( 'caviale-vegano', 'acciughe-sott-olio-100-gr' ), true ) ) {
+	if ( in_array( $term->slug, array( 'luxureat', 'truffleat' ), true ) || in_array( $product_slug, array( 'caviale-vegano', 'acciughe-sott-olio-100-gr' ), true ) ) {
 		$images = array_slice( ugolini_group_product_editorial_media()['guide'], 0, 3 );
 	}
 	if ( ! $images ) return '';

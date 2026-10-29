@@ -280,7 +280,7 @@ main .ugolini-b2b-partner__features h3 { margin: 0 0 .35rem; color: inherit; fon
 .ugolini-caviareat-editorial h3 { font-size: clamp(1.1rem, 1.5vw, 1.5rem); }
 .ugolini-caviareat-editorial p { margin: 0 0 1.25em; line-height: 1.55; }
 .ugolini-caviareat-editorial ul { margin: 0; padding-left: 1.35em; }
-@media (max-width: 760px) { .ugolini-product-films { gap: .5rem; } .ugolini-caviareat-editorial__row, .ugolini-caviareat-editorial__row + .ugolini-caviareat-editorial__row, .ugolini-caviareat-editorial__copy-grid { grid-template-columns: 1fr; } .ugolini-caviareat-editorial__row > img { width: min(100%, 320px); justify-self: start; } }
+@media (max-width: 760px) { .ugolini-product-films { gap: .5rem; } .ugolini-caviareat-editorial__row, .ugolini-caviareat-editorial__row + .ugolini-caviareat-editorial__row, .ugolini-caviareat-editorial__copy-grid { grid-template-columns: 1fr; } .ugolini-caviareat-editorial__row > img { width: min(100%, 320px); } .ugolini-caviareat-editorial__row:first-child > img { justify-self: start; } }
 
 .ugolini-section.ugolini-product-after { padding-top: 0; padding-bottom: 0; border-bottom: 0; background: #fff; }
 .ugolini-product-after > .ugolini-product-story { max-width: none !important; margin-inline: 0 !important; }
