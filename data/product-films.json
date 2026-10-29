@@ -99,6 +99,26 @@
       "file": "products/chocolate-candy",
       "alt": "Cioccolatini artigianali in preparazione",
       "source": "https://www.pexels.com/video/crop-person-preparing-chocolate-candies-6112828/"
+    },
+    "seaweed1": {
+      "file": "products/seaweed1",
+      "alt": "Alghe marine in acqua, ingrediente di ispirazione per il caviale vegano",
+      "source": "https://www.pexels.com/video/seaweed-16473202/"
+    },
+    "seaweed2": {
+      "file": "products/seaweed2",
+      "alt": "Alghe marine in acqua cristallina",
+      "source": "https://www.pexels.com/video/kelp-floating-in-the-sea-8823620/"
+    },
+    "salmon": {
+      "file": "products/salmon",
+      "alt": "Filetto di salmone fresco preparato a mano",
+      "source": "https://www.pexels.com/video/a-close-up-of-a-person-cutting-a-salmon-fillet-8901917/"
+    },
+    "fish2": {
+      "file": "products/fish2",
+      "alt": "Preparazione di filetti di pesce fresco",
+      "source": "https://www.pexels.com/video/chef-preparing-the-fish-in-kitchen-8626089/"
     }
   },
   "products": {
@@ -184,51 +204,51 @@
     ],
     "caviale-huso-dauricus-tin": [
       "caviar",
-      "anchovy"
+      "caviar2"
     ],
     "caviale-vegano": [
-      "caviar",
-      "anchovy"
+      "seaweed1",
+      "seaweed2"
     ],
     "caviale-royal-oscietra-blue-tin": [
       "caviar",
-      "anchovy"
+      "caviar2"
     ],
     "caviale-royal-baerii-blue-tin": [
       "caviar",
-      "anchovy"
+      "caviar2"
     ],
     "caviale-beluga-huso-huso-blue-tin": [
       "caviar",
-      "anchovy"
+      "caviar2"
     ],
     "acciughe-sott-olio-100-gr": [
-      "caviar",
-      "anchovy"
+      "anchovy",
+      "fish2"
     ],
     "caviale-beluga-huso-huso": [
       "caviar",
-      "anchovy"
+      "caviar2"
     ],
     "caviale-huso-dauricus": [
       "caviar",
-      "anchovy"
+      "caviar2"
     ],
     "caviale-royal-baerii": [
       "caviar",
-      "anchovy"
+      "caviar2"
     ],
     "caviale-royal-kaluga": [
       "caviar",
-      "anchovy"
+      "caviar2"
     ],
     "caviale-royal-oscietra": [
       "caviar",
-      "anchovy"
+      "caviar2"
     ],
     "caviale-schrenkii-imperial": [
       "caviar",
-      "anchovy"
+      "caviar2"
     ],
     "crema-di-funghi-porcini-e-tartufo-bianco": [
       "mushroom",
@@ -308,11 +328,11 @@
     ],
     "tincaviar-lattine-per-caviale": [
       "caviar",
-      "anchovy"
+      "caviar2"
     ],
     "tartare-di-ricciola": [
       "fish",
-      "tuna"
+      "fish2"
     ],
     "tartare-di-scampi": [
       "shrimp",
@@ -324,7 +344,7 @@
     ],
     "tartare-di-pesce-spada": [
       "fish",
-      "tuna"
+      "fish2"
     ],
     "tartare-di-mazzancolla": [
       "shrimp",
@@ -348,7 +368,7 @@
     ],
     "salsa-di-soia-al-wasabi-e-tartufo-100-ml": [
       "truffle",
-      "fish"
+      "basil"
     ],
     "olio-di-vinacciolo-al-tartufo-bianco-naturale-250-ml": [
       "olive",
@@ -420,7 +440,7 @@
     ],
     "salmon-tartare": [
       "fish",
-      "tuna"
+      "salmon"
     ],
     "precious-black-truffle": [
       "truffle",
