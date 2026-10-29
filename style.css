@@ -3,7 +3,7 @@ Theme Name: Ugolini Group
 Theme URI: https://ugolinigroup.com/
 Author: Ugolini Group
 Description: A purpose-built block theme for the Ugolini Group SureCart store.
-Version: 6.66.38
+Version: 6.66.39
 Requires at least: 6.6
 Requires PHP: 8.1
 Text Domain: ugolini-group
@@ -1384,7 +1384,7 @@ main .ugolini-b2b-partner__features h3 { margin: 0 0 .35rem; color: inherit; fon
 .ugolini-product-information .preview-product-facts > :first-child { margin-top: 0; padding-top: 0; border-top: 0; }
 .ugolini-product-films-shell { padding-block: clamp(2rem, 4vw, 4rem); background: #fff; }
 .ugolini-product-films { width: min(calc(100% - (2 * var(--ugolini-gutter))), var(--ugolini-container)); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(1.5rem, 3vw, 3rem); margin-inline: auto; }
-.ugolini-product-films video { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: transparent; }
+.ugolini-product-films video { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: transparent; pointer-events: none; }
 .ugolini-caviareat-editorial-shell { padding: clamp(3rem, 6vw, 6rem) 0; background: #fff; }
 .ugolini-caviareat-editorial { width: min(calc(100% - (2 * var(--ugolini-gutter))), var(--ugolini-container)); display: grid; gap: clamp(2rem, 4vw, 4rem); margin-inline: auto; color: #171714; font-family: var(--wp--preset--font-family--interface); }
 .ugolini-caviareat-editorial__row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(1.5rem, 3vw, 3rem); align-items: center; }

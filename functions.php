@@ -1771,7 +1771,7 @@ function ugolini_group_product_films() {
 		$film = $data['media'][ $slug ] ?? null;
 		if ( ! $film ) continue;
 		$base = 'assets/videos/' . $film['file'];
-		$html .= '<video autoplay muted loop playsinline controls preload="none" poster="' . esc_url( get_theme_file_uri( $base . '.jpg' ) ) . '" aria-label="' . esc_attr( $film['alt'] ) . '" src="' . esc_url( get_theme_file_uri( $base . '.mp4' ) ) . '"></video>';
+		$html .= '<video autoplay muted loop playsinline preload="none" poster="' . esc_url( get_theme_file_uri( $base . '.jpg' ) ) . '" aria-label="' . esc_attr( $film['alt'] ) . '" src="' . esc_url( get_theme_file_uri( $base . '.mp4' ) ) . '"></video>';
 	}
 	return $html . '</div></section>';
 }
