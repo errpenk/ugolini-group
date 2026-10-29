@@ -309,7 +309,16 @@
 }
 
 @media (max-width: 767px) {
-	.ugolini-cooking .ugolini-cooking-grid { grid-template-columns: minmax(0, 1fr); }
+	.ugolini-related-products .preview-product-grid,
+	.ugolini-cooking .ugolini-cooking-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+	.ugolini-related-products .preview-product-grid { gap: .75rem; }
+	.ugolini-related-products .preview-product-media { height: auto; aspect-ratio: 3 / 4; margin-bottom: .5rem; }
+	.ugolini-related-products .preview-product-card h3 { font-size: clamp(.85rem, 2.9vw, 1.1rem); }
+	.ugolini-related-products .preview-product-card :is(.ugolini-product-card-meta, .preview-product-price) { font-size: .7rem; }
+	.ugolini-cooking-grid article { aspect-ratio: 3 / 4; }
+	.ugolini-cooking-grid article > div { padding: .65rem; }
+	.ugolini-cooking-grid strong { font-size: clamp(.9rem, 3vw, 1.15rem); line-height: 1.1; }
+	.ugolini-cooking-grid span { font-size: clamp(.65rem, 2.3vw, .8rem); line-height: 1.25; }
 	.ugolini-support-customer__grid { grid-template-columns: 1fr; gap: 2rem; }
 	.ugolini-support-business__cases,
 	.ugolini-support-gallery__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }

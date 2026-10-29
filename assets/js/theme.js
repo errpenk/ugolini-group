@@ -285,7 +285,12 @@ for (const deal of document.querySelectorAll('[data-deal-rail]')) {
 	}
 })();
 
-for (const detail of document.querySelectorAll('.ugolini-product-fact')) detail.open = true;
+const productFactsViewport = matchMedia('(max-width: 767px)');
+const syncProductFacts = () => {
+	for (const detail of document.querySelectorAll('.ugolini-product-fact')) detail.open = !productFactsViewport.matches;
+};
+syncProductFacts();
+productFactsViewport.addEventListener('change', syncProductFacts);
 
 (() => {
 	const cards = [...document.querySelectorAll('.ugolini-journal-grid > .wp-block-post')];
