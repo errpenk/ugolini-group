@@ -1619,14 +1619,44 @@ function ugolini_group_product_guide_shortcode() {
 	$terms = is_singular() ? wp_get_post_terms( get_the_ID(), 'sc_collection' ) : array();
 	$term  = is_array( $terms ) ? ( $terms[0] ?? null ) : null;
 	$slug  = $term instanceof WP_Term ? $term->slug : 'salse-tartufo';
-	$is_sturgeon_caviar = 'caviareat' === $slug && ! in_array( get_post_field( 'post_name', get_the_ID() ), array( 'caviale-vegano', 'acciughe-sott-olio-100-gr' ), true );
-	if ( 'caviareat' === $slug && ! $is_sturgeon_caviar ) return '';
+	$product_slug = get_post_field( 'post_name', get_the_ID() );
+	$is_sturgeon_caviar = 'caviareat' === $slug && ! in_array( $product_slug, array( 'caviale-vegano', 'acciughe-sott-olio-100-gr' ), true );
 	$guides = array(
 		'caviareat' => array(
 			array( 'sparkles', 'Eccellenza della Materia Prima', 'Solo materie prime selezionate danno vita a un caviale dal gusto autentico e raffinato.\n\nOgni fase della produzione è curata con precisione per garantire qualità, purezza e un sapore inconfondibile, espressione della nostra dedizione all’eccellenza.' ),
 			array( 'book-open', 'Benessere e Cura dello Storione', 'Gli storioni crescono in un ambiente controllato e rispettoso, seguendo i loro ritmi naturali.\n\nAttenzione quotidiana, alimentazione equilibrata e tempi di maturazione lunghi assicurano il loro benessere e un caviale di qualità superiore.' ),
 			array( 'package-check', 'Confezionamento di Precisione', 'Ogni confezione viene realizzata con cura e competenza per preservare freschezza e gusto.\n\nIl rigoroso controllo della catena del freddo e la tracciabilità completa della filiera garantiscono un prodotto perfetto in ogni dettaglio.' ),
 			array( 'badge-check', 'Consulenza e Servizio Dedicato', 'Offriamo un servizio personalizzato, rapido e attento alle esigenze di ogni cliente.\n\nDalla scelta del caviale alla consegna, accompagniamo ogni esperienza con professionalità, competenza e una passione che fa la differenza.' ),
+		),
+		'caviareat-vegano' => array(
+			array( 'sparkles', 'Ispirazione marina', 'Il caviale vegano nasce da alghe marine. Presentalo in piccole quantità per valorizzarne colore, consistenza e carattere.' ),
+			array( 'utensils', 'Come servirlo', 'Usalo come finitura per antipasti e piccoli assaggi. La scheda prodotto indica le caratteristiche della referenza.' ),
+			array( 'book-open', 'Abbinamenti', 'Scegli accompagnamenti delicati e costruisci l’assaggio gradualmente, lasciando spazio al sapore del prodotto.' ),
+			array( 'tag', 'Prima dell’uso', 'Verifica sempre ingredienti, allergeni, formato e conservazione riportati sulla confezione.' ),
+		),
+		'caviareat-acciughe' => array(
+			array( 'sparkles', 'Il carattere delle acciughe', 'I filetti di acciughe hanno un gusto deciso: inizia con una piccola quantità e completa il piatto secondo il tuo gusto.' ),
+			array( 'utensils', 'Come servirle', 'Provale su crostini oppure come ingrediente per salse e primi piatti, seguendo le indicazioni della referenza.' ),
+			array( 'book-open', 'Abbinamenti', 'Accosta le acciughe a preparazioni semplici, così la loro componente sapida resta riconoscibile.' ),
+			array( 'tag', 'Prima dell’uso', 'Consulta l’etichetta per ingredienti, allergeni, formato e conservazione, anche dopo l’apertura.' ),
+		),
+		'luxureat' => array(
+			array( 'sparkles', 'Una specialità da scoprire', 'Ogni referenza LuxurEat ha ingredienti e caratteristiche propri. Parti dalla sua scheda per conoscere il prodotto.' ),
+			array( 'utensils', 'Idee di utilizzo', 'Scegli preparazione e servizio in base alle indicazioni della singola referenza e al piatto che desideri creare.' ),
+			array( 'book-open', 'Costruire l’esperienza', 'Valorizza il carattere del prodotto con abbinamenti misurati, lasciando spazio al suo gusto e alla sua consistenza.' ),
+			array( 'tag', 'Prima dell’uso', 'Controlla in etichetta ingredienti, allergeni, formato, istruzioni e conservazione.' ),
+		),
+		'truffleat' => array(
+			array( 'sparkles', 'Il mondo del tartufo', 'La gamma comprende tartufi, condimenti e accessori. Ogni referenza ha una funzione e caratteristiche specifiche.' ),
+			array( 'utensils', 'Nel piatto', 'Per le referenze alimentari, segui le indicazioni d’uso e dosa il prodotto in funzione della preparazione.' ),
+			array( 'book-open', 'Scelta della referenza', 'Confronta ingredienti, formato e modalità d’impiego della singola scheda prima di scegliere la specialità o l’accessorio.' ),
+			array( 'tag', 'Prima dell’uso', 'Leggi sempre etichetta e istruzioni per uso, conservazione e manutenzione quando previste.' ),
+		),
+		'tin-caviar' => array(
+			array( 'package-check', 'Confezionamento', 'Le lattine sono pensate per il confezionamento del caviale e delle uova di pesce.' ),
+			array( 'sparkles', 'La presentazione', 'Scegli il formato più adatto alla referenza e al contesto di servizio consultando le specifiche del prodotto.' ),
+			array( 'book-open', 'Materiali e formati', 'La collezione comprende diverse soluzioni in metallo. Le caratteristiche sono descritte nella scheda.' ),
+			array( 'tag', 'Prima dell’uso', 'Verifica materiali, misure e indicazioni specifiche prima del confezionamento.' ),
 		),
 		'pesto' => array(
 			array( 'utensils', 'Come servirlo', 'Usalo per condire la pasta oppure come finitura per bruschette, focacce e preparazioni creative. Aggiungilo fuori dal fuoco o a calore moderato per conservarne il profilo aromatico.' ),
@@ -1665,7 +1695,7 @@ function ugolini_group_product_guide_shortcode() {
 			array( 'tag', 'Prima dell’uso', 'Rispetta le istruzioni riportate in etichetta per apertura, conservazione e durata; sono specifiche per ciascuna referenza.' ),
 		),
 	);
-	$guide_slug = $is_sturgeon_caviar ? 'caviareat' : $slug;
+	$guide_slug = $is_sturgeon_caviar ? 'caviareat' : ( 'caviareat' === $slug ? ( 'caviale-vegano' === $product_slug ? 'caviareat-vegano' : 'caviareat-acciughe' ) : $slug );
 	if ( ! isset( $guides[ $guide_slug ] ) ) return '';
 	$items = $guides[ $guide_slug ];
 	$images = ugolini_group_product_editorial_media()['guide'];
