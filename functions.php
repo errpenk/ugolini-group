@@ -1759,19 +1759,34 @@ function ugolini_group_product_editorial() {
 	$editorial = '<section class="ugolini-caviareat-editorial" aria-label="CaviarEat"><div class="ugolini-caviareat-editorial__row"><div><h2>L’Equilibrio Perfetto tra Natura e Innovazione</h2><p>Ogni fase del nostro processo nasce dal rispetto per la vita e per l’ambiente.</p><p>Tecnologia, esperienza e attenzione quotidiana si fondono per creare un ecosistema armonioso, dove lo storione cresce in modo sano e naturale.</p><p>Un equilibrio che si riflette nella purezza e nell’eccellenza del nostro caviale.</p></div><img src="' . esc_url( $spoons ) . '" alt="Caviale nero, fotografia illustrativa" loading="lazy"></div><div class="ugolini-caviareat-editorial__row"><img src="' . esc_url( $ice ) . '" alt="Caviale nero, fotografia illustrativa" loading="lazy"><div class="ugolini-caviareat-editorial__copy-grid"><div><h3>Sapori autentici</h3><p>Ogni perla di caviale racchiude il piacere autentico della vita.</p><h3>La Cultura del Gusto</h3><p>Il caviale per noi è arte, tradizione e conoscenza.</p><p>Frutto di anni di esperienza e di una visione artigianale che valorizza la materia prima, rappresenta l’incontro tra passione italiana e perfezione naturale.</p></div><div><h3>CaviarEat</h3><p>Un invito a vivere ogni istante con eleganza e passione.</p><ul><li>Selezionato dalle acque più pure</li><li>Lavorato con cura artigianale</li><li>Sfumature, aromi e consistenze per veri intenditori.</li></ul></div></div></div></section>';
 	return '<section class="ugolini-caviareat-editorial-shell">' . $editorial . '</section>';
 }
-/** Product-specific licensed films between facts and collection content. */
+/** Product pair films shown before the collection guide. */
 function ugolini_group_product_films() {
 	if ( ! is_singular( 'sc_product' ) ) return '';
 	$path = get_theme_file_path( 'data/product-films.json' );
 	$data = is_readable( $path ) ? json_decode( file_get_contents( $path ), true ) : null;
 	$slugs = $data['products'][ get_post_field( 'post_name', get_queried_object_id() ) ] ?? array();
 	if ( ! $slugs ) return '';
+	$pair_collections = array( 'luxureat', 'olio-al-tartufo', 'marmellate', 'pesto', 'salse-funghi', 'salse-tartufo', 'truffleat', 'tin-caviar' );
+	$terms = wp_get_post_terms( get_queried_object_id(), 'sc_collection' );
+	$collection = null;
+	if ( is_array( $terms ) ) {
+		foreach ( $terms as $term ) {
+			if ( ! in_array( $term->slug, $pair_collections, true ) && 'caviareat' !== $term->slug ) continue;
+			$collection = $term;
+			break;
+		}
+	}
 	$html = '<section class="ugolini-product-films-shell" aria-label="Video delle specialità"><div class="ugolini-product-films">';
-	foreach ( $slugs as $slug ) {
+	foreach ( $slugs as $index => $slug ) {
 		$film = $data['media'][ $slug ] ?? null;
 		if ( ! $film ) continue;
 		$base = 'assets/videos/' . $film['file'];
-		$html .= '<video autoplay muted loop playsinline preload="none" poster="' . esc_url( get_theme_file_uri( $base . '.jpg' ) ) . '" aria-label="' . esc_attr( $film['alt'] ) . '" src="' . esc_url( get_theme_file_uri( $base . '.mp4' ) ) . '"></video>';
+		$alt = $film['alt'];
+		if ( $collection && ( in_array( $collection->slug, $pair_collections, true ) || ( 'caviareat' === $collection->slug && 1 === $index ) ) ) {
+			$base = 'assets/videos/series-pairs/' . $collection->slug . '/' . sprintf( '%02d', $index + 1 );
+			$alt = $collection->name . ' ' . ( $index + 1 );
+		}
+		$html .= '<video autoplay muted loop playsinline preload="none" poster="' . esc_url( get_theme_file_uri( $base . '.jpg' ) ) . '" aria-label="' . esc_attr( $alt ) . '" src="' . esc_url( get_theme_file_uri( $base . '.mp4' ) ) . '"></video>';
 	}
 	return $html . '</div></section>';
 }
