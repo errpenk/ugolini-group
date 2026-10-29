@@ -1589,8 +1589,7 @@ function ugolini_group_product_story_shortcode() {
 	$image = get_the_post_thumbnail_url( get_the_ID(), 'full' );
 	$slides = $image ? '<img class="ugolini-carousel__slide is-active" src="' . esc_url( $image ) . '" alt="" loading="lazy">' : '';
 	if ( is_wp_error( $link ) ) $link = home_url( '/products/' );
-	$film = 'olio-al-tartufo' === $slug ? '<p><a href="' . esc_url( home_url( '/galleria/#quattrociocchi-video' ) ) . '">Guarda il percorso dell’olio con Quattrociocchi Americo →</a></p>' : '';
-	return '<section class="ugolini-product-story"><div class="ugolini-carousel ugolini-product-story__media" data-carousel data-product-gallery-story>' . $slides . '</div><div class="ugolini-product-story__copy"><div><p class="ugolini-eyebrow">Continua a scoprire</p><h2>' . esc_html( $content[0] ) . '</h2></div><div><p>' . esc_html( $content[1] ) . '</p><p>' . esc_html( $content[2] ) . '</p><a href="' . esc_url( $link ) . '#ugolini-products">Vai alla collezione</a>' . $film . '</div></div></section>';
+	return '<section class="ugolini-product-story"><div class="ugolini-carousel ugolini-product-story__media" data-carousel data-product-gallery-story>' . $slides . '</div><div class="ugolini-product-story__copy"><div><p class="ugolini-eyebrow">Continua a scoprire</p><h2>' . esc_html( $content[0] ) . '</h2></div><div><p>' . esc_html( $content[1] ) . '</p><p>' . esc_html( $content[2] ) . '</p><a href="' . esc_url( $link ) . '#ugolini-products">Vai alla collezione</a></div></div></section>';
 }
 add_shortcode( 'ugolini_product_story', 'ugolini_group_product_story_shortcode' );
 
@@ -2066,7 +2065,10 @@ function ugolini_group_related_products_shortcode() {
 	if ( ! $ids ) return '';
 	$title = $needs_extra ? 'Altre proposte' : 'Altre specialità ' . $term->name;
 	$grid = ugolini_group_live_product_grid( '', $ids, true );
-	return '<section class="alignfull ugolini-section ugolini-related-products"><div class="ugolini-section-heading alignwide"><h2>' . esc_html( $title ) . '</h2><p class="ugolini-editorial-link"><a href="' . esc_url( home_url( '/products/' ) ) . '">Tutti i prodotti</a></p></div>' . $grid . '</section>';
+	$hero_path = 'assets/images/collection-heroes/' . ( $term instanceof WP_Term ? $term->slug : 'all' ) . '.jpg';
+	if ( ! file_exists( get_theme_file_path( $hero_path ) ) ) $hero_path = 'assets/images/collection-heroes/all.jpg';
+	$banner = '<div class="ugolini-related-collection-banner" aria-hidden="true" style="--ugolini-related-hero:url(\'' . esc_url( get_theme_file_uri( $hero_path ) ) . '\')"></div>';
+	return $banner . '<section class="alignfull ugolini-section ugolini-related-products"><div class="ugolini-section-heading alignwide"><h2>' . esc_html( $title ) . '</h2><p class="ugolini-editorial-link"><a href="' . esc_url( home_url( '/products/' ) ) . '">Tutti i prodotti</a></p></div>' . $grid . '</section>';
 }
 add_shortcode( 'ugolini_related_products', 'ugolini_group_related_products_shortcode' );
 

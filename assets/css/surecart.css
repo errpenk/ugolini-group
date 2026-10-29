@@ -99,7 +99,7 @@
 .ugolini-summary-detail summary::after { content: "+"; float: right; font-weight: 400; }
 .ugolini-summary-detail[open] summary::after { content: "−"; }
 .ugolini-summary-detail p { margin: 0.8rem 0 0; color: var(--wp--preset--color--secondary-text); font-size: 0.88rem; }
-.ugolini-product-information { padding-block: clamp(3rem, 7vw, 7rem); border-top: 1px solid var(--wp--preset--color--border); background: #fff; }
+.ugolini-product-information { padding-block: clamp(3rem, 7vw, 7rem); border-top: 0; background: #fff; }
 .ugolini-product-information .wp-block-post-content { width: 100%; max-width: 920px !important; margin-block-start: 0 !important; margin-inline: 0 !important; }
 .ugolini-product-information .wp-block-post-content .ugolini-product-fact p { white-space: normal; }
 .ugolini-product-fact { margin: 0; padding-block: 1.15rem; border: 0; border-top: 1px solid var(--wp--preset--color--border); }
