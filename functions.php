@@ -2021,7 +2021,7 @@ function ugolini_group_cooking_suggestions_shortcode() {
 	}
 	$series_images = array(
 		'caviareat'  => array( '211115873_m.jpg', '206245340_m.jpg', '298347544_m.jpg' ),
-		'luxureat'   => array( '253553877_m.jpg', '59780622_m.jpg', '166425501_m.jpg' ),
+		'luxureat'   => array( 'luxureat-salmon-crostini.jpg', 'luxureat-tartare.jpg', 'luxureat-salmon-tartare.jpg' ),
 		'marmellate' => array( '34452330_m.jpg', '111613897_m.jpg', '32972926_m.jpg' ),
 		'olio-al-tartufo' => array( '183259666_m.jpg', '302161853_m.jpg', '39045492_m.jpg' ),
 		'pesto' => array( '166835018_m.jpg', '143312877_m.jpg', '182397301_m.jpg' ),
@@ -2029,12 +2029,12 @@ function ugolini_group_cooking_suggestions_shortcode() {
 		'salse-tartufo' => array( '308823080_m.jpg', '322831973_m.jpg', '181619574_m.jpg' ),
 		'sughi' => array( '120055713_m.jpg', '48652897_m.jpg', '83068629_m.jpg' ),
 		'tin-caviar' => array( '315399848_m.jpg', '180091432_m.jpg', '316165762_m.jpg' ),
-		'truffleat' => array( '179951066_m.jpg', '157737860_m.jpg', '225963806_m.jpg' ),
+		'truffleat' => array( 'truffleat-pasta.jpg', 'truffleat-plated.jpg', 'truffleat-risotto.jpg' ),
 	);
 	$images = isset( $series_images[ $term->slug ] )
 		? array_map( static fn( $file ) => get_theme_file_uri( 'assets/images/cooking-suggestions/' . $file ), $series_images[ $term->slug ] )
 		: ugolini_group_editorial_images( $term, 3 );
-	if ( in_array( $term->slug, array( 'luxureat', 'truffleat' ), true ) || in_array( $product_slug, array( 'caviale-vegano', 'acciughe-sott-olio-100-gr' ), true ) ) {
+	if ( in_array( $product_slug, array( 'caviale-vegano', 'acciughe-sott-olio-100-gr' ), true ) ) {
 		$images = array_slice( ugolini_group_product_editorial_media()['guide'], 0, 3 );
 	}
 	if ( ! $images ) return '';
