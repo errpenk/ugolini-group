@@ -1775,6 +1775,23 @@ function ugolini_group_product_films() {
 	}
 	return $html . '</div></section>';
 }
+/** Five portrait films shared by every product in the same collection. */
+function ugolini_group_collection_films() {
+	if ( ! is_singular( 'sc_product' ) ) return '';
+	$collections = array( 'caviareat', 'luxureat', 'marmellate', 'olio-al-tartufo', 'pesto', 'salse-funghi', 'salse-tartufo', 'sughi', 'tin-caviar', 'truffleat' );
+	$terms = wp_get_post_terms( get_queried_object_id(), 'sc_collection' );
+	if ( ! is_array( $terms ) ) return '';
+	foreach ( $terms as $term ) {
+		if ( ! in_array( $term->slug, $collections, true ) ) continue;
+		$html = '<section class="ugolini-collection-films-shell" aria-label="Video della collezione ' . esc_attr( $term->name ) . '"><div class="ugolini-collection-films">';
+		for ( $i = 1; $i <= 5; $i++ ) {
+			$base = 'assets/videos/collections/' . $term->slug . '/' . sprintf( '%02d', $i );
+			$html .= '<video autoplay muted loop playsinline preload="none" poster="' . esc_url( get_theme_file_uri( $base . '.jpg' ) ) . '" aria-label="' . esc_attr( $term->name . ' ' . $i ) . '" src="' . esc_url( get_theme_file_uri( $base . '.mp4' ) ) . '"></video>';
+		}
+		return $html . '</div></section>';
+	}
+	return '';
+}
 function ugolini_group_caviareat_editorial_after_details( $html, $block ) {
 	if ( is_singular( 'sc_product' ) && in_array( $block['blockName'] ?? '', array( 'core/shortcode', 'core/paragraph' ), true ) && str_contains( $html, '[ugolini_related_products]' ) ) return '';
 	if ( is_singular( 'sc_product' ) && 'core/group' === ( $block['blockName'] ?? '' ) && str_contains( $block['attrs']['className'] ?? '', 'ugolini-related-products' ) ) return ugolini_group_related_products_shortcode();
@@ -1798,8 +1815,9 @@ function ugolini_group_caviareat_editorial_after_details( $html, $block ) {
 		if ( str_contains( $class, 'ugolini-home-collections' ) ) return '';
 	}
 	if ( is_tax( 'sc_collection' ) && 'core/group' === ( $block['blockName'] ?? '' ) && str_contains( $block['attrs']['className'] ?? '', 'ugolini-collection-editorial-section' ) ) return $html . do_blocks( ugolini_group_page_pattern_content( 'professional-assurances' ) );
+	if ( is_singular( 'sc_product' ) && 'core/group' === ( $block['blockName'] ?? '' ) && str_contains( $block['attrs']['className'] ?? '', 'ugolini-product-after' ) ) return ugolini_group_product_films() . $html;
 	if ( 'core/group' !== ( $block['blockName'] ?? '' ) || ! str_contains( $block['attrs']['className'] ?? '', 'ugolini-product-information' ) ) return $html;
-	return ugolini_group_product_films() . $html . ugolini_group_product_editorial() . ugolini_group_related_products_shortcode();
+	return ugolini_group_collection_films() . $html . ugolini_group_product_editorial() . ugolini_group_related_products_shortcode();
 }
 add_filter( 'render_block', 'ugolini_group_caviareat_editorial_after_details', 10, 2 );
 
