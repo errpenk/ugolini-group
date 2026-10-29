@@ -1717,6 +1717,16 @@ function ugolini_group_product_guide_shortcode() {
 }
 add_shortcode( 'ugolini_product_guide', 'ugolini_group_product_guide_shortcode' );
 
+/** A small, collection-specific image break between the editorial stories. */
+function ugolini_group_product_editorial_banner( $slug ) {
+	$path = 'assets/images/product-editorial/banners/' . $slug . '.jpg';
+	if ( ! file_exists( get_theme_file_path( $path ) ) ) {
+		$path = 'assets/images/collection-heroes/' . $slug . '.jpg';
+	}
+	if ( ! file_exists( get_theme_file_path( $path ) ) ) return '';
+	return '<div class="ugolini-caviareat-editorial__banner" aria-hidden="true" style="--ugolini-editorial-banner:url(\'' . esc_url( get_theme_file_uri( $path ) ) . '\')"></div>';
+}
+
 /** Collection editorial, rendered as its own section immediately after product details. */
 function ugolini_group_product_editorial() {
 	$post_id = get_queried_object_id();
@@ -1757,13 +1767,12 @@ function ugolini_group_product_editorial() {
 		foreach ( $products as $product_id ) $names .= '<li>' . esc_html( get_the_title( $product_id ) ) . '</li>';
 		$data = $copy[ $slug ];
 		$description = trim( wp_strip_all_tags( term_description( $term ) ) ) ?: $data[1];
-		$editorial = '<section class="ugolini-caviareat-editorial ugolini-caviareat-editorial--series" aria-label="' . esc_attr( $term->name ) . '"><div class="ugolini-caviareat-editorial__row"><div><h2>' . esc_html( $data[0] ) . '</h2><p>' . esc_html( $description ) . '</p><p>' . esc_html( $data[1] ) . '</p></div><img src="' . esc_url( $images[0] ) . '" alt="' . esc_attr( $term->name ) . '" loading="lazy"></div><div class="ugolini-caviareat-editorial__row"><img src="' . esc_url( $images[1] ?? $images[0] ) . '" alt="' . esc_attr( $term->name ) . '" loading="lazy"><div class="ugolini-caviareat-editorial__copy-grid"><div><h3>La collezione</h3><p>' . esc_html( $data[2] ) . '</p><h3>Ogni prodotto ha la sua scheda</h3><p>Consulta ingredienti, formati e indicazioni d’uso della singola referenza.</p></div><div><h3>' . esc_html( $term->name ) . '</h3><p>' . esc_html( $description ) . '</p><ul>' . $names . '</ul></div></div></div></section>';
+		$editorial = '<section class="ugolini-caviareat-editorial ugolini-caviareat-editorial--series" aria-label="' . esc_attr( $term->name ) . '"><div class="ugolini-caviareat-editorial__row"><div><h2>' . esc_html( $data[0] ) . '</h2><p>' . esc_html( $description ) . '</p><p>' . esc_html( $data[1] ) . '</p></div><img src="' . esc_url( $images[0] ) . '" alt="' . esc_attr( $term->name ) . '" loading="lazy"></div>' . ugolini_group_product_editorial_banner( $slug ) . '<div class="ugolini-caviareat-editorial__row"><img src="' . esc_url( $images[1] ?? $images[0] ) . '" alt="' . esc_attr( $term->name ) . '" loading="lazy"><div class="ugolini-caviareat-editorial__copy-grid"><div><h3>La collezione</h3><p>' . esc_html( $data[2] ) . '</p><h3>Ogni prodotto ha la sua scheda</h3><p>Consulta ingredienti, formati e indicazioni d’uso della singola referenza.</p></div><div><h3>' . esc_html( $term->name ) . '</h3><p>' . esc_html( $description ) . '</p><ul>' . $names . '</ul></div></div></div></section>';
 		return '<section class="ugolini-caviareat-editorial-shell">' . $editorial . '</section>';
 	}
-	$caviar_images = ugolini_group_product_editorial_media( $post_id )['photos'];
-	$spoons = $caviar_images[0] ?? get_theme_file_uri( 'assets/images/product-editorial/caviar.jpg' );
-	$ice = $caviar_images[1] ?? get_theme_file_uri( 'assets/images/product-editorial/caviar2.jpg' );
-	$editorial = '<section class="ugolini-caviareat-editorial" aria-label="CaviarEat"><div class="ugolini-caviareat-editorial__row"><div><h2>L’Equilibrio Perfetto tra Natura e Innovazione</h2><p>Ogni fase del nostro processo nasce dal rispetto per la vita e per l’ambiente.</p><p>Tecnologia, esperienza e attenzione quotidiana si fondono per creare un ecosistema armonioso, dove lo storione cresce in modo sano e naturale.</p><p>Un equilibrio che si riflette nella purezza e nell’eccellenza del nostro caviale.</p></div><img src="' . esc_url( $spoons ) . '" alt="Caviale nero, fotografia illustrativa" loading="lazy"></div><div class="ugolini-caviareat-editorial__row"><img src="' . esc_url( $ice ) . '" alt="Caviale nero, fotografia illustrativa" loading="lazy"><div class="ugolini-caviareat-editorial__copy-grid"><div><h3>Sapori autentici</h3><p>Ogni perla di caviale racchiude il piacere autentico della vita.</p><h3>La Cultura del Gusto</h3><p>Il caviale per noi è arte, tradizione e conoscenza.</p><p>Frutto di anni di esperienza e di una visione artigianale che valorizza la materia prima, rappresenta l’incontro tra passione italiana e perfezione naturale.</p></div><div><h3>CaviarEat</h3><p>Un invito a vivere ogni istante con eleganza e passione.</p><ul><li>Selezionato dalle acque più pure</li><li>Lavorato con cura artigianale</li><li>Sfumature, aromi e consistenze per veri intenditori.</li></ul></div></div></div></section>';
+	$spoons = get_theme_file_uri( 'assets/images/product-editorial/caviareat-dish.jpg' );
+	$ice = get_theme_file_uri( 'assets/images/product-editorial/caviareat-scallops.jpg' );
+	$editorial = '<section class="ugolini-caviareat-editorial" aria-label="CaviarEat"><div class="ugolini-caviareat-editorial__row"><div><h2>L’Equilibrio Perfetto tra Natura e Innovazione</h2><p>Ogni fase del nostro processo nasce dal rispetto per la vita e per l’ambiente.</p><p>Tecnologia, esperienza e attenzione quotidiana si fondono per creare un ecosistema armonioso, dove lo storione cresce in modo sano e naturale.</p><p>Un equilibrio che si riflette nella purezza e nell’eccellenza del nostro caviale.</p></div><img src="' . esc_url( $spoons ) . '" alt="Caviale nero, fotografia illustrativa" loading="lazy"></div>' . ugolini_group_product_editorial_banner( $slug ) . '<div class="ugolini-caviareat-editorial__row"><img src="' . esc_url( $ice ) . '" alt="Caviale nero, fotografia illustrativa" loading="lazy"><div class="ugolini-caviareat-editorial__copy-grid"><div><h3>Sapori autentici</h3><p>Ogni perla di caviale racchiude il piacere autentico della vita.</p><h3>La Cultura del Gusto</h3><p>Il caviale per noi è arte, tradizione e conoscenza.</p><p>Frutto di anni di esperienza e di una visione artigianale che valorizza la materia prima, rappresenta l’incontro tra passione italiana e perfezione naturale.</p></div><div><h3>CaviarEat</h3><p>Un invito a vivere ogni istante con eleganza e passione.</p><ul><li>Selezionato dalle acque più pure</li><li>Lavorato con cura artigianale</li><li>Sfumature, aromi e consistenze per veri intenditori.</li></ul></div></div></div></section>';
 	return '<section class="ugolini-caviareat-editorial-shell">' . $editorial . '</section>';
 }
 /** Product pair films shown before the collection guide. */
