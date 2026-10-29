@@ -1767,14 +1767,14 @@ function ugolini_group_product_films() {
 	$data = is_readable( $path ) ? json_decode( file_get_contents( $path ), true ) : null;
 	$slugs = $data['products'][ get_post_field( 'post_name', get_queried_object_id() ) ] ?? array();
 	if ( ! $slugs ) return '';
-	$html = '<section class="ugolini-product-films" aria-label="Video delle specialità">';
+	$html = '<section class="ugolini-product-films-shell" aria-label="Video delle specialità"><div class="ugolini-product-films">';
 	foreach ( $slugs as $slug ) {
 		$film = $data['media'][ $slug ] ?? null;
 		if ( ! $film ) continue;
 		$base = 'assets/videos/' . $film['file'];
 		$html .= '<video autoplay muted loop playsinline controls preload="none" poster="' . esc_url( get_theme_file_uri( $base . '.jpg' ) ) . '" aria-label="' . esc_attr( $film['alt'] ) . '" src="' . esc_url( get_theme_file_uri( $base . '.mp4' ) ) . '"></video>';
 	}
-	return $html . '</section>';
+	return $html . '</div></section>';
 }
 function ugolini_group_caviareat_editorial_after_details( $html, $block ) {
 	if ( is_singular( 'sc_product' ) && in_array( $block['blockName'] ?? '', array( 'core/shortcode', 'core/paragraph' ), true ) && str_contains( $html, '[ugolini_related_products]' ) ) return '';
@@ -1800,7 +1800,7 @@ function ugolini_group_caviareat_editorial_after_details( $html, $block ) {
 	}
 	if ( is_tax( 'sc_collection' ) && 'core/group' === ( $block['blockName'] ?? '' ) && str_contains( $block['attrs']['className'] ?? '', 'ugolini-collection-editorial-section' ) ) return $html . do_blocks( ugolini_group_page_pattern_content( 'professional-assurances' ) );
 	if ( 'core/group' !== ( $block['blockName'] ?? '' ) || ! str_contains( $block['attrs']['className'] ?? '', 'ugolini-product-information' ) ) return $html;
-	return $html . ugolini_group_product_films() . ugolini_group_product_editorial() . ugolini_group_related_products_shortcode();
+	return ugolini_group_product_films() . $html . ugolini_group_product_editorial() . ugolini_group_related_products_shortcode();
 }
 add_filter( 'render_block', 'ugolini_group_caviareat_editorial_after_details', 10, 2 );
 
