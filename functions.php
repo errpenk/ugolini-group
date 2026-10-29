@@ -186,7 +186,7 @@ add_action( 'init', 'ugolini_group_seed_preview_pages', 99 );
 
 /** Create or refresh the gallery page without touching other pages. */
 function ugolini_group_seed_gallery_page() {
-	if ( ! current_user_can( 'manage_options' ) || get_option( 'ugolini_group_gallery_page_v14_seeded' ) ) return;
+	if ( ! current_user_can( 'manage_options' ) || get_option( 'ugolini_group_gallery_page_v18_seeded' ) ) return;
 	$content = ugolini_group_page_pattern_content( 'page-gallery' );
 	if ( ! $content ) return;
 	$page = get_page_by_path( 'galleria', OBJECT, 'page' );
@@ -196,7 +196,7 @@ function ugolini_group_seed_gallery_page() {
 	} else {
 		$result = wp_insert_post( array( 'post_type' => 'page', 'post_status' => 'publish', 'post_title' => 'Galleria aziendale', 'post_name' => 'galleria', 'post_content' => $content ), true );
 	}
-	if ( ! is_wp_error( $result ) ) update_option( 'ugolini_group_gallery_page_v14_seeded', 1, false );
+	if ( ! is_wp_error( $result ) ) update_option( 'ugolini_group_gallery_page_v18_seeded', 1, false );
 }
 add_action( 'init', 'ugolini_group_seed_gallery_page', 100 );
 
@@ -1267,7 +1267,8 @@ function ugolini_group_collection_editorial_shortcode() {
 	$panels = '';
 	$render = static function( $slug, $name, $lead, $details, $image, $active ) {
 		if ( ! $image ) return '';
-		return '<section class="ugolini-collection-editorial alignwide" data-collection-editorial="' . esc_attr( $slug ) . '"' . ( $active ? '' : ' hidden' ) . '><div class="ugolini-collection-editorial__media"><img src="' . esc_url( $image ) . '" alt="" loading="lazy" decoding="async"><div class="ugolini-collection-editorial__content"><div class="ugolini-collection-editorial__title"><p class="ugolini-eyebrow">' . esc_html__( 'Collezione Ugolini Gourmet', 'ugolini-group' ) . '</p><h2>' . esc_html( $name ) . '</h2></div><div class="ugolini-collection-editorial__intro"><p>' . esc_html( $lead ) . '</p><details open><summary>' . esc_html__( 'Scopri la collezione', 'ugolini-group' ) . '</summary><p>' . esc_html( $details ) . '</p><p>' . esc_html__( 'Consulta ogni scheda per ingredienti, formati, modalità d’uso e certificazioni disponibili.', 'ugolini-group' ) . '</p></details></div></div></div></section>';
+		$film = 'olio-al-tartufo' === $slug ? '<p><a href="' . esc_url( home_url( '/galleria/#quattrociocchi-video' ) ) . '">Guarda la raccolta e la produzione dell’olio con Quattrociocchi Americo →</a></p>' : '';
+		return '<section class="ugolini-collection-editorial alignwide" data-collection-editorial="' . esc_attr( $slug ) . '"' . ( $active ? '' : ' hidden' ) . '><div class="ugolini-collection-editorial__media"><img src="' . esc_url( $image ) . '" alt="" loading="lazy" decoding="async"><div class="ugolini-collection-editorial__content"><div class="ugolini-collection-editorial__title"><p class="ugolini-eyebrow">' . esc_html__( 'Collezione Ugolini Gourmet', 'ugolini-group' ) . '</p><h2>' . esc_html( $name ) . '</h2></div><div class="ugolini-collection-editorial__intro"><p>' . esc_html( $lead ) . '</p><details open><summary>' . esc_html__( 'Scopri la collezione', 'ugolini-group' ) . '</summary><p>' . esc_html( $details ) . '</p><p>' . esc_html__( 'Consulta ogni scheda per ingredienti, formati, modalità d’uso e certificazioni disponibili.', 'ugolini-group' ) . '</p></details>' . $film . '</div></div></div></section>';
 	};
 	$panels .= $render( '', 'Tutti i prodotti', 'Tutta la gamma Ugolini Gourmet.', 'Esplora le collezioni e consulta la scheda di ciascun prodotto.', $editorial_image( '' ), '' === $current );
 	foreach ( $terms as $term ) {
@@ -1588,7 +1589,8 @@ function ugolini_group_product_story_shortcode() {
 	$image = get_the_post_thumbnail_url( get_the_ID(), 'full' );
 	$slides = $image ? '<img class="ugolini-carousel__slide is-active" src="' . esc_url( $image ) . '" alt="" loading="lazy">' : '';
 	if ( is_wp_error( $link ) ) $link = home_url( '/products/' );
-	return '<section class="ugolini-product-story"><div class="ugolini-carousel ugolini-product-story__media" data-carousel data-product-gallery-story>' . $slides . '</div><div class="ugolini-product-story__copy"><div><p class="ugolini-eyebrow">Continua a scoprire</p><h2>' . esc_html( $content[0] ) . '</h2></div><div><p>' . esc_html( $content[1] ) . '</p><p>' . esc_html( $content[2] ) . '</p><a href="' . esc_url( $link ) . '#ugolini-products">Vai alla collezione</a></div></div></section>';
+	$film = 'olio-al-tartufo' === $slug ? '<p><a href="' . esc_url( home_url( '/galleria/#quattrociocchi-video' ) ) . '">Guarda il percorso dell’olio con Quattrociocchi Americo →</a></p>' : '';
+	return '<section class="ugolini-product-story"><div class="ugolini-carousel ugolini-product-story__media" data-carousel data-product-gallery-story>' . $slides . '</div><div class="ugolini-product-story__copy"><div><p class="ugolini-eyebrow">Continua a scoprire</p><h2>' . esc_html( $content[0] ) . '</h2></div><div><p>' . esc_html( $content[1] ) . '</p><p>' . esc_html( $content[2] ) . '</p><a href="' . esc_url( $link ) . '#ugolini-products">Vai alla collezione</a>' . $film . '</div></div></section>';
 }
 add_shortcode( 'ugolini_product_story', 'ugolini_group_product_story_shortcode' );
 
@@ -1705,6 +1707,22 @@ function ugolini_group_product_editorial() {
 	$editorial = '<section class="ugolini-caviareat-editorial" aria-label="CaviarEat"><div class="ugolini-caviareat-editorial__row"><div><h2>L’Equilibrio Perfetto tra Natura e Innovazione</h2><p>Ogni fase del nostro processo nasce dal rispetto per la vita e per l’ambiente.</p><p>Tecnologia, esperienza e attenzione quotidiana si fondono per creare un ecosistema armonioso, dove lo storione cresce in modo sano e naturale.</p><p>Un equilibrio che si riflette nella purezza e nell’eccellenza del nostro caviale.</p></div><img src="' . esc_url( $spoons ) . '" alt="Confezioni CaviarEat con cucchiaini" loading="lazy"></div><div class="ugolini-caviareat-editorial__row"><img src="' . esc_url( $ice ) . '" alt="Caviale servito sul ghiaccio" loading="lazy"><div class="ugolini-caviareat-editorial__copy-grid"><div><h3>Sapori autentici</h3><p>Ogni perla di caviale racchiude il piacere autentico della vita.</p><h3>La Cultura del Gusto</h3><p>Il caviale per noi è arte, tradizione e conoscenza.</p><p>Frutto di anni di esperienza e di una visione artigianale che valorizza la materia prima, rappresenta l’incontro tra passione italiana e perfezione naturale.</p></div><div><h3>CaviarEat</h3><p>Un invito a vivere ogni istante con eleganza e passione.</p><ul><li>Selezionato dalle acque più pure</li><li>Lavorato con cura artigianale</li><li>Sfumature, aromi e consistenze per veri intenditori.</li></ul></div></div></div></section>';
 	return '<section class="ugolini-caviareat-editorial-shell">' . $editorial . '</section>';
 }
+/** Product-specific licensed films between facts and collection content. */
+function ugolini_group_product_films() {
+	if ( ! is_singular( 'sc_product' ) ) return '';
+	$path = get_theme_file_path( 'data/product-films.json' );
+	$data = is_readable( $path ) ? json_decode( file_get_contents( $path ), true ) : null;
+	$slugs = $data['products'][ get_post_field( 'post_name', get_queried_object_id() ) ] ?? array();
+	if ( ! $slugs ) return '';
+	$html = '<section class="ugolini-product-films" aria-label="Video delle specialità">';
+	foreach ( $slugs as $slug ) {
+		$film = $data['media'][ $slug ] ?? null;
+		if ( ! $film ) continue;
+		$base = 'assets/videos/' . $film['file'];
+		$html .= '<video autoplay muted loop playsinline controls preload="none" poster="' . esc_url( get_theme_file_uri( $base . '.jpg' ) ) . '" aria-label="' . esc_attr( $film['alt'] ) . '" src="' . esc_url( get_theme_file_uri( $base . '.mp4' ) ) . '"></video>';
+	}
+	return $html . '</section>';
+}
 function ugolini_group_caviareat_editorial_after_details( $html, $block ) {
 	if ( is_singular( 'sc_product' ) && in_array( $block['blockName'] ?? '', array( 'core/shortcode', 'core/paragraph' ), true ) && str_contains( $html, '[ugolini_related_products]' ) ) return '';
 	if ( is_singular( 'sc_product' ) && 'core/group' === ( $block['blockName'] ?? '' ) && str_contains( $block['attrs']['className'] ?? '', 'ugolini-related-products' ) ) return ugolini_group_related_products_shortcode();
@@ -1729,7 +1747,7 @@ function ugolini_group_caviareat_editorial_after_details( $html, $block ) {
 	}
 	if ( is_tax( 'sc_collection' ) && 'core/group' === ( $block['blockName'] ?? '' ) && str_contains( $block['attrs']['className'] ?? '', 'ugolini-collection-editorial-section' ) ) return $html . do_blocks( ugolini_group_page_pattern_content( 'professional-assurances' ) );
 	if ( 'core/group' !== ( $block['blockName'] ?? '' ) || ! str_contains( $block['attrs']['className'] ?? '', 'ugolini-product-information' ) ) return $html;
-	return $html . ugolini_group_product_editorial() . ugolini_group_related_products_shortcode();
+	return $html . ugolini_group_product_films() . ugolini_group_product_editorial() . ugolini_group_related_products_shortcode();
 }
 add_filter( 'render_block', 'ugolini_group_caviareat_editorial_after_details', 10, 2 );
 

@@ -2,6 +2,7 @@
   const gallery = document.querySelector('[data-company-gallery]');
   if (!gallery) return;
   const items = [...gallery.querySelectorAll('[data-gallery-item]')];
+  const sections = [...gallery.querySelectorAll('[data-gallery-section]')];
   const densityButtons = [...gallery.querySelectorAll('[data-gallery-density-button]')];
   const search = gallery.querySelector('[data-gallery-search]');
   const place = gallery.querySelector('[data-gallery-location]');
@@ -62,6 +63,7 @@
     page = Math.min(page, pages);
     const shown = new Set(matching.slice((page - 1) * 20, page * 20));
     items.forEach(item => { item.hidden = !shown.has(item); });
+    sections.forEach(section => { section.hidden = ![...section.querySelectorAll('[data-gallery-item]')].some(item => !item.hidden); });
     pagination.replaceChildren();
     if (!matching.length) return;
     const button = (label, target, active = false) => {
@@ -86,7 +88,7 @@
     matching = items.filter(item => {
       const startMonth = (item.dataset.startDate || '').slice(0, 7);
       const endMonth = (item.dataset.endDate || item.dataset.startDate || '').slice(0, 7);
-      const name = [item.getAttribute('aria-label'), item.querySelector('img').alt, item.dataset.eventTitle, item.dataset.location].join(' ');
+      const name = [item.getAttribute('aria-label'), item.querySelector('img').alt, item.dataset.galleryCaption, item.dataset.eventTitle, item.dataset.location].join(' ');
       return !((place.value && item.dataset.location !== place.value)
         || (month.value && (!startMonth || month.value < startMonth || month.value > endMonth))
         || (event.value && item.dataset.eventId !== event.value)
@@ -115,7 +117,7 @@
       large.src = image.currentSrc || image.src;
       large.alt = image.alt;
     }
-    position.textContent = `${current + 1} / ${shown.length}`;
+    position.textContent = item.dataset.galleryCaption || `${current + 1} / ${shown.length}`;
     const dateLabel = date => new Intl.DateTimeFormat('it-IT', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(`${date}T12:00:00`));
     const dates = item.dataset.startDate ? (item.dataset.endDate && item.dataset.endDate !== item.dataset.startDate ? `${dateLabel(item.dataset.startDate)} – ${dateLabel(item.dataset.endDate)}` : dateLabel(item.dataset.startDate)) : '';
     meta.textContent = [item.dataset.location, dates].filter(Boolean).join(' · ');
@@ -123,7 +125,7 @@
     eventLink.hidden = !item.dataset.eventUrl;
     if (item.dataset.eventUrl) {
       eventLink.href = item.dataset.eventUrl;
-      eventLink.textContent = `Scopri ${item.dataset.eventTitle || 'l’evento'} →`;
+      eventLink.textContent = item.dataset.galleryLinkLabel || `Scopri ${item.dataset.eventTitle || 'l’evento'} →`;
     }
   };
   search.addEventListener('input', update);
@@ -154,5 +156,16 @@
     if (event.key === 'ArrowLeft') { event.preventDefault(); show(current - 1); }
     if (event.key === 'ArrowRight') { event.preventDefault(); show(current + 1); }
   });
+  let touchStart;
+  dialog.addEventListener('touchstart', event => {
+    touchStart = event.touches.length === 1 ? [event.touches[0].clientX, event.touches[0].clientY] : null;
+  }, { passive: true });
+  dialog.addEventListener('touchend', event => {
+    if (!touchStart || event.changedTouches.length !== 1) return;
+    const deltaX = event.changedTouches[0].clientX - touchStart[0];
+    const deltaY = event.changedTouches[0].clientY - touchStart[1];
+    if (Math.abs(deltaX) > 60 && Math.abs(deltaX) > Math.abs(deltaY)) show(current + (deltaX < 0 ? 1 : -1));
+    touchStart = null;
+  }, { passive: true });
   update();
 })();

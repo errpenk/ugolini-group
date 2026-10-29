@@ -1,0 +1,450 @@
+{
+  "media": {
+    "caviar": {
+      "file": "caviareat/caviar",
+      "alt": "Caviale nero in una preparazione gourmet",
+      "source": "https://www.pexels.com/video/chef-topping-sushi-rolls-with-caviar-8902208/"
+    },
+    "anchovy": {
+      "file": "caviareat/anchovy",
+      "alt": "Filetti di acciughe in conserva",
+      "source": "https://www.pexels.com/video/person-getting-anchovies-using-fork-6398604/"
+    },
+    "caviar2": {
+      "file": "products/caviar2",
+      "alt": "Caviale nero servito su una preparazione di pesce",
+      "source": "https://www.pexels.com/video/close-up-shot-of-a-person-preparing-food-8908444/"
+    },
+    "truffle": {
+      "file": "products/truffle",
+      "alt": "Tartufo affettato su un piatto di pasta",
+      "source": "https://www.pexels.com/video/a-person-is-cutting-pasta-with-a-knife-19905869/"
+    },
+    "truffle2": {
+      "file": "products/truffle2",
+      "alt": "Selezione di tartufi e specialità gastronomiche",
+      "source": "https://www.pexels.com/video/a-buffet-table-with-truffles-and-other-food-19551103/"
+    },
+    "olive": {
+      "file": "products/olive",
+      "alt": "Olio di oliva versato durante la preparazione",
+      "source": "https://www.pexels.com/video/close-up-view-of-person-pouring-an-olive-oil-in-the-frying-pan-4912633/"
+    },
+    "olive-bottle": {
+      "file": "products/olive-bottle",
+      "alt": "Olio di oliva versato in una bottiglia di vetro",
+      "source": "https://www.pexels.com/video/pouring-oil-into-container-7189208/"
+    },
+    "tomato": {
+      "file": "products/tomato",
+      "alt": "Salsa di pomodoro in cottura",
+      "source": "https://www.pexels.com/video/cooking-a-tomato-based-pasta-sauce-4146097/"
+    },
+    "pasta": {
+      "file": "products/pasta",
+      "alt": "Pasta condita con salsa di pomodoro",
+      "source": "https://www.pexels.com/video/person-mixing-spaghetti-with-the-sauce-6221657/"
+    },
+    "fish": {
+      "file": "products/fish",
+      "alt": "Filetto di pesce fresco tagliato a mano",
+      "source": "https://www.pexels.com/video/slicing-a-fish-854567/"
+    },
+    "tuna": {
+      "file": "products/tuna",
+      "alt": "Tonno fresco affettato per una preparazione di pesce",
+      "source": "https://www.pexels.com/video/close-up-shot-of-a-person-slicing-tuna-for-sashimi-5789857/"
+    },
+    "shrimp": {
+      "file": "products/shrimp",
+      "alt": "Gamberi freschi preparati a mano",
+      "source": "https://www.pexels.com/video/people-shelling-shrimps-at-a-wet-market-10039771/"
+    },
+    "shrimp2": {
+      "file": "products/shrimp2",
+      "alt": "Piatto di pasta ai gamberi",
+      "source": "https://www.pexels.com/video/seafood-pasta-5065327/"
+    },
+    "burger": {
+      "file": "products/burger",
+      "alt": "Hamburger di manzo sulla griglia",
+      "source": "https://www.pexels.com/video/close-up-view-of-a-person-grilling-a-patty-5254603/"
+    },
+    "onion": {
+      "file": "products/onion",
+      "alt": "Cipolle rosse preparate in cucina",
+      "source": "https://www.pexels.com/video/a-person-tossing-onion-slices-on-a-crystal-bowl-with-olive-oil-3195370/"
+    },
+    "rice": {
+      "file": "products/rice",
+      "alt": "Riso preparato in padella",
+      "source": "https://www.pexels.com/video/cooking-rice-casserole-in-an-iron-pot-3209243/"
+    },
+    "basil": {
+      "file": "products/basil",
+      "alt": "Erbe aromatiche fresche tritate",
+      "source": "https://www.pexels.com/video/cutting-vegetable-7424436/"
+    },
+    "mushroom": {
+      "file": "products/mushroom",
+      "alt": "Funghi freschi tagliati in cucina",
+      "source": "https://www.pexels.com/video/a-person-cutting-fresh-button-mushrooms-into-pieces-3209212/"
+    },
+    "chocolate": {
+      "file": "products/chocolate",
+      "alt": "Cioccolato lavorato in una preparazione artigianale",
+      "source": "https://www.pexels.com/video/a-close-up-video-of-a-chocolate-being-mixed-4458665/"
+    },
+    "chocolate-candy": {
+      "file": "products/chocolate-candy",
+      "alt": "Cioccolatini artigianali in preparazione",
+      "source": "https://www.pexels.com/video/crop-person-preparing-chocolate-candies-6112828/"
+    }
+  },
+  "products": {
+    "ragu-vegano": [
+      "tomato",
+      "pasta"
+    ],
+    "bruschetta-piccantina": [
+      "tomato",
+      "pasta"
+    ],
+    "salsa-tartufata": [
+      "truffle",
+      "truffle2"
+    ],
+    "confit-cipolle-rosse": [
+      "onion",
+      "olive"
+    ],
+    "sugo-arrabbiata": [
+      "tomato",
+      "pasta"
+    ],
+    "crema-panna-tartufo-bianchetto": [
+      "truffle",
+      "truffle2"
+    ],
+    "sugo-tartufo-nero": [
+      "tomato",
+      "truffle"
+    ],
+    "crema-funghi-porcini": [
+      "mushroom",
+      "basil"
+    ],
+    "tartufo-estivo-intero": [
+      "truffle",
+      "truffle2"
+    ],
+    "crema-tartufo-nero": [
+      "mushroom",
+      "truffle"
+    ],
+    "crema-carciofi-tartufo-nero": [
+      "truffle",
+      "truffle2"
+    ],
+    "ketchup-tartufo-estivo": [
+      "tomato",
+      "truffle"
+    ],
+    "olio-tartufo-bianco": [
+      "olive",
+      "truffle"
+    ],
+    "olio-tartufo-nero": [
+      "olive",
+      "truffle"
+    ],
+    "pesto-genovese": [
+      "basil",
+      "olive"
+    ],
+    "pesto-tartufo-nero": [
+      "truffle",
+      "basil"
+    ],
+    "pesto-rosso-bio": [
+      "tomato",
+      "basil"
+    ],
+    "pesto-rosso": [
+      "tomato",
+      "basil"
+    ],
+    "pesto-vegano": [
+      "basil",
+      "olive"
+    ],
+    "ragu-bolognese": [
+      "tomato",
+      "pasta"
+    ],
+    "caviale-huso-dauricus-tin": [
+      "caviar",
+      "anchovy"
+    ],
+    "caviale-vegano": [
+      "caviar",
+      "anchovy"
+    ],
+    "caviale-royal-oscietra-blue-tin": [
+      "caviar",
+      "anchovy"
+    ],
+    "caviale-royal-baerii-blue-tin": [
+      "caviar",
+      "anchovy"
+    ],
+    "caviale-beluga-huso-huso-blue-tin": [
+      "caviar",
+      "anchovy"
+    ],
+    "acciughe-sott-olio-100-gr": [
+      "caviar",
+      "anchovy"
+    ],
+    "caviale-beluga-huso-huso": [
+      "caviar",
+      "anchovy"
+    ],
+    "caviale-huso-dauricus": [
+      "caviar",
+      "anchovy"
+    ],
+    "caviale-royal-baerii": [
+      "caviar",
+      "anchovy"
+    ],
+    "caviale-royal-kaluga": [
+      "caviar",
+      "anchovy"
+    ],
+    "caviale-royal-oscietra": [
+      "caviar",
+      "anchovy"
+    ],
+    "caviale-schrenkii-imperial": [
+      "caviar",
+      "anchovy"
+    ],
+    "crema-di-funghi-porcini-e-tartufo-bianco": [
+      "mushroom",
+      "truffle"
+    ],
+    "riso-carnaroli-con-tartufo-nero-estivo": [
+      "rice",
+      "truffle"
+    ],
+    "salsa-tartufata-con-tartufo-nero-estivo": [
+      "truffle",
+      "truffle2"
+    ],
+    "tartufo-intero-estivo": [
+      "truffle",
+      "truffle2"
+    ],
+    "carpaccio-tartufo-estivo-kosher-copia": [
+      "truffle",
+      "truffle2"
+    ],
+    "tagliatelle-alluovo-con-tartufo-nero": [
+      "truffle",
+      "pasta"
+    ],
+    "affettatartufi-in-acciaio-inox": [
+      "truffle",
+      "truffle2"
+    ],
+    "salsa-al-tartufo-nero-estivo-5": [
+      "truffle",
+      "truffle2"
+    ],
+    "polenta-al-tartufo-nero-estivo": [
+      "truffle",
+      "truffle2"
+    ],
+    "sale-grigio-di-guerande-e-tartufo-nero": [
+      "truffle",
+      "truffle2"
+    ],
+    "mayonese-al-tartufo-nero-estivo": [
+      "truffle",
+      "olive"
+    ],
+    "mostarda-al-tartufo-nero-estivo": [
+      "truffle",
+      "onion"
+    ],
+    "salsa-al-tartufo-bianco": [
+      "truffle",
+      "truffle2"
+    ],
+    "salsa-al-tartufo-nero-pregiato": [
+      "truffle",
+      "truffle2"
+    ],
+    "olio-extravergine-di-oliva-aromatizzato-al-tartufo-bianco": [
+      "olive",
+      "truffle"
+    ],
+    "olio-extravergine-di-oliva-aromatizzato-al-tartufo-nero": [
+      "olive",
+      "truffle"
+    ],
+    "olio-extravergine-di-oliva-al-tartufo-nero": [
+      "olive",
+      "truffle"
+    ],
+    "olio-extravergine-di-oliva-al-tartufo-bianco": [
+      "olive",
+      "truffle"
+    ],
+    "affettatartufo-in-polietilene-per-uso-alimentare": [
+      "truffle",
+      "truffle2"
+    ],
+    "tincaviar-lattine-per-caviale": [
+      "caviar",
+      "anchovy"
+    ],
+    "tartare-di-ricciola": [
+      "fish",
+      "tuna"
+    ],
+    "tartare-di-scampi": [
+      "shrimp",
+      "shrimp2"
+    ],
+    "tartare-di-tonno": [
+      "fish",
+      "tuna"
+    ],
+    "tartare-di-pesce-spada": [
+      "fish",
+      "tuna"
+    ],
+    "tartare-di-mazzancolla": [
+      "shrimp",
+      "shrimp2"
+    ],
+    "burger-di-fassona-al-tartufo-nero-200-gr": [
+      "burger",
+      "truffle"
+    ],
+    "maionese-vegana-al-tartufo": [
+      "truffle",
+      "olive"
+    ],
+    "cioccolatini-desire-al-tartufo-e-peperoncino-50-gr": [
+      "chocolate",
+      "chocolate-candy"
+    ],
+    "trufflemist-spray-al-tartufo-100-ml": [
+      "truffle",
+      "truffle2"
+    ],
+    "salsa-di-soia-al-wasabi-e-tartufo-100-ml": [
+      "truffle",
+      "fish"
+    ],
+    "olio-di-vinacciolo-al-tartufo-bianco-naturale-250-ml": [
+      "olive",
+      "truffle"
+    ],
+    "olio-extra-vergine-di-oliva-al-peperoncino-di-calabria-250-ml": [
+      "olive",
+      "olive-bottle"
+    ],
+    "salsa-detox-al-tartufo-nero": [
+      "truffle",
+      "olive"
+    ],
+    "salsa-detox-al-tartufo-bianco": [
+      "truffle",
+      "olive"
+    ],
+    "burger-di-fassona-al-tartufo-bianco-200-gr": [
+      "burger",
+      "truffle"
+    ],
+    "grani-di-gambero-rosso-di-mazara-del-vallo-50-gr": [
+      "shrimp",
+      "shrimp2"
+    ],
+    "caviale-russian-oscietra": [
+      "caviar",
+      "caviar2"
+    ],
+    "cioccolatini-al-tartufo-nero-e-bianco-50-gr": [
+      "chocolate",
+      "chocolate-candy"
+    ],
+    "tartare-di-gambero-rosa-di-mazara-del-vallo": [
+      "shrimp",
+      "shrimp2"
+    ],
+    "tartare-di-gambero-rosso-di-mazara-del-vallo": [
+      "shrimp",
+      "shrimp2"
+    ],
+    "olio-di-oliva-al-tartufo-nero-250-ml": [
+      "olive",
+      "truffle"
+    ],
+    "olio-di-oliva-al-tartufo-bianco-250-ml": [
+      "olive",
+      "truffle"
+    ],
+    "caviale-russian-oscietra-30-gr": [
+      "caviar",
+      "caviar2"
+    ],
+    "caviale-royal-kaluga-30-gr": [
+      "caviar",
+      "caviar2"
+    ],
+    "caviale-royal-baerii-30-gr": [
+      "caviar",
+      "caviar2"
+    ],
+    "caviale-beluga-100-huso-huso": [
+      "caviar",
+      "caviar2"
+    ],
+    "caviale-amur": [
+      "caviar",
+      "caviar2"
+    ],
+    "salmon-tartare": [
+      "fish",
+      "tuna"
+    ],
+    "precious-black-truffle": [
+      "truffle",
+      "truffle2"
+    ],
+    "white-truffle-tuber-magnatum": [
+      "truffle",
+      "truffle2"
+    ],
+    "bianchetto-truffle-tuber-albidum-pico": [
+      "truffle",
+      "truffle2"
+    ],
+    "summer-black-truffle-tuber-aestivum": [
+      "truffle",
+      "truffle2"
+    ],
+    "whole-summer-truffle": [
+      "truffle",
+      "truffle2"
+    ],
+    "summer-truffle-slices": [
+      "truffle",
+      "truffle2"
+    ]
+  }
+}

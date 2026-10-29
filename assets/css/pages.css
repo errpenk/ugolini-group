@@ -265,6 +265,8 @@ main .ugolini-b2b-partner__features h3 { margin: 0 0 .35rem; color: inherit; fon
 .ugolini-product-information .alignwide > .ugolini-eyebrow { --ugolini-sticky-image: none; position: sticky; top: calc(var(--ugolini-header-bottom, var(--ugolini-header-height)) + 1.5rem); height: fit-content; display: flex; flex-direction: column; margin: 0; padding-top: 0.12em; font-family: var(--wp--preset--font-family--display); font-size: clamp(2.6rem, 4.4vw, 4.8rem); font-weight: 400; letter-spacing: -0.035em; line-height: 1; text-transform: none; }
 .ugolini-product-information .wp-block-post-content > :first-child,
 .ugolini-product-information .preview-product-facts > :first-child { margin-top: 0; padding-top: 0; border-top: 0; }
+.ugolini-product-films { width: min(calc(100% - (2 * var(--ugolini-gutter))), var(--ugolini-container)); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(1.5rem, 3vw, 3rem); margin-inline: auto; }
+.ugolini-product-films video { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: #171714; }
 .ugolini-caviareat-editorial-shell { padding: clamp(3rem, 6vw, 6rem) 0; background: #fff; }
 .ugolini-caviareat-editorial { width: min(calc(100% - (2 * var(--ugolini-gutter))), var(--ugolini-container)); display: grid; gap: clamp(2rem, 4vw, 4rem); margin-inline: auto; color: #171714; font-family: var(--wp--preset--font-family--interface); }
 .ugolini-caviareat-editorial__row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(1.5rem, 3vw, 3rem); align-items: center; }
@@ -275,7 +277,7 @@ main .ugolini-b2b-partner__features h3 { margin: 0 0 .35rem; color: inherit; fon
 .ugolini-caviareat-editorial h3 { font-size: clamp(1.1rem, 1.5vw, 1.5rem); }
 .ugolini-caviareat-editorial p { margin: 0 0 1.25em; line-height: 1.55; }
 .ugolini-caviareat-editorial ul { margin: 0; padding-left: 1.35em; }
-@media (max-width: 760px) { .ugolini-caviareat-editorial__row, .ugolini-caviareat-editorial__row + .ugolini-caviareat-editorial__row, .ugolini-caviareat-editorial__copy-grid { grid-template-columns: 1fr; } }
+@media (max-width: 760px) { .ugolini-product-films, .ugolini-caviareat-editorial__row, .ugolini-caviareat-editorial__row + .ugolini-caviareat-editorial__row, .ugolini-caviareat-editorial__copy-grid { grid-template-columns: 1fr; } }
 
 .ugolini-section.ugolini-product-after { padding-top: 0; background: #fff; }
 .ugolini-product-after > .ugolini-product-story { max-width: none !important; margin-inline: 0 !important; }

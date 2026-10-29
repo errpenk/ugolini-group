@@ -4,6 +4,14 @@
 .ugolini-gallery__intro { margin-bottom: 2.4rem; text-align: center; }
 .ugolini-gallery__intro h2 { margin: 0; font-size: clamp(2.8rem, 5vw, 5rem); line-height: 1.15; }
 .ugolini-gallery__intro > p { max-width: 31rem; margin: 0 0 .3rem; font-size: 1.13rem; line-height: 1.65; }
+.ugolini-gallery__section { margin-top: clamp(2.5rem, 5vw, 4.5rem); scroll-margin-top: calc(var(--ugolini-header-height) + 2rem); }
+.ugolini-gallery__section[hidden] { display: none; }
+.ugolini-gallery__section-heading { margin: 0 auto 1.6rem; text-align: center; }
+.ugolini-gallery__section-heading h3 { margin: 0; font-size: clamp(1.65rem, 3vw, 2.6rem); line-height: 1.2; }
+.ugolini-gallery__section-heading p { max-width: 48rem; margin: .7rem auto 0; font-family: var(--wp--preset--font-family--display); font-style: italic; font-size: clamp(.95rem, 1.5vw, 1.13rem); line-height: 1.6; }
+.ugolini-gallery__related { margin: 1.5rem 0 0; font-size: .9rem; text-align: center; }
+.ugolini-gallery__related a { color: var(--wp--preset--color--brand); text-underline-offset: .18em; transition: color .2s ease, opacity .2s ease; }
+.ugolini-gallery__related a:is(:hover, :focus-visible) { color: #701b23; opacity: .72; transform: none; }
 .ugolini-gallery__controls { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1rem; align-items: end; margin-bottom: 1rem; }
 .ugolini-gallery__filters { display: grid; gap: .8rem; min-width: 0; }
 .ugolini-gallery__filters label { display: grid; gap: .45rem; min-width: 0; font-size: .9rem; }
@@ -45,7 +53,7 @@
 .ugolini-gallery__dialog figure :is(img, video) { display: block; width: 100%; max-height: calc(100dvh - 11rem); object-fit: contain; }
 .ugolini-gallery__dialog figure :is(img, video)[hidden] { display: none; }
 .ugolini-gallery__dialog figcaption { padding-top: .85rem; font-size: 1rem; text-align: center; }
-.ugolini-gallery__dialog figcaption small { font-family: var(--wp--preset--font-family--interface); }
+.ugolini-gallery__dialog figcaption small { color: #fff; font-family: var(--wp--preset--font-family--interface); font-size: 1rem; }
 .ugolini-gallery__detail-meta { margin: .4rem 0 0; color: #ddd; font-size: .85rem; text-align: center; }
 .ugolini-gallery__event-link { display: inline-block; margin-top: .45rem; color: #fff; font-size: .9rem; text-underline-offset: .2em; }
 .ugolini-gallery__dialog :is(.ugolini-gallery__detail-meta, .ugolini-gallery__event-link)[hidden] { display: none; }

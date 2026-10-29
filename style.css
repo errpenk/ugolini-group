@@ -3,7 +3,7 @@ Theme Name: Ugolini Group
 Theme URI: https://ugolinigroup.com/
 Author: Ugolini Group
 Description: A purpose-built block theme for the Ugolini Group SureCart store.
-Version: 6.66.25
+Version: 6.66.30
 Requires at least: 6.6
 Requires PHP: 8.1
 Text Domain: ugolini-group
@@ -1382,6 +1382,8 @@ main .ugolini-b2b-partner__features h3 { margin: 0 0 .35rem; color: inherit; fon
 .ugolini-product-information .alignwide > .ugolini-eyebrow { --ugolini-sticky-image: none; position: sticky; top: calc(var(--ugolini-header-bottom, var(--ugolini-header-height)) + 1.5rem); height: fit-content; display: flex; flex-direction: column; margin: 0; padding-top: 0.12em; font-family: var(--wp--preset--font-family--display); font-size: clamp(2.6rem, 4.4vw, 4.8rem); font-weight: 400; letter-spacing: -0.035em; line-height: 1; text-transform: none; }
 .ugolini-product-information .wp-block-post-content > :first-child,
 .ugolini-product-information .preview-product-facts > :first-child { margin-top: 0; padding-top: 0; border-top: 0; }
+.ugolini-product-films { width: min(calc(100% - (2 * var(--ugolini-gutter))), var(--ugolini-container)); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(1.5rem, 3vw, 3rem); margin-inline: auto; }
+.ugolini-product-films video { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: #171714; }
 .ugolini-caviareat-editorial-shell { padding: clamp(3rem, 6vw, 6rem) 0; background: #fff; }
 .ugolini-caviareat-editorial { width: min(calc(100% - (2 * var(--ugolini-gutter))), var(--ugolini-container)); display: grid; gap: clamp(2rem, 4vw, 4rem); margin-inline: auto; color: #171714; font-family: var(--wp--preset--font-family--interface); }
 .ugolini-caviareat-editorial__row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(1.5rem, 3vw, 3rem); align-items: center; }
@@ -1392,7 +1394,7 @@ main .ugolini-b2b-partner__features h3 { margin: 0 0 .35rem; color: inherit; fon
 .ugolini-caviareat-editorial h3 { font-size: clamp(1.1rem, 1.5vw, 1.5rem); }
 .ugolini-caviareat-editorial p { margin: 0 0 1.25em; line-height: 1.55; }
 .ugolini-caviareat-editorial ul { margin: 0; padding-left: 1.35em; }
-@media (max-width: 760px) { .ugolini-caviareat-editorial__row, .ugolini-caviareat-editorial__row + .ugolini-caviareat-editorial__row, .ugolini-caviareat-editorial__copy-grid { grid-template-columns: 1fr; } }
+@media (max-width: 760px) { .ugolini-product-films, .ugolini-caviareat-editorial__row, .ugolini-caviareat-editorial__row + .ugolini-caviareat-editorial__row, .ugolini-caviareat-editorial__copy-grid { grid-template-columns: 1fr; } }
 
 .ugolini-section.ugolini-product-after { padding-top: 0; background: #fff; }
 .ugolini-product-after > .ugolini-product-story { max-width: none !important; margin-inline: 0 !important; }
@@ -1560,6 +1562,14 @@ body.page-id-559 .ugolini-legal-band { background-image: url("https://ugolinigro
 .ugolini-gallery__intro { margin-bottom: 2.4rem; text-align: center; }
 .ugolini-gallery__intro h2 { margin: 0; font-size: clamp(2.8rem, 5vw, 5rem); line-height: 1.15; }
 .ugolini-gallery__intro > p { max-width: 31rem; margin: 0 0 .3rem; font-size: 1.13rem; line-height: 1.65; }
+.ugolini-gallery__section { margin-top: clamp(2.5rem, 5vw, 4.5rem); scroll-margin-top: calc(var(--ugolini-header-height) + 2rem); }
+.ugolini-gallery__section[hidden] { display: none; }
+.ugolini-gallery__section-heading { margin: 0 auto 1.6rem; text-align: center; }
+.ugolini-gallery__section-heading h3 { margin: 0; font-size: clamp(1.65rem, 3vw, 2.6rem); line-height: 1.2; }
+.ugolini-gallery__section-heading p { max-width: 48rem; margin: .7rem auto 0; font-family: var(--wp--preset--font-family--display); font-style: italic; font-size: clamp(.95rem, 1.5vw, 1.13rem); line-height: 1.6; }
+.ugolini-gallery__related { margin: 1.5rem 0 0; font-size: .9rem; text-align: center; }
+.ugolini-gallery__related a { color: var(--wp--preset--color--brand); text-underline-offset: .18em; transition: color .2s ease, opacity .2s ease; }
+.ugolini-gallery__related a:is(:hover, :focus-visible) { color: #701b23; opacity: .72; transform: none; }
 .ugolini-gallery__controls { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1rem; align-items: end; margin-bottom: 1rem; }
 .ugolini-gallery__filters { display: grid; gap: .8rem; min-width: 0; }
 .ugolini-gallery__filters label { display: grid; gap: .45rem; min-width: 0; font-size: .9rem; }
@@ -1601,7 +1611,7 @@ body.page-id-559 .ugolini-legal-band { background-image: url("https://ugolinigro
 .ugolini-gallery__dialog figure :is(img, video) { display: block; width: 100%; max-height: calc(100dvh - 11rem); object-fit: contain; }
 .ugolini-gallery__dialog figure :is(img, video)[hidden] { display: none; }
 .ugolini-gallery__dialog figcaption { padding-top: .85rem; font-size: 1rem; text-align: center; }
-.ugolini-gallery__dialog figcaption small { font-family: var(--wp--preset--font-family--interface); }
+.ugolini-gallery__dialog figcaption small { color: #fff; font-family: var(--wp--preset--font-family--interface); font-size: 1rem; }
 .ugolini-gallery__detail-meta { margin: .4rem 0 0; color: #ddd; font-size: .85rem; text-align: center; }
 .ugolini-gallery__event-link { display: inline-block; margin-top: .45rem; color: #fff; font-size: .9rem; text-underline-offset: .2em; }
 .ugolini-gallery__dialog :is(.ugolini-gallery__detail-meta, .ugolini-gallery__event-link)[hidden] { display: none; }
