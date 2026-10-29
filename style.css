@@ -3,7 +3,7 @@ Theme Name: Ugolini Group
 Theme URI: https://ugolinigroup.com/
 Author: Ugolini Group
 Description: A purpose-built block theme for the Ugolini Group SureCart store.
-Version: 6.66.44
+Version: 6.66.45
 Requires at least: 6.6
 Requires PHP: 8.1
 Text Domain: ugolini-group
@@ -1396,8 +1396,6 @@ main .ugolini-b2b-partner__features h3 { margin: 0 0 .35rem; color: inherit; fon
 .ugolini-caviareat-editorial__row > img { width: 100%; height: clamp(280px, 32vw, 440px); object-fit: cover; }
 .ugolini-caviareat-editorial__row:first-child > img { justify-self: end; }
 .ugolini-caviareat-editorial__row + .ugolini-caviareat-editorial__row > img { justify-self: start; }
-.ugolini-caviareat-editorial__banner { position: relative; width: 100%; height: clamp(140px, 15vw, 220px); background-image: var(--ugolini-editorial-banner); background-position: center; background-size: cover; background-attachment: fixed; }
-.ugolini-caviareat-editorial__banner::after { position: absolute; inset: 0; background: rgb(0 0 0 / 48%); content: ""; }
 .ugolini-caviareat-editorial :where(h2, h3) { margin: 0 0 .6em; font-family: inherit; font-size: clamp(1.3rem, 2vw, 2rem); font-weight: 700; line-height: 1.2; }
 .ugolini-caviareat-editorial h3 { font-size: clamp(1.1rem, 1.5vw, 1.5rem); }
 .ugolini-caviareat-editorial p { margin: 0 0 1.25em; line-height: 1.55; }
@@ -1407,11 +1405,10 @@ main .ugolini-b2b-partner__features h3 { margin: 0 0 .35rem; color: inherit; fon
 	.ugolini-caviareat-editorial { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .5rem; }
 	.ugolini-caviareat-editorial__row { display: contents; }
 	.ugolini-caviareat-editorial__row:first-child > div { grid-column: 1 / -1; order: 1; margin-bottom: 1.5rem; }
-	.ugolini-caviareat-editorial__row:first-child > img { grid-column: 1 / -1; order: 2; }
-	.ugolini-caviareat-editorial__banner { grid-column: 1 / -1; order: 3; height: 130px; background-attachment: scroll; }
-	.ugolini-caviareat-editorial__row + .ugolini-caviareat-editorial__row > img { grid-column: 1 / -1; order: 4; }
+	.ugolini-caviareat-editorial__row:first-child > img { grid-column: 1; order: 2; }
+	.ugolini-caviareat-editorial__row + .ugolini-caviareat-editorial__row > img { grid-column: 2; order: 3; }
 	.ugolini-caviareat-editorial__row > img { width: 100%; height: auto; aspect-ratio: 1; justify-self: center; }
-	.ugolini-caviareat-editorial__row + .ugolini-caviareat-editorial__row > .ugolini-caviareat-editorial__copy-grid { grid-column: 1 / -1; order: 5; grid-template-columns: 1fr; margin-top: 1.5rem; }
+	.ugolini-caviareat-editorial__row + .ugolini-caviareat-editorial__row > .ugolini-caviareat-editorial__copy-grid { grid-column: 1 / -1; order: 4; grid-template-columns: 1fr; margin-top: 1.5rem; }
 }
 
 .ugolini-related-collection-banner { position: relative; height: clamp(170px, 18vw, 260px); background-image: var(--ugolini-related-hero); background-position: center; background-size: cover; background-attachment: fixed; }
