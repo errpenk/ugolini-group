@@ -2,7 +2,7 @@
 .ugolini-product-gallery .sc-image-slider__thumbs .swiper { height: 100% !important; max-height: 100% !important; }
 .ugolini-product-gallery .sc-image-slider__thumbs .swiper-wrapper { height: 100% !important; min-height: 100% !important; flex-direction: column !important; justify-content: center !important; transform: none !important; }
 .ugolini-product-gallery .sc-lightbox-container .lightbox-trigger { top: 1rem !important; right: 10px !important; left: auto !important; transform: none !important; }
-@media (min-width: 768px) { .ugolini-product-columns { align-items: center !important; } }
+@media (min-width: 768px) { .ugolini-product-gallery { top: calc(var(--ugolini-header-height) + 1rem); height: calc(100svh - var(--ugolini-header-height) - 2rem); display: flex; flex-direction: column; justify-content: center; margin-top: -1.5rem !important; } }
 @media (min-width: 768px) { .ugolini-sticky-product__image { display: block; } }
 body #gt_float_wrapper .gt_float_switcher,
 body #gt_float_wrapper .gt_options { transition: none !important; }
