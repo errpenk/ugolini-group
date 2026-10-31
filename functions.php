@@ -2376,6 +2376,65 @@ function ugolini_group_verified_reviews_shortcode() {
 }
 add_shortcode( 'ugolini_verified_reviews', 'ugolini_group_verified_reviews_shortcode' );
 
+/** Route the three Beluga products to their matching purchase or contact destination. */
+function ugolini_group_amazon_beluga_products() {
+	return array(
+		'caviale-beluga-huso-huso'          => '2f123339-7b5e-4cd9-961e-b4d96881cce4',
+		'caviale-beluga-huso-huso-blue-tin' => 'cc7de64a-8a13-4f5a-a8e6-59e780379d77',
+		'caviale-beluga-100-huso-huso'      => 'e8a47512-13ff-4e35-8a1c-a6b0afe13de5',
+	);
+}
+
+function ugolini_group_is_amazon_beluga_page() {
+	return is_singular( 'sc_product' ) && array_key_exists( get_post_field( 'post_name', get_queried_object_id() ), ugolini_group_amazon_beluga_products() );
+}
+
+add_filter( 'render_block_surecart/product-variant-pills', function ( $html ) {
+	if ( ! ugolini_group_is_amazon_beluga_page() ) return $html;
+	$slug = get_post_field( 'post_name', get_queried_object_id() );
+	if ( 'caviale-beluga-100-huso-huso' === $slug ) return '';
+	$grams = 'caviale-beluga-huso-huso-blue-tin' === $slug ? 1000 : 50;
+	return '<div class="wp-block-surecart-product-variant-pills ugolini-amazon-variants"><span class="sc-form-label">Peso</span><div class="sc-pill-option__wrapper" role="radiogroup" aria-label="Peso"><button type="button" role="radio" aria-checked="true" class="sc-pill-option__button ugolini-amazon-variant sc-pill-option__button--selected">' . esc_html( $grams . ' gr' ) . '</button></div></div>';
+}, 10 );
+
+add_filter( 'render_block_surecart/product-buy-buttons', function ( $html ) {
+	if ( ! ugolini_group_is_amazon_beluga_page() ) return $html;
+	$slug = get_post_field( 'post_name', get_queried_object_id() );
+	$purchases = array(
+		'caviale-beluga-huso-huso'          => array( 'https://www.amazon.it/Caviale-Beluga-Huso-50/dp/B0BHF58598/ref=ast_sto_dp_puis', 'Acquista su Amazon' ),
+		'caviale-beluga-100-huso-huso'      => array( 'https://luxureat.it/products/caviale-beluga-100-huso-huso', 'Acquista su LuxurEat' ),
+		'caviale-beluga-huso-huso-blue-tin' => array( 'mailto:info@ugolinigroup.com?subject=Caviale%20Beluga%20Huso%20Huso%20Blue%20Tin', 'Contattaci per acquistare' ),
+	);
+	return '<div class="wp-block-surecart-product-buy-buttons ugolini-amazon-buy-buttons"><a class="wp-block-button__link wp-element-button ugolini-amazon-buy" data-amazon-grams="0" href="' . esc_url( $purchases[ $slug ][0] ) . '" rel="noopener noreferrer">' . esc_html( $purchases[ $slug ][1] ) . '</a></div>';
+}, 10 );
+
+add_filter( 'render_block_surecart/product-quantity', function ( $html ) {
+	return ugolini_group_is_amazon_beluga_page() ? '' : $html;
+}, 10 );
+
+add_filter( 'render_block_surecart/product-page', function ( $html ) {
+	if ( ! ugolini_group_is_amazon_beluga_page() ) return $html;
+	return str_replace( 'I pagamenti sono gestiti tramite SureCart.', 'L’acquisto avviene tramite il collegamento indicato.', $html );
+}, 20 );
+
+/** An existing SureCart cart must not be able to finalize a Beluga purchase. */
+add_filter( 'surecart/checkout/validate', function ( $errors, $args, $request ) {
+	if ( ! class_exists( '\\SureCart\\Models\\Checkout' ) ) return $errors;
+	$checkout_id = (string) $request->get_param( 'id' );
+	if ( ! $checkout_id ) return $errors;
+	$checkout = \SureCart\Models\Checkout::with( array( 'line_items.price' ) )->find( $checkout_id );
+	if ( is_wp_error( $checkout ) || empty( $checkout->line_items->data ) ) return $errors;
+	$blocked_ids = array_values( ugolini_group_amazon_beluga_products() );
+	foreach ( $checkout->line_items->data as $item ) {
+		$product_id = $item->price->product_id ?? $item->product_id ?? '';
+		if ( in_array( (string) $product_id, $blocked_ids, true ) ) {
+			$errors->add( 'ugolini_amazon_beluga', 'Questo caviale non è acquistabile tramite questo carrello. Rimuovilo per completare gli altri acquisti.' );
+			break;
+		}
+	}
+	return $errors;
+}, 10, 3 );
+
 /** Reject saved non-Italian shipping addresses during SureCart checkout finalization. */
 add_filter( 'surecart/checkout/validate', function ( $errors, $args ) {
 	$shipping_address = $args['shipping_address'] ?? array();
