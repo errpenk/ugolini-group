@@ -49,10 +49,10 @@
 
 <section class="ugolini-support-gallery ugolini-section" aria-labelledby="ugolini-support-gallery-title">
   <div class="alignwide"><p class="ugolini-eyebrow">Spazi e canali</p><h2 id="ugolini-support-gallery-title">Progetti di collaborazione</h2><div class="ugolini-support-gallery__grid">
-    <figure><img src="<?php echo esc_url( get_theme_file_uri( 'assets/images/support/partnership/05.webp' ) ); ?>" alt="Ingresso di un concept TruffleEat bar e ristorante" loading="lazy"><figcaption>Ristorazione</figcaption></figure>
-    <figure><img src="<?php echo esc_url( get_theme_file_uri( 'assets/images/support/partnership/09.webp' ) ); ?>" alt="Concept di ristorante TruffleEat" loading="lazy"><figcaption>Concept dining</figcaption></figure>
+    <figure><img src="<?php echo esc_url( get_theme_file_uri( 'assets/images/support/partnership/05.webp' ) ); ?>" alt="Ingresso di un concept TrufflEat bar e ristorante" loading="lazy"><figcaption>Ristorazione</figcaption></figure>
+    <figure><img src="<?php echo esc_url( get_theme_file_uri( 'assets/images/support/partnership/09.webp' ) ); ?>" alt="Concept di ristorante TrufflEat" loading="lazy"><figcaption>Concept dining</figcaption></figure>
     <figure><img src="<?php echo esc_url( get_theme_file_uri( 'assets/images/support/partnership/14.webp' ) ); ?>" alt="Spazio bar di un hotel" loading="lazy"><figcaption>Hotellerie</figcaption></figure>
-    <figure><img src="<?php echo esc_url( get_theme_file_uri( 'assets/images/support/partnership/17.webp' ) ); ?>" alt="Concept di food truck TruffleEat" loading="lazy"><figcaption>Street food</figcaption></figure>
+    <figure><img src="<?php echo esc_url( get_theme_file_uri( 'assets/images/support/partnership/17.webp' ) ); ?>" alt="Concept di food truck TrufflEat" loading="lazy"><figcaption>Street food</figcaption></figure>
   </div>
   <details class="ugolini-support-more"><summary><span class="ugolini-support-more__closed">Mostra altre immagini</span><span class="ugolini-support-more__open">Mostra meno immagini</span></summary>
     <div class="ugolini-support-gallery__grid">
