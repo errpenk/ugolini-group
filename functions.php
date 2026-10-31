@@ -1761,6 +1761,22 @@ function ugolini_group_product_editorial() {
 		if ( ! ugolini_group_product_editorial_media( $post_id )['photos'] && isset( $series_images[ $slug ] ) ) {
 			$images = array_map( static fn( $file ) => get_theme_file_uri( 'assets/images/series-editorial/' . $file ), $series_images[ $slug ] );
 		}
+		if ( 'caviale-vegano' === get_post_field( 'post_name', $post_id ) ) $images[1] = content_url( 'uploads/2026/10/caviale-vegano-editorial.jpg' );
+		$product_slug = get_post_field( 'post_name', $post_id );
+		if ( in_array( $product_slug, array( 'cioccolatini-al-tartufo-nero-e-bianco-50-gr', 'cioccolatini-desire-al-tartufo-e-peperoncino-50-gr' ), true ) ) {
+			$images = array( content_url( 'uploads/2026/10/243445520_m.jpg' ), content_url( 'uploads/2026/10/64106785_m.jpg' ) );
+		} else {
+			$replacements = array( 'burger.jpg' => '255782744_m.jpg', 'seaweed1.jpg' => 'serezniy260798891-scaled.jpg', 'truffle.jpg' => '191242956_m.jpg', 'caviar.jpg' => 'serezniy260798891-scaled.jpg' );
+			if ( 'luxureat' === $slug && count( $images ) >= 2 && str_ends_with( $images[0], '/caviar.jpg' ) && str_ends_with( $images[1], '/caviar2.jpg' ) ) {
+				$images = array( content_url( 'uploads/2026/10/291928080_m.jpg' ), content_url( 'uploads/2026/10/314506786_m.jpg' ) );
+			} else {
+				foreach ( $images as &$image ) {
+					$filename = basename( wp_parse_url( $image, PHP_URL_PATH ) );
+					if ( isset( $replacements[ $filename ] ) ) $image = content_url( 'uploads/2026/10/' . $replacements[ $filename ] );
+				}
+				unset( $image );
+			}
+		}
 		if ( ! $images ) return '';
 		$products = get_posts( array( 'post_type' => 'sc_product', 'post_status' => 'publish', 'posts_per_page' => 3, 'fields' => 'ids', 'tax_query' => array( array( 'taxonomy' => 'sc_collection', 'field' => 'term_id', 'terms' => $term->term_id ) ) ) );
 		$names = '';

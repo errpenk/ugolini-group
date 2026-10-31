@@ -331,6 +331,48 @@ for (const gallery of document.querySelectorAll('.ugolini-product-gallery .sc-im
 	update();
 }
 
+(() => {
+	const page = document.querySelector('.ugolini-product-page');
+	const title = page?.querySelector('.ugolini-product-summary h1');
+	const amazonSource = page?.querySelector('.ugolini-product-summary .ugolini-amazon-buy');
+	const source = amazonSource || page?.querySelector('.ugolini-product-summary .wp-block-surecart-product-buy-button button');
+	if (!title || !source) return;
+	const price = page.querySelector('.ugolini-product-price [data-wp-text="state.selectedDisplayAmount"]');
+	const gallery = page.querySelector('.ugolini-product-gallery');
+	const bar = document.createElement('aside');
+	bar.className = 'ugolini-sticky-product';
+	bar.setAttribute('aria-label', 'Acquisto rapido');
+	bar.innerHTML = `<div class="ugolini-sticky-product__inner"><img class="ugolini-sticky-product__image" alt=""><div class="ugolini-sticky-product__details"><strong class="ugolini-sticky-product__title"></strong><span class="ugolini-sticky-product__price"></span></div>${amazonSource ? '<a class="ugolini-sticky-product__button" rel="noopener noreferrer"></a>' : '<button class="ugolini-sticky-product__button" type="button"></button>'}</div>`;
+	const thumbnail = bar.querySelector('img');
+	const updateThumbnail = () => {
+		const firstImage = gallery?.querySelector('.sc-image-slider__thumbs .swiper-slide:first-child img') || gallery?.querySelector('.swiper-slide:first-child img');
+		if (!firstImage) return;
+		const src = firstImage.currentSrc || firstImage.src;
+		if (thumbnail.src !== src) thumbnail.src = src;
+		thumbnail.hidden = false;
+	};
+	thumbnail.hidden = true;
+	if (gallery) new MutationObserver(updateThumbnail).observe(gallery, { childList: true, subtree: true });
+	updateThumbnail();
+	const button = bar.querySelector('.ugolini-sticky-product__button');
+	const sync = () => {
+		bar.querySelector('.ugolini-sticky-product__title').textContent = title.textContent.trim();
+		bar.querySelector('.ugolini-sticky-product__price').textContent = price?.textContent.trim() || '';
+		button.textContent = source.querySelector('.sc-button__link-text')?.textContent.trim() || source.textContent.trim();
+		if (amazonSource) button.href = amazonSource.href;
+		else button.disabled = source.disabled || source.classList.contains('sc-button__link--busy');
+	};
+	if (!amazonSource) button.addEventListener('click', () => source.click());
+	new MutationObserver(sync).observe(source, { attributes: true, childList: true, characterData: true, subtree: true });
+	if (price) new MutationObserver(sync).observe(price, { childList: true, characterData: true, subtree: true });
+	new MutationObserver(sync).observe(title, { childList: true, characterData: true, subtree: true });
+	const toggle = () => bar.classList.toggle('is-visible', scrollY > 16);
+	addEventListener('scroll', toggle, { passive: true });
+	document.body.append(bar);
+	sync();
+	toggle();
+})();
+
 for (const testimonials of document.querySelectorAll('[data-testimonials]')) {
 	const rail = testimonials.querySelector('[data-testimonials-rail]');
 	const move = direction => {

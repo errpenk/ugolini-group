@@ -178,3 +178,26 @@ body > .wp-block-surecart-cart-icon { display: none !important; }
 	font-weight: 700;
 	letter-spacing: 0.09em;
 }
+
+.ugolini-sticky-product { position: fixed; right: 0; bottom: 0; left: 0; z-index: 90; border-top: 1px solid var(--wp--preset--color--border); background: var(--wp--preset--color--background); box-shadow: 0 -8px 30px rgb(0 0 0 / 8%); opacity: 0; visibility: hidden; transform: translateY(100%); transition: opacity 180ms ease, transform 180ms ease, visibility 180ms; }
+.ugolini-sticky-product.is-visible { opacity: 1; visibility: visible; transform: none; }
+.ugolini-sticky-product__inner { width: min(calc(100% - 2rem), 1000px); min-height: 76px; display: flex; align-items: center; justify-content: center; gap: 1rem; margin: auto; padding: .5rem 0; }
+.ugolini-sticky-product__image { width: 58px; height: 58px; flex: none; object-fit: cover; }
+.ugolini-sticky-product__details { max-width: min(44vw, 520px); min-width: 0; line-height: 1.2; }
+.ugolini-sticky-product__title { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 2; font-size: .95rem; }
+.ugolini-sticky-product__price { display: block; margin-top: .2rem; color: var(--wp--preset--color--secondary-text); font-size: .86rem; font-weight: 700; }
+.ugolini-sticky-product__button { min-height: 44px; flex: none; padding: .7rem 1.3rem; border: 1px solid #731d28; background: #731d28; color: #fff; font: inherit; font-size: .8rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; cursor: pointer; }
+.ugolini-amazon-buy, .ugolini-amazon-buy:hover, .ugolini-sticky-product__button, .ugolini-sticky-product__button:hover { text-decoration: none !important; }
+.ugolini-sticky-product__button:hover, .ugolini-sticky-product__button:focus-visible { background: #171714; border-color: #171714; }
+.ugolini-sticky-product__button:disabled { opacity: .55; cursor: not-allowed; }
+@media (max-width: 767px) {
+	.ugolini-sticky-product__inner { min-height: 104px; flex-direction: column; justify-content: center; gap: .45rem; padding: .65rem 0 calc(.65rem + env(safe-area-inset-bottom)); text-align: center; }
+	.ugolini-sticky-product__image { display: none; }
+	.ugolini-sticky-product__details { width: 100%; max-width: none; }
+	.ugolini-sticky-product__title { display: block; overflow: hidden; font-size: .78rem; text-overflow: ellipsis; white-space: nowrap; }
+	.ugolini-sticky-product__price { display: none; }
+	.ugolini-sticky-product__button { width: min(100%, 260px); padding-inline: .75rem; font-size: .7rem; }
+	body:has(.ugolini-sticky-product.is-visible) .ugolini-scroll-top,
+	body:has(.ugolini-sticky-product.is-visible) #gt_float_wrapper { bottom: calc(7.5rem + env(safe-area-inset-bottom)) !important; }
+	body:has(.ugolini-sticky-product.is-visible) .kodee-fab { bottom: calc(11.5rem + env(safe-area-inset-bottom)) !important; }
+}
