@@ -22,7 +22,7 @@
 .ugolini-gallery__advanced summary::marker { content: ''; }
 .ugolini-gallery__advanced summary .lucide { display: block; flex: none; width: 1.25rem; height: 1.25rem; transition: transform .32s cubic-bezier(.22, 1, .36, 1); }
 .ugolini-gallery__advanced[data-expanded="true"] summary .lucide { transform: rotate(180deg); }
-.ugolini-gallery__advanced-panel { overflow: hidden; }
+.ugolini-gallery__advanced-panel { overflow: visible; }
 .ugolini-gallery__advanced-fields { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .8rem; padding-top: .8rem; }
 .ugolini-gallery__density, .ugolini-gallery__density-desktop, .ugolini-gallery__density-mobile { display: flex; gap: .35rem; }
 .ugolini-gallery__density-mobile { display: none; }

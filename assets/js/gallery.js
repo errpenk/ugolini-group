@@ -49,12 +49,14 @@
       advanced.open = opening;
       return;
     }
+    advancedPanel.style.overflow = 'hidden';
     filtersAnimation = advancedPanel.animate([
       { height: `${from}px`, opacity: fromOpacity },
       { height: `${opening ? advancedPanel.scrollHeight : 0}px`, opacity: opening ? 1 : 0 }
     ], { duration: 320, easing: 'cubic-bezier(.22, 1, .36, 1)' });
     filtersAnimation.finished.then(() => {
       if (!filtersExpanded) advanced.open = false;
+      advancedPanel.style.overflow = 'visible';
       filtersAnimation = null;
     }).catch(() => {});
   });
