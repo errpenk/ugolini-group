@@ -3,7 +3,7 @@ Theme Name: Ugolini Group
 Theme URI: https://ugolinigroup.com/
 Author: Ugolini Group
 Description: A purpose-built block theme for the Ugolini Group SureCart store.
-Version: 6.66.51
+Version: 6.66.52
 Requires at least: 6.6
 Requires PHP: 8.1
 Text Domain: ugolini-group
@@ -92,6 +92,9 @@ html {
 body #gt_float_wrapper { bottom: max(1rem, var(--ugolini-gutter)) !important; left: max(1rem, var(--ugolini-gutter)) !important; }
 body #gt_float_wrapper .gt_float_switcher { overflow: hidden; border: 1px solid #171714; border-radius: 6px; background: rgb(247 243 238 / 94%); box-shadow: none; }
 body #gt_float_wrapper .gt-selected { background: transparent; }
+body #gt_float_wrapper .gt_options { width: max-content; min-width: 100%; max-width: calc(100vw - 2rem); }
+body #gt_float_wrapper .gt_options a { display: flex !important; align-items: center; gap: 0.6rem; white-space: nowrap; }
+body #gt_float_wrapper .gt_options a img { flex: 0 0 auto; margin-right: 0; }
 
 body {
 	overflow-x: clip;
@@ -1892,13 +1895,12 @@ body.page-id-559 .ugolini-legal-band { background-image: url("https://ugolinigro
 .ugolini-product-gallery { padding-left: 88px; overflow: visible !important; }
 .ugolini-product-gallery .sc-image-slider { position: relative; }
 .ugolini-product-gallery .sc-image-slider > .swiper { height: auto !important; aspect-ratio: 1; }
-.ugolini-product-gallery .sc-image-slider__thumbs { position: absolute; z-index: 2; top: 50%; right: auto; bottom: auto; left: -88px; width: 76px; height: fit-content !important; max-height: 100%; display: block !important; visibility: visible !important; opacity: 1 !important; margin: 0 !important; overflow: hidden; transform: translateY(-50%); }
+.ugolini-product-gallery .sc-image-slider__thumbs { position: absolute; z-index: 2; top: 50%; right: auto; bottom: auto; left: -88px; width: 76px; height: 100%; max-height: 100%; display: block !important; visibility: visible !important; opacity: 1 !important; margin: 0 !important; overflow: hidden; transform: translateY(-50%); }
 .ugolini-product-gallery .sc-image-slider__thumbs > :where([role="button"], .sc-image-slider-button__prev, .sc-image-slider-button__next) { display: none; }
-.ugolini-product-gallery .sc-image-slider__thumbs .swiper { width: 100%; height: fit-content !important; max-height: 100% !important; display: block !important; overflow-y: auto; }
+.ugolini-product-gallery .sc-image-slider__thumbs .swiper { width: 100%; height: 100% !important; max-height: 100% !important; display: block !important; overflow-y: auto; }
 .ugolini-product-gallery .sc-image-slider__thumbs .swiper { scrollbar-width: none; }
 .ugolini-product-gallery .sc-image-slider__thumbs .swiper::-webkit-scrollbar { display: none; }
-.ugolini-product-gallery .sc-image-slider__thumbs .swiper-wrapper { height: fit-content !important; min-height: 0 !important; flex-direction: column; justify-content: center !important; gap: 0.55rem; transform: none !important; }
-.ugolini-product-gallery .sc-image-slider__thumbs .swiper-wrapper:has(.swiper-slide:nth-child(6)) { justify-content: center !important; }
+.ugolini-product-gallery .sc-image-slider__thumbs .swiper-wrapper { min-height: 100% !important; flex-direction: column; justify-content: center !important; gap: 0.55rem; transform: none !important; }
 
 .ugolini-product-gallery .sc-image-slider__thumbs .swiper-slide { width: 76px !important; height: 57px !important; display: block !important; flex: 0 0 57px; visibility: visible !important; opacity: 1 !important; }
 .ugolini-product-gallery .sc-image-slider__thumbs .swiper-slide img { display: block; width: 100%; height: 100%; outline-offset: -2px; }
@@ -1911,7 +1913,7 @@ body.page-id-559 .ugolini-legal-band { background-image: url("https://ugolinigro
 .ugolini-product-gallery :where([class*="thumbnail"] img) { object-fit: cover !important; }
 .ugolini-product-gallery :where(button, [role="button"]) { min-width: 44px; min-height: 44px; border-color: rgb(23 23 20 / 24%); background: transparent !important; color: var(--wp--preset--color--text); }
 .ugolini-product-gallery :where(button, [role="button"]):hover { border-color: var(--wp--preset--color--white); background: var(--wp--preset--color--white) !important; color: var(--wp--preset--color--text); }
-.ugolini-product-gallery .sc-lightbox-container .lightbox-trigger { top: 1rem !important; right: 1rem !important; left: auto !important; width: 44px; height: 44px; display: grid; place-items: center; border: 1px solid rgb(23 23 20 / 55%) !important; border-radius: 50%; background: rgb(255 255 255 / 96%) !important; color: #171714 !important; box-shadow: 0 2px 12px rgb(0 0 0 / 18%); }
+.ugolini-product-gallery .sc-lightbox-container .lightbox-trigger { top: 50% !important; transform: translateY(-50%) !important; right: 1rem !important; left: auto !important; width: 44px; height: 44px; display: grid; place-items: center; border: 1px solid rgb(23 23 20 / 55%) !important; border-radius: 50%; background: rgb(255 255 255 / 96%) !important; color: #171714 !important; box-shadow: 0 2px 12px rgb(0 0 0 / 18%); }
 .ugolini-product-gallery .sc-lightbox-container .lightbox-trigger:is(:hover, :focus-visible) { border-color: #731d28 !important; background: #731d28 !important; color: #fff !important; }
 .ugolini-gallery-count { position: absolute; z-index: 3; right: 1rem; bottom: 1rem; padding: 0.25rem 0.45rem; color: var(--wp--preset--color--text); font-family: var(--wp--preset--font-family--interface); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; }
 .ugolini-product-summary { position: sticky; top: calc(var(--ugolini-header-height) + 2rem); }
@@ -2214,13 +2216,13 @@ body > .wp-block-surecart-cart-icon { display: none !important; }
 	.ugolini-product-columns > .wp-block-column { width: 100% !important; max-width: 100%; flex: 0 0 auto !important; }
 	.ugolini-product-gallery { position: static; align-self: stretch; padding-left: 0; overflow: hidden; }
 	.ugolini-product-gallery :where(.sc-image-slider, .swiper) { width: 100% !important; max-width: 100%; }
-	.ugolini-product-gallery .sc-image-slider__thumbs { position: static; width: auto; height: auto; max-height: none; margin-top: 0.5rem !important; overflow: visible; transform: none; }
+	.ugolini-product-gallery .sc-image-slider__thumbs { position: static; width: auto; height: auto !important; max-height: none; margin-top: 0.5rem !important; overflow: visible; transform: none; }
 	.ugolini-product-gallery .sc-image-slider > .swiper { position: relative; height: auto !important; aspect-ratio: auto; }
 	.ugolini-product-gallery .sc-image-slider > .swiper > :where(.swiper-button-prev, .swiper-button-next, .sc-image-slider-button__prev, .sc-image-slider-button__next) { position: absolute !important; top: 50% !important; bottom: auto !important; z-index: 3; transform: translateY(-50%) !important; }
 	.ugolini-product-gallery .ugolini-gallery-count { right: .75rem; bottom: .75rem; }
-	.ugolini-product-gallery .sc-image-slider__thumbs .swiper { height: auto; overflow-x: auto; }
+	.ugolini-product-gallery .sc-image-slider__thumbs .swiper { height: auto !important; overflow-x: auto; }
 	.ugolini-product-gallery .sc-image-slider__thumbs .swiper-wrapper { flex-direction: row; }
-	.ugolini-product-gallery .sc-image-slider__thumbs .swiper-wrapper { min-height: 0; justify-content: flex-start; }
+	.ugolini-product-gallery .sc-image-slider__thumbs .swiper-wrapper { min-height: 0 !important; justify-content: flex-start !important; }
 	.ugolini-product-gallery .sc-image-slider__thumbs .swiper-wrapper { justify-content: center; }
 	.ugolini-product-gallery .sc-image-slider__thumbs .swiper-slide { width: 68px !important; height: 68px !important; flex-basis: 68px; }
 	.ugolini-product-summary { position: static; }

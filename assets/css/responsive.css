@@ -202,13 +202,13 @@
 	.ugolini-product-columns > .wp-block-column { width: 100% !important; max-width: 100%; flex: 0 0 auto !important; }
 	.ugolini-product-gallery { position: static; align-self: stretch; padding-left: 0; overflow: hidden; }
 	.ugolini-product-gallery :where(.sc-image-slider, .swiper) { width: 100% !important; max-width: 100%; }
-	.ugolini-product-gallery .sc-image-slider__thumbs { position: static; width: auto; height: auto; max-height: none; margin-top: 0.5rem !important; overflow: visible; transform: none; }
+	.ugolini-product-gallery .sc-image-slider__thumbs { position: static; width: auto; height: auto !important; max-height: none; margin-top: 0.5rem !important; overflow: visible; transform: none; }
 	.ugolini-product-gallery .sc-image-slider > .swiper { position: relative; height: auto !important; aspect-ratio: auto; }
 	.ugolini-product-gallery .sc-image-slider > .swiper > :where(.swiper-button-prev, .swiper-button-next, .sc-image-slider-button__prev, .sc-image-slider-button__next) { position: absolute !important; top: 50% !important; bottom: auto !important; z-index: 3; transform: translateY(-50%) !important; }
 	.ugolini-product-gallery .ugolini-gallery-count { right: .75rem; bottom: .75rem; }
-	.ugolini-product-gallery .sc-image-slider__thumbs .swiper { height: auto; overflow-x: auto; }
+	.ugolini-product-gallery .sc-image-slider__thumbs .swiper { height: auto !important; overflow-x: auto; }
 	.ugolini-product-gallery .sc-image-slider__thumbs .swiper-wrapper { flex-direction: row; }
-	.ugolini-product-gallery .sc-image-slider__thumbs .swiper-wrapper { min-height: 0; justify-content: flex-start; }
+	.ugolini-product-gallery .sc-image-slider__thumbs .swiper-wrapper { min-height: 0 !important; justify-content: flex-start !important; }
 	.ugolini-product-gallery .sc-image-slider__thumbs .swiper-wrapper { justify-content: center; }
 	.ugolini-product-gallery .sc-image-slider__thumbs .swiper-slide { width: 68px !important; height: 68px !important; flex-basis: 68px; }
 	.ugolini-product-summary { position: static; }
