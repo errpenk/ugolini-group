@@ -47,9 +47,10 @@
 	const widgetChanges = new MutationObserver(() => schedulePosition());
 	const observedFrames = new WeakSet();
 	const schedulePosition = () => {
-		if (!positionFrame) positionFrame = requestAnimationFrame(positionChat);
 		clearTimeout(settleTimer);
-		settleTimer = setTimeout(() => requestAnimationFrame(positionChat), 500);
+		settleTimer = setTimeout(() => {
+			if (!positionFrame) positionFrame = requestAnimationFrame(positionChat);
+		}, 140);
 	};
 	const placeFrame = (frame, bottom) => {
 		if (!frame) return;

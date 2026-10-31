@@ -65,11 +65,11 @@
 .ugolini-product-gallery .sc-image-slider > .swiper { height: auto !important; aspect-ratio: 1; }
 .ugolini-product-gallery .sc-image-slider__thumbs { position: absolute; z-index: 2; top: 50%; right: auto; bottom: auto; left: -88px; width: 76px; height: 100%; max-height: 100%; display: block !important; visibility: visible !important; opacity: 1 !important; margin: 0 !important; overflow: hidden; transform: translateY(-50%); }
 .ugolini-product-gallery .sc-image-slider__thumbs > :where([role="button"], .sc-image-slider-button__prev, .sc-image-slider-button__next) { display: none; }
-.ugolini-product-gallery .sc-image-slider__thumbs .swiper { width: 100%; height: 100%; display: block !important; overflow-y: auto; }
+.ugolini-product-gallery .sc-image-slider__thumbs .swiper { width: 100%; height: max-content !important; max-height: 100% !important; display: block !important; overflow-y: auto; }
 .ugolini-product-gallery .sc-image-slider__thumbs .swiper { scrollbar-width: none; }
 .ugolini-product-gallery .sc-image-slider__thumbs .swiper::-webkit-scrollbar { display: none; }
-.ugolini-product-gallery .sc-image-slider__thumbs .swiper-wrapper { min-height: 100%; flex-direction: column; justify-content: center; gap: 0.55rem; transform: none !important; }
-.ugolini-product-gallery .sc-image-slider__thumbs .swiper-wrapper:has(.swiper-slide:nth-child(6)) { justify-content: flex-start; }
+.ugolini-product-gallery .sc-image-slider__thumbs .swiper-wrapper { height: max-content !important; min-height: 0 !important; flex-direction: column; justify-content: center; gap: 0.55rem; transform: none !important; }
+
 .ugolini-product-gallery .sc-image-slider__thumbs .swiper-slide { width: 76px !important; height: 57px !important; display: block !important; flex: 0 0 57px; visibility: visible !important; opacity: 1 !important; }
 .ugolini-product-gallery .sc-image-slider__thumbs .swiper-slide img { display: block; width: 100%; height: 100%; outline-offset: -2px; }
 .ugolini-product-gallery :where(.sc-image-slider > .swiper, .swiper-slide, .sc-product-media, .wp-block-surecart-product-media) { background: transparent !important; }
