@@ -355,6 +355,7 @@ for (const gallery of document.querySelectorAll('.ugolini-product-gallery .sc-im
 	if (gallery) new MutationObserver(updateThumbnail).observe(gallery, { childList: true, subtree: true });
 	updateThumbnail();
 	const button = bar.querySelector('.ugolini-sticky-product__button');
+	button.style.textDecoration = 'none';
 	const sync = () => {
 		bar.querySelector('.ugolini-sticky-product__title').textContent = title.textContent.trim();
 		bar.querySelector('.ugolini-sticky-product__price').textContent = price?.textContent.trim() || '';
