@@ -3,7 +3,7 @@ Theme Name: Ugolini Group
 Theme URI: https://ugolinigroup.com/
 Author: Ugolini Group
 Description: A purpose-built block theme for the Ugolini Group SureCart store.
-Version: 6.66.65
+Version: 6.66.66
 Requires at least: 6.6
 Requires PHP: 8.1
 Text Domain: ugolini-group
@@ -2777,9 +2777,8 @@ main .ugolini-contact-commercial h3 { font-family: var(--wp--preset--font-family
 .ugolini-sticky-product__details { max-width: min(44vw, 520px); min-width: 0; line-height: 1.2; }
 .ugolini-sticky-product__title { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 2; font-size: .95rem; }
 .ugolini-sticky-product__price { display: block; margin-top: .2rem; color: var(--wp--preset--color--secondary-text); font-size: .86rem; font-weight: 700; }
-.ugolini-sticky-product__button { min-height: 44px; flex: none; padding: .7rem 1.3rem; border: 1px solid #731d28; background: #731d28; color: #fff; font: inherit; font-size: .8rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; cursor: pointer; }
+.ugolini-sticky-product__button { min-height: 44px; flex: none; padding: .7rem 1.3rem; border: 1px solid #731d28; background: #731d28; color: #fff; font: inherit; font-size: .8rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; text-decoration: none !important; cursor: pointer; }
 .ugolini-amazon-buy, .ugolini-amazon-buy:hover, .ugolini-sticky-product__button, .ugolini-sticky-product__button:hover { text-decoration: none !important; }
-body .ugolini-sticky-product a.ugolini-sticky-product__button { text-decoration-line: none !important; }
 .ugolini-sticky-product__button:hover, .ugolini-sticky-product__button:focus-visible { background: #171714; border-color: #171714; }
 .ugolini-sticky-product__button:disabled { opacity: .55; cursor: not-allowed; }
 @media (max-width: 767px) {
