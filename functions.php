@@ -980,6 +980,7 @@ function ugolini_group_enqueue_assets() {
 		array(),
 		$version
 	);
+	wp_enqueue_style( 'ugolini-group-controls', get_theme_file_uri( 'assets/css/controls.css' ), array( 'ugolini-group' ), $version );
 	wp_enqueue_script( 'ugolini-group-interactions', get_theme_file_uri( 'assets/js/theme.js' ), array(), $version, true );
 	if ( is_singular( array( 'post', 'ugolini_news' ) ) || ( is_page( 'events' ) && ugolini_group_requested_event() ) ) {
 		wp_enqueue_script( 'ugolini-group-share', get_theme_file_uri( 'assets/js/share.js' ), array(), $version, true );

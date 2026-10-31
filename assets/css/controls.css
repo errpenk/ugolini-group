@@ -1,0 +1,12 @@
+.ugolini-product-gallery .sc-image-slider__thumbs { height: 100% !important; max-height: 100% !important; overflow: hidden !important; }
+.ugolini-product-gallery .sc-image-slider__thumbs .swiper { height: 100% !important; max-height: 100% !important; }
+.ugolini-product-gallery .sc-image-slider__thumbs .swiper-wrapper { height: 100% !important; min-height: 100% !important; flex-direction: column !important; justify-content: center !important; transform: none !important; }
+.ugolini-product-gallery .sc-lightbox-container .lightbox-trigger { top: 50% !important; right: 1rem !important; left: auto !important; transform: translateY(-50%) !important; }
+body #gt_float_wrapper .gt_options { width: max-content; min-width: 100%; max-width: calc(100vw - 2rem); }
+body #gt_float_wrapper .gt_options a { display: flex !important; align-items: center; gap: 0.6rem; white-space: nowrap; }
+body #gt_float_wrapper .gt_options a img { flex: 0 0 auto; margin-right: 0; }
+@media (max-width: 767px) {
+	.ugolini-product-gallery .sc-image-slider__thumbs { height: auto !important; max-height: none !important; overflow: visible !important; }
+	.ugolini-product-gallery .sc-image-slider__thumbs .swiper { height: auto !important; max-height: none !important; overflow-x: auto; }
+	.ugolini-product-gallery .sc-image-slider__thumbs .swiper-wrapper { height: auto !important; min-height: 0 !important; flex-direction: row !important; justify-content: flex-start !important; }
+}
