@@ -40,17 +40,13 @@
 	document.body.append(root);
 
 	let positionFrame = 0;
-	let settleTimer = 0;
 	let observedPicker;
 	const pickerSize = new ResizeObserver(() => schedulePosition());
 	const pickerChanges = new MutationObserver(() => schedulePosition());
 	const widgetChanges = new MutationObserver(() => schedulePosition());
 	const observedFrames = new WeakSet();
 	const schedulePosition = () => {
-		clearTimeout(settleTimer);
-		settleTimer = setTimeout(() => {
-			if (!positionFrame) positionFrame = requestAnimationFrame(positionChat);
-		}, 140);
+		if (!positionFrame) positionFrame = requestAnimationFrame(positionChat);
 	};
 	const placeFrame = (frame, bottom) => {
 		if (!frame) return;
@@ -80,8 +76,13 @@
 			pickerChanges.observe(picker, { attributes: true, childList: true, subtree: true, attributeFilter: ['class', 'style'] });
 			observedPicker = picker;
 		}
+		const selected = picker?.querySelector('.gt-selected');
 		const options = picker?.querySelector('.gt_options');
-		const pickerTop = picker ? Math.min(picker.getBoundingClientRect().top, options && getComputedStyle(options).display !== 'none' ? options.getBoundingClientRect().top : Infinity) : innerHeight - 72;
+		const menu = options && getComputedStyle(options).display !== 'none' ? options.getBoundingClientRect() : null;
+		const pickerTop = Math.min(
+			selected ? selected.getBoundingClientRect().top : picker ? picker.getBoundingClientRect().top : innerHeight - 72,
+			menu ? menu.top : Infinity
+		);
 		const controlsBottom = Math.max(12, innerHeight - pickerTop + 12);
 		if (picker) root.style.setProperty('--ugolini-chat-bottom', `${controlsBottom.toFixed(2)}px`);
 		placeFrame(document.querySelector('#min-widget > iframe'), controlsBottom);
@@ -107,6 +108,7 @@
 		}
 	};
 	new MutationObserver(schedulePosition).observe(document.body, { childList: true, subtree: true });
+	addEventListener('scroll', schedulePosition, { passive: true });
 	addEventListener('resize', schedulePosition);
 	window.visualViewport?.addEventListener('resize', schedulePosition);
 	schedulePosition();
