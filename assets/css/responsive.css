@@ -208,8 +208,7 @@
 	.ugolini-product-gallery .ugolini-gallery-count { right: .75rem; bottom: .75rem; }
 	.ugolini-product-gallery .sc-image-slider__thumbs .swiper { height: auto; overflow-x: auto; }
 	.ugolini-product-gallery .sc-image-slider__thumbs .swiper-wrapper { flex-direction: row; }
-	.ugolini-product-gallery .sc-image-slider__thumbs .swiper-wrapper,
-	.ugolini-product-gallery .sc-image-slider__thumbs .swiper-wrapper:has(.swiper-slide:nth-child(6)) { min-height: 0; justify-content: flex-start; }
+	.ugolini-product-gallery .sc-image-slider__thumbs .swiper-wrapper { min-height: 0; justify-content: flex-start; }
 	.ugolini-product-gallery .sc-image-slider__thumbs .swiper-wrapper { justify-content: center; }
 	.ugolini-product-gallery .sc-image-slider__thumbs .swiper-slide { width: 68px !important; height: 68px !important; flex-basis: 68px; }
 	.ugolini-product-summary { position: static; }
