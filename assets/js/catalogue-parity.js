@@ -62,7 +62,7 @@ if (shop) {
 		const tabs = shop.querySelector('.preview-shop-tabs');
 		const rows = tabs.querySelectorAll('.preview-shop-tab-row');
 		const all = rows[0].querySelector('[data-shop-collection=""]');
-		for (const row of rows) row.replaceChildren(row.querySelector('span'), row.querySelector('[data-shop-collection=""]'));
+		for (const row of rows) row.replaceChildren(row.querySelector('span'), ...row.querySelectorAll('[data-shop-collection=""]'));
 		for (const term of terms.filter(term => term.count > 0)) {
 			const button = all.cloneNode(true);
 			button.classList.remove('is-active');
