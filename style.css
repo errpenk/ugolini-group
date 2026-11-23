@@ -3,7 +3,7 @@ Theme Name: Ugolini Group
 Theme URI: https://ugolinigroup.com/
 Author: Ugolini Group
 Description: A purpose-built block theme for the Ugolini Group SureCart store.
-Version: 6.66.69
+Version: 6.66.70
 Requires at least: 6.6
 Requires PHP: 8.1
 Text Domain: ugolini-group
@@ -796,10 +796,10 @@ body.admin-bar .ugolini-home-first-screen { min-height: calc(100vh - var(--ugoli
 .ugolini-event-meta { display: grid; gap: .65rem; margin-top: 1.5rem; }
 .ugolini-event-meta span { display: flex; align-items: center; gap: .65rem; color: var(--wp--preset--color--secondary-text); }
 .ugolini-event-meta svg { width: 20px; height: 20px; flex: 0 0 auto; color: var(--wp--preset--color--brand-dark); }
-.ugolini-event-link { width: max-content; display: inline-flex; gap: .7rem; margin-top: 1.75rem; padding-bottom: .35rem; border-bottom: 1px solid currentColor; color: var(--wp--preset--color--brand-dark); font-weight: 600; text-decoration: none; transform-origin: left center; }
+.ugolini-event-link { width: max-content; display: inline-flex; gap: .7rem; margin-top: 1.75rem; color: var(--wp--preset--color--brand-dark); font-weight: 600; text-decoration: none; transform-origin: left center; }
 .ugolini-event-link:hover { color: var(--wp--preset--color--brand); transform: scale(1.035); }
 .ugolini-event-thumbs { grid-column: 2; grid-row: 1; align-self: center; display: grid; align-content: center; gap: 1rem; }
-.ugolini-event-thumbs button { min-width: 0; display: grid; gap: .45rem; padding: 0; border: 1px solid transparent; background: transparent; color: var(--wp--preset--color--secondary-text); cursor: pointer; text-align: left; transform-origin: center; }
+.ugolini-event-thumbs button { width: 96px; min-width: 0; display: grid; gap: .45rem; padding: 0; border: 1px solid transparent; background: transparent; color: var(--wp--preset--color--secondary-text); cursor: pointer; text-align: left; transform-origin: center; }
 .ugolini-event-thumbs button:hover { color: var(--wp--preset--color--brand-dark); transform: scale(1.025); }
 .ugolini-event-thumbs button[aria-current="true"] { border-color: var(--wp--preset--color--brand-dark); color: var(--wp--preset--color--brand-dark); }
 .ugolini-event-thumbs img { width: 100%; height: auto; display: block; }
@@ -2052,7 +2052,7 @@ body > .wp-block-surecart-cart-icon { display: none !important; }
 @media (max-width: 900px) {
 	.ugolini-event-deck { grid-template-columns: 1fr; }
 	.ugolini-event-thumbs { grid-column: 1; grid-row: 2; display: flex; justify-content: center; overflow-x: auto; padding-block: .25rem; }
-	.ugolini-event-thumbs button { flex: 0 0 112px; }
+	.ugolini-event-thumbs button { flex: 0 0 96px; }
 	.ugolini-event-controls { grid-row: 3; }
 	.ugolini-contact-grid,
 	.ugolini-contact-form.alignwide { grid-template-columns: 1fr; }
@@ -2506,7 +2506,9 @@ a { color: inherit; }
 .preview-shop-bar { display: flex; align-items: stretch; flex-direction: column; gap: 2rem; margin-bottom: 2.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--wp--preset--color--border); }
 .preview-shop-tabs,
 .preview-shop-actions { display: flex; align-items: center; flex-wrap: wrap; }
-.preview-shop-tabs { min-width: 0; gap: 0.75rem; margin-block: -0.4rem; padding-block: 0.4rem; flex-wrap: wrap; overflow: visible; }
+.preview-shop-tabs { min-width: 0; display: grid; gap: 0.75rem; margin-block: -0.4rem; padding-block: 0.4rem; }
+.preview-shop-tab-row { display: flex; align-items: center; flex-wrap: wrap; gap: 0.75rem; }
+.preview-shop-tab-row > span { width: 7rem; flex: 0 0 7rem; font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
 .preview-shop-actions { justify-content: flex-end; gap: clamp(2.5rem, 4vw, 4.5rem); flex-wrap: nowrap; }
 .preview-shop-actions > .ugolini-shop-count { min-height: 48px; display: inline-flex; align-items: center; margin: 0 auto 0 0; padding-left: calc(1rem + 1px); font-style: italic; font-family: var(--wp--preset--font-family--interface); font-size: .9rem; font-weight: 600; white-space: nowrap; }
 .preview-shop-tabs :is(button, a),
@@ -2653,7 +2655,9 @@ a { color: inherit; }
 	.preview-journal-grid,
 	.preview-product-detail { grid-template-columns: 1fr; }
 	.preview-shop-bar { align-items: stretch; flex-direction: column; }
-	.preview-shop-tabs { width: 100%; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.55rem; margin-inline: 0; padding-inline: 0; overflow: visible; }
+	.preview-shop-tabs { width: 100%; gap: 1rem; margin-inline: 0; padding-inline: 0; }
+	.preview-shop-tab-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .55rem; }
+	.preview-shop-tab-row > span { width: auto; grid-column: 1 / -1; }
 	.preview-shop-tabs :is(button, a) { width: 100%; min-width: 0; min-height: 44px; height: auto; padding: 0.6rem 0.65rem; line-height: 1.25; white-space: normal; }
 	.preview-shop-actions { display: grid; grid-template-columns: 1fr 1fr; column-gap: 2rem; }
 	.preview-shop-actions > .ugolini-shop-count { grid-column: 1; padding-left: calc(.65rem + 1px); }

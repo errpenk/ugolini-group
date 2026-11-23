@@ -139,10 +139,10 @@ body.admin-bar .ugolini-home-first-screen { min-height: calc(100vh - var(--ugoli
 .ugolini-event-meta { display: grid; gap: .65rem; margin-top: 1.5rem; }
 .ugolini-event-meta span { display: flex; align-items: center; gap: .65rem; color: var(--wp--preset--color--secondary-text); }
 .ugolini-event-meta svg { width: 20px; height: 20px; flex: 0 0 auto; color: var(--wp--preset--color--brand-dark); }
-.ugolini-event-link { width: max-content; display: inline-flex; gap: .7rem; margin-top: 1.75rem; padding-bottom: .35rem; border-bottom: 1px solid currentColor; color: var(--wp--preset--color--brand-dark); font-weight: 600; text-decoration: none; transform-origin: left center; }
+.ugolini-event-link { width: max-content; display: inline-flex; gap: .7rem; margin-top: 1.75rem; color: var(--wp--preset--color--brand-dark); font-weight: 600; text-decoration: none; transform-origin: left center; }
 .ugolini-event-link:hover { color: var(--wp--preset--color--brand); transform: scale(1.035); }
 .ugolini-event-thumbs { grid-column: 2; grid-row: 1; align-self: center; display: grid; align-content: center; gap: 1rem; }
-.ugolini-event-thumbs button { min-width: 0; display: grid; gap: .45rem; padding: 0; border: 1px solid transparent; background: transparent; color: var(--wp--preset--color--secondary-text); cursor: pointer; text-align: left; transform-origin: center; }
+.ugolini-event-thumbs button { width: 96px; min-width: 0; display: grid; gap: .45rem; padding: 0; border: 1px solid transparent; background: transparent; color: var(--wp--preset--color--secondary-text); cursor: pointer; text-align: left; transform-origin: center; }
 .ugolini-event-thumbs button:hover { color: var(--wp--preset--color--brand-dark); transform: scale(1.025); }
 .ugolini-event-thumbs button[aria-current="true"] { border-color: var(--wp--preset--color--brand-dark); color: var(--wp--preset--color--brand-dark); }
 .ugolini-event-thumbs img { width: 100%; height: auto; display: block; }

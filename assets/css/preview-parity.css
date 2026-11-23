@@ -155,7 +155,9 @@ a { color: inherit; }
 .preview-shop-bar { display: flex; align-items: stretch; flex-direction: column; gap: 2rem; margin-bottom: 2.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--wp--preset--color--border); }
 .preview-shop-tabs,
 .preview-shop-actions { display: flex; align-items: center; flex-wrap: wrap; }
-.preview-shop-tabs { min-width: 0; gap: 0.75rem; margin-block: -0.4rem; padding-block: 0.4rem; flex-wrap: wrap; overflow: visible; }
+.preview-shop-tabs { min-width: 0; display: grid; gap: 0.75rem; margin-block: -0.4rem; padding-block: 0.4rem; }
+.preview-shop-tab-row { display: flex; align-items: center; flex-wrap: wrap; gap: 0.75rem; }
+.preview-shop-tab-row > span { width: 7rem; flex: 0 0 7rem; font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
 .preview-shop-actions { justify-content: flex-end; gap: clamp(2.5rem, 4vw, 4.5rem); flex-wrap: nowrap; }
 .preview-shop-actions > .ugolini-shop-count { min-height: 48px; display: inline-flex; align-items: center; margin: 0 auto 0 0; padding-left: calc(1rem + 1px); font-style: italic; font-family: var(--wp--preset--font-family--interface); font-size: .9rem; font-weight: 600; white-space: nowrap; }
 .preview-shop-tabs :is(button, a),
@@ -302,7 +304,9 @@ a { color: inherit; }
 	.preview-journal-grid,
 	.preview-product-detail { grid-template-columns: 1fr; }
 	.preview-shop-bar { align-items: stretch; flex-direction: column; }
-	.preview-shop-tabs { width: 100%; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.55rem; margin-inline: 0; padding-inline: 0; overflow: visible; }
+	.preview-shop-tabs { width: 100%; gap: 1rem; margin-inline: 0; padding-inline: 0; }
+	.preview-shop-tab-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .55rem; }
+	.preview-shop-tab-row > span { width: auto; grid-column: 1 / -1; }
 	.preview-shop-tabs :is(button, a) { width: 100%; min-width: 0; min-height: 44px; height: auto; padding: 0.6rem 0.65rem; line-height: 1.25; white-space: normal; }
 	.preview-shop-actions { display: grid; grid-template-columns: 1fr 1fr; column-gap: 2rem; }
 	.preview-shop-actions > .ugolini-shop-count { grid-column: 1; padding-left: calc(.65rem + 1px); }

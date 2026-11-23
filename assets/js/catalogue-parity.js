@@ -60,15 +60,16 @@ if (shop) {
 		}
 		if (!nextCards.length) return;
 		const tabs = shop.querySelector('.preview-shop-tabs');
-		const all = tabs.querySelector('[data-shop-collection=""]');
-		tabs.replaceChildren(all);
+		const rows = tabs.querySelectorAll('.preview-shop-tab-row');
+		const all = rows[0].querySelector('[data-shop-collection=""]');
+		for (const row of rows) row.replaceChildren(row.querySelector('span'), row.querySelector('[data-shop-collection=""]'));
 		for (const term of terms.filter(term => term.count > 0)) {
 			const button = all.cloneNode(true);
 			button.classList.remove('is-active');
 			button.dataset.shopCollection = term.slug;
 			button.href = `/collections/${encodeURIComponent(term.slug)}/`;
 			button.textContent = term.name;
-			tabs.append(button);
+			rows[['caviareat', 'luxureat', 'tin-caviar', 'truffleat', 'ugolini-gourmet'].includes(term.slug) ? 0 : 1].append(button);
 		}
 		cards = nextCards;
 		grid.replaceChildren(...cards);
@@ -119,7 +120,7 @@ if (shop) {
 		const button = shop.querySelector(`[data-shop-collection="${CSS.escape(slug)}"]`) || shop.querySelector('[data-shop-collection=""]');
 		collection = button.dataset.shopCollection;
 		syncHero(collection);
-		for (const item of shop.querySelectorAll('[data-shop-collection]')) item.classList.toggle('is-active', item === button);
+		for (const item of shop.querySelectorAll('[data-shop-collection]')) item.classList.toggle('is-active', item === button || (!item.dataset.shopCollection && item.closest('.preview-shop-tab-row') !== button.closest('.preview-shop-tab-row')));
 		update();
 		const panels = [...document.querySelectorAll('[data-collection-editorial]')];
 		for (const panel of panels) panel.hidden = panel.dataset.collectionEditorial !== collection;

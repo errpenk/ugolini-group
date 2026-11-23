@@ -34,7 +34,7 @@
 @media (max-width: 900px) {
 	.ugolini-event-deck { grid-template-columns: 1fr; }
 	.ugolini-event-thumbs { grid-column: 1; grid-row: 2; display: flex; justify-content: center; overflow-x: auto; padding-block: .25rem; }
-	.ugolini-event-thumbs button { flex: 0 0 112px; }
+	.ugolini-event-thumbs button { flex: 0 0 96px; }
 	.ugolini-event-controls { grid-row: 3; }
 	.ugolini-contact-grid,
 	.ugolini-contact-form.alignwide { grid-template-columns: 1fr; }
