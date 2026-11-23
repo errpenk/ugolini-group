@@ -62,14 +62,15 @@ if (shop) {
 		const tabs = shop.querySelector('.preview-shop-tabs');
 		const rows = tabs.querySelectorAll('.preview-shop-tab-row');
 		const all = rows[0].querySelector('[data-shop-collection=""]');
-		for (const row of rows) row.replaceChildren(row.querySelector('span'), ...row.querySelectorAll('[data-shop-collection=""]'));
-		for (const term of terms.filter(term => term.count > 0)) {
+		for (const row of rows) row.querySelector('.preview-shop-tab-links').replaceChildren(...row.querySelectorAll('[data-shop-collection=""]'));
+		const categoryOrder = ['caviale-e-mare', 'tartufi', 'olio-al-tartufo', 'salse-tartufo', 'sughi', 'pesto', 'salse-funghi', 'marmellate', 'altre-specialita', 'packaging-e-accessori'];
+		for (const term of terms.filter(term => term.count > 0).sort((a, b) => (categoryOrder.indexOf(a.slug) + 1 || Infinity) - (categoryOrder.indexOf(b.slug) + 1 || Infinity))) {
 			const button = all.cloneNode(true);
 			button.classList.remove('is-active');
 			button.dataset.shopCollection = term.slug;
 			button.href = `/collections/${encodeURIComponent(term.slug)}/`;
 			button.textContent = term.name;
-			rows[['caviareat', 'luxureat', 'tin-caviar', 'truffleat', 'ugolini-gourmet'].includes(term.slug) ? 0 : 1].append(button);
+			rows[['caviareat', 'luxureat', 'tin-caviar', 'truffleat', 'ugolini-gourmet'].includes(term.slug) ? 0 : 1].querySelector('.preview-shop-tab-links').append(button);
 		}
 		cards = nextCards;
 		grid.replaceChildren(...cards);

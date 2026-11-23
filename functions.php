@@ -867,13 +867,19 @@ function ugolini_group_preview_shop() {
 	$count = $collection ? ugolini_group_collection_count( get_queried_object() ) : substr_count( $grid, 'data-product-card' );
 	$all = '<a class="' . ( $collection ? '' : 'is-active' ) . '" href="' . esc_url( home_url( '/products/' ) ) . '" data-shop-collection="" data-shop-label="">Tutti i prodotti</a>';
 	$brands = '';
-	$categories = '';
+	$categories = array();
 	foreach ( ugolini_group_get_collections() as $term ) {
 		$link = '<a class="' . ( $collection === $term->slug ? 'is-active' : '' ) . '" href="' . esc_url( get_term_link( $term ) ) . '" data-shop-collection="' . esc_attr( $term->slug ) . '" data-shop-label="' . esc_attr( strtolower( $term->name ) ) . '">' . esc_html( $term->name ) . '</a>';
 		if ( in_array( $term->slug, array( 'caviareat', 'luxureat', 'tin-caviar', 'truffleat', 'ugolini-gourmet' ), true ) ) $brands .= $link;
-		else $categories .= $link;
+		else $categories[ $term->slug ] = $link;
 	}
-	$tabs = '<div class="preview-shop-tab-row"><span>Marchi</span>' . $all . $brands . '</div><div class="preview-shop-tab-row"><span>Categorie</span>' . $categories . '</div>';
+	$ordered_categories = '';
+	foreach ( array( 'caviale-e-mare', 'tartufi', 'olio-al-tartufo', 'salse-tartufo', 'sughi', 'pesto', 'salse-funghi', 'marmellate', 'altre-specialita', 'packaging-e-accessori' ) as $slug ) {
+		$ordered_categories .= $categories[ $slug ] ?? '';
+		unset( $categories[ $slug ] );
+	}
+	$ordered_categories .= implode( '', $categories );
+	$tabs = '<div class="preview-shop-tab-row"><span>Marchi</span><div class="preview-shop-tab-links">' . $all . $brands . '</div></div><div class="preview-shop-tab-row"><span>Categorie</span><div class="preview-shop-tab-links">' . $ordered_categories . '</div></div>';
 	return '<div class="alignwide preview-shop" data-preview-shop data-catalogue-complete><div class="preview-shop-bar"><div class="preview-shop-tabs">' . $tabs . '</div><div class="preview-shop-actions"><p class="ugolini-shop-count" data-shop-count aria-live="polite">' . esc_html( $count . ' prodotti' ) . '</p><button type="button" data-filter-open>' . ugolini_group_icon( 'sliders-horizontal' ) . 'Filtri</button><label><span>Cerca</span><input type="search" data-shop-search placeholder="Cerca prodotti"></label><label><span>Ordina</span><select data-shop-sort><option value="featured">In evidenza</option><option value="az">Nome, A–Z</option><option value="za">Nome, Z–A</option><option value="low">Prezzo crescente</option><option value="high">Prezzo decrescente</option></select></label></div></div><dialog class="preview-filter-dialog" data-filter-dialog><form method="dialog"><button class="preview-filter-close" value="close" aria-label="Chiudi filtri">' . ugolini_group_icon( 'x' ) . '</button><h2>Filtri</h2><fieldset><legend>Disponibilità</legend><label><input type="checkbox" checked disabled> Disponibile</label><label class="is-disabled"><input type="checkbox" disabled> Non disponibile</label></fieldset><fieldset class="preview-price-filter"><legend>Prezzo</legend><div class="preview-price-inputs"><label>Minimo € <input type="number" min="0" step="0.01" data-price-min></label><label>Massimo € <input type="number" min="0" step="0.01" data-price-max></label></div></fieldset><button type="button" data-filter-clear>Azzera filtri</button></form></dialog>' . $grid . '</div>';
 }
 
