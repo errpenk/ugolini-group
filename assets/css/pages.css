@@ -159,12 +159,12 @@
 .ugolini-wholesale-benefits li { display: grid; grid-template-columns: minmax(10rem, .7fr) 2rem 1fr; gap: 1.5rem; align-items: center; padding-block: 1.45rem; }
 .ugolini-wholesale-benefits .lucide { width: 1.5rem; height: 1.5rem; color: var(--wp--preset--color--brand); }
 .ugolini-wholesale-benefits span { color: var(--wp--preset--color--secondary-text); }
-.ugolini-wholesale-services { position: relative; height: 440svh; isolation: isolate; background: #171714; color: #fff; scroll-margin-top: var(--ugolini-header-height); }
+.ugolini-wholesale-services { position: relative; height: 440svh; isolation: isolate; background: #171714; color: #fff; scroll-margin-top: calc(var(--ugolini-header-bottom, var(--ugolini-header-height)) + 12px); }
 .ugolini-wholesale-services__background { position: sticky; z-index: 0; top: 0; height: 100svh; overflow: hidden; margin-bottom: -100svh; background: #171714; pointer-events: none; }
 .ugolini-wholesale-services__background::after { content: ""; position: absolute; inset: 0; background: rgb(0 0 0 / 62%); }
 .ugolini-wholesale-services__background img { position: absolute; inset: -24px; width: calc(100% + 48px); height: calc(100% + 48px); object-fit: cover; filter: blur(22px); opacity: 0; transition: opacity 550ms ease; }
 .ugolini-wholesale-services__background img.is-active { opacity: 1; }
-.ugolini-wholesale-services__stage { position: sticky; z-index: 1; top: 10svh; width: min(calc(100% - (2 * var(--ugolini-gutter))), var(--ugolini-container)); height: 80svh; min-height: 540px; display: grid; grid-template-rows: auto 180px auto minmax(180px, 1fr); align-content: center; gap: .75rem; margin-inline: auto; padding-block: clamp(1.75rem, 3.5vh, 3rem); overflow: hidden; }
+.ugolini-wholesale-services__stage { position: sticky; z-index: 1; top: calc(var(--ugolini-header-bottom, var(--ugolini-header-height)) + 12px); width: min(calc(100% - (2 * var(--ugolini-gutter))), var(--ugolini-container)); height: calc(100svh - var(--ugolini-header-bottom, var(--ugolini-header-height)) - 24px); min-height: 0; display: grid; grid-template-rows: auto 180px auto minmax(180px, 1fr); align-content: center; gap: .75rem; margin-inline: auto; padding-block: clamp(1.75rem, 3.5vh, 3rem); overflow: hidden; }
 .ugolini-wholesale-services__heading { margin: 0; }
 .ugolini-wholesale-services__heading > * { margin-inline: 0 !important; }
 .ugolini-wholesale-services__heading .ugolini-eyebrow { color: #d3a57d; }

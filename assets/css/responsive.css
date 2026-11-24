@@ -248,7 +248,7 @@
 	.ugolini-contact-form-section { padding-top: 1rem; }
 	.ugolini-b2b-form__row { grid-template-columns: 1fr; }
 	.ugolini-wholesale-services { height: 560svh; }
-	.ugolini-wholesale-services__stage { top: 0; height: 100svh; min-height: 100svh; max-height: none; grid-template-rows: auto 330px auto minmax(96px, 1fr); gap: .65rem; padding-block: 2.25rem 1.25rem; }
+	.ugolini-wholesale-services__stage { top: calc(var(--ugolini-header-bottom, var(--ugolini-header-height)) + 12px); height: calc(100svh - var(--ugolini-header-bottom, var(--ugolini-header-height)) - 24px); min-height: 0; max-height: none; grid-template-rows: auto 330px auto minmax(96px, 1fr); gap: .65rem; padding-block: 2.25rem 1.25rem; }
 	.ugolini-wholesale-services__heading h2 { white-space: normal; }
 	.ugolini-wholesale-services__slides { min-height: 330px; }
 	.ugolini-wholesale-services__slides article { grid-template-columns: 3.5rem 1fr; align-content: center; }
