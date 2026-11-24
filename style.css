@@ -3,7 +3,7 @@ Theme Name: Ugolini Group
 Theme URI: https://ugolinigroup.com/
 Author: Ugolini Group
 Description: A purpose-built block theme for the Ugolini Group SureCart store.
-Version: 6.66.85
+Version: 6.66.86
 Requires at least: 6.6
 Requires PHP: 8.1
 Text Domain: ugolini-group
@@ -414,7 +414,7 @@ textarea {
 	.ugolini-header-actions { grid-column: 3; grid-row: 2; }
 }
 .ugolini-brand .wp-block-site-title { margin: 0; font-family: var(--wp--preset--font-family--display); font-size: 1.75rem; line-height: 1; }
-.ugolini-brand .wp-block-site-title a { width: clamp(180px, 18vw, 260px); height: 82px; display: block; overflow: hidden; background: url('assets/images/ugolini-wordmark.svg') center / contain no-repeat; filter: brightness(0); font-size: 0; text-decoration: none; }
+.ugolini-brand .wp-block-site-title a { width: clamp(180px, 18vw, 260px); height: 82px; display: block; overflow: hidden; background: url('assets/images/ugolini-wordmark.svg?v=6.66.86') center / contain no-repeat; filter: brightness(0); font-size: 0; text-decoration: none; }
 
 .ugolini-header-inner > .wp-block-shortcode { margin: 0; }
 .ugolini-shop-direct,
@@ -2069,7 +2069,6 @@ body > .wp-block-surecart-cart-icon { display: none !important; }
 
 @media (min-width: 768px) and (max-width: 1099px) {
 	.ugolini-header-inner { grid-template-columns: auto minmax(0, 1fr) auto; gap: 0.4rem; }
-	.ugolini-brand .wp-block-site-title a { width: 130px; }
 	.ugolini-primary-navigation .wp-block-navigation__container { gap: clamp(0.35rem, 0.8vw, 0.75rem); }
 	.ugolini-primary-navigation .wp-block-navigation-item__content,
 	.ugolini-mega-menu > summary { font-size: 0.625rem; letter-spacing: 0.06em; }

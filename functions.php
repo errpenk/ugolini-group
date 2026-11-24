@@ -44,6 +44,10 @@ add_filter( 'surecart/product/json_schema', 'ugolini_group_product_schema' );
 add_filter( 'the_content', static fn( $value ) => str_ireplace( 'Ugolini Gourmet', 'Ugolini Group', $value ) );
 add_filter( 'the_title', static fn( $value ) => str_ireplace( 'Ugolini Gourmet', 'Ugolini Group', $value ) );
 add_filter( 'get_the_excerpt', static fn( $value ) => str_ireplace( 'Ugolini Gourmet', 'Ugolini Group', $value ) );
+add_filter( 'render_block', static function ( $html ) {
+	$html = str_ireplace( 'Ugolini Gourmet', 'Ugolini Group', $html );
+	return str_replace( 'ugolini-wordmark.svg"', 'ugolini-wordmark.svg?v=6.66.86"', $html );
+}, 201 );
 add_filter( 'get_term', static function ( $term ) {
 	if ( $term instanceof WP_Term && 'ugolini-gourmet' === $term->slug ) $term->name = 'Ugolini Group';
 	return $term;

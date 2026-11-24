@@ -17,7 +17,6 @@
 
 @media (min-width: 768px) and (max-width: 1099px) {
 	.ugolini-header-inner { grid-template-columns: auto minmax(0, 1fr) auto; gap: 0.4rem; }
-	.ugolini-brand .wp-block-site-title a { width: 130px; }
 	.ugolini-primary-navigation .wp-block-navigation__container { gap: clamp(0.35rem, 0.8vw, 0.75rem); }
 	.ugolini-primary-navigation .wp-block-navigation-item__content,
 	.ugolini-mega-menu > summary { font-size: 0.625rem; letter-spacing: 0.06em; }
