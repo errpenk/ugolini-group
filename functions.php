@@ -9,6 +9,50 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/** Complete SureCart's structured data for the two Ugolini pantry products. */
+function ugolini_group_product_schema( $schema ) {
+	if ( ! is_singular( 'sc_product' ) || ! in_array( get_post_field( 'post_name', get_queried_object_id() ), array( 'crema-funghi-porcini', 'bruschetta-piccantina' ), true ) ) return $schema;
+
+	$brand = array( '@type' => 'Brand', 'name' => 'Ugolini Group' );
+	$policy = array(
+		'@type'                => 'MerchantReturnPolicy',
+		'applicableCountry'    => 'IT',
+		'returnPolicyCategory' => 'https://schema.org/MerchantReturnFiniteReturnWindow',
+		'merchantReturnDays'   => 14,
+		'returnMethod'         => 'https://schema.org/ReturnByMail',
+		'returnFees'           => 'https://schema.org/ReturnShippingFees',
+		'url'                  => home_url( '/spedizioni-e-resi/' ),
+	);
+	$schema['brand'] = $brand;
+	$variants = isset( $schema['hasVariant'] ) ? $schema['hasVariant'] : array( $schema );
+	foreach ( $variants as &$variant ) {
+		$variant['brand'] = $brand;
+		if ( empty( $variant['description'] ) && ! empty( $schema['description'] ) ) $variant['description'] = $schema['description'];
+		if ( ! empty( $variant['offers'] ) ) {
+			foreach ( $variant['offers'] as &$offer ) $offer['hasMerchantReturnPolicy'] = $policy;
+			unset( $offer );
+		}
+	}
+	unset( $variant );
+	if ( isset( $schema['hasVariant'] ) ) $schema['hasVariant'] = $variants;
+	else $schema = $variants[0];
+	return $schema;
+}
+add_filter( 'surecart/product/json_schema', 'ugolini_group_product_schema' );
+
+// Existing WordPress posts and the legacy collection keep their URLs while displaying the current brand.
+add_filter( 'the_content', static fn( $value ) => str_ireplace( 'Ugolini Gourmet', 'Ugolini Group', $value ) );
+add_filter( 'the_title', static fn( $value ) => str_ireplace( 'Ugolini Gourmet', 'Ugolini Group', $value ) );
+add_filter( 'get_the_excerpt', static fn( $value ) => str_ireplace( 'Ugolini Gourmet', 'Ugolini Group', $value ) );
+add_filter( 'get_term', static function ( $term ) {
+	if ( $term instanceof WP_Term && 'ugolini-gourmet' === $term->slug ) $term->name = 'Ugolini Group';
+	return $term;
+} );
+add_filter( 'get_terms', static function ( $terms ) {
+	if ( is_array( $terms ) ) foreach ( $terms as $term ) if ( $term instanceof WP_Term && 'ugolini-gourmet' === $term->slug ) $term->name = 'Ugolini Group';
+	return $terms;
+} );
+
 
 /**
  * Enable editor parity with the front end.
@@ -400,7 +444,7 @@ function ugolini_group_render_post_author_name( $block_content ) {
 		return $block_content;
 	}
 
-	$author = 'ugolini_news' === get_post_type() ? get_post_meta( get_the_ID(), '_ugolini_news_author', true ) : 'Ugolini Gourmet';
+	$author = 'ugolini_news' === get_post_type() ? get_post_meta( get_the_ID(), '_ugolini_news_author', true ) : 'Ugolini Group';
 	return '<div class="wp-block-post-author-name">' . esc_html( $author ?: 'LuxurEat' ) . '</div>';
 }
 add_filter( 'render_block_core/post-author-name', 'ugolini_group_render_post_author_name' );
@@ -424,8 +468,8 @@ function ugolini_group_render_page_hero_image( $html, $block ) {
 		return $html;
 	}
 	$images = array(
-		'shop'      => array( 'collection-heroes/all.jpg', 'Selezione delle specialità Ugolini Gourmet' ),
-		'collections' => array( 'collection-heroes/all.jpg', 'Selezione delle specialità Ugolini Gourmet' ),
+		'shop'      => array( 'collection-heroes/all.jpg', 'Selezione delle specialità Ugolini Group' ),
+		'collections' => array( 'collection-heroes/all.jpg', 'Selezione delle specialità Ugolini Group' ),
 		'caviareat' => array( 'collection-heroes/caviareat.jpg', 'Storione in acqua' ),
 		'luxureat' => array( 'collection-heroes/luxureat.jpg', 'Specialità LuxurEat al tartufo' ),
 		'marmellate' => array( 'collection-heroes/marmellate.jpg', 'Marmellate e frutta' ),
@@ -449,7 +493,7 @@ function ugolini_group_render_page_hero_image( $html, $block ) {
 	}
 	$url = esc_url( add_query_arg( 'v', '6.65.75', get_theme_file_uri( 'assets/images/' . $images[ $slug ][0] ) ) );
 	$alt = esc_attr( $images[ $slug ][1] );
-	return preg_replace_callback(
+	$html = preg_replace_callback(
 		'/<img\b(?=[^>]*\bclass="[^"]*\bwp-block-cover__image-background\b)[^>]*>/',
 		static function ( $match ) use ( $url, $alt ) {
 			$image = preg_replace( '/\bsrc="[^"]*"/', 'src="' . $url . '"', $match[0], 1 );
@@ -459,6 +503,7 @@ function ugolini_group_render_page_hero_image( $html, $block ) {
 		$html,
 		1
 	);
+	return $html;
 }
 add_filter( 'render_block_core/cover', 'ugolini_group_render_page_hero_image', 10, 2 );
 
@@ -474,12 +519,13 @@ add_filter( 'render_block_core/cover', static function ( $html, $block ) {
 	if ( ! is_front_page() || ! str_contains( $block['attrs']['className'] ?? '', 'ugolini-hero' ) ) return $html;
 	$small = esc_url( get_theme_file_uri( 'assets/images/home-hero-ugolini-800.webp' ) );
 	$large = esc_url( get_theme_file_uri( 'assets/images/home-hero-ugolini.webp' ) );
-	return preg_replace_callback( '/<img\b(?=[^>]*\bclass="[^"]*\bwp-block-cover__image-background\b)[^>]*>/', static function ( $match ) use ( $small, $large ) {
+	$html = preg_replace_callback( '/<img\b(?=[^>]*\bclass="[^"]*\bwp-block-cover__image-background\b)[^>]*>/', static function ( $match ) use ( $small, $large ) {
 		$image = preg_replace( '/\s+(?:loading|fetchpriority|decoding|srcset|sizes|width|height)="[^"]*"/', '', $match[0] );
 		$image = preg_replace( '/\s+src="[^"]*"/', ' src="' . $small . '"', $image, 1 );
 		$attrs = ' fetchpriority="high" decoding="async" width="1600" height="659" srcset="' . $small . ' 800w, ' . $large . ' 1600w" sizes="(max-width: 767px) 60vw, 100vw"';
 		return str_replace( '<img ', '<img' . $attrs . ' ', $image );
 	}, $html, 1 );
+	return $html;
 }, 20, 2 );
 
 /** Start the visible hero request before the browser reaches the page body. */
@@ -1239,32 +1285,32 @@ function ugolini_group_collection_editorial_shortcode() {
 		'caviareat'       => array( 'CaviarEat', 'Caviale di storione, caviale vegano e altre specialità della collezione.', 'La gamma comprende caviali di storione, caviale vegano e filetti di acciughe. Consulta la singola scheda per conoscere le caratteristiche di ogni prodotto.' ),
 		'luxureat'        => array( 'LuxurEat', 'Tartufi, caviali, tartare e altre specialità gourmet.', 'La collezione riunisce tartufi, caviali, tartare di pesce, oli, salse e preparazioni al tartufo. Ogni referenza conserva ingredienti, formati e indicazioni propri.' ),
 		'marmellate'       => array(
-			'Marmellate gastronomiche Ugolini Gourmet',
+			'Marmellate gastronomiche Ugolini Group',
 			'Note agrodolci pensate per accompagnare formaggi, salumi e carni.',
 			'La collezione nasce dall’incontro tra ortaggi selezionati e ingredienti della tradizione italiana. La confit di cipolle rosse all’Aceto Balsamico di Modena IGP porta in tavola una consistenza morbida e un profilo agrodolce, ideale per creare contrasti equilibrati negli antipasti e nei secondi piatti.',
 		),
 		'olio-al-tartufo'   => array(
-			'Oli al tartufo Ugolini Gourmet',
+			'Oli al tartufo Ugolini Group',
 			'Il profumo del tartufo bianco e nero incontra l’olio extra vergine di oliva.',
 			'Pensati per completare il piatto al momento del servizio, gli oli al tartufo Ugolini valorizzano pasta, risotti, uova, carne e verdure. Bastano poche gocce per aggiungere una nota aromatica riconoscibile, mantenendo semplice e immediato l’utilizzo in cucina.',
 		),
 		'pesto'             => array(
-			'Pesti Ugolini Gourmet',
+			'Pesti Ugolini Group',
 			'Ricette pronte per condire pasta, bruschette e preparazioni creative.',
 			'Dal Pesto alla Genovese alle versioni rosse, vegane e al tartufo, la collezione riunisce interpretazioni diverse di uno dei condimenti più versatili della cucina italiana. Ogni vaso è pronto all’uso e può diventare condimento, farcitura o base per una ricetta.',
 		),
 		'salse-funghi'      => array(
-			'Salse ai funghi Ugolini Gourmet',
+			'Salse ai funghi Ugolini Group',
 			'Porcini e champignon in creme morbide, pronte per la cucina di ogni giorno.',
 			'Le salse ai funghi sono pensate per risotti, pasta fresca, crostini e ripieni. La consistenza cremosa consente di utilizzarle direttamente oppure di stemperarle con panna o latte, adattandole con facilità alla preparazione desiderata.',
 		),
 		'salse-tartufo'     => array(
-			'Specialità al tartufo Ugolini Gourmet',
+			'Specialità al tartufo Ugolini Group',
 			'Salse, creme e condimenti che portano il carattere del tartufo in tavola.',
 			'La collezione comprende salsa tartufata, creme, pesto, ketchup, sugo al tartufo e tartufo estivo intero. Formati e ricette differenti permettono di completare pasta, riso, uova, carne, verdure e crostini con un ingrediente pronto all’uso e facile da dosare.',
 		),
 		'sughi'             => array(
-			'Sughi Ugolini Gourmet',
+			'Sughi Ugolini Group',
 			'Ricette italiane pronte per una tavola semplice, generosa e ricca di gusto.',
 			'Dal ragù alla Bolognese alla versione vegana, dall’arrabbiata alla bruschetta piccantina e al sugo al tartufo, la collezione offre condimenti pronti per pasta, crostini e piatti conviviali. Una gamma costruita intorno al pomodoro italiano e a ricette immediatamente riconoscibili.',
 		),
@@ -1279,10 +1325,10 @@ function ugolini_group_collection_editorial_shortcode() {
 	$panels = '';
 	$render = static function( $slug, $name, $lead, $details, $image, $active ) {
 		if ( ! $image ) return '';
-		$film = 'olio-al-tartufo' === $slug ? '<p><a href="' . esc_url( home_url( '/galleria/#quattrociocchi-video' ) ) . '">Guarda la raccolta e la produzione dell’olio con Quattrociocchi Americo →</a></p>' : '';
-		return '<section class="ugolini-collection-editorial alignwide" data-collection-editorial="' . esc_attr( $slug ) . '"' . ( $active ? '' : ' hidden' ) . '><div class="ugolini-collection-editorial__media"><img src="' . esc_url( $image ) . '" alt="" loading="lazy" decoding="async"><div class="ugolini-collection-editorial__content"><div class="ugolini-collection-editorial__title"><p class="ugolini-eyebrow">' . esc_html__( 'Collezione Ugolini Gourmet', 'ugolini-group' ) . '</p><h2>' . esc_html( $name ) . '</h2></div><div class="ugolini-collection-editorial__intro"><p>' . esc_html( $lead ) . '</p><details open><summary>' . esc_html__( 'Scopri la collezione', 'ugolini-group' ) . '</summary><p>' . esc_html( $details ) . '</p><p>' . esc_html__( 'Consulta ogni scheda per ingredienti, formati, modalità d’uso e certificazioni disponibili.', 'ugolini-group' ) . '</p></details>' . $film . '</div></div></div></section>';
+		$eyebrow = in_array( $slug, array( 'caviareat', 'truffleat', 'luxureat', 'tin-caviar' ), true ) ? $name : 'Collezione Ugolini Group';
+		return '<section class="ugolini-collection-editorial alignwide" data-collection-editorial="' . esc_attr( $slug ) . '"' . ( $active ? '' : ' hidden' ) . '><div class="ugolini-collection-editorial__media"><img src="' . esc_url( $image ) . '" alt="" loading="lazy" decoding="async"><div class="ugolini-collection-editorial__content"><div class="ugolini-collection-editorial__title"><p class="ugolini-eyebrow">' . esc_html( $eyebrow ) . '</p><h2>' . esc_html( $name ) . '</h2></div><div class="ugolini-collection-editorial__intro"><p>' . esc_html( $lead ) . '</p><details open><summary>' . esc_html__( 'Scopri la collezione', 'ugolini-group' ) . '</summary><p>' . esc_html( $details ) . '</p><p>' . esc_html__( 'Consulta ogni scheda per ingredienti, formati, modalità d’uso e certificazioni disponibili.', 'ugolini-group' ) . '</p></details></div></div></div></section>';
 	};
-	$panels .= $render( '', 'Tutti i prodotti', 'Tutta la gamma Ugolini Gourmet.', 'Esplora le collezioni e consulta la scheda di ciascun prodotto.', $editorial_image( '' ), '' === $current );
+	$panels .= $render( '', 'Tutti i prodotti', 'Tutta la gamma Ugolini Group.', 'Esplora le collezioni e consulta la scheda di ciascun prodotto.', $editorial_image( '' ), '' === $current );
 	foreach ( $terms as $term ) {
 		$description = trim( wp_strip_all_tags( term_description( $term ) ) );
 		$content = $copy[ $term->slug ] ?? array( $term->name, $description, $description );
@@ -1373,10 +1419,14 @@ function ugolini_group_event_url( $event ) {
 	return add_query_arg( 'evento', sanitize_title( $event['id'] ), home_url( '/events/' ) );
 }
 
+function ugolini_group_event_image_url( $event ) {
+	return ! empty( $event['imageUrl'] ) ? esc_url_raw( $event['imageUrl'] ) : get_theme_file_uri( 'assets/images/events/' . $event['image'] );
+}
+
 function ugolini_group_event_detail( $event ) {
-	$image = get_theme_file_uri( 'assets/images/events/' . $event['image'] );
+	$image = ugolini_group_event_image_url( $event );
 	$gallery_link = ! empty( $event['galleryId'] ) ? '<p><a href="' . esc_url( add_query_arg( 'evento', sanitize_title( $event['galleryId'] ), home_url( '/galleria/' ) ) ) . '#ugolini-gallery-title">Guarda i video dell’evento →</a></p>' : '';
-	return '<article class="ugolini-event-detail"><div class="alignwide"><header><p class="ugolini-eyebrow">Eventi · SIAL Paris 2026</p><h1>' . esc_html( $event['detailTitle'] ?? $event['title'] ) . '</h1><p class="ugolini-event-detail__meta">' . esc_html( $event['detailMeta'] ?? ugolini_group_event_date_label( $event['startDate'], $event['endDate'] ) ) . '</p>' . ugolini_group_share_markup( ugolini_group_event_url( $event ), $event['detailTitle'] ?? $event['title'] ) . '</header><figure><img src="' . esc_url( $image ) . '" alt="' . esc_attr( $event['alt'] ?? $event['title'] ) . '"></figure><div class="ugolini-event-detail__body">' . wp_kses_post( $event['detailHtml'] ) . $gallery_link . '</div><a class="ugolini-event-detail__back" href="' . esc_url( home_url( '/events/' ) ) . '">← Tutti gli eventi</a></div></article>';
+	return '<article class="ugolini-event-detail"><div class="alignwide"><header><p class="ugolini-eyebrow">Eventi · ' . esc_html( $event['title'] ) . '</p><h1>' . esc_html( $event['detailTitle'] ?? $event['title'] ) . '</h1><p class="ugolini-event-detail__meta">' . esc_html( $event['detailMeta'] ?? ugolini_group_event_date_label( $event['startDate'], $event['endDate'] ) ) . '</p>' . ugolini_group_share_markup( ugolini_group_event_url( $event ), $event['detailTitle'] ?? $event['title'] ) . '</header><figure><img src="' . esc_url( $image ) . '" alt="' . esc_attr( $event['alt'] ?? $event['title'] ) . '"></figure><div class="ugolini-event-detail__body">' . wp_kses_post( $event['detailHtml'] ) . $gallery_link . '</div><a class="ugolini-event-detail__back" href="' . esc_url( home_url( '/events/' ) ) . '">← Tutti gli eventi</a></div></article>';
 }
 
 add_filter( 'document_title_parts', static function ( $parts ) {
@@ -1397,7 +1447,7 @@ function ugolini_group_event_deck( $events, $heading, $home = false ) {
 	$thumbs = '';
 	foreach ( $events as $index => $event ) {
 		$status = ugolini_group_event_status( $event );
-		$image  = get_theme_file_uri( 'assets/images/events/' . $event['image'] );
+		$image  = ugolini_group_event_image_url( $event );
 		$base   = pathinfo( $event['image'], PATHINFO_FILENAME );
 		$has_sizes = file_exists( get_theme_file_path( 'assets/images/events/' . $base . '-400.jpg' ) ) && file_exists( get_theme_file_path( 'assets/images/events/' . $base . '-1200.jpg' ) );
 		$small  = $has_sizes ? get_theme_file_uri( 'assets/images/events/' . $base . '-400.jpg' ) : $image;
@@ -1423,7 +1473,7 @@ function ugolini_group_event_list( $events, $heading, $id ) {
 	$cards = '';
 	foreach ( $events as $event ) {
 		$status = ugolini_group_event_status( $event );
-		$image  = get_theme_file_uri( 'assets/images/events/' . $event['image'] );
+		$image  = ugolini_group_event_image_url( $event );
 		$link   = ugolini_group_event_url( $event );
 		$cards .= '<article id="' . esc_attr( $event['id'] ) . '" class="ugolini-event-card"><a class="ugolini-event-card__link" href="' . esc_url( $link ) . '"><figure><img src="' . esc_url( $image ) . '" alt="' . esc_attr( $event['alt'] ?? $event['title'] ) . '" loading="lazy"></figure><div><p class="ugolini-eyebrow">' . esc_html( $status_labels[ $status ] ) . '</p><h3>' . esc_html( $event['title'] ) . '</h3><p class="ugolini-event-lead"><strong>' . esc_html( $event['lead'] ) . '</strong></p><p>' . esc_html( $event['description'] ) . '</p><p class="ugolini-event-highlight"><strong>' . esc_html( $event['highlight'] ) . '</strong></p><p class="ugolini-event-brands">' . esc_html( implode( ' · ', $event['brands'] ?? array() ) ) . '</p><div class="ugolini-event-meta"><span>' . ugolini_group_icon( 'map-pin' ) . esc_html( $event['location'] ) . '</span><span>' . ugolini_group_icon( 'calendar' ) . esc_html( ugolini_group_event_date_label( $event['startDate'], $event['endDate'] ) ) . '</span></div><span class="ugolini-event-card__more">Scopri l’evento →</span></div></a></article>';
 	}
@@ -1590,12 +1640,12 @@ function ugolini_group_product_story_shortcode() {
 		'luxureat'        => array( 'LuxurEat', 'Tartufi, caviali, tartare e altre specialità gourmet.', 'Scopri le diverse referenze della collezione e consulta ogni scheda per ingredienti, formati e modalità d’uso.' ),
 		'tin-caviar'      => array( 'Tin Caviar', 'Lattine per il confezionamento del caviale e delle uova di pesce.', 'La collezione comprende confezioni in banda stagnata e alluminio; consulta la scheda per i dettagli della referenza.' ),
 		'truffleat'       => array( 'Truffleat', 'Tartufi, oli, salse, condimenti e accessori.', 'Esplora le specialità al tartufo e gli strumenti della collezione, verificando le caratteristiche di ogni prodotto nella relativa scheda.' ),
-		'pesto'           => array( 'Pesti Ugolini Gourmet', 'Ricette pronte per condire pasta, bruschette e preparazioni creative.', 'Dal pesto alla Genovese alle varianti rosse e vegetali, ogni referenza mantiene ingredienti, formati e indicazioni d’uso propri: consulta la scheda del prodotto prima del servizio.' ),
-		'sughi'           => array( 'Sughi Ugolini Gourmet', 'Ricette italiane pronte per una tavola semplice, generosa e ricca di gusto.', 'La collezione comprende preparazioni al pomodoro, ragù e proposte dal profilo più deciso. Scalda dolcemente e completa il piatto seguendo sempre le indicazioni della singola referenza.' ),
-		'marmellate'      => array( 'Marmellate gastronomiche Ugolini Gourmet', 'Note agrodolci pensate per accompagnare formaggi, salumi e carni.', 'Le diverse combinazioni di frutta e ortaggi aiutano a costruire contrasti equilibrati su taglieri, aperitivi e secondi piatti. Parti da una piccola quantità e regola l’abbinamento al gusto.' ),
-		'olio-al-tartufo' => array( 'Oli al tartufo Ugolini Gourmet', 'Il profumo del tartufo bianco e nero incontra l’olio extra vergine di oliva.', 'Pensati come condimenti di finitura, valorizzano pasta, risotti, uova, carne e verdure. Bastano poche gocce; ingredienti e modalità di conservazione restano quelli riportati in etichetta.' ),
-		'salse-funghi'    => array( 'Salse ai funghi Ugolini Gourmet', 'Porcini e champignon in creme morbide, pronte per la cucina di ogni giorno.', 'Servile su primi piatti, crostini, carne o verdure e regola la consistenza con moderazione. Ogni ricetta conserva il proprio profilo e le informazioni specifiche della confezione.' ),
-		'salse-tartufo'   => array( 'Specialità al tartufo Ugolini Gourmet', 'Salse, creme e condimenti che portano il carattere del tartufo in tavola.', 'La collezione riunisce ricette e formati diversi per completare pasta, riso, uova, carne, verdure e crostini con un prodotto pronto all’uso e facile da dosare.' ),
+		'pesto'           => array( 'Pesti Ugolini Group', 'Ricette pronte per condire pasta, bruschette e preparazioni creative.', 'Dal pesto alla Genovese alle varianti rosse e vegetali, ogni referenza mantiene ingredienti, formati e indicazioni d’uso propri: consulta la scheda del prodotto prima del servizio.' ),
+		'sughi'           => array( 'Sughi Ugolini Group', 'Ricette italiane pronte per una tavola semplice, generosa e ricca di gusto.', 'La collezione comprende preparazioni al pomodoro, ragù e proposte dal profilo più deciso. Scalda dolcemente e completa il piatto seguendo sempre le indicazioni della singola referenza.' ),
+		'marmellate'      => array( 'Marmellate gastronomiche Ugolini Group', 'Note agrodolci pensate per accompagnare formaggi, salumi e carni.', 'Le diverse combinazioni di frutta e ortaggi aiutano a costruire contrasti equilibrati su taglieri, aperitivi e secondi piatti. Parti da una piccola quantità e regola l’abbinamento al gusto.' ),
+		'olio-al-tartufo' => array( 'Oli al tartufo Ugolini Group', 'Il profumo del tartufo bianco e nero incontra l’olio extra vergine di oliva.', 'Pensati come condimenti di finitura, valorizzano pasta, risotti, uova, carne e verdure. Bastano poche gocce; ingredienti e modalità di conservazione restano quelli riportati in etichetta.' ),
+		'salse-funghi'    => array( 'Salse ai funghi Ugolini Group', 'Porcini e champignon in creme morbide, pronte per la cucina di ogni giorno.', 'Servile su primi piatti, crostini, carne o verdure e regola la consistenza con moderazione. Ogni ricetta conserva il proprio profilo e le informazioni specifiche della confezione.' ),
+		'salse-tartufo'   => array( 'Specialità al tartufo Ugolini Group', 'Salse, creme e condimenti che portano il carattere del tartufo in tavola.', 'La collezione riunisce ricette e formati diversi per completare pasta, riso, uova, carne, verdure e crostini con un prodotto pronto all’uso e facile da dosare.' ),
 	);
 	$content = $copy[ $slug ] ?? $copy['salse-tartufo'];
 	$image = get_the_post_thumbnail_url( get_the_ID(), 'full' );
@@ -1754,10 +1804,10 @@ function ugolini_group_product_editorial() {
 			'luxureat'        => array( 'L’universo LuxurEat', 'La gamma riunisce tartufi, caviali, tartare e altre specialità gourmet. Comprende inoltre oli, salse e preparazioni al tartufo: ingredienti e formati cambiano da una referenza all’altra.', 'La gamma comprende anche oli, salse e preparazioni al tartufo, con referenze diverse per ingredienti e formato.' ),
 			'marmellate'      => array( 'Marmellate gastronomiche', 'La confit di cipolle rosse all’Aceto Balsamico di Modena IGP ha una consistenza morbida e un profilo agrodolce. È proposta come accompagnamento per formaggi, salumi e carni.', 'La confit di cipolle rosse all’Aceto Balsamico di Modena IGP unisce consistenza morbida e profilo agrodolce.' ),
 			'olio-al-tartufo' => array( 'Oli al tartufo', 'Due referenze a base di olio extra vergine di oliva portano il profumo del tartufo bianco o nero nel piatto. Sono pensate come condimento per crostini, ripieni, antipasti, primi e secondi.', 'Due referenze pensate come condimento per crostini, ripieni, antipasti, primi e secondi piatti.' ),
-			'pesto'           => array( 'Pesti Ugolini Gourmet', 'La collezione comprende il Pesto alla Genovese, le varianti rosse, il pesto vegano e quello al tartufo. Le diverse ricette possono accompagnare pasta, bruschette e altre preparazioni.', 'Le diverse ricette della collezione possono accompagnare pasta, bruschette e altre preparazioni.' ),
+			'pesto'           => array( 'Pesti Ugolini Group', 'La collezione comprende il Pesto alla Genovese, le varianti rosse, il pesto vegano e quello al tartufo. Le diverse ricette possono accompagnare pasta, bruschette e altre preparazioni.', 'Le diverse ricette della collezione possono accompagnare pasta, bruschette e altre preparazioni.' ),
 			'salse-funghi'    => array( 'Salse ai funghi', 'Le creme ai porcini e champignon riuniscono due referenze con caratteri differenti. La collezione è pensata per accompagnare risotti, pasta fresca, crostini e ripieni; ingredienti e formati sono indicati in ogni scheda.', 'Le salse della collezione sono pensate per risotti, pasta fresca, crostini e ripieni.' ),
 			'salse-tartufo'   => array( 'Specialità al tartufo', 'Salse e creme al tartufo nero, bianco e bianchetto affiancano pesto, ketchup e sugo al tartufo, oltre al tartufo estivo intero. La collezione comprende ricette e formati diversi per completare i piatti.', 'La collezione comprende salsa tartufata, creme, pesto, ketchup, sugo al tartufo e tartufo estivo intero.' ),
-			'sughi'           => array( 'Sughi Ugolini Gourmet', 'La gamma comprende il ragù alla Bolognese, proposte vegane e piccanti, condimenti al pomodoro e sughi al tartufo. Sono ricette pronte per accompagnare pasta e altri piatti conviviali.', 'Dal ragù alla Bolognese alle proposte vegane e piccanti, la gamma comprende condimenti al pomodoro e sughi al tartufo.' ),
+			'sughi'           => array( 'Sughi Ugolini Group', 'La gamma comprende il ragù alla Bolognese, proposte vegane e piccanti, condimenti al pomodoro e sughi al tartufo. Sono ricette pronte per accompagnare pasta e altri piatti conviviali.', 'Dal ragù alla Bolognese alle proposte vegane e piccanti, la gamma comprende condimenti al pomodoro e sughi al tartufo.' ),
 			'tin-caviar'      => array( 'Tin Caviar', 'La collezione presenta lattine per il confezionamento del caviale e delle uova di pesce. La referenza comprende formati in banda stagnata e alluminio; i dettagli sono riportati nella scheda prodotto.', 'La referenza della collezione comprende lattine in banda stagnata e alluminio.' ),
 			'truffleat'       => array( 'Le specialità Truffleat', 'La gamma riunisce tartufi, oli, salse e condimenti, accanto ad accessori dedicati. Comprende anche pasta, riso e strumenti per il taglio del tartufo: ogni referenza ha caratteristiche proprie.', 'La gamma comprende anche pasta, riso e strumenti per il taglio del tartufo.' ),
 		);
@@ -1768,17 +1818,28 @@ function ugolini_group_product_editorial() {
 			'marmellate' => array( '192687642_m.jpg', '181382010_m.jpg' ),
 			'olio-al-tartufo' => array( '98843234_m.jpg', '178273414_m.jpg' ),
 			'salse-funghi' => array( '74609046_m.jpg', '229065274_m.jpg' ),
-			'tin-caviar' => array( '211109345_m.jpg', '203333167_m.jpg' ),
+			'tin-caviar' => array( 'https://ugolinigroup.com/wp-content/uploads/2026/10/323962191_m.jpg', 'https://ugolinigroup.com/wp-content/uploads/2026/10/287514122_m-scaled.jpg' ),
 		);
-		if ( ! ugolini_group_product_editorial_media( $post_id )['photos'] && isset( $series_images[ $slug ] ) ) {
-			$images = array_map( static fn( $file ) => get_theme_file_uri( 'assets/images/series-editorial/' . $file ), $series_images[ $slug ] );
+		if ( 'tin-caviar' === $slug || ( ! ugolini_group_product_editorial_media( $post_id )['photos'] && isset( $series_images[ $slug ] ) ) ) {
+			$images = array_map( static fn( $file ) => str_starts_with( $file, 'https://' ) ? $file : get_theme_file_uri( 'assets/images/series-editorial/' . $file ), $series_images[ $slug ] );
 		}
-		if ( 'caviale-vegano' === get_post_field( 'post_name', $post_id ) ) $images[1] = content_url( 'uploads/2026/10/caviale-vegano-editorial.jpg' );
+		if ( 'caviale-vegano' === get_post_field( 'post_name', $post_id ) ) {
+			$images[1] = content_url( 'uploads/2026/10/caviale-vegano-editorial.jpg' );
+		}
 		$product_slug = get_post_field( 'post_name', $post_id );
-		if ( in_array( $product_slug, array( 'cioccolatini-al-tartufo-nero-e-bianco-50-gr', 'cioccolatini-desire-al-tartufo-e-peperoncino-50-gr' ), true ) ) {
-			$images = array( content_url( 'uploads/2026/10/243445520_m.jpg' ), content_url( 'uploads/2026/10/64106785_m.jpg' ) );
+		$chocolate_products = array( 'cioccolatini-al-tartufo-nero-e-bianco-50-gr', 'cioccolatini-desire-al-tartufo-e-peperoncino-50-gr' );
+		if ( in_array( $product_slug, $chocolate_products, true ) ) {
+			$images = array(
+				content_url( 'uploads/2026/10/243445520_m.jpg' ),
+				content_url( 'uploads/2026/10/64106785_m.jpg' ),
+			);
 		} else {
-			$replacements = array( 'burger.jpg' => '255782744_m.jpg', 'seaweed1.jpg' => 'serezniy260798891-scaled.jpg', 'truffle.jpg' => '191242956_m.jpg', 'caviar.jpg' => 'serezniy260798891-scaled.jpg' );
+			$replacements = array(
+				'burger.jpg' => '255782744_m.jpg',
+				'seaweed1.jpg' => 'serezniy260798891-scaled.jpg',
+				'truffle.jpg' => '191242956_m.jpg',
+				'caviar.jpg' => 'serezniy260798891-scaled.jpg',
+			);
 			if ( 'luxureat' === $slug && count( $images ) >= 2 && str_ends_with( $images[0], '/caviar.jpg' ) && str_ends_with( $images[1], '/caviar2.jpg' ) ) {
 				$images = array( content_url( 'uploads/2026/10/291928080_m.jpg' ), content_url( 'uploads/2026/10/314506786_m.jpg' ) );
 			} else {
@@ -1830,7 +1891,11 @@ function ugolini_group_product_films() {
 			$base = 'assets/videos/series-pairs/' . $collection->slug . '/' . sprintf( '%02d', $index + 1 );
 			$alt = $collection->name . ' ' . ( $index + 1 );
 		}
-		$html .= '<video autoplay muted loop playsinline preload="none" poster="' . esc_url( get_theme_file_uri( $base . '.jpg' ) ) . '" aria-label="' . esc_attr( $alt ) . '" src="' . esc_url( get_theme_file_uri( $base . '.mp4' ) ) . '"></video>';
+		$replace = 'assets/videos/products/seaweed1' === $base;
+		$poster = $replace ? content_url( 'uploads/2026/10/ocean-all-products.jpg' ) : get_theme_file_uri( $base . '.jpg' );
+		$video = $replace ? content_url( 'uploads/2026/10/ocean-all-products.mp4' ) : get_theme_file_uri( $base . '.mp4' );
+		if ( $replace ) $alt = 'Riprese del mare';
+		$html .= '<video autoplay muted loop playsinline preload="none" poster="' . esc_url( $poster ) . '" aria-label="' . esc_attr( $alt ) . '" src="' . esc_url( $video ) . '"></video>';
 	}
 	return $html . '</div></section>';
 }
@@ -1862,7 +1927,7 @@ function ugolini_group_caviareat_editorial_after_details( $html, $block ) {
 		$moments = array(
 			array( 'Le origini', 'Renato e Renata', 'Nonno Renato avvia l’attività agricola di famiglia; sua figlia Renata porta personalmente il raccolto al mercato. Questo rapporto diretto con il cibo fresco e naturale diventa parte della memoria di Roberto.', get_theme_file_uri( 'assets/images/about/timeline-1.jpg' ) ),
 			array( 'L’esperienza', 'Dalla tavola alla cucina', 'Roberto cresce in questa cultura familiare e lavora per oltre vent’anni nella ristorazione. Il confronto con chef stellati gli permette di tradurre le esigenze quotidiane di cucina in criteri di qualità e funzionalità.', get_theme_file_uri( 'assets/images/about/timeline-2.jpg' ) ),
-			array( 'Il progetto', 'Le prime salse gourmet', 'Dalla collaborazione con lo chef Nino Cannavale nasce la prima linea di salse gourmet e al tartufo. Ugolini Gourmet unisce così la memoria gastronomica di famiglia a prodotti pensati per la cucina professionale e la tavola.', get_theme_file_uri( 'assets/images/about/timeline-3.jpg' ) ),
+			array( 'Il progetto', 'Le prime salse gourmet', 'Dalla collaborazione con lo chef Nino Cannavale nasce la prima linea di salse gourmet e al tartufo. Ugolini Group unisce così la memoria gastronomica di famiglia a prodotti pensati per la cucina professionale e la tavola.', get_theme_file_uri( 'assets/images/about/timeline-3.jpg' ) ),
 			array( 'La gamma oggi', 'Una scelta più ampia', 'La linea si sviluppa per professionisti, distribuzione e famiglie. Alle salse si aggiungono proposte vegane e biologiche; eventuali certificazioni Halal o Kosher restano specifiche delle singole referenze.', get_theme_file_uri( 'assets/images/about/timeline-4.png' ) ),
 		);
 		$articles = '';
@@ -1979,20 +2044,20 @@ add_action( 'wp_head', static function() {
 	if ( is_page() && ! is_page( ugolini_group_public_page_slugs() ) ) return;
 
 	$descriptions = array(
-		'home'                 => 'Scopri Ugolini Gourmet: salse, tartufi, caviale e specialità italiane selezionate per portare gusto e qualità in tavola.',
-		'shop'                 => 'Esplora le collezioni Ugolini Gourmet: salse, sughi, pesti, tartufi, caviale e altre specialità italiane.',
-		'chi-siamo'            => 'Conosci la storia, la famiglia e la passione per la gastronomia italiana che guidano Ugolini Gourmet.',
-		'galleria'             => 'Esplora la galleria aziendale Ugolini Gourmet: foto e video dagli eventi, dalle fiere internazionali e dal mondo dei nostri brand.',
-		'events'               => 'Scopri gli eventi e le novità di Ugolini Gourmet, LuxurEat, Truffleat e Caviareat.',
-		'b2b'                  => 'Scopri le specialità Ugolini Gourmet per professionisti, distributori e partner commerciali.',
-		'blog'                 => 'Leggi gli articoli Ugolini Gourmet su ingredienti, cucina, ricette e specialità italiane.',
-		'faq'                  => 'Trova risposte alle domande frequenti su prodotti, ordini, spedizioni e assistenza Ugolini Gourmet.',
-		'contatti'             => 'Contatta Ugolini Gourmet per informazioni sui prodotti, ordini e collaborazioni commerciali.',
-		'supporto'             => 'Trova informazioni e assistenza per acquisti, spedizioni e prodotti Ugolini Gourmet.',
+		'home'                 => 'Scopri Ugolini Group: salse, tartufi, caviale e specialità italiane selezionate per portare gusto e qualità in tavola.',
+		'shop'                 => 'Esplora le collezioni Ugolini Group: salse, sughi, pesti, tartufi, caviale e altre specialità italiane.',
+		'chi-siamo'            => 'Conosci la storia, la famiglia e la passione per la gastronomia italiana che guidano Ugolini Group.',
+		'galleria'             => 'Esplora la galleria aziendale Ugolini Group: foto e video dagli eventi, dalle fiere internazionali e dal mondo dei nostri brand.',
+		'events'               => 'Scopri gli eventi e le novità di Ugolini Group, LuxurEat, Truffleat e Caviareat.',
+		'b2b'                  => 'Scopri le specialità Ugolini Group per professionisti, distributori e partner commerciali.',
+		'blog'                 => 'Leggi gli articoli Ugolini Group su ingredienti, cucina, ricette e specialità italiane.',
+		'faq'                  => 'Trova risposte alle domande frequenti su prodotti, ordini, spedizioni e assistenza Ugolini Group.',
+		'contatti'             => 'Contatta Ugolini Group per informazioni sui prodotti, ordini e collaborazioni commerciali.',
+		'supporto'             => 'Trova informazioni e assistenza per acquisti, spedizioni e prodotti Ugolini Group.',
 		'privacy-policy'       => 'Leggi l’informativa sulla privacy e sul trattamento dei dati personali di Ugolini Group.',
 		'cookie-policy'        => 'Scopri come Ugolini Group utilizza i cookie e gestisce le tue preferenze.',
 		'termini-e-condizioni' => 'Consulta i termini e le condizioni di vendita e utilizzo del sito Ugolini Group.',
-		'spedizioni-e-resi'     => 'Informazioni su spedizioni, consegne, recesso, resi e rimborsi per gli acquisti Ugolini Gourmet.',
+		'spedizioni-e-resi'     => 'Informazioni su spedizioni, consegne, recesso, resi e rimborsi per gli acquisti Ugolini Group.',
 	);
 	$image = get_theme_file_uri( 'assets/images/home-hero-ugolini.jpeg' );
 	$url = '';
@@ -2007,7 +2072,7 @@ add_action( 'wp_head', static function() {
 		if ( is_page( 'events' ) && ( $event = ugolini_group_requested_event() ) ) {
 			$url = ugolini_group_event_url( $event );
 			$description = $event['description'];
-			$image = get_theme_file_uri( 'assets/images/events/' . $event['image'] );
+			$image = ugolini_group_event_image_url( $event );
 		} else {
 			$heroes = array( 'chi-siamo' => 'about/about-hero.jpg', 'galleria' => 'page-heroes/gallery-hero-caviar.jpg', 'events' => 'page-heroes/events.jpg', 'b2b' => 'page-heroes/b2b.jpg', 'blog' => 'page-heroes/blog.jpg', 'faq' => 'page-heroes/faq.jpg', 'contatti' => 'page-heroes/contact.jpg', 'supporto' => 'support/hero.jpg', 'shop' => 'collection-heroes/all.jpg' );
 			if ( isset( $heroes[ $page->post_name ] ) ) $image = get_theme_file_uri( 'assets/images/' . $heroes[ $page->post_name ] );
@@ -2023,7 +2088,7 @@ add_action( 'wp_head', static function() {
 		$url = get_term_link( $term );
 		if ( is_wp_error( $url ) ) return;
 		$description = term_description( $term );
-		if ( ! $description ) $description = 'Scopri ' . $term->name . ' e le specialità selezionate da Ugolini Gourmet.';
+		if ( ! $description ) $description = 'Scopri ' . $term->name . ' e le specialità selezionate da Ugolini Group.';
 		if ( is_tax( 'sc_collection' ) ) {
 			$path = 'assets/images/collection-heroes/' . $term->slug . '.jpg';
 			if ( file_exists( get_theme_file_path( $path ) ) ) $image = get_theme_file_uri( $path );
@@ -2113,6 +2178,9 @@ function ugolini_group_cooking_suggestions_shortcode() {
 		: ugolini_group_editorial_images( $term, 3 );
 	if ( in_array( $product_slug, array( 'caviale-vegano', 'acciughe-sott-olio-100-gr' ), true ) ) {
 		$images = array_slice( ugolini_group_product_editorial_media()['guide'], 0, 3 );
+	}
+	if ( 'caviale-vegano' === $product_slug ) {
+		$images = array_map( static fn( $file ) => content_url( 'uploads/2026/10/' . $file ), array( 'caviale-vegano-crostini.jpg', 'caviale-vegano-insalata.jpg', 'caviale-vegano-assaggi.jpg' ) );
 	}
 	if ( ! $images ) return '';
 	$html = '';
@@ -2298,6 +2366,7 @@ function ugolini_group_live_search( WP_REST_Request $request ) {
 			'post_type'           => array( 'sc_product', 'post', 'page' ),
 			'post_status'         => 'publish',
 			's'                   => $search,
+			'ugolini_title_ingredients_search' => true,
 			'posts_per_page'      => 6,
 			'ignore_sticky_posts' => true,
 			'no_found_rows'       => true,
@@ -2315,6 +2384,34 @@ function ugolini_group_live_search( WP_REST_Request $request ) {
 
 	return rest_ensure_response( $items );
 }
+
+/** Limit public search to titles, plus the Ingredienti section on products. */
+function ugolini_group_title_ingredients_search( $search, $query ) {
+	if ( ! $query->get( 'ugolini_title_ingredients_search' ) || ! $query->is_search() && ! $query->get( 's' ) ) {
+		return $search;
+	}
+
+	global $wpdb;
+	$terms = preg_split( '/\s+/', trim( (string) $query->get( 's' ) ) );
+	$terms = array_values( array_filter( array_map( 'trim', $terms ) ) );
+	if ( ! $terms ) {
+		return $search;
+	}
+
+	$clauses = array();
+	foreach ( $terms as $term ) {
+		$like = '%' . $wpdb->esc_like( $term ) . '%';
+		$ingredient_like = '%' . $wpdb->esc_like( '<summary>Ingredienti</summary>' ) . '%' . $wpdb->esc_like( '<p>' ) . $wpdb->esc_like( $term ) . '%';
+		$clauses[] = $wpdb->prepare(
+			"({$wpdb->posts}.post_title LIKE %s OR ({$wpdb->posts}.post_type = 'sc_product' AND {$wpdb->posts}.post_content LIKE %s))",
+			$like,
+			$ingredient_like
+		);
+	}
+
+	return ' AND ' . implode( ' AND ', $clauses );
+}
+add_filter( 'posts_search', 'ugolini_group_title_ingredients_search', 10, 2 );
 
 /** Register the public, read-only endpoint used by the header search. */
 function ugolini_group_register_live_search() {
@@ -2342,6 +2439,7 @@ add_shortcode( 'ugolini_search_overlay', 'ugolini_group_search_overlay_shortcode
 function ugolini_group_global_search( $query ) {
 	if ( ! is_admin() && $query->is_main_query() && $query->is_search() ) {
 		$query->set( 'post_type', array( 'post', 'page', 'sc_product' ) );
+		$query->set( 'ugolini_title_ingredients_search', true );
 	}
 }
 add_action( 'pre_get_posts', 'ugolini_group_global_search' );
@@ -2424,6 +2522,10 @@ add_filter( 'render_block_surecart/product-quantity', function ( $html ) {
 	return ugolini_group_is_amazon_beluga_page() ? '' : $html;
 }, 10 );
 
+add_filter( 'render_block_surecart/product-selected-price-amount', function ( $html ) {
+	return $html;
+}, 10 );
+
 add_filter( 'render_block_surecart/product-page', function ( $html ) {
 	if ( ! ugolini_group_is_amazon_beluga_page() ) return $html;
 	return str_replace( 'I pagamenti sono gestiti tramite SureCart.', 'L’acquisto avviene tramite il collegamento indicato.', $html );
@@ -2465,3 +2567,11 @@ add_action( 'wp_enqueue_scripts', function () {
 		"wp.hooks.addFilter('surecart_stripe_payment_element_payment_method_order', 'ugolini-group/payment-method-order', function () { return ['card', 'satispay', 'revolut_pay', 'alipay']; });"
 	);
 } );
+
+/** Refresh the interaction script in browsers whenever its content changes. */
+add_filter( 'script_loader_src', function ( $src, $handle ) {
+	if ( 'ugolini-group-interactions' !== $handle ) {
+		return $src;
+	}
+	return add_query_arg( 'ver', (string) filemtime( get_theme_file_path( 'assets/js/theme.js' ) ), $src );
+}, 10, 2 );

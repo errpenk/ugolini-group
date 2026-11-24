@@ -68,7 +68,7 @@ if (shop) {
 			const button = all.cloneNode(true);
 			button.classList.remove('is-active');
 			button.dataset.shopCollection = term.slug;
-			button.href = `/collections/${encodeURIComponent(term.slug)}/`;
+			button.href = term.slug === 'ugolini-gourmet' ? '/ugolini-gourmet/' : `/collections/${encodeURIComponent(term.slug)}/`;
 			button.textContent = term.name;
 			rows[['caviareat', 'luxureat', 'tin-caviar', 'truffleat', 'ugolini-gourmet'].includes(term.slug) ? 0 : 1].querySelector('.preview-shop-tab-links').append(button);
 		}
@@ -94,7 +94,8 @@ if (shop) {
 	};
 
 	const heroImages = {
-		'': ['all.jpg', 'Selezione delle specialità Ugolini Gourmet'],
+		'ugolini-gourmet': ['/wp-content/plugins/ugolini-homepage/assets/ugolini-gourmet.jpg', 'Pasta al sugo Ugolini Group'],
+		'': ['all.jpg', 'Selezione delle specialità Ugolini Group'],
 		caviareat: ['caviareat.jpg', 'Storione in acqua'],
 		luxureat: ['luxureat.jpg', 'Specialità LuxurEat al tartufo'],
 		marmellate: ['marmellate.jpg', 'Marmellate e frutta'],
@@ -106,12 +107,13 @@ if (shop) {
 		'tin-caviar': ['tin-caviar.jpg', 'Caviale servito su crostini'],
 		truffleat: ['truffleat.jpg', 'Gamma Truffleat'],
 	};
+	Object.assign(heroImages, JSON.parse(shop.dataset.brandHeroes || '{}'));
 	const cover = document.querySelector('.ugolini-page-hero .wp-block-cover__image-background');
-	const coverBase = cover?.src.match(/^(.*\/collection-heroes\/)[^/]+(?:\?.*)?$/)?.[1];
+	const coverBase = '/wp-content/themes/ugolini-group/assets/images/collection-heroes/';
 	const syncHero = slug => {
 		const [file, alt] = heroImages[slug] || heroImages[''];
 		if (!cover || !coverBase) return;
-		const src = `${coverBase}${file}?v=6.65.75`;
+		const src = /^(?:https?:)?\//.test(file) ? file : `${coverBase}${file}?v=6.65.75`;
 		if (cover.src !== src) cover.src = src;
 		cover.alt = alt;
 		cover.removeAttribute('srcset');
@@ -135,10 +137,10 @@ if (shop) {
 		}
 	};
 	const isPreview = location.pathname.endsWith('/shop.html');
-	const routeCollection = () => decodeURIComponent(isPreview ? location.hash.slice(1) : location.pathname.match(/\/collections\/([^/]+)/)?.[1] || '');
+	const routeCollection = () => decodeURIComponent(isPreview ? location.hash.slice(1) : (location.pathname === '/ugolini-gourmet/' ? 'ugolini-gourmet' : location.pathname.match(/\/collections\/([^/]+)/)?.[1] || ''));
 	const legacyHash = decodeURIComponent(location.hash.slice(1));
 	if (!isPreview && legacyHash && shop.querySelector(`[data-shop-collection="${CSS.escape(legacyHash)}"]`)) {
-		location.replace(`/collections/${encodeURIComponent(legacyHash)}/`);
+		location.replace(legacyHash === 'ugolini-gourmet' ? '/ugolini-gourmet/' : `/collections/${encodeURIComponent(legacyHash)}/`);
 	}
 
 	shop.querySelector('.preview-shop-tabs').addEventListener('click', event => {
@@ -146,7 +148,7 @@ if (shop) {
 		if (!button || event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || (button.tagName === 'A' && button.target === '_blank')) return;
 		event.preventDefault();
 		const slug = button.dataset.shopCollection;
-		history.pushState(null, '', isPreview ? (slug ? `#${encodeURIComponent(slug)}` : 'shop.html') : (slug ? `/collections/${encodeURIComponent(slug)}/` : '/products/'));
+		history.pushState(null, '', isPreview ? (slug ? `#${encodeURIComponent(slug)}` : 'shop.html') : (slug === 'ugolini-gourmet' ? '/ugolini-gourmet/' : slug ? `/collections/${encodeURIComponent(slug)}/` : '/products/'));
 		selectCollection(slug);
 	});
 	addEventListener('popstate', () => selectCollection(routeCollection()));

@@ -48,7 +48,7 @@
 }
 
 :root {
-	--ugolini-header-height: 76px;
+	--ugolini-header-height: 138px;
 	--ugolini-announcement-height: 32px;
 	--ugolini-control-height: 48px;
 	--ugolini-container: 1392px;
@@ -78,12 +78,15 @@ html {
 .ugolini-scroll-top.is-visible { opacity: 1; pointer-events: auto; transform: none; }
 .ugolini-scroll-top.is-visible:hover { background: var(--wp--preset--color--text); color: var(--wp--preset--color--white); transform: scale(1.06); }
 .ugolini-scroll-top svg { width: 21px; height: 21px; }
-@media (min-width: 768px) {
-	body:has(.ugolini-product-page) .ugolini-scroll-top { translate: none; }
-}
 body #gt_float_wrapper { bottom: max(1rem, var(--ugolini-gutter)) !important; left: max(1rem, var(--ugolini-gutter)) !important; }
 body #gt_float_wrapper .gt_float_switcher { overflow: hidden; border: 1px solid #171714; border-radius: 6px; background: rgb(247 243 238 / 94%); box-shadow: none; }
 body #gt_float_wrapper .gt-selected { background: transparent; }
+body #gt_float_wrapper .gt_float_switcher,
+body #gt_float_wrapper .gt_options { transition: none !important; }
+body #gt_float_wrapper .gt_options { transform: none !important; opacity: 1 !important; }
+@media (min-width: 768px) {
+	body:has(.ugolini-product-page) .ugolini-scroll-top { bottom: var(--ugolini-product-controls-bottom, max(1rem, var(--ugolini-gutter))); translate: none; }
+}
 
 body {
 	overflow-x: clip;

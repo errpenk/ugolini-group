@@ -7,7 +7,7 @@
  */
 ?>
 <!-- wp:html -->
-<section class="ugolini-contact-commercial-showcase" data-testimonials aria-label="Richieste commerciali Ugolini Gourmet">
+<section class="ugolini-contact-commercial-showcase" data-testimonials aria-label="Richieste commerciali Ugolini Group">
 	<div class="ugolini-contact-commercial-showcase__rail" data-testimonials-rail>
 		<article><span>01</span><h3>Retail e negozi</h3><p>Presenta la tua attività, il paese e le linee di interesse: ti aiuteremo a individuare specialità, formati e materiali adatti alla vendita.</p></article>
 		<article><span>02</span><h3>Ristorazione</h3><p>Raccontaci il tipo di cucina e le esigenze del servizio. La gamma comprende condimenti pronti all’uso pensati per sostenere qualità e continuità.</p></article>

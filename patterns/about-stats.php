@@ -6,7 +6,7 @@
  */
 ?>
 <!-- wp:html -->
-<section class="ugolini-about-stats" data-counter-section aria-label="Ugolini Gourmet in numeri">
+<section class="ugolini-about-stats" data-counter-section aria-label="Ugolini Group in numeri">
 	<div class="ugolini-about-stats__grid">
 		<article><strong data-counter="20" data-suffix=" Anni">0</strong><span>di esperienza</span></article>
 		<article><strong data-counter="100">0</strong><span>Clienti soddisfatti</span></article>

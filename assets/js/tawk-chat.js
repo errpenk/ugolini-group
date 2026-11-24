@@ -27,7 +27,7 @@
 			</div>
 			<div class="ugolini-chat__actions">
 				<button type="button" data-chat-topic="Prodotti e ordini">${copy.question}</button>
-				<button type="button" data-chat-topic="Ugolini Gourmet">${copy.discover}</button>
+				<button type="button" data-chat-topic="Ugolini Group">${copy.discover}</button>
 			</div>
 		</section>` : ''}
 		<div class="ugolini-chat__status" role="status" hidden>

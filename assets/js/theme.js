@@ -286,6 +286,59 @@ for (const deal of document.querySelectorAll('[data-deal-rail]')) {
 })();
 
 const productFactsViewport = matchMedia('(max-width: 767px)');
+// Edit the visible product facts without changing their saved WordPress content.
+(() => {
+	const slug = location.pathname.split('/').filter(Boolean).at(-1);
+	const descriptions = {
+		'ragu-vegano': 'Il ragù vegano con soia è un’alternativa vegana e vegetariana al classico ragù alla bolognese. Abbiamo creato questa ricetta per chi non mangia carne, per offrire un prodotto gustoso che non ha nulla da invidiare al ragù tradizionale. Lo prepariamo con pura passata di pomodoro italiano, verdure e soia. Sarà quasi impossibile distinguerlo dalla ricetta originale. Puoi così preparare una buona pasta per tutti i tuoi amici, vegani e non vegani. Provare per credere!',
+		'salmon-tartare': 'Tartare di salmone LuxurEat, preparata con salmone selezionato per antipasti raffinati e piatti di mare.',
+		'precious-black-truffle': 'Tartufo nero pregiato (Tuber melanosporum), apprezzato per il suo aroma intenso e raffinato.',
+		'white-truffle-tuber-magnatum': 'Tartufo bianco (Tuber magnatum Pico), apprezzato per il suo profumo unico e inconfondibile.',
+		'bianchetto-truffle-tuber-albidum-pico': 'Tartufo bianchetto (Tuber borchii Vitt.), noto per il suo aroma delicato e gradevole.',
+		'summer-black-truffle-tuber-aestivum': 'Tartufo nero estivo (Tuber aestivum Vitt.), versatile e dal sapore delicato.',
+		'whole-summer-truffle': 'Tartufo estivo intero, conservato con cura per mantenerne l’aroma naturale.',
+		'summer-truffle-slices': 'Fette di tartufo estivo pronte per preparazioni gourmet e per completare i piatti.',
+	};
+	for (const detail of document.querySelectorAll('.ugolini-product-information .ugolini-product-fact')) {
+		const label = detail.querySelector('summary')?.textContent.trim().toLowerCase();
+		const body = detail.querySelector('.ugolini-product-fact__body p, p');
+		if (!body) continue;
+		let copy = label === 'descrizione' && descriptions[slug] ? descriptions[slug] : body.innerText;
+		copy = copy.replace(/\r\n?/g, '\n').replace(/\u00a0/g, ' ')
+			.replace(/[ \t]+\n/g, '\n').replace(/\n[ \t]+/g, '\n')
+			.replace(/([.!?])(?=[A-ZÀ-ÖØ-Þ][a-zà-öø-ÿ])/g, '$1 ')
+			.replace(/(?<=[a-zà-öø-ÿ)])(?=(?:Tipologia|Contenuto di tartufo|Consistenza|Colore|Odore|Sapore|Scadenza|Confezionamento):)/g, '\n')
+			.replace(/\s*✔\s*/g, '\n• ')
+			.replace(/;[ \t]+(?=[A-ZÀ-ÖØ-Þ])/g, ';\n')
+			.replace(/\s*\|\s*/g, ' · ')
+			.replace(/\n{3,}/g, '\n\n').trim();
+		if (slug === 'tartare-di-ricciola' && label === 'descrizione') copy = copy.replace(/\n?Ogni lotto viene\s*$/, '');
+		if (copy !== body.innerText.trim()) body.textContent = copy;
+	}
+})();
+
+// Some imported facts contain multiple paragraphs; review each remaining one.
+for (const detail of document.querySelectorAll('.ugolini-product-information .ugolini-product-fact')) {
+	for (const body of [...detail.querySelectorAll('p')].slice(1)) {
+		const copy = body.innerText.replace(/\u00a0/g, ' ')
+			.replace(/È pensata per chi desidera\s+Piatti gourmet\b/g, 'È pensata per chi desidera piatti gourmet')
+			.replace(/([.!?])(?=[A-ZÀ-ÖØ-Þ][a-zà-öø-ÿ])/g, '$1 ')
+			.replace(/\s*✔\s*/g, '\n• ')
+			.replace(/;[ \t]+(?=[A-ZÀ-ÖØ-Þ])/g, ';\n')
+			.replace(/\s*\|\s*/g, ' · ')
+			.replace(/\n{3,}/g, '\n\n').trim();
+		if (copy !== body.innerText.trim()) body.textContent = copy;
+	}
+}
+
+if (location.pathname.includes('/products/salsa-detox-al-tartufo-nero/')) {
+	const parts = [...document.querySelectorAll('.ugolini-product-information .ugolini-product-fact:first-child p')];
+	const index = parts.findIndex(part => part.textContent.trim() === 'È pensata per chi desidera');
+	if (index >= 0 && parts[index + 1]?.textContent.trim() === 'Piatti gourmet') {
+		parts[index].textContent = 'È pensata per chi desidera piatti gourmet.';
+		parts[index + 1].remove();
+	}
+}
 const syncProductFacts = () => {
 	for (const detail of document.querySelectorAll('.ugolini-product-fact')) detail.open = !productFactsViewport.matches;
 };
@@ -325,9 +378,33 @@ for (const gallery of document.querySelectorAll('.ugolini-product-gallery .sc-im
 		const slides = [...stage.querySelectorAll(':scope > .swiper-wrapper > .swiper-slide')].filter(slide => getComputedStyle(slide).display !== 'none');
 		const active = Math.max(0, slides.findIndex(slide => slide.classList.contains('swiper-slide-active')));
 		count.textContent = `${active + 1} / ${Math.max(1, slides.length)}`;
+		const image = slides[active]?.querySelector('.sc-lightbox-container img');
+		if (!image?.naturalWidth) return;
+		const imageBox = image.getBoundingClientRect();
+		const scale = Math.min(imageBox.width / image.naturalWidth, imageBox.height / image.naturalHeight);
+		const paintedWidth = image.naturalWidth * scale;
+		const paintedHeight = image.naturalHeight * scale;
+		const imageBounds = {
+			top: imageBox.top + (imageBox.height - paintedHeight) / 2,
+			right: imageBox.left + (imageBox.width + paintedWidth) / 2,
+			bottom: imageBox.top + (imageBox.height + paintedHeight) / 2,
+		};
+		const figure = image.closest('.sc-lightbox-container');
+		const figureBounds = figure.getBoundingClientRect();
+		const stageBounds = stage.getBoundingClientRect();
+		const setInset = (element, property, value) => {
+			const pixels = `${Math.max(0, value)}px`;
+			if (element.style.getPropertyValue(property) !== pixels) element.style.setProperty(property, pixels);
+		};
+		setInset(figure, '--ugolini-image-top', imageBounds.top - figureBounds.top);
+		setInset(figure, '--ugolini-image-right', figureBounds.right - imageBounds.right);
+		setInset(stage, '--ugolini-image-bottom', stageBounds.bottom - imageBounds.bottom);
+		setInset(stage, '--ugolini-image-right', stageBounds.right - imageBounds.right);
 	};
 	new MutationObserver(update).observe(stage, { subtree: true, attributes: true, attributeFilter: ['class', 'style'] });
 	gallery.addEventListener('click', () => requestAnimationFrame(update));
+	gallery.addEventListener('load', update, true);
+	new ResizeObserver(update).observe(stage);
 	update();
 }
 
@@ -345,7 +422,7 @@ for (const gallery of document.querySelectorAll('.ugolini-product-gallery .sc-im
 	bar.innerHTML = `<div class="ugolini-sticky-product__inner"><img class="ugolini-sticky-product__image" alt=""><div class="ugolini-sticky-product__details"><strong class="ugolini-sticky-product__title"></strong><span class="ugolini-sticky-product__price"></span></div>${amazonSource ? '<a class="ugolini-sticky-product__button" rel="noopener noreferrer"></a>' : '<button class="ugolini-sticky-product__button" type="button"></button>'}</div>`;
 	const thumbnail = bar.querySelector('img');
 	const updateThumbnail = () => {
-		const firstImage = gallery?.querySelector('.sc-image-slider__thumbs .swiper-slide:first-child img') || gallery?.querySelector('.swiper-slide:first-child img, .wp-block-surecart-product-media img');
+		const firstImage = gallery?.querySelector('.sc-image-slider__thumbs .swiper-slide:first-child img') || gallery?.querySelector('.swiper-slide:first-child img');
 		if (!firstImage) return;
 		const src = firstImage.currentSrc || firstImage.src;
 		if (thumbnail.src !== src) thumbnail.src = src;
@@ -355,7 +432,6 @@ for (const gallery of document.querySelectorAll('.ugolini-product-gallery .sc-im
 	if (gallery) new MutationObserver(updateThumbnail).observe(gallery, { childList: true, subtree: true });
 	updateThumbnail();
 	const button = bar.querySelector('.ugolini-sticky-product__button');
-	button.style.textDecoration = 'none';
 	const sync = () => {
 		bar.querySelector('.ugolini-sticky-product__title').textContent = title.textContent.trim();
 		bar.querySelector('.ugolini-sticky-product__price').textContent = price?.textContent.trim() || '';
@@ -536,11 +612,11 @@ const ugoliniNormalizePath = value => {
 const ugoliniPagePath = ugoliniNormalizePath(location.href);
 const ugoliniPageMenus = {
 	'Home': ['Scopri i prodotti', 'Sapori per ogni tavola', 'Perché scegliere Ugolini', 'Tradizione, esperienza e innovazione'],
-	'Shop': ['Sapori per ogni tavola', 'Tutta la gamma Ugolini Gourmet'],
+	'Shop': ['Sapori per ogni tavola', 'Tutta la gamma Ugolini Group'],
 	'Chi siamo': ['Le radici di una passione italiana', 'Tradizione, esperienza e innovazione', 'Perché scegliere Ugolini', 'Scopri le specialità nate dalla passione Ugolini'],
 	'Event': ['Prossimi eventi', 'Eventi passati', 'Notizie dal gruppo'],
 	'B2B': ['Sei uno chef, ristoratore o distributore?', 'Dalla selezione al riordino', 'Una gamma per ogni servizio', 'Un rapporto costruito sulla tua attività'],
-	'FAQ': ['Ugolini Gourmet', 'Scelta e utilizzo', 'Acquisto e assistenza', 'Area clienti'],
+	'FAQ': ['Ugolini Group', 'Scelta e utilizzo', 'Acquisto e assistenza', 'Area clienti'],
 };
 const ugoliniSectionTargets = new Map();
 const ugoliniSlug = value => `sezione-${value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`;
@@ -674,6 +750,34 @@ for (const menu of document.querySelectorAll('.ugolini-primary-navigation .wp-bl
 })();
 
 (() => {
+	const gallery = document.querySelector('.ugolini-product-page :is(.ugolini-product-gallery, .preview-product-gallery)');
+	if (!gallery) return;
+	let frame = 0;
+	const update = () => {
+		frame = 0;
+		if (innerWidth < 768) {
+			return;
+		}
+		const stage = gallery.querySelector('.sc-image-slider > .swiper, .preview-gallery-stage');
+		if (!stage) return;
+		const bounds = stage.getBoundingClientRect();
+		const center = (bounds.top + bounds.bottom) / 2;
+		if (center < 24 || center > innerHeight - 24) {
+			document.body.style.removeProperty('--ugolini-product-controls-bottom');
+			return;
+		}
+		const bottom = innerHeight - center - 24;
+		document.body.style.setProperty('--ugolini-product-controls-bottom', `${bottom}px`);
+	};
+	const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
+	addEventListener('scroll', schedule, { passive: true });
+	addEventListener('resize', schedule);
+	new ResizeObserver(schedule).observe(gallery);
+	new MutationObserver(schedule).observe(gallery, { childList: true, subtree: true });
+	schedule();
+})();
+
+(() => {
 	const presets = [
 		['.ugolini-hero', ['home/hero-slide-2.jpg', 'home/hero-slide-3.jpg']],
 		['.ugolini-catalogue-panel', ['https://ugolinigroup.com/wp-content/uploads/2026/08/8763-confit-cipolle-rosse-ugolini-gourmet-1-1024x683.jpg', 'https://ugolinigroup.com/wp-content/uploads/2026/08/9265-crema-panna-tartufo-bianchetto-ugolini-gourmet-1-scaled-1-1024x683.jpg']],
@@ -684,7 +788,7 @@ for (const menu of document.querySelectorAll('.ugolini-primary-navigation .wp-bl
 		if (!first) continue;
 		if (carousel.closest('.ugolini-b2b-catalogue')) {
 			first.src = 'https://ugolinigroup.com/wp-content/uploads/2026/08/8862-ragu-vegano-ugolini-gourmet-1-1024x683.jpg';
-			first.alt = 'Ragù vegano Ugolini Gourmet';
+			first.alt = 'Ragù vegano Ugolini Group';
 			first.removeAttribute('srcset');
 		}
 		carousel.classList.add('ugolini-carousel');

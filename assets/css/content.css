@@ -75,7 +75,7 @@
 .ugolini-single-hero > .wp-block-post-featured-image img { width: 100%; height: 133.333%; object-fit: cover; object-position: center 66%; transform: translateY(-25%); }
 .ugolini-single-hero__copy { position: relative; z-index: 2; width: min(calc(100% - (2 * var(--ugolini-gutter))), 76rem) !important; max-width: 76rem !important; margin: 0 auto !important; padding: 0 0 clamp(1.25rem, 2.5vw, 2.25rem); text-align: center; }
 .ugolini-single-hero__copy h1 { max-width: 18ch; margin: 0.65rem auto 0.9rem; font-size: clamp(3rem, 5.7vw, 6rem); line-height: 1.02; }
-.ugolini-single-hero__copy > .wp-block-post-terms { width: max-content; margin-inline: auto; color: var(--wp--preset--color--text); font-size: 0.72rem; }
+.ugolini-single-hero__copy > .wp-block-post-terms { width: max-content; margin-inline: auto; padding: .4rem .9rem; border-radius: 999px; background: #fff; color: var(--wp--preset--color--text); font-size: 0.72rem; }
 .ugolini-single-hero__copy .ugolini-single-meta { justify-content: center; color: var(--wp--preset--color--text); font-size: 0.86rem; letter-spacing: 0.02em; text-transform: none; }
 .single-post .ugolini-single-hero,
 .single-ugolini_news .ugolini-single-hero { display: block; height: auto; min-height: 0; }
