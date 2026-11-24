@@ -42,7 +42,7 @@
 	.ugolini-header-actions { grid-column: 3; grid-row: 2; }
 }
 .ugolini-brand .wp-block-site-title { margin: 0; font-family: var(--wp--preset--font-family--display); font-size: 1.75rem; line-height: 1; }
-.ugolini-brand .wp-block-site-title a { width: clamp(160px, 15vw, 220px); height: 70px; display: block; overflow: hidden; background: url('../images/ugolini-wordmark.svg?v=6.66.86') center / contain no-repeat; filter: brightness(0); font-size: 0; text-decoration: none; }
+.ugolini-brand .wp-block-site-title a { width: clamp(160px, 15vw, 220px); height: 70px; display: block; overflow: hidden; background: url('../images/ugolini-wordmark.svg?v=6.66.86') center / 85% auto no-repeat; filter: brightness(0); font-size: 0; text-decoration: none; }
 
 .ugolini-header-inner > .wp-block-shortcode { margin: 0; }
 .ugolini-shop-direct,
