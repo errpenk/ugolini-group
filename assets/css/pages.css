@@ -13,6 +13,8 @@
 .ugolini-page-hero--image .ugolini-page-hero-content { width: min(calc(100% - (2 * var(--ugolini-gutter))), var(--ugolini-container)) !important; max-width: var(--ugolini-container) !important; display: flex; flex-direction: column; align-items: center; margin-inline: auto !important; padding: clamp(4rem, 8vw, 7rem) 0; }
 .ugolini-page-hero--image .ugolini-page-hero-content > * { max-width: 48rem; }
 .ugolini-page-hero-content > * { margin-inline: auto !important; margin-block-start: 0 !important; }
+.ugolini-page-hero-content > .ugolini-eyebrow,
+.ugolini-hero .ugolini-eyebrow { display: none !important; }
 .ugolini-page-hero-content :where(h1, h2, p, .wp-block-buttons) { text-align: center !important; }
 .ugolini-page-hero:not(.wp-block-cover) > .ugolini-page-hero-content { width: min(calc(100% - (2 * var(--ugolini-gutter))), var(--ugolini-container)); margin-inline: auto !important; text-align: center; }
 .ugolini-page-hero-content > p:last-child { margin-bottom: 1em; }
