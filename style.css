@@ -3,7 +3,7 @@ Theme Name: Ugolini Group
 Theme URI: https://ugolinigroup.com/
 Author: Ugolini Group
 Description: A purpose-built block theme for the Ugolini Group SureCart store.
-Version: 6.66.86
+Version: 6.66.87
 Requires at least: 6.6
 Requires PHP: 8.1
 Text Domain: ugolini-group
@@ -408,13 +408,13 @@ textarea {
 .ugolini-header-inner > * { margin-block: 0; }
 .ugolini-brand { display: flex; align-items: center; gap: 0.8rem; }
 @media (min-width: 768px) {
-	.ugolini-brand { grid-column: 1 / -1; justify-self: center; }
+	.ugolini-brand { grid-column: 1 / -1; justify-self: center; transform: translateY(clamp(14px, 1.75vw, 25px)); }
 	.ugolini-header-inner > .wp-block-shortcode, .ugolini-header-inner > .ugolini-mega-menu { grid-column: 1; grid-row: 2; }
 	.ugolini-header-inner > .ugolini-primary-navigation { grid-column: 2; grid-row: 2; justify-self: center; }
 	.ugolini-header-actions { grid-column: 3; grid-row: 2; }
 }
 .ugolini-brand .wp-block-site-title { margin: 0; font-family: var(--wp--preset--font-family--display); font-size: 1.75rem; line-height: 1; }
-.ugolini-brand .wp-block-site-title a { width: clamp(180px, 18vw, 260px); height: 82px; display: block; overflow: hidden; background: url('assets/images/ugolini-wordmark.svg?v=6.66.86') center / contain no-repeat; filter: brightness(0); font-size: 0; text-decoration: none; }
+.ugolini-brand .wp-block-site-title a { width: clamp(160px, 15vw, 220px); height: 70px; display: block; overflow: hidden; background: url('assets/images/ugolini-wordmark.svg?v=6.66.86') center / contain no-repeat; filter: brightness(0); font-size: 0; text-decoration: none; }
 
 .ugolini-header-inner > .wp-block-shortcode { margin: 0; }
 .ugolini-shop-direct,
@@ -2116,6 +2116,9 @@ body > .wp-block-surecart-cart-icon { display: none !important; }
 	.ugolini-brand .wp-block-site-logo img { width: clamp(118px, 33vw, 130px); max-height: 50px; }
 	.ugolini-brand .wp-block-site-title a { width: clamp(118px, 33vw, 130px); height: 50px; }
 	.ugolini-primary-navigation { grid-column: 1; grid-row: 1; align-self: stretch; justify-self: start; display: flex; align-items: center; }
+	.ugolini-primary-navigation .wp-block-navigation__responsive-container:not(.is-menu-open) { display: none !important; }
+	.ugolini-primary-navigation .wp-block-navigation__responsive-container-open { display: flex !important; }
+	.ugolini-primary-navigation .wp-block-navigation__responsive-container.is-menu-open { display: flex !important; }
 	.ugolini-header-actions { grid-column: 3; grid-row: 1; align-self: stretch; grid-template-columns: repeat(3, 34px); align-content: center; gap: 4px; justify-self: end; }
 	.ugolini-header-actions > * { display: inline-flex; }
 	.ugolini-header-actions > .wp-block-shortcode { display: contents; }

@@ -64,6 +64,9 @@
 	.ugolini-brand .wp-block-site-logo img { width: clamp(118px, 33vw, 130px); max-height: 50px; }
 	.ugolini-brand .wp-block-site-title a { width: clamp(118px, 33vw, 130px); height: 50px; }
 	.ugolini-primary-navigation { grid-column: 1; grid-row: 1; align-self: stretch; justify-self: start; display: flex; align-items: center; }
+	.ugolini-primary-navigation .wp-block-navigation__responsive-container:not(.is-menu-open) { display: none !important; }
+	.ugolini-primary-navigation .wp-block-navigation__responsive-container-open { display: flex !important; }
+	.ugolini-primary-navigation .wp-block-navigation__responsive-container.is-menu-open { display: flex !important; }
 	.ugolini-header-actions { grid-column: 3; grid-row: 1; align-self: stretch; grid-template-columns: repeat(3, 34px); align-content: center; gap: 4px; justify-self: end; }
 	.ugolini-header-actions > * { display: inline-flex; }
 	.ugolini-header-actions > .wp-block-shortcode { display: contents; }
