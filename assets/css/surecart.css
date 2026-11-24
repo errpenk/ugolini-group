@@ -95,6 +95,7 @@
 .ugolini-sticky-product.is-visible { opacity: 1; visibility: visible; transform: none; }
 .ugolini-sticky-product__inner { width: min(calc(100% - 2rem), 1000px); min-height: 76px; display: flex; align-items: center; justify-content: center; gap: 1rem; margin: auto; padding: .5rem 0; }
 .ugolini-sticky-product__image { width: 58px; height: 58px; flex: none; object-fit: cover; }
+.ugolini-sticky-product__image[hidden] { display: none; }
 .ugolini-sticky-product__details { max-width: min(44vw, 520px); min-width: 0; line-height: 1.2; }
 .ugolini-sticky-product__title { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 2; font-size: .95rem; }
 .ugolini-sticky-product__price { display: block; margin-top: .2rem; color: var(--wp--preset--color--secondary-text); font-size: .86rem; font-weight: 700; }

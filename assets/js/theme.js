@@ -422,7 +422,7 @@ for (const gallery of document.querySelectorAll('.ugolini-product-gallery .sc-im
 	bar.innerHTML = `<div class="ugolini-sticky-product__inner"><img class="ugolini-sticky-product__image" alt=""><div class="ugolini-sticky-product__details"><strong class="ugolini-sticky-product__title"></strong><span class="ugolini-sticky-product__price"></span></div>${amazonSource ? '<a class="ugolini-sticky-product__button" rel="noopener noreferrer"></a>' : '<button class="ugolini-sticky-product__button" type="button"></button>'}</div>`;
 	const thumbnail = bar.querySelector('img');
 	const updateThumbnail = () => {
-		const firstImage = gallery?.querySelector('.sc-image-slider__thumbs .swiper-slide:first-child img') || gallery?.querySelector('.swiper-slide:first-child img');
+		const firstImage = gallery?.querySelector('.sc-image-slider__thumbs .swiper-slide:first-child img') || gallery?.querySelector('.swiper-slide:first-child img') || gallery?.querySelector('img');
 		if (!firstImage) return;
 		const src = firstImage.currentSrc || firstImage.src;
 		if (thumbnail.src !== src) thumbnail.src = src;
